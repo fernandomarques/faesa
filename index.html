@@ -85,6 +85,7 @@ int main() {
         <section>
             <h3>Adicionar métodos</h3>
             <ul>
+                <li class="fragment">O que o C++ disse para o C?</li>
                 <li class="fragment">Além de atributos, também podemos agrupar métodos</li>
                 <li class="fragment">Métodos famosos são os Construtores e os Destrutores</li>
                 <li class="fragment">Teria como fazer isso em C?</li>
@@ -110,7 +111,7 @@ int Notas::media(){
 				<section>
 						<h3>Controle de Acesso</h3>
 						<ul>
-								<li class="fragment">Ao declararmos um atributo ou método de uma classe, também
+								<li class="fragment">Ao declararmos um atributo ou método de uma classe também
 								definimos seu escopo</li>
 								<li class="fragment"><b>Public</b>: É público e pode ser acessado por qualquer um que veja a classe </li></li>
 								<li class="fragment"><b>Protected</b>: Só pode ser visto por classes filhas. Classes que herdam</li></li>
@@ -121,9 +122,11 @@ int Notas::media(){
             <h3>Mas de que adianta ter um método ou atributo privado?</h3>
             <ul>
                 <li class="fragment">Getter/Setter</li>
+				<ul>
                 <li class="fragment">Atributos são protegidos e só podem ser acessados usando funções específicas</li>
                 <li class="fragment">Getter = Pega o valor do atributo</li>
                 <li class="fragment">Setter = Altera o valor do atributo</li>
+				</ul>
                 <li class="fragment">Algumas funções são usadas internamente e não poderiam ser chamadas por outras classes</li>
             </ul>
         </section>
@@ -149,10 +152,37 @@ int Conta::saque(float valor){
 }
 						</code></pre>
         </section>
+		<section>
+            <h3>Classes e Objetos</h3>
+            <ul>
+                <li class="fragment">As classes funcionam como uma máscara do que um objeto deve ter</li>
+                <li class="fragment">Classes ainda não algo 'abstrato', pense em um super-herói. Pode ser Wolverine, Ironman, Capitão América...</li>
+                <li class="fragment">Quando instanciamos a classe, temos algo mais 'concreto': um objeto</li>
+            </ul>
+        </section>
+
+		<section>
+            <small>Classes e Objetos</small>
+<pre><code>
+class SuperHeroi{
+	public:
+		char nome_real[30];
+		char codinome[30];
+};
+int main(){
+	SuperHeroi homenAranha;
+	homemAranha.nome_real = "Peter Park";
+	homemAranha.codinome = "Homem Aranha";
+	SuperHeroi wolverine;
+	wolverine.nome_real = "James Logan Howlett";
+	wolverine.codinome = "Wolverine";
+}
+</code></pre>
+        </section>
 				<section>
 						<h3>Construtores e Destrutores</h3>
 						<ul>
-								<li class="fragment">São métodos especias que são chamados, muitas vezes de forma explicita</li>
+								<li class="fragment">São métodos especias que são chamados de forma implícita</li>
 								<li class="fragment">Quando um objeto de uma classe é criado, esse método é chamado</li>
 								<li class="fragment">Assim, devemos nesse método fazer todas as inicializações de variáveis</li>
 								<li class="fragment">Da mesma forma, o destrutor é chamado sempre que um objeto deixa de existir</li>
@@ -160,7 +190,7 @@ int Conta::saque(float valor){
 				</section>
 				<section>
 						<small>Construtores e Destrutores</small>
-<pre><code>
+<pre><code data-trim data-noescape>
 #include <iostream>
 class Notas {
 	float Nota1, Nota2, Nota3;
@@ -184,34 +214,8 @@ int main(){
             <ul>
                 <li class="fragment">É recomendado que as declarações sejam feitas no arquivo de cabeçalho .h</li>
                 <li class="fragment">Já a implementação dos métodos é feita no arquivo .cpp, que deve incluir o cabeçalho</li>
+                <li class="fragment">Assim, podemos distribuir os cabeçalhos e os binários das implementações</li>
             </ul>
-        </section>
-
-			  <section>
-            <h3>Classes e Objetos</h3>
-            <ul>
-                <li class="fragment">As classes funcionam como uma máscara do que um objeto deve ter</li>
-                <li class="fragment">Classes ainda não algo 'abstrato', pense em um super-herói. Pode ser Wolverine, Ironman, Capitão América...</li>
-                <li class="fragment">Quando instanciamos a classe, temos algo mais 'concreto': um objeto</li>
-            </ul>
-        </section>
-        <section>
-            <small>Classes e Objetos</small>
-<pre><code>
-class SuperHeroi{
-	public:
-		char nome_real[30];
-		char codinome[30];
-};
-int main(){
-	SuperHeroi homenAranha;
-	homemAranha.nome_real = "Peter Park";
-	homemAranha.codinome = "Homem Aranha";
-	SuperHeroi wolverine;
-	wolverine.nome_real = "James Logan Howlett";
-	wolverine.codinome = "Wolverine";
-}
-</code></pre>
         </section>
         <section>
             <h3>Exercícios</h3>
