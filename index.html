@@ -38,203 +38,25 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-                    <h3>Classes e Objetos</h3>
+          <ul>
+						  <li><a href="">Sistemas Multimídia</a></li>
+						  <li><a href="./tp2/index.html">Técnicas de Programação II (5MC/5PC)</a></li>
+						  <li><a href="">Técnicas de Programação II (3TC/3EC)</a></li>
+					</ul>
 					<p>
 						<small>Created by Fernando Marques </small>
 					</p>
 				</section>
         <section>
+
 		<h3>Breve Apresentação das funcionalidades do Reveal.js</h3>
 			<ul>
 				<li> Use as teclas direcionais para navegar. Em smartphones basta arrastar</li>
 				<li> Para ver uma visão 'geral' basta apertar ESC</li>
-				<li> Para salvar em pdf : ?pdf-print, no chrome salvar como pdf </li>
+				<li> Para salvar em pdf : ?print-pdf, no chrome salvar como pdf </li>
 			</ul>
         </section>
-        <section>
-            <h3>Motivação de Usar Classes</h3>
-            <ul>
-                <li class="fragment">Agrupar dados semelhantes</li>
-                <li class="fragment">Exemplo: Calcular média de 03 notas de 20 alunos</li>
-				<li class="fragment">Encapsulamento e Abstração</li>
-                <li class="fragment">Herança</li>
-                <li class="fragment">Polimorfismo</li>
-							</ul>
-        </section>
-        <section>
-            <h3>Mas em C já podemos fazer isso!</h3>
-						<pre><code>
-struct Notas {
-	float nota1;
-	float nota2;
-	float nota3;
-};
-int main(){
-	struct Notas aluno1;
-	aluno1.nota1 = 10;
-}
-						</code></pre>
-        </section>
-        <section>
-            <h3>Por outro lado, em C++</h3>
-						<pre><code>
-class Notas {
-	public:
-		float nota1;
-		float nota2;
-		float nota3;
-};
-int main() {
-	Notas aluno1;
-	aluno1.nota1 = 10;
-}
-						</code></pre>
-        </section>
-        <section>
-            <h3>Adicionar métodos</h3>
-            <ul>
-                <li class="fragment">O que o C++ disse para o C?</li>
-                <li class="fragment">Além de atributos, também podemos agrupar métodos</li>
-                <li class="fragment">Métodos famosos são os Construtores e os Destrutores</li>
-                <li class="fragment">Teria como fazer isso em C?</li>
-								<li class="fragment">Pouco prático</li>
-            </ul>
-        </section>
-				<section>
-            <h3>Adicionando métodos e implementando</h3>
-            <pre><code>
-class Notas {
-	private:
-		float Nota1;
-		float Nota2;
-		float Nota3;
-	public:
-		int media();
-}
-int Notas::media(){
-	return (Nota1+Nota2+Nota3)/3
-}
-						</code></pre>
-        </section>
-				<section>
-						<h3>Controle de Acesso</h3>
-						<ul>
-								<li class="fragment">Ao declararmos um atributo ou método de uma classe também
-								definimos seu escopo</li>
-								<li class="fragment"><b>Public</b>: É público e pode ser acessado por qualquer um que veja a classe </li></li>
-								<li class="fragment"><b>Protected</b>: Só pode ser visto por classes filhas. Classes que herdam</li></li>
-								<li class="fragment"><b>Private</b>: Os métodos e variáveis só podem ser acessados pela própria classe</li></li>
-						</ul>
-				</section>
-        <section>
-            <h3>Mas de que adianta ter um método ou atributo privado?</h3>
-            <ul>
-                <li class="fragment">Getter/Setter</li>
-				<ul>
-                <li class="fragment">Atributos são protegidos e só podem ser acessados usando funções específicas</li>
-                <li class="fragment">Getter = Pega o valor do atributo</li>
-                <li class="fragment">Setter = Altera o valor do atributo</li>
-				</ul>
-                <li class="fragment">Algumas funções são usadas internamente e não poderiam ser chamadas por outras classes</li>
-            </ul>
-        </section>
-        <section>
-						<pre><code>
-class Conta
-{
-  int numero;     // São atributos
-  string nome;    // privados por
-  float saldo;    // default
-public:
-  void deposita(float valor);
-  void consulta();
-  int saque(float valor);
-};
-int Conta::saque(float valor){
-	if (saldo < valor)
-		return 0;
-	else{
-		saldo = saldo - valor;
-		return 1;
-	}
-}
-						</code></pre>
-        </section>
-		<section>
-            <h3>Classes e Objetos</h3>
-            <ul>
-                <li class="fragment">As classes funcionam como uma máscara do que um objeto deve ter</li>
-                <li class="fragment">Classes ainda não algo 'abstrato', pense em um super-herói. Pode ser Wolverine, Ironman, Capitão América...</li>
-                <li class="fragment">Quando instanciamos a classe, temos algo mais 'concreto': um objeto</li>
-            </ul>
-        </section>
 
-		<section>
-            <small>Classes e Objetos</small>
-<pre><code>
-class SuperHeroi{
-	public:
-		char nome_real[30];
-		char codinome[30];
-};
-int main(){
-	SuperHeroi homenAranha;
-	homemAranha.nome_real = "Peter Park";
-	homemAranha.codinome = "Homem Aranha";
-	SuperHeroi wolverine;
-	wolverine.nome_real = "James Logan Howlett";
-	wolverine.codinome = "Wolverine";
-}
-</code></pre>
-        </section>
-				<section>
-						<h3>Construtores e Destrutores</h3>
-						<ul>
-								<li class="fragment">São métodos especias que são chamados de forma implícita</li>
-								<li class="fragment">Quando um objeto de uma classe é criado, esse método é chamado</li>
-								<li class="fragment">Assim, devemos nesse método fazer todas as inicializações de variáveis</li>
-								<li class="fragment">Da mesma forma, o destrutor é chamado sempre que um objeto deixa de existir</li>
-						</ul>
-				</section>
-				<section>
-						<small>Construtores e Destrutores</small>
-<pre><code data-trim data-noescape>
-#include <iostream>
-class Notas {
-	float Nota1, Nota2, Nota3;
-	public:
-		Notas();
-		~Notas();
-};
-Notas::Notas(){
-	std::cout << "Eu existo! :)\n";
-}
-Notas::~Notas(){
-	std::cout << "Não existo mais :(\n";
-}
-int main(){
-	Notas nota;
-}
-</code></pre>
-				</section>
-				<section>
-            <h3>Boas Práticas</h3>
-            <ul>
-                <li class="fragment">É recomendado que as declarações sejam feitas no arquivo de cabeçalho .h</li>
-                <li class="fragment">Já a implementação dos métodos é feita no arquivo .cpp, que deve incluir o cabeçalho</li>
-                <li class="fragment">Assim, podemos distribuir os cabeçalhos e os binários das implementações</li>
-            </ul>
-        </section>
-        <section>
-            <h3>Exercícios</h3>
-            <ul>
-                <li class="fragment">Crie uma classe Notas</li>
-                <li class="fragment">Deve Conter, como atributos privados, string Nome e float Nota1, float Nota2 e float Nota3;</li>
-                <li class="fragment">Implemente os métodos, como public: media e os getters e setters</li>
-                <li class="fragment">Para os getters basta retornar os valores das variáveis</li>
-                <li class="fragment">Os setters devem ler do terminal. Para as notas, garanta que elas não sejam menores que 0 ou maiores que 10</li>
-            </ul>
-        </section>
         <section>
             <h3>Avaliação de um minuto</h3>
             <ul>
