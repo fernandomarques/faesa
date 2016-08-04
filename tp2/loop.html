@@ -1,11 +1,16 @@
 <!doctype html>
 <html lang="en">
+
 	<head>
 		<meta charset="utf-8">
-		<title>SM</title>
+
+		<title>TP2</title>
+
 		<meta name="author" content="Fernando Antonio Marques Filho">
+
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="../css/reveal.css">
@@ -33,74 +38,80 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>
-				<h3>Introdução HTML</h3>
+				<h3>Repetindo Código</h3>
 				<p>
 					<small>Created by Fernando Marques </small>
 				</p>
 			</section>
 			<section>
-				<h3>Introdução</h3>
+				<h3>Avaliação de um minuto</h3>
 				  <ul>
-						  <li class="fragment">A linguagem HTML é uma linguagem de marcação</li>
-						  <li class="fragment">Os protocolos para transmitir HTML é o HTTP(1 e 2) e HTTPS</li>
-							<li class="fragment">Os documentos HTML são utilizados os programas chamados browser ou navegador</li>
-							<li class="fragment">Navegador interpreta tags e formatação</li>
+							<li class="fragment">Declarar Variáveis</li>
+						  <li class="fragment">Dificuldade em abstrair</li>
+							<li class="fragment">Exemplo DOS</li>
+							<li class="fragment">Recordar que float usa-se . e não ,</li>
+						  <li class="fragment">Tipo de exercícios complica mais que ajuda</li>
 					</ul>
 			</section>
 			<section>
-				<h3>Conhecendo as tags</h3>
+				<h3>Repetição</h3>
 				  <ul>
-						  <li class="fragment">A linguagem html é baseada em tags aninhadas</li>
-						  <li class="fragment">As tags são comandos escritos entre <nome> </li>
-						  <li class="fragment">Tags devem ser fechadas com seu equivalente</nome></li>
-						  <li class="fragment">Também é possível fechar a tag direto com <nome/></li>
+						  <li class="fragment">Repetição é coisa para máquina</li>
+						  <li class="fragment">As máquinas são feitas para repetir as mesmas operações</li>
+						  <li class="fragment">Logo... elas são boas nisso!</li>
 					</ul>
 			</section>
 			<section>
-				<h3>Estrutura de página HTML</h3>
+				<h3>Utilizando for</h3>
 				  <ul>
-							<li class="fragment">!DOCTYPE html indica a versão</li>
-						  <li class="fragment">html tag inicial de todo documento</li>
-						  <li class="fragment">head> informações gerais</li>
-							<li class="fragment">title titulo do arquivo, fica no head</li>
-						  <li class="fragment">body corpo do documento</li>
-						</ul>
+						  <li class="fragment">O comando for possui 3 campos</li>
+							<ol>
+							  <li class="fragment">Inicialização da variável de contagem</li>
+							  <li class="fragment">Condição de parada</li>
+							  <li class="fragment">Atualização da variável</li>
+							</ol>
+					</ul>
 			</section>
 			<section>
-				<h3>HEAD</h3>
+				<h3>Exemplo For</h3>
+				<pre><code>
+#include <stdio.h>
+int main(){
+	for(int i=0; i < 10 ; i ++){
+		printf("%d\n",i);
+	}
+}
+							</code></pre>
+			</section>
+			<section>
+				<h3>Utilizando while</h3>
 				  <ul>
-						  <li class="fragment">title: define o título do documento</li>
-						  <li class="fragment">style: pode ser utilizado para colocar código css</li>
-						  <li class="fragment">link: funciona como um 'include'</li>
-						  <li class="fragment">meta: possui informações que, por exemplo, mecanismos de busca podem usar</li>
-						  <li class="fragment">script: códigos em js</li>
-						  <li class="fragment">Pelo html5 não é necessário colocar html,head e body, mas isso pode causar erro em alguns navegadores</li>
-						</ul>
+						  <li class="fragment">O loop while (enquanto) vai se repetir enquanto algo for verdade</li>
+						  <li class="fragment">Possui apenas o campo de comparação</li>
+						  <li class="fragment">ATENÇÃO: É mais comum que aconteçam loops infinitos no while</li>
+					</ul>
 			</section>
 			<section>
-				<h3>Exemplo Meta</h3>
-					<pre><code>
-<meta charset="UTF-8">
-<meta name="description" content="Free Web tutorials">
-<meta name="keywords" content="HTML,CSS,XML,JavaScript">
-<meta name="author" content="Hege Refsnes">
-				</code></pre>
+				<h3>Exemplo While</h3>
+				<pre><code>
+#include <stdio.h>
+int main(){
+	int i = 0;
+	while(i < 10 ){
+		printf("%d\n",i);
+		i += 1;
+	}
+}
+							</code></pre>
 			</section>
 			<section>
-				<h3>BODY</h3>
-				  <ul>
-						  <li class="fragment">No body ficam as tags de conteúdo</li>
-						  <li class="fragment">Cabeçalho: h1, h2 ..  h6 </li>
-						  <li class="fragment">Paragrafos: p</li>
-						  <li class="fragment">Espaços br</li>
-						  <li class="fragment">Divs</li>
-						</ul>
-			</section>
-			<section>
-				  <h3>Exercício</h3>
-				  <h4>Crie um Olá Mundo</h4>
-				  <h4>Tente criar uma página simple</h4>
-				  <h4>Use H, P e br para escrever mais texto</h4>
+				  <h3>Fechando ... </h3>
+					<ul>
+						  <li>Também temos o comando do {...} while()</li>
+						  <li>Prestem atenção a identação utilizada</li>
+						  <li>Organização de código facilita a compreenção</li>
+						  <li>Outra ferramenta da linguagem é o comentário</li>
+					</ul>
 			</section>
 			<section>
           <h3>Avaliação de um minuto</h3>
@@ -109,6 +120,7 @@
 							<li>O formato foi tirado do One-minute paper da universidade de Oxford</li>
           </ul>
       </section>
+
       </div>
 		</div>
 
