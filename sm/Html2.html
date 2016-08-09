@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>SM - Aula HTML</title>
+		<meta name="author" content="Fernando Antonio Marques Filho">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Continuação HTML</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				  <h3>Tags e Atributos</h3>
+					<ul>
+						  <li class="fragment">Nós vimos como são as tags em html</li>
+						  <li class="fragment">Atributos são valores da tag</li>
+						  <li class="fragment">Exemplo: <pre><code><font color='red'></font></code></pre> </li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Comentários</h3>
+					<ul>
+						  <li class="fragment">É possível  comentar código em html?</li>
+						  <li class="fragment"><pre><code><!-- Isso é um comentário --></code></code></pre></li>
+					</ul>
+			</section>
+			<section>
+				<h3>Tag font</h3>
+				  <ul>
+						  <li class="fragment"><strong><font color="red">Não é suportado em html 5! O padrão é usar html</font></strong></li>
+						  <li class="fragment">Atributos</li>
+							<ul>
+								<li class="fragment">size= "3"</li>
+								<li class="fragment">color= "red"</li>
+								<li class="fragment">face = "verdana,arial,sans-serif"</li>
+							</ul>
+							<li class="fragment">Façam testes com esse três atributos</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Hiperlinks</h3>
+				  <ul>
+						  <li class="fragment">Tag= <pre><code><a></a></code></pre></li>
+						  <li class="fragment">Atributo= <pre><code><a href="meulink.com"></a></code></pre></li>
+						  <li class="fragment">Por padrão:</li>
+							<ul>
+						  	<li class="fragment">Links não visitados são azuis e sublinhado</li>
+						  	<li class="fragment">Links visitados são roxos e sublinhados</li>
+						  	<li class="fragment">Links ativo é sublinhado e vermelho</li>
+							</ul>
+					</ul>
+			</section>
+			<section>
+				<h3>Links - Atributos</h3>
+				  <ul>
+						  <li class="fragment">download (html5)- indica que o link vai ser baixado</li>
+						  <li class="fragment">href - url do link</li>
+						  <li class="fragment">hreflang - linguagem do documento</li>
+						  <li class="fragment">media (html5) - indica para qual midia</li>
+						  <li class="fragment">rel - relação com o documento atual e o linkado</li>
+						  <li class="fragment">target - onde abrir o documento (parent, self, top)</li>
+						  <li class="fragment">type - tipo de mídia</li>
+						  <li class="fragment"><a href="http://www.w3schools.com/tags/tag_a.asp">Mais detalhes e tags</a></li>
+						  <li class="fragment">Façam experimentos com os links! Crie link para outras páginas.</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Âncoras</h3>
+				  <ul>
+						  <li class="fragment">São utilizadas para acessadar partes de uma página</li>
+						  <li class="fragment">Novamente vamos utilizar a tag a</li>
+						  <li class="fragment">Com o mesmo atributo href!</li>
+						  <li class="fragment">no href vamos colocar o id de uma âncora</li>
+						  <li class="fragment"><pre><code><h1 id="meuTitulo">Titulo</h1></code></pre></li>
+						  <li class="fragment"><pre><code><a href="#meuTitulo">Link para titulo</a><</code></pre></li>
+						  <li class="fragment"><pre><code><a href="minhapagina.html#meuTitulo">Link para titulo</a><</code></pre></li>
+							<li class="fragment"><a href="http://www.w3schools.com/html/html_links.asp">Mais detalhes</a></li>
+							<li class="fragment">Tentem colocar ids e usar ancoras pela página</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Barras Horizontais</h3>
+				  <ul>
+						  <li class="fragment">Tag hr</li>
+						  <li class="fragment">Em HTML5: Representa uma quebra temática</li>
+						  <li class="fragment">Em HTML4.01 Representa uma régua horizontal</li>
+						  <li class="fragment">Todos atributos foram removidos em html5!</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Imagens</h3>
+				  <ul>
+						  <li class="fragment">Permite adicionar uma imagem à página web</li>
+						  <li class="fragment">Caminho relativo vs. caminho real</li>
+						  <li class="fragment">Tag e atributos:<pre><code><img src="smiley.gif" alt="Smiley face" height="42" width="42"></code></pre></li>
+							<li class="fragment">Align, border, hspace, vspace não são mais suportados em html5</li>
+							<li class="fragment"><a href="http://www.w3schools.com/tags/tag_img.asp">Link para mais infomações</a></li>
+					</ul>
+			</section>
+			<section>
+				<h3>Imagens Atributos</h3>
+				  <ul>
+						  <li class="fragment">alt - texto para a imagem (caso a imagem não apareça)</li>
+						  <li class="fragment">height - altura em pixels</li>
+							<li class="fragment">longdes - descrição detalhada da imagem</li>
+						  <li class="fragment">src - caminho da imagem</li>
+							<li class="fragment">width - largura em pixels</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Exercícios</h3>
+				  <ul>
+						  <li>Utilizem as tags de imagem, podem colocar link direto para uma imagem na web</li>
+						  <li>Usem os links e imagens para fazer imagem com link</li>
+						  <li>Tentem fazer imagem com ancoras!</li>
+					</ul>
+			</section>
+			<section>
+          <h3>Avaliação de um minuto</h3>
+          <ul>
+              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+							<li>O formato foi tirado do One-minute paper da universidade de Oxford</li>
+          </ul>
+      </section>
+      </div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
