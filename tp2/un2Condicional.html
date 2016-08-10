@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>TP2</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Repetindo Código</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				  <ul>
+							<li class="fragment">Declarar e inicializar variáveis</li>
+							<li class="fragment">Cuidado com divisão de inteiro</li>
+							<li class="fragment">Expressões</li>
+							<li class="fragment">Identar o código</li>
+							<li class="fragment">Estruturas de repetição</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Aula de Hoje</h3>
+				  <ul>
+						  <li class="fragment">Verdadeiro e Falso em C</li>
+						  <li class="fragment">Operadores relacionais</li>
+						  <li class="fragment">Operadores lógicos</li>
+						  <li class="fragment">if-else, switch, break</li>
+						  <li class="fragment">Operador ?</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Lógica em C</h3>
+					<ul>
+						  <li class="fragment">Para C, se 0 é Falso, Se não é Verdadeiro</li>
+							<li class="fragment">Operador Relacional: >, <, >=, <=, == e !=</li></li></li>
+							<li class="fragment">Operador lógicos || e &&</li>
+					</ul>
+			</section>
+			<section>
+					<h3>Fluxograma</h3>
+					<img src="../img/algoritmo.jpg" width="40%"/>
+			</section>
+			<section>
+				  <h3>If-else</h3>
+					<ul>
+						  <li class="fragment">O condicional permite criar trechos de código que só são executados quando uma condição ocorre.</li>
+						  <li class="fragment">If ... </li>
+						  <li class="fragment"><pre><code>
+int main(){
+	if(10 < 20){
+		printf("10 é menor que 20");
+	}
+}
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>If-else</h3>
+					<ul>
+						  <li class="fragment">A condição Else indica o que deve acontecer caso a condição seja falsa</li>
+						  <li class="fragment"><font color="red">Não é obrigatória, mas precisa de um if!</font></li>
+						  <li class="fragment"><pre><code>
+int main(){
+	if (10 < 20){
+		printf("10 é menor que 20");
+	}else{
+		printf("10 não é menor que 20");
+	}
+}
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>If-Else If</h3>
+					<ul>
+						  <li class="fragment">Caso a primeira comparação não seja verdadeira, ainda podemos fazer mais uma pergunta</li>
+						  <li class="fragment">Assim como o else, também não é obrigatório</li>
+						  <li class="fragment"><pre><code>
+int main(){
+	if (10 < 20){
+		printf("10 é menor que 20");
+	}else{
+		printf("10 não é menor que 20");
+	}
+}
+								</code></pre>
+							</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>If-else Endadeados</h3>
+					<ul>
+						  <li class="fragment">Não existe limite para a quantidade de if-else</li>
+						  <li class="fragment">Dentro de um bloco {} if ou else, podem existir mais condicionais</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Operador Ternário ?</h3>
+					<ul>
+						  <li class="fragment">Não é aconselhado o uso por deixar a leitura do código mais complexa</li>
+							<li class="fragment">condição ? expressão1 : expressão2</li>
+						  <li class="fragment"><pre><code>
+int main(){
+	float salario;
+	scanf("%f",&salario);
+	salario = salario > 1000 : salario *1.05: salario * 1.07;
+}
+							</code></pre></li>
+							<li class="fragment">Contrário do if-else o ? retorna um valor</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Switch Case</h3>
+					<ul>
+						  <li class="fragment">É uma opção quando o número de possibilidades é elevado</li>
+						  <li class="fragment"><pre><code>
+#include <stdio.h>
+int main (){
+  int valor;
+  printf ("Digite um valor de 1 a 7: ");
+  scanf("%d", &valor);
+  switch ( valor ) {
+     case 1 :
+       printf ("Domingo\n"); break;
+     case 2 :
+       printf ("Segunda\n");     break;
+     case 3 :
+        printf ("Terça\n");     break;
+		// ...
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Exercícios</h3>
+					<ul>
+						  <li class="fragment">Termine o código que converte de número para dia.</li>
+						  <li class="fragment">Leia um valor inteiro em segundos, e imprima-o em horas, minutos e segundos.</li>
+						  <li class="fragment">Faça uma calculadora de adição, subtração, multiplicação e divisão. </li>
+						  <li class="fragment">Faça um programa que leia um numero positivo, calcule e imprima a sequência Fibonacci,  até o primeiro numero superior ao numero lido. </li>
+					</ul>
+			</section>
+			<section>
+          <h3>Avaliação de um minuto</h3>
+          <ul>
+              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+							<li>O formato foi tirado do One-minute paper da universidade de Oxford</li>
+          </ul>
+      </section>
+
+      </div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
