@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>TP2</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Vetores</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				  <ul>
+							<li class="fragment">Nada a comentar da avaliação de um minuto</li>
+							<li class="fragment">Operadores lógicos e relacionais</li>
+							<li class="fragment">if-else, switch e break</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Aula de Hoje</h3>
+				  <ul>
+						  <li class="fragment">Vetores!</li>
+						  <li class="fragment">O que são vetores</li>
+						  <li class="fragment">Declaração</li>
+							<li class="fragment">Acessando elementos e índices</li>
+						  <li class="fragment">Inicialização</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>O que são vetores</h3>
+					<ul>
+						  <li class="fragment">Vimos um exercício de calcular a média de 5 números, mas e se fossem 100? Como iriamos declarar todas essas variaveis?</li>
+							<li class="fragment">Com vetores (também conhecidos como array) podemos acessar a diversos elementos consecutivos</li>
+							<li class="fragment">Assim, podemos salvar um número pré-determinado de valores na variável</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Declarando um vetor</h3>
+					<ul>
+						<li class="fragment">int notas[50]; // Declara um vetor de 50 notas</li>
+					  <li class="fragment">Os vetores podem ser de qualquer tipo, mas todos os seus elementos devem ser do mesmo tipo</li>
+					  <li class="fragment">int - tipo dos elementos do vetor</li>
+					  <li class="fragment">notas - nome da variável que guardará os elementos</li>
+					  <li class="fragment">50 - número de elementos que a variável notas pode guardar</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Acessando elementos e índices</h3>
+					<ul>
+						  <li class="fragment">Depois de declarar o vetor, podemos acessar seus elementos</li>
+						  <li class="fragment">Para atribuir o valor 10 ao 21º elemento: notas[20]= 10;</li>
+						  <li class="fragment"><b>O índice do primeiro elemento é o 0</b></li>
+						  <li class="fragment"><font color="red">Se tentar acessar um índice maior que o tamanho do vetor teremos um erro!</font></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Inicializando um vetor</h3>
+					<pre><code>
+#include <stdio.h>
+int main(){
+	int notas[50],i;
+	for (i=0;i<50;i++){
+		notas[i] = 0;
+	}
+}
+					</code></pre>
+			</section>
+			<section>
+				  <h3>Outra forma de inicializar vetor</h3>
+					<pre><code>
+#include <stdio.h>
+int main(){
+	int notas[50] = { 1,2,3};
+}
+					</code></pre>
+					<ul>
+						  <li>Nesse caso, os três primeiros elementos são inicializados com os valores 1,2 e 3 e todos os outros com valores 0</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Exercícios</h3>
+					<ul>
+						<li class="fragment">Dada uma sequência de n números, faça um algoritmo que a imprime na ordem invers</li>
+					  <li class="fragment">Solicite ao usuário 5 números inteiros, guarde-os em um vetor, mostre-os na tela e, em seguida, conte quantos elementos são negativos e informe ao usuário</li>
+					  <li class="fragment">Leia um vetor de 10 elementos e encontre a posição do elemento m (dado pelo usuário) no vetor. Caso o elemento não exista no vetor informe ao usuário</li>
+					  <li class="fragment">Faça um programa que carregue um vetor com dez números reais, calcule e mostre a quantidade de números negativos e a some dos números positivos desse vetor</li>
+				  	<li class="fragment">Leia um vetor com 20 elementos. Faça a troca do primeiro elemento com o último, do segundo com o penúltimo, e assim por diante, até o décimo com o décimo primeiro</li>
+						<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+					</ul>
+			</section>
+      </div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
