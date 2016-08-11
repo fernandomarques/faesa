@@ -114,8 +114,8 @@ int main(){
 int main(){
 	if (10 < 20){
 		printf("10 é menor que 20");
-	}else{
-		printf("10 não é menor que 20");
+	}else if (10 > 20){
+		printf("10 é maior que 20");
 	}
 }
 								</code></pre>
@@ -138,7 +138,7 @@ int main(){
 int main(){
 	float salario;
 	scanf("%f",&salario);
-	salario = salario > 1000 : salario *1.05: salario * 1.07;
+	salario = salario > 1000 ? salario *1.05: salario * 1.07;
 }
 							</code></pre></li>
 							<li class="fragment">Contrário do if-else o ? retorna um valor</li>
