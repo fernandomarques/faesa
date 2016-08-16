@@ -1,0 +1,11 @@
+img.top-right {
+    width: 30%;
+    z-index:-1;
+    position:absolute;
+    top:0;
+    left:90%;
+}
+
+.nobullet {
+    list-style-type: none;
+}
