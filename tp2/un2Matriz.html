@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>TP2</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Vetores</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				  <ul>
+							<li class="fragment">Avaliação de um minuto: for dentro do vetor</li>
+							<li class="fragment">Vetores:Declaração e Inicialização</li>
+							<li class="fragment">Vetores:Acesso</li>
+							<li class="fragment"><pre><code data-trim>
+const int tam = 10;
+int main(){
+	int vet[tam] = {};
+	int i;
+	for(i=0; i < tam;i++){
+		printf("%d\n",vet[i]);
+	}
+
+}
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				<h3>Aula de Hoje</h3>
+				  <ul>
+						  <li class="fragment">Formas de facilitar a mudança de tamanho</li>
+						  <li class="fragment">Vetores multidimensionais</li>
+						  <li class="fragment">Declaração e Inicialização de Matriz</li>
+						  <li class="fragment">Acessando Elementos da Matriz</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Facilitando mudanças no tamanho</h3>
+					<ul>
+						  <li class="fragment">Como já citado, uma das formas é usando define</li>
+							<li class="fragment"><pre><code>
+#define tam 10
+int main(){
+	int vet[tam];
+}
+							</code></pre></li>
+						  <li class="fragment">Também podemos usar const para isso</li>
+						  <li class="fragment">
+								  <pre><code data-trim>
+const int tam = 10;
+int main(){
+	int vet[tam];
+}
+									</code></pre>
+							</li>
+						  <li class="fragment">Qual a diferença dos dois métodos?</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Vetores Multidimensionais</h3>
+					<ul>
+						  <li class="fragment">Vimos como utilizar vetores com apenas uma dimensão</li>
+						  <li class="fragment"><strong>Vetores podem possuir qualquer número de dimenções</strong></li>
+						  <li class="fragment nobullet"><blockquote>tipo vetor[dim<sub>1</sub>] [dim<sub>2</sub>] ... [dim<sub>n</sub>]</blockquote></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Declaração de Matriz</h3>
+					<ul>
+						  <li class="fragment">Matriz nada mais é que um vetor de duas dimenções</li>
+						  <li class="fragment">Essas dimenções podem ser vistas como x,y ou linha e coluna</li>
+						  <li class="fragment">Para declarar um vetor 3x3</li>
+						  <li class="fragment"><pre><code>
+const int dim = 3;
+int main(){
+	int matriz[dim][dim]; /* temos uma matriz com 3 linhas e 3 colunas */
+}
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Inicialização de Matriz</h3>
+					<ul>
+						  <li class="fragment">Como então iremos iniciar uma matriz?</li>
+						  <li class="fragment"><pre><code>
+#define dim 3
+int main(){
+	int mat[dim][dim] = {}; // Será que funciona???
+}
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Inicialização de Matriz</h3>
+					<ul>
+							<li class="fragment">E nesse caso, o que acontece?</li>
+						  <li class="fragment"><pre><code>
+#define dim 3
+int main(){
+	int mat[dim][dim] = {1,2,3,4,5,6,7,8,9};
+}
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Inicialização de Matriz</h3>
+					<ul>
+							<li class="fragment">E nesse caso, o que acontece?</li>
+						  <li class="fragment"><pre><code>
+#define dim 3
+int main(){
+	int mat[dim][dim] = {{1,2,3} , {4,5,6} , {7,8,9}};
+}
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Indices de uma matriz</h3>
+					<table>
+						  <tr>
+								<td>mat[0][0]</td>
+								<td>mat[0][1]</td>
+								<td>mat[0][2]</td>
+							</tr>
+						  <tr>
+								<td>mat[1][0]</td>
+								<td>mat[1][1]</td>
+								<td>mat[1][2]</td>
+							</tr>
+						  <tr>
+								<td>mat[2][0]</td>
+								<td>mat[2][1]</td>
+								<td>mat[2][2]</td>
+							</tr>
+					</table>
+			</section>
+			<section>
+				  <h3>Escrevendo em uma matriz</h3>
+					<ul>
+						  <li class="fragment">Para Escrever valores em uma matriz, iremos usar 2 loop, um para as linhas e outro para as colunas</li>
+							<li class="fragment"><pre><code>
+int main(){
+...
+	for(i=0;i < dim; i++){
+		for(j=0; j < dim;j++){
+			mat[i][j] = i + j;
+		}
+	}
+}
+							</code></pre></li>
+							<li class="fragment">Quais os valores dos elementos mat[2][2], mat[1][1] e mat[0,2]</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Imprimindo uma matriz</h3>
+					<ul>
+						  <li class="fragment">Segue um truque para Imprimir a matriz em um formato comum, quebre a linha apenas no loop externo</li>
+							<li class="fragment"><pre><code>
+int main(){
+	// ...
+	for(i=0; i < dim; i++){
+		for(j=0; j < dim; j++){
+			printf("%d\t",mat[i][j]);
+		}
+		printf("\n");
+	}
+}
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Entendendo melhor os dois []</h3>
+					<ul>
+						  <li class="fragment">Considerando int mat[3][3]</li>
+						  <li class="fragment"><font color="blue">mat</font> é um vetor com 3 elementos. Que elementos?</li>
+						  <li class="fragment"><font color="blue">mat[0]</font> é um vetor com 3 elementos. Que elementos?</li>
+						  <li class="fragment"><font color="blue">mat[0][0]</font> é um elemento. Qual elemento?</li>
+					</ul>
+			</section>
+			<section>
+				<h4>Exercícios</h4>
+				<ol>
+					<li class="">Como criar uma matriz 2x4 e inicializar? Como imprimir seus elementos?</li>
+					<li class="">Crie uma matriz identidade! Na identidade, se i = j então o valor é 1 se não, 0</li>
+					<li class="">Faça um código que some matrizA com matrizB e salve em matrizC</li>
+					<li class="">Faça uma matriz 4x4 onde M<sub>i,j</sub> = i*j</li>
+				  <li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+				</ol>
+			</section>
+      </div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
