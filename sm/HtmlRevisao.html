@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 
 	<head>
 		<meta charset="utf-8">
 
 		<title>Sistemas Multimidia</title>
 
-		<meta name="description" content="Aulas de Programação I">
+		<meta name="description" content="">
 		<meta name="author" content="Fernando Antonio Marques Filho">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -44,8 +44,7 @@
 				<section>
           <h3>Sistemas Multimidia</h3>
 					<ul>
-						<li>Form e GET/POST</li>
-						<li>Input</li>
+						<li>Revisão</li>
 					</ul>
 					<p>
 						<small>Created by Fernando Marques </small>
@@ -61,165 +60,130 @@
 							  <li class="fragment">iframe (paginas e youtube) e sandbox</li>
 							  <li class="fragment">audio, video: loop, mute, autoplay e controls</li>
 							  <li class="fragment">embed para pdf e outras coisas</li>
+								<li class="fragment">Disponibilizar códigos</li>
 						</ul>
 				</section>
         <section>
-        	<h3>Como mandar a informação para o servidor?</h3>
-					<ul>
-						<li class="fragment">GET/POST</li>
-						<li class="fragment">form: action!</li>
-						<li class="fragment">Tag: form</li>
-						<li class="fragment">Atributo: action - Página Web</li>
-						<li class="fragment">Atributo: method - post/get</li>
-						<li class="fragment">Dentro do form, colocamos tags do tipo <bold>input</bold></li>
-					</ul>
+					<font size="6">
+        	<table>
+							<tr>
+								  <th>Tag</th>
+								  <th colspan="3">Atributos</th>
+							</tr>
+							<tr>
+									<td>font</td>
+									<td>size</td>
+									<td>color</td>
+									<td>face</td>
+							</tr>
+							<tr>
+									<td>a</td>
+									<td>href</td>
+									<td>target</td>
+									<td>#ancora</td>
+							</tr>
+							<tr>
+									<td>img</td>
+									<td>src</td>
+									<td>height</td>
+									<td>width</td>
+							</tr>
+							<tr>
+								  <td>ol</td>
+								  <td>type</td>
+									<td>start</td>
+								  <td>reversed</td>
+							</tr>
+							<tr>
+								  <td>ul</td>
+								  <td>-</td>
+								  <td>-</td>
+								  <td>-</td>
+							</tr>
+							<tr>
+								  <td>table/caption</td>
+								  <td>-</td>
+								  <td>-</td>
+								  <td>-</td>
+							</tr>
+							<tr>
+								  <td>td/th</td>
+								  <td>rowspan</td>
+								  <td>colspan</td>
+								  <td>-</td>
+							</tr>
+							<tr>
+								  <td>audio/video</td>
+									<td>autoplay</td>
+								  <td>loop</td>
+								  <td>mute</td>
+							</tr>
+														<tr>
+									<td>iframe</td>
+									<td>sandbox</td>
+									<td>src</td>
+									<td>height width</td>
+							</tr>
+							<tr>
+								  <td>form</td>
+								  <td>method</td>
+								  <td>action</td>
+								  <td></td>
+							</tr>
+							<tr>
+								  <td>input</td>
+								  <td>type</td>
+								  <td>name</td>
+								  <td>value</td>
+							</tr>
+					</table></font>
 				</section>
-				<section>
-					  <pre><code>
-<form method="get" action="pagina.html">
-	  Aqui colocamos um formulário!
+			<section>
+<pre><code>
+<font size="3" color="green" face="verdana">Meu Texto</font>
+<a href="exemplo.com#ancora" target="_blank">Meu link</a>
+<img src="../img/sandbox.png" width="5%" height="5%"/>
+<ol start="4" reversed="" type="1">
+	<li>Meu valor</li><li>Outro valor</li>
+</ol>
+<ul><li>Meu valor</li><li>Outro valor</li></ul>
+<table><caption>Titulo</caption>
+	<tr><th>Cabeçalho</th></tr>
+	<tr><td>Dado</td></tr>
+</table>
+<audio autoplay="" muted="" loop="">
+	<source src="wrong.ogg" type="video/ogg" />
+	Não encontrado
+</audio>
+<form method="GET" action="">
+	  <input type="text" name="txtNome" value="" placeholder="Seu nome"/>
 </form>
-						</code></pre>
-				</section>
-				<section>
-					  <h3>Mais atributos existentes</h3>
-						<ul>
-							  <li class="fragment">autocomplete - o navegador pode autocompletar (por padrão está ligado)</li>
-							  <li class="fragment">name</li>
-							  <li class="fragment">novalidate - o formulário não deve ser validado</li>
-							  <li class="fragment">target - Onde mostrar o resultado (_self)</li>
-						</ul>
-				</section>
-				<section>
-					  <h3>Exemplo de input</h3>
-						<ul>
-							  <li class="fragment">Não basta ter um form. Precisamos de um input!</li>
-							  <li class="fragment">tag: input</li>
-							  <li class="fragment">atributo principal: type</li>
-							  <li class="fragment">atributo: name</li>
-							  <li class="fragment">atributo: value</li>
-							  <li class="fragment"><pre><code>
-<form method="post">
-	  <legend>Login</legend><br>	</br>
-		Nome de usuario</br>
-		<input type="text" name="login"/></br>
-		Senha
-		<input type="password" name="password"/></br>
-</form>
-								</code></pre></li>
-						</ul>
-				</section>
-				<section>
-	<form>
-		<fieldset>
-		  <legend>Login</legend><br>	</br>
-			Nome de usuario</br>
-			<input type="text" name="login"/></br>
-			Senha</br>
-			<input type="password" name="password"/></br>
-			<input type="submit" value="Ok"/>
-		</fieldset>
-	</form>
-				</section>
-				<section>
-					  <h3>Get ou Post</h3>
-						<table>
-							  <tr>
-									<th></th>
-									<th>GET</th>
-									<th>POST</th>
-								</tr>
-							  <tr>
-									<td>Botão Voltar</td>
-									<td>Sem Problema</td>
-									<td>Os dados são resubmetidos</td>
-								</tr>
-							  <tr>
-									<td>Bookmark</td>
-									<td>Pode</td>
-									<td>Não Pode</td>
-								</tr>
-							  <tr>
-									<td>Histórico</td>
-									<td>Parametros são salvos</td>
-									<td>Parametros não são salvos</td>
-								</tr>
-							  <tr>
-									<td>Seguraça / Visibilidade</td>
-									<td>É visível a todos pela url</td>
-									<td>Os dados não são vistos na url</td>
-								</tr>
-						</table>
-				</section>
-				<section>
-					  <h3>Checkbox e Radio</h3>
-						<pre><code>
-<input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
-<input type="checkbox" name="vehicle2" value="Car"> I have a car
-<input type="radio" name="gender" value="male"> Male<br>
-<input type="radio" name="gender" value="female"> Female<br>
-						</code></pre>
-				</section>
-				<section>
-<h3>Checkbox</h3>
-<input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
-<input type="checkbox" name="vehicle2" value="Car"> I have a car<br>
-<hr></hr>
-<h3>Radio</h3>
-<input type="radio" name="gender" value="male"> Male<br>
-<input type="radio" name="gender" value="female"> Female<br>
-				</section>
-				<section>
-					  <h3>Placeholder</h3>
-						<ul>
-							  <li class="fragment">Outro atributo interessante para input text</li>
-							  <li class="fragment"><pre><code>
-<input type="text" name="apelido" placeholder="Digite o apelido"/>
-								</code></pre></li>
-								<li class="fragment nobullet">
-									<input type="text" name="apelido" placeholder="Digite o apelido"/>
-								</li>
-						</ul>
-				</section>
-				<section>
-					  <h3>Required e Html5 Data Validation</h3>
-						<ul>
-							  <li class="fragment">O atributo required indica que o campo deve ser preenchido</li>
-							  <li class="fragment">pattern: expressão regular</li>
-							  <li class="fragment">Se o tipo for email, é feito uma validação</li>
-							  <li class="fragment">min e max: Valores máximos e mínimos</li>
-							  <li class="fragment">Testem!</li>
-						</ul>
-				</section>
-        <section>
-        	<h3>Tipos de Input</h3>
-					<ul>
-						<li>button</li>
-						<li>checkbox</li>
-						<li>date</li>
-						<li>email</li>
-						<li>file</li>
-						<li>password</li>
-            <li>radio</li>
-            <li>range</li>
-            <li>submit</li>
-            <li>text</li>
-            <li>Entre muitos outros... <a href="http://www.w3schools.com/tags/att_input_type.asp">Aqui tem mais opções</a></li>
-				</ul>
+</code></pre>
 			</section>
 			<section>
-				<h3>Exercícios</h3>
-				  <ol>
-					  <li>Vamos fazer um formulário de cadastro!</li>
-						<ul>
-						  <li>Ao menos 02 campos de texto</li>
-						  <li>Ao menos 01 campo de radio (será que conseguimos fazer o usuário escolher entre imagens?)</li>
-						  <li>Ao menos 01 CheckBox</li>
-						  <li>Ao menos 02 outros tipos de input. (color é bem legal mas não funciona no IE)</li>
-							<li.nobullet><em>Sugestões:</em> Personagem de Jogo, Cadastro de Usuário</li>
-						</ul>
-						<li.nobullet><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
-					</ol>
+				<font size="3" color="green" face="verdana">Meu Texto</font>
+				<a href="exemplo.com#ancora" target="_blank">Meu link</a>
+				<img src="../img/sandbox.png" width="5%" height="5%"/>
+				<ol start="4" reversed="" type="1">
+					<li>Meu valor</li><li>Outro valor</li>
+				</ol>
+				<ul><li>Meu valor</li><li>Outro valor</li></ul>
+				<table><caption>Titulo</caption>
+					<tr><th>Cabeçalho</th></tr>
+					<tr><td>Dado</td></tr>
+				</table>
+				<audio autoplay="" muted="" loop="">
+					<source src="wrong.ogg"/>
+					Não encontrado
+				</audio>
+				<form method="GET" action="">
+					  <input type="text" name="txtNome" value="" placeholder="Seu nome"/>
+				</form>
+			</section>
+			<section>
+				  <h3>Nossa avaliação será no dia 30</h3>
+				  <h3>Não deixem de fazer o exercício do ava!</h3>
+				  <h3>Proxima aula veremos como deixar as páginas bonitas!</h3>
 			</section>
 		</div>
 		</div>
