@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>TP2</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Revisão II</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				  <ul>
+							<li class="fragment">Operadores lógicos e relacionais</li>
+							<li class="fragment">if-else, switch e break</li>
+							<li class="fragment">Vetores: Declaração, Acesso e Inicialização</li>
+							<li class="fragment">Matrizes: Declaração, Acesso e Inicialização</li>
+							<li class="fragment">Identação!</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Operadores lógicos e Condicionais</h3>
+<pre><code>
+int main(){
+	int a = 5;
+	if(a == 5 && a <6)
+		a = 7;
+	if(a != 7 || a < 6)
+		a = 10;
+	if (a < 20 || a != 10)
+		a = 15;
+	else if(a > 10 && a == 15)
+		a = 20
+	printf("%i",a);
+}
+</code></pre>
+			</section>
+			<section>
+				<h3>Switch - Break</h3>
+<pre><code>
+int main(){
+	int a = 0;
+	switch(a){
+		case(0): printf("Olá ");
+		case(1): printf(" Mundo ");
+		case(2): printf("!"); break;
+		case(3): printf(" Tchau"); break;
+		default: printf("Erro, valor errado!\n");
+	}
+}
+</code></pre>
+			</section>
+			<section>
+				<h3>For e Vetores</h3>
+<pre><code>
+const int tamanho = 20;
+int main(){
+	int i, V[tamanho] = {0};
+	int soma = 0;
+	// valores aleatorios no vetor
+	for(i=0;i < tamanho; i++)
+		V[i] = rand() % tamanho; // Valor aleatorio de 0 a tamanho -1
+	// Faz a soma dos valores
+	for(i=0;i < tamanho; i++)
+		soma += V[i];
+	printf("%d\n",soma);
+}
+</code></pre>
+			</section>
+			<section>
+				<h3>While e Do-While</h3>
+<pre><code>
+int main(){
+	int valor;
+	do{
+		printf("Digite um valor, 0 para sair");
+		scanf("%d",&valor);
+		printf("O valor digitado foi %d",valor);
+	} while(valor != 0);
+}
+</code></pre>
+			</section>
+			<section>
+				<h3>Matrizes</h3>
+<pre><code>
+int maint(){
+	int matriz[2][2] = {0};
+	int determinante = 0,i,j;
+	for(i=0; i < 2; i++){
+		for(j=0; j < 2; j++){
+			printf("%d\t",matriz[i][j]);
+		}
+		printf("\n");
+	}
+}
+</code></pre>
+			</section>
+			<section>
+				  <ul>
+						<li.nobullet><a href="https://www.codingame.com/games/training/easy">Link Treino Fácil</a></li>
+						<li><font color="green">Onboarding</font></li>
+						<li><font color="green">Power of Thor</font></li>
+					  <li><font color="yellow">Temperatures</font></li>
+					  <li><font color="red">The Bridge</font></li>
+					  <li><font color="red">Horse-Racing</font></li>
+					</ul>
+			</section>
+      </div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
