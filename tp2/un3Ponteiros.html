@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>TP2</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Ponteiros</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				  <ul>
+							<li class="fragment">Funções e Procedimentos</li>
+							<li class="fragment">Cabeçalho e corpo de função</li>
+							<li class="fragment">Parâmetros</li>
+							<li class="fragment">Passagem de parâmetros</li>
+							<li class="fragment">Valor de retorno</li>
+							<li class="fragment">Void</li>
+							<li class="fragment">Protótipo de funções</li>
+							<li class="fragment">Variaveis locais</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Ponteiros e Memórias - Conceito Básico</h3>
+					<ul>
+						<li class="fragment" style="color:red">Não se desesperem, esse conceito é difícil</li>
+						<li class="fragment">Valor da variável</li>
+						<li class="fragment">Endereço da varíavel</li>
+						<li class="fragment">Quase tudo do computador passa pela memória RAM</li>
+						<li class="fragment">Podemos ver a memória RAM como um vetor de bytes consecutivos</li>
+						<li class="fragment">É mais fácil referenciar uma variável do que um endereço de memória</li>
+						<li class="fragment">Ponteiro armazena o endereço de memória de outra variável</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Ponteiros - Declaração</h3>
+					<ul>
+						<li class="fragment">Para declarar um ponteiro utilizamos <em>int *ptr</em></li>
+						<li class="fragment">Para inicializar o ponteiro podemos usar a constante simbólica <em>NULL</em></li>
+						<li class="fragment">Para atribuir o endereço de uma variável a um ponteiro, utilizamos <em>&nome_variável</em></li>
+						<li class="fragment">
+<pre><code>int main(){
+	int a=5, b=7;
+	int *ptr = NULL;
+	ptr = &a;
+	printf("%d\n",a);
+	printf("%d\n",*ptr);
+	ptr = &b;
+	printf("%d\n",*ptr);
+	*ptr = 20;
+	printf("%d\n",*ptr);
+	printf("%d\n",b);
+}
+
+</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Ponteiros</h3>
+					<ul>
+						<li class="fragment">Onde já vimos o uso de ponteiros?</li>
+						<li class="fragment">scanf("%d",&nome);</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Aritmética de Ponteiros</h3>
+					<ul>
+						<li class="fragment">Podemos incrementar um ponteiro, mas ele não será deslocado apenas 01</li>
+						<li class="fragment">Também podemos decrementar</li>
+						<li class="fragment">Diferença mostra quantos elementos existem entre dois intervalos</li>
+						<li class="fragment">Também podemos fazer comparações</li>
+						<li class="fragment">ptr[2] é igual a *(ptr+2)</li>
+						<li class="fragment">O nome de um vetor corresponde ao endereço do primeiro elemento</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Passagem de Ponteiros em Função</h3>
+<pre><code>
+	void incrementa(int *a){
+		*a +=1;
+}
+int main(){
+	int a = 5;
+	incrementa(&a);
+	printf("%d\n",a);
+}
+</code></pre>
+			</section>
+			<section>
+				  <h3>Ponteiro de Ponteiro</h3>
+					<ul>
+						<li class="fragment">Como as outras variáveis, os ponteiros também são armazenados em memória</li>
+						<li class="fragment">Logo... também possuem endereço!</li>
+						<li class="fragment">Assim, se armazenarmos o endereço de um ponteiro, temos um ponteiro de ponteiro</li>
+						<li class="fragment"><pre><code>
+int main(){
+	int x =5;
+	int *ptr_x;
+	int **ptr_ptr_x;
+	ptr_x = &x;
+	ptr_ptr_x = &ptr_x;
+	printf("x = %d - &x = %ld\n",x,&x);
+	printf("x = %d - &x = %ld\n",*ptr_x,ptr_x);
+	printf("x = %d - &x = %ld\n",**ptr_x,*ptr_x	);
+}
+						</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Cuidados</h3>
+					<ul>
+						<li class="fragment">Em ponteiros é ainda mais importante inicialos antes de utilizar</li>
+						<li class="fragment">int *ptr = NULL;</li>
+						<li class="fragment">O programa pode travar se for atribuído um valor a um ponteiro ainda não inicializado</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Exercícios</h3>
+					<ol>
+						<li>Suponha int x=2, *px, *py, y=3;</li>
+					<ol>
+						<li>Faça px apontar para o endereço de x e py para o endereço de y</li>
+						  <li>Qual o resultado de:<pre><code>
+printf("%d %d\n",x,y);
+printf("%d %d\n",*px,*py);
+printf("%d %d\n",&px,&py);
+printf("%d %d\n",&x - px,&y - py);
+							</code></pre></li>
+					</ol>
+					<li>Faça uma função scanfInt que tenha um ponteiro como parametro, chame o scanf e salve o valor no endereço do ponteiro</li>
+					<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+				</ol>
+			</section>
+      </div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
