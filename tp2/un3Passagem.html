@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>TP2</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Passagem de parametro por valor e referência</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<section>
+					<h3>Revisão - Ponteiros</h3>
+					  <ul>
+								<li class="fragment">Valor e Endereço</li>
+								<li class="fragment">Declaração e uso</li>
+								<li class="fragment">Aritmética de Ponteiros</li>
+								<li class="fragment">Passagem de ponteiro em função</li>
+								<li class="fragment">Ponteiro de Ponteiro</li>
+						</ul>
+				</section>
+				<section>
+					<h3>Revisão - Funções</h3>
+					  <ul>
+								<li class="fragment">Funções e Procedimentos</li>
+								<li class="fragment">Cabeçalho e corpo de função</li>
+								<li class="fragment">Parâmetros</li>
+								<li class="fragment">Passagem de parâmetros</li>
+								<li class="fragment">Valor de retorno</li>
+								<li class="fragment">Void</li>
+								<li class="fragment">Protótipo de funções</li>
+								<li class="fragment">Variaveis locais</li>
+						</ul>
+				</section>
+			</section>
+			<section>
+				  <h3>Passagem de parâmetros</h3>
+					<ul>
+						<li class="fragment">Tipos de passagens de parametro</li>
+						<li class="fragment">Memória entre chamadas de funções</li>
+						<li class="fragment">Passagem de vetores para funções</li>
+						<li class="fragment">Os parâmetros da função main</li>
+						<li class="fragment">Recursividade</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Conceitos básicos de função</h3>
+<pre><code>
+int Maior(int a, int b){
+	return (a > b) ? a : b;
+}
+int main(){
+	printf("O maior entre %d e %d eh %d",10,15,Maior(10,15));
+}
+</code></pre>
+				<table>
+					<tr>
+						<th>Nome da Função</th>
+						<td>Maior</td>
+					</tr>
+					<tr>
+						<th>Tipo de Retorno</th>
+						<td>int</td>
+					</tr>
+					<tr>
+						<th>Lista de Parâmetros</th>
+						<td>int a, int b</td>
+					</tr>
+					<tr>
+						<th>Corpo da função</th>
+						<td>return (a>b) ? a : b;</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				  <h3>Tipo de Retorno</h3>
+					<ul>
+						<li class="fragment">Como já vimos, uma função possui apenas um tipo de retorno</li>
+						<li class="fragment">Isso pode ser um problema, caso seja necessário retornar mais de um valor</li>
+						<li class="fragment">Imaginem uma função que calcula o número de elementos menores que 0 em um vetor de reais e também esses exemplos</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Trocando elementos</h3>
+					<ul>
+						<li class="fragment">Uma operação que realizamos com frequencia é a de troca, por exemplo para ordenar um vetor</li>
+						<li class="fragment">Para trocar o conteúdo de dois copos precisamos de um terceiro</li>
+						<li class="fragment">O mesmo acontece para trocar o conteúdo de 2 variáveis</li>
+						<li class="fragment">Como podemos fazer essa função?</li>
+						<li class="fragment"><pre><code>void troca(int a, int b){
+ int temp = a;
+ a = b;
+ b = temp;
+}</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Passagem de Parâmetros por Valor</h3>
+					<ul>
+						<li class="fragment">É enviada uma cópia do valor e não a variável ou expressão</li>
+						<li class="fragment">Assim, podemos alterar os valores que o valor original não é modificado</li>
+						<li class="fragment">Quando a função termina, as cópias são apagadas</li>
+						<li class="fragment">Foi o que fizemos na função que troca valores, por isso ela não funciona!</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Passagem de Parâmetros por Referência</h3>
+					<ul>
+						<li class="fragment">Na passagem de parâmetros por referência não é enviado o valor mas sim a própria varíavel ou uma referência</li>
+						<li class="fragment">Assim, qualquer alteração corresponde a uma alteração no valor</li>
+						<li class="fragment">Para fazer isso em C, precisamos da utilização de ponteiros</li>
+						<li class="fragment"><pre><code>void troca(int *a, int *b){
+ int temp = *a;
+ *a = *b;
+ *b = temp;
+}</code></pre></li>
+						<li class="fragment">Sempre que passarmos vetores, estamos, na verdade, passando seu endereço</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Quando usar endereços?</h3>
+					<ul>
+						<li class="fragment">Se for vetor, nunca</li>
+						<li class="fragment">Se não for vetor, devemos usar endereço se ela deve ser alterada</li>
+						<li class="fragment">Implemente a função Calc(v,num, xmin, xmax)</li>
+						<ul>
+							<li class="fragment">v é um vetor de floats</li>
+							<li class="fragment">num o número de elementos em v</li>
+							<li class="fragment">xmin e xmax vão armazenar o maior e menor valor no vetor</li>
+						</ul>
+					</ul>
+			</section>
+			<section>
+				  <h3>Passar parametros em main</h3>
+					<ul>
+						<li class="fragment"><pre><code>
+main(int argc, char *argv[]){
+	int i;
+	for(i=0; i < argc; i++)
+		printf("%d - Parâmetro = %s\n",i+1;argv[i]);
+}	</code></pre></li>
+						<li class="fragment">argc - um inteiro que indica quantos argumentos foram passados</li>
+						<li class="fragment">argv - todas strings passadas na linha de comando</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Recursividade</h3>
+					<ul>
+						<li class="fragment">Recursividade é quando uma função chama a ela mesma, direta ou indiretamente</li>
+						<li class="fragment"><pre><code>int fat(int n){
+if (n == 0)
+	return 1;
+else
+	return n*fat(n-1);
+}</code></pre></li>
+						<li class="fragment">Sempre ter um critério de parada</li>
+						<li class="fragment">Depois do critério de parada, é feita a chamada recursiva</li>
+						<li class="fragment">Implemente a função Down que imprime os N números até 0</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Exercícios</h3>
+					<ol>
+						<li>Faça uma função de potência de forma recursiva. Exemplo a elevado e x</li>
+						<li>Faça uma função interativa e uma recursiva para Fibonnacci. Fib(n) = Fib(n-1) + Fib(n-2)</li>
+						<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+				</ol>
+			</section>
+      </div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
