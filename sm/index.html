@@ -46,6 +46,7 @@
 						  <li><a href="CSS4Responsive.html">CSS3 e Responsividade</a></li>
 						  <li><a href="CSS5Exercicios.html">Boas Práticas e Exercícios</a></li>
 						  <li><a href="CSS6Bootstrap.html">Bootstrap</a></li>
+						  <li><a href="http://www.teaching-materials.org/css3/#slide1">Revisão</a></li>
 					</ol>
 					<p>
 						<small>Created by Fernando Marques </small>
@@ -94,7 +95,12 @@
 					{ src: '../plugin/notes/notes.js', async: true }
 				]
 			});
-
+			Reveal.configure({
+				keyboard: {
+					39: 'next',
+					37: 'prev'
+				}
+			});
 		</script>
 
 	</body>
