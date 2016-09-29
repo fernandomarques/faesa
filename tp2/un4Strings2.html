@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>TP2</title>
+
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Funções de string.h</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Strings</h3>
+				<ul>
+					<li class="fragment"><a href="un4Strings.html#/7">Exercícios da Aula Passada</a></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Copiando Strings</h3>
+				<ul>
+					<li class="fragment">Vai copiar a string origem para a string destino</li>
+					<li class="fragment">char *strcpy(char *dest,char *orig)</li>
+					<li class="fragment"><pre><code>
+char *strcpy(char *dest, char *orig){
+	int i;
+	int tam = strlen(orig);
+	for(i=0; i <= tam; i++){
+		dest[i] = orig[i];
+	}
+	return dest;
+}
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Concatenando Strings</h3>
+				<ul>
+					<li class="fragment">Coloca a string orig imediatamente após dest. Não adiciona espaço nem outro caracter entre as duas.</li>
+					<li class="fragment">char *strcat(char *dest,char *orig)</li>
+					<li class="fragment"><pre><code>
+char *strcpy(char *dest, char *orig){
+	int i, len;
+	for(i=0, len=strlen(orig); orig[i] != '\0'; i++){
+		dest[len+i] = orig[i];
+	}
+	dest[len+i] = '\0';
+	return dest;
+}
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Contando Caracteres</h3>
+				<ul>
+					<li class="fragment">Conta quantas vezes o caracter ch aparece na string s</li>
+					<li class="fragment">int strcountc(char *s, char ch)</li>
+					<li class="fragment"><pre><code>
+int strcountc(char *s, char ch){
+	int i,conta;
+	for(i=conta=0; s[i] != '\0'; i++){
+		if(s[i] == ch)
+			conta++;
+	}
+	return conta;
+}
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Outras funções da string.h</h3>
+				<ul>
+					<li class="fragment">int strcmp(char *str1, char *str2) - Compara duas strings</li>
+					<li class="fragment">char *strchr(const char *str, int c) - Retorna a primeira posição do caracter</li>
+					<li class="fragment">char *strrchr(const char *str, int c) - Retorna a última posição do caracter</li>
+					<li class="fragment">char *strstr(char *palheiro, char *agulha) - Procura a agulha no palheiro</li>
+				</ul>
+			</section>
+				<section>
+					<h3>Exercícios</h3>
+					<ol>
+						<li>Faça uma função que verifique se uma string é palindromo
+							<blockquote>
+								Diz-se de ou frase ou palavra que se pode ler, indiferentemente, da esquerda para a direita ou vice-versa.
+							</blockquote>
+							Exemplos: Ana, Reviver, O galo ama o lago, SOCORRAM-ME, SUBI NO ÔNIBUS EM MARROCOS
+						</li>
+						<li>Vamos Fazer um jogo da forca?
+							<ul>
+								<li>String com a palavra a ser descoberta</li>
+								<li>Vetor com os caracteres tentados</li>
+								<li>Contar número de tentativas</li>
+							</ul>
+						</li>
+						<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+					</ol>
+				</section>
+			</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true }
+			]
+		});
+		Reveal.configure({
+			keyboard: {
+				38: 'next',
+				40: 'prev'
+			}
+		});
+		</script>
+
+	</body>
+	</html>
