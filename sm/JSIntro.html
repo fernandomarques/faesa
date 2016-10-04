@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-br">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Sistemas Multimidia</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+          <h3>Sistemas Multimidia</h3>
+					<ul>
+						<li>JavaScript</li>
+					</ul>
+					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+				</section>
+				<section>
+					  <h3>JavaScript</h3>
+						<ul>
+							  <li class="fragment">100% das pessoas que responderam o questionário tem contato com linguagens de programação e conhecem ao menos Java</li>
+							  <li class="fragment">Infelizmente 100% de <span style="color:red;">04</span> pessoas não é uma boa representação da nossa turma</li>
+							  <li class="fragment"><a href="https://www.destroyallsoftware.com/talks/the-birth-and-death-of-javascript">Birth and Death of JavaScript</a></li>
+							  <li class="fragment">Apesar de vermos JS apenas como uma linguagem client-side, já existem frameworks de backend em js!</li>
+							  <li class="fragment"><button type="button"
+onclick="document.getElementById('demo').innerHTML = Date()">
+Mostrar Data/Hora</button></li>
+							  <li><p id="demo"> </p></li>
+								<li class="fragment">JavaScript é considerado por alguns a melhor primeira linguagem</li>
+								<li class="fragment"><a href="https://www.codecademy.com/learn/javascript">Ótima fonte para quem quer aprender mais js</a></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>O que veremos de JavaScript?</h3>
+						<ul>
+							  <li class="fragment">Comandos Básicos</li>
+							  <li class="fragment">Declaração, Atribuição e Tipos Básicos</li>
+							  <li class="fragment">Alert</li>
+							  <li class="fragment">Operadores, Condicionais, Loops</li>
+							  <li class="fragment">Entrada de Dados</li>
+							  <li class="fragment">Funções e Vetores</li>
+							  <li class="fragment">Ajax</li>
+							  <li class="fragment">Canvas</li>
+							  <li class="fragment">Árvore DOM e jQuery</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>HTML vs CSS vs JS</h3>
+						<ul>
+							  <li class="fragment">Se HTML é conteúdo e CSS forma, o que seria JS?</li>
+							  <li class="fragment">Javascript = <span style="font-size:52px;color:blue;">Comportamento</span></li>
+							  <li class="fragment">PS.: Apesar do nome, JavaScript não tem nada a ver com Java. Foi apenas uma jogada de marketing!</li>
+							  <li class="fragment">JavaScript implementa o padrão conhecido como ECMAScript</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>O que podemos fazer com JavaScript?</h3>
+						<ul>
+							  <li class="fragment"><a href="http://www.w3schools.com/js/tryit.asp?filename=tryjs_intro_lightbulb">Modificar, Adicionar e Remover conteúdo HTML</a></li>
+							  <li class="fragment">Modificar, Adicionar e Remover atributos HTML</li>
+							  <li class="fragment">Modificar, Adicionar e Remover CSS</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Onde Colocar o JavaScript</h3>
+						<ul>
+							  <li class="fragment">Dentro do HTML o js pode estar dentro de head ou body. Sempre dentro da tag script</li>
+							  <li class="fragment">JavaScript pode funcionar como função (sendo chamado diretamente) ou como evento, sendo chamado quando algo acontece</li>
+							  <li class="fragment">É indicado colocar script no final do body, pois a compilação de js pode deixar o carregamento da página lento</li>
+							  <li class="fragment">Também podemos criar um arquivo .js e colocar o atributo src na tag script para adicionar o código</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Escrevendo na Tela</h3>
+						<ul>
+							  <li class="fragment">Usar um alertbox com window.alert()	</li>
+							  <li class="fragment">Escrever no documento com document.write() (Apaga o conteúdo que já existe)</li>
+							  <li class="fragment">Escrever dentro de um elemento html (document.getElementById) atualizando seu innerHTML</li>
+							  <li class="fragment">Escrever no console do navegador com console.log (F12)</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Sintaxe</h3>
+						<ul>
+							  <li class="fragment">Comandos são separados por ;</li>
+							  <li class="fragment">Strings podem ser usadas com aspas dupla ou simples</li>
+							  <li class="fragment">Para declarar variáveis utilizamos var</li>
+							  <li class="fragment">Comentários podem ser feitos com // ou /**/</li>
+							  <li class="fragment">JavaScript é case-sensitive!</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Expressões e Variáveis</h3>
+						<ul>
+							  <li class="fragment">Podemos somar strings, tentem!</li>
+							  <li class="fragment">var helloWorld = "Hello" + " " + "World";</li>
+							  <li class="fragment">Mas o que acontece nos exemplos a baixo</li>
+							  <li class="fragment">var x = 2 + 3 + "5"</li>
+							  <li class="fragment">var x = "5" + 2 + 3;</li>
+							  <li class="fragment">Além dos operadores de comparação comuns também temos === e !==. Igual em valor e tipo!</li>
+							  <li class="fragment">Para saber um tipo podemos chamar typeof()</li>
+						</ul>
+				</section>
+
+				<section>
+					  <h3>Tipos de dados</h3>
+						<ul>
+							  <li class="fragment"><pre>
+var length = 16;                               // Number
+var lastName = "Johnson";                      // String
+var cars = ["Saab", "Volvo", "BMW"];           // Array
+var x = {firstName:"John", lastName:"Doe"};    // Object
+							  </pre></li>
+							  <li class="fragment">Usem typeof para verificar!</li>
+							  <li class="fragment">JavaScript utiliza tipagem dinâmica!</li>
+							  <li class="fragment">Também temos o tipo booleano que usamos com: true | false</li>
+							  <li class="fragment">Também temos arrays = ["A","B"]</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Condicionais</h3>
+						<ul>
+							  <li class="fragment">if, else if, else e switch</li>
+							  <li class="fragment"><pre><code>
+if (time < 10) {
+    greeting = "Good morning";
+} else if (time < 20) {
+    greeting = "Good day";
+} else {
+    greeting = "Good evening";
+}
+switch (new Date().getDay()) {
+    case 0:
+        day = "Sunday";
+        break;
+    case 1:
+        day = "Monday";
+        break;
+		default:
+				day = "Outro...";
+			}
+								</code></pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Loops</h3>
+						<ul>
+							  <li class="fragment">Os loops que podemos usar são for, for in, while e do while</li>
+							  <li class="fragment"><pre><code>
+for (i = 0; i < 5; i++) {
+    text += "The number is " + i + "<br>";
+}
+var person = {fname:"John", lname:"Doe", age:25};
+
+var text = "";
+var x;
+for (x in person) {
+    text += person[x];
+}
+								</code></pre></li>
+						</ul>
+				</section>
+				<section>
+				  <ul>
+						<li>Preencham a enquete!</li>
+						<li>Faça uma função que calcula a área de um círculo</li>
+						<li>Faça uma função que calcule a distância entre dois pontos A(x<sub>0</sub>,y<sub>0</sub>) e B(x<sub>1</sub>,y<sub>1</sub>)</li>
+						<li>Faça uma função que calcule o fatorial de N</li>
+						<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+					</ul>
+			</section>
+		</div>
+		</div>
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+                    { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
+			});
+		</script>
+
+	</body>
+</html>
