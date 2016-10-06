@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-br">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Sistemas Multimidia</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+          <h3>Sistemas Multimidia</h3>
+					<ul>
+						<li>JavaScript</li>
+					</ul>
+					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+				</section>
+				<section>
+					  <h3>JavaScript</h3>
+						<ul>
+							<li class="fragment">String</li>
+							<li class="fragment">Array</li>
+							  <li class="fragment">Funções</li>
+							  <li class="fragment">Classes</li>
+							  <li class="fragment">Input</li>
+							  <li class="fragment">Eventos</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>String</h3>
+						<ul>
+							  <li class="fragment">Vimos que se somar um número com string, temos uma string!</li>
+							  <li class="fragment">Para saber o tamanho da string basta fazer str.length , <b>não é um método!</b></li>
+							  <li class="fragment">str.indexOf('palavra') retorna a primeira posição da palavra em str</li>
+							  <li class="fragment">Também existe o str.lastIndexOf('palavra'), ambos retornam -1 se não for encontrado</li>
+							  <li class="fragment">str.slice(inicio, fim), também existe str.substring(inicio, fim). Slide aceita indice negativo!</li>
+								<li class="fragment">str.substr(inicio, tamanho) também é parecido, mas o segundo parametro é o tamanho</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>String</h3>
+						<ul>
+							  <li class="fragment">str.replace("Oi","Tchau"), substitui todas ocorrências de Oi por Tchau </li>
+							  <li class="fragment">str.toUpperCase() e str.toLowerCase()</li>
+							  <li class="fragment">str.charAt(0) e str.charCodeAt(0)</li>
+							  <li class="fragment"><b>Não devemos trabalhar com string como array. Ou seja, não podemos fazer str[0] = 'A'</b></li>
+							  <li class="fragment">Para converter em array podemos usar o str.split()</li>
+							  <li class="fragment">Para juntar podemos usar .toString() ou .join(sep) onde sep é o separador, por padrão ','</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Array</h3>
+						<ul>
+							  <li class="fragment">var frutas = ["Banana", 'Maçã', 'Caju']</li>
+							  <li class="fragment">frutas.toString()</li>
+							  <li class="fragment">frutas.join(' * ')</li>
+							  <li class="fragment">frutas.pop() e frutas.push('Kiwi')</li>
+							  <li class="fragment">frutas.shift() e frutas.unshift('Acerola')</li>
+							  <li class="fragment">delete fruits[0];</li>
+							  <li class="fragment">frutas.splice(2,0,"Manga","Laranja")</li>
+							  <li class="fragment">frutas.slice()</li>
+							  <li class="fragment">frutas.sort() e frutas.reverse()</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Funções</h3>
+						<ul>
+							  <li class="fragment"><pre><code>
+function foo(p1, p2){
+	return p1 + p2;
+}
+								</code></pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Objetos</h3>
+						<ul>
+							  <li class="fragment">Objetos sem métodos:</li>
+							  <li class="fragment"><pre><code>
+var carro = { type:'Fiat', model:'500', color:'white'};
+console.log(carro.model);
+carro['cv'] = 107;
+console.log(carro.cv)
+for( x in carro)
+	console.log(carro[x]);
+// ou
+var carro = new Object();
+carro.type = 'Fiat';
+...
+delete carro.type;
+								</code></pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Objetos Construtores</h3>
+						<ul>
+							  <li class="fragment"><pre><code>
+function pessoa(nome, sobrenome, nickname){
+	this.nome = nome;
+	this.sobrenome = sobrenome;
+	this.nickname = nickname;
+}
+var batman = new pessoa('Bruce','Wayne','Batman');
+var luke = new pessoa('Luke','Cage', 'Powerman');
+								</code></pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Objetos Métodos</h3>
+						<ul>
+							  <li class="fragment"><pre><code>
+function pessoa(nome, sobrenome, nickname){
+	this.nome = nome;
+	this.sobrenome = sobrenome;
+	this.nickname = nickname;
+	this.fullname = function() {
+		return this.nome + this.sobrenome;
+	}
+}
+var batman = new pessoa('Bruce','Wayne','Batman');
+var luke = new pessoa('Luke','Cage', 'Powerman');
+								</code></pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Objetos Protótipos</h3>
+						<ul>
+							  <li class="fragment">Todo objeto js tem um protótipo. O protótipo também é um objeto</li>
+							  <li class="fragment"><pre><code>
+function pessoa(nome, sobrenome, nickname){
+	this.nome = nome;
+	this.sobrenome = sobrenome;
+	this.nickname = nickname;
+}
+pessoa.prototype.tipo = "Super-Herói";
+pessoa.prototype.fullname = function(){
+		return this.nome + ' ' + this.sobrenome;
+}
+var batman = new pessoa('Bruce','Wayne','Batman');
+var luke = new pessoa('Luke','Cage', 'Powerman');
+								</code></pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Objetos Protótipos-Herança</h3>
+						<ul>
+							  <li class="fragment"><pre><code>
+function Mammal(name){
+	this.name=name;
+	this.offspring=[];
+}
+Mammal.prototype.toString=function(){
+	return '[Mammal "'+this.name+'"]';
+}
+Cat.prototype = new Mammal();        // Here's where the inheritance occurs
+Cat.prototype.constructor=Cat;       // Otherwise instances of Cat would have a constructor of Mammal
+function Cat(name){
+	this.name=name;
+}
+Cat.prototype.toString=function(){
+	return '[Cat "'+this.name+'"]';
+}
+var someAnimal = new Mammal('Mr. Biggles');
+var myPet = new Cat('Felix');
+alert('someAnimal is '+someAnimal);   // results in 'someAnimal is [Mammal "Mr. Biggles"]'
+alert('myPet is '+myPet);             // results in 'myPet is [Cat "Felix"]'
+
+								</code></pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Eventos</h3>
+						<ul>
+							  <li class="fragment">Eventos são coisas que acontecem na página. Quando o evento ocorre, o js reage</li>
+							  <li class="fragment"><pre>
+									  <button onclick="document.getElementById("demo").innerHTML=Date()">Clique-me</button>
+								</pre></li>
+							  <li class="fragment">onchange - Quando um elemento html mudar</li>
+							  <li class="fragment">onclick - Clicar em um elemento </li>
+							  <li class="fragment">onmouseover</li>
+							  <li class="fragment">onmouseout</li>
+							  <li class="fragment">onkeydown - Aperta uma tecla</li>
+							  <li class="fragment">onload - A página termina de carregar</li>
+							  <li class="fragment"><a href="http://www.w3schools.com/jsref/dom_obj_event.asp">Lista de eventos</a></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>Input</h3>
+						<ul>
+							  <li class="fragment"><pre><code>
+var r = confirm("Press a button");
+if (r == true) {
+    x = "You pressed OK!";
+} else {
+    x = "You pressed Cancel!";
+}
+var person = prompt("Please enter your name", "Harry Potter");
+if (person != null) {
+    document.getElementById("demo").innerHTML =
+    "Hello " + person + "! How are you today?";
+}
+								</code></pre></li>
+						</ul>
+				</section>
+				<section>
+				  <ul>
+						<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+					</ul>
+			</section>
+		</div>
+		</div>
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+                    { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
+			});
+		</script>
+
+	</body>
+</html>
