@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-br">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Sistemas Multimidia</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+          <h3>Sistemas Multimidia</h3>
+					<ul>
+						<li>JavaScript - Boas Práticas</li>
+					</ul>
+					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+				</section>
+				<section>
+					  <h3>JavaScript - Performance</h3>
+						<ul>
+							<li class="fragment">Reduzir atividades em loops</li>
+							<li class="fragment"><pre><code>var i;
+for(i=0;i < arr.length; i++){ ...} </code></pre></li>
+							<li class="fragment">VS</li>
+							<li class="fragment"><pre><code>var i;
+var l = arr.length;
+for(i=0;i < l; i++){ ...}
+							</code>
+							</pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>JavaScript - Performance</h3>
+						<ul>
+							<li class="fragment">Reduzir acessos a árvore DOM</li>
+							<li class="fragment"><pre><code>var obj;
+obj = document.getElementsById("demo");
+obj.innerHTML = "Hello"; </code></pre></li>
+							<li class="fragment">Tente manter a árvore DOM com poucos elementos</li>
+							<li class="fragment">Coloque os scripts no final da página</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>JavaScript - Erros Comuns</h3>
+						<ul>
+							<li class="fragment">Usar o operador de atribuição ao invés do de igualdade ==</li>
+							<li class="fragment">'10' == 10 &rarr; true</li></li>
+							<li class="fragment">'10' === 10 &rarr; false</li></li>
+							<li class="fragment">Switch usa comparação restrita (===)</li>
+							<li class="fragment">0.2 + 0.1 não é = 0.3 (floats...)</li>
+							<li class="fragment">Quebrar uma string em linhas</li>
+							<li class="fragment"><pre><code>var x = "Hello \
+World!";</code></pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>JavaScript - Erros Comuns</h3>
+						<ul>
+							<li class="fragment">Adicionar ; após if: if( a == 2); {}</li>
+							<li class="fragment">JavaScript adiciona ; automáticamente, isso pode gerar erro</li>
+							<li class="fragment"><pre><code>function foo(a){
+var
+power = 10;
+return
+a * power;
+							}
+						</code></pre></li>
+							<li class="fragment">Indices em Objetos usam string, mas em array usam inteiros!</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>JavaScript - Boas Práticas</h3>
+						<ul>
+							<li class="fragment">Evite o uso de variáveis globais (duh!)</li>
+							<li class="fragment">Variáveis locais são declaradas com o var</li>
+							<li class="fragment">Declare variáveis no início do script</li>
+							<li class="fragment">E inicialize os valores!</li>
+							<li class="fragment">Evite declarar objetos Number,String ou Boolean pois eles atrazam a execução</li>
+							<li class="fragment">var a = new Number(1);</li>
+							<li class="fragment"><pre><code>var x = new String('Fernando');
+var y = new String('Fernando');
+x == y // falso pois não podemos comparar objetos</code></pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>JavaScript - Boas Práticas</h3>
+						<ul>
+							<li class="fragment">Use {} instead of new Object()</li>
+							<li class="fragment">Use "" instead of new String()</li>
+							<li class="fragment">Use 0 instead of new Number()</li>
+							<li class="fragment">Use false instead of new Boolean()</li>
+							<li class="fragment">Use [] instead of new Array()</li>
+							<li class="fragment">Use /()/ instead of new RegExp()</li>
+							<li class="fragment">Use function (){} instead of new Function()</li>
+						</ul>
+				</section>
+				<section>
+					  <h3>JavaScript - Boas Práticas</h3>
+						<ul>
+							<li class="fragment">Sempre utilize ===</li>
+							<li class="fragment"><pre><code>0 == "";        // true
+1 == "1";       // true
+1 == true;      // true
+
+0 === "";       // false
+1 === "1";      // false
+1 === true;     // false</code></pre></li>
+						</ul>
+				</section>
+				<section>
+					  <h3>JavaScript - Boas Práticas</h3>
+						<ul>
+							<li class="fragment">Use parametros default</li>
+							<li class="fragment"><pre><code>function myFunction(x, y) {
+    if (y === undefined) {
+        y = 0;
+    }
+}</code></pre></li>
+							<li class="fragment">Sempre coloque default no seu switch</li>
+							<li class="fragment">Evite usar eval(). PS.: eval rocks! </li>
+						</ul>
+				</section>
+				<section>
+				  <ul>
+						<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+					</ul>
+			</section>
+		</div>
+		</div>
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+                    { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
+			});
+		</script>
+
+	</body>
+</html>

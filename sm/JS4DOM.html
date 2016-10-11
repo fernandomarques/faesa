@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="utf-8">
+	<title>Sistemas Multimidia</title>
+
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Sistemas Multimidia</h3>
+				<ul>
+					<li>JavaScript e DOM</li>
+				</ul>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>DOM - Document Object Model</h3>
+				<ul>
+					<li class="fragment">Dividido em três partes</li>
+					<ul>
+						<li class="fragment">Core DOM – modelo padrão para qualquer documento estruturado</li>
+						<li class="fragment">XML DOM – modelo padrão para documentos XML</li>
+						<li class="fragment">XML DOM – modelo padrão para documentos HTML</li>
+					</ul>
+					<li class="fragment">Dom define os <em>objetos</em> e as <em>propriedades</em> de todos os elementos de um documento, assim como os <em>métodos</em> (interface) para acessá-los</li>
+				</ul>
+			</section>
+			<section>
+				<h3>DOM</h3>
+				<ul>
+					<li class="fragment">Pode ser utilizado para HTML ou para XML</li>
+					<li class="fragment">É um padrão W3C</li>
+					<li class="fragment">HTML DOM é um modelo para HTML</li>
+					<li class="fragment">Independente de linguagem e plataforma</li>
+					<li class="fragment">Define um padrão para a manipulação de documentos HTML</li>
+					<li class="fragment">Define um padrão para acessar objetos de um documento XML</li>
+					<li class="fragment">“Parser de arquivos Estruturados”</li>
+				</ul>
+			</section>
+			<section>
+				<h3>DOM</h3>
+				<ul>
+					<li class="fragment">Vantagem</li>
+					<ul>
+						<li class="fragment">Possui API robusta para a manipulação dos dados</li>
+					</ul>
+					<li class="fragment">Desvantagem</li>
+					<ul>
+						<li class="fragment">Consumo de memória, pois armazena todo o documento em memória em forma de árvore</li>
+						<li class="fragment">Não recomendado para arquivos grandes</li>
+					</ul>
+				</ul>
+			</section>
+			<section>
+				<h3>Árvore DOM</h3>
+				<ul>
+					<li class="fragment">Dom é utilizado para a manipulação de arquivos</li>
+					<li class="fragment">Carrega os arquivos em forma de árvore na memória</li>
+					<li class="fragment">Todos os elementos são manipulados como nós da árvore</li>
+					<li class="fragment">Relação Hierárquica entre os nós</li>
+					<ul>
+						<li class="fragment">Pais, filhos, vizinhos, raiz e nós folhas</li>
+					</ul>
+				</ul>
+			</section>
+			<section>
+				<h3>Árvore DOM HTML</h3>
+				<ul>
+					<img src="../img/arvoreDOM.png" height="80%"/>
+				</ul>
+			</section>
+			<section>
+				<h3>Propriedades DOM</h3>
+				<ul>
+					<li class="fragment"><em>nodeName</em> – contém o nome de um nó</li>
+					<li class="fragment"><em>value</em> – contém o valor (conteúdo) de um nó</li>
+					<li class="fragment"><em>parentNode</em> – o pai de um nó</li>
+					<li class="fragment"><em>childNode</em> – os nós filhos de um nó</li>
+					<li class="fragment"><em>attributes</em> – os atributos de um nó</li>
+					<li class="fragment"><em>innerHTML</em> – contém o texto</li>
+				</ul>
+			</section>
+			<section>
+				<h3>HTML DOM</h3>
+				<ul>
+					<li class="fragment">Elementos HTML como objetos</li>
+					<li class="fragment">Propriedades de todos elementos HTML</li>
+					<li class="fragment">Métodos de acesso a todos elementos HTML</li>
+					<li class="fragment">Eventos de  todos elementos HTML</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Javascript e DOM</h3>
+				<ul>
+					<li class="fragment">Javascript consegue criar HTML dinâmico:</li>
+					<ul>
+						<li class="fragment">Modificar todos elementos HTML</li>
+						<li class="fragment">Modificar todos atributos HTML</li>
+						<li class="fragment">Modificar todos styles CSS</li>
+						<li class="fragment">Remover elementos e atributos HTML</li>
+						<li class="fragment">Adicionar novos elementos e atributos HTML</li>
+						<li class="fragment">Reagir a eventos HTML</li>
+						<li class="fragment">Criar novos eventos HTML</li>
+					</ul>
+				</ul>
+			</section>
+			<section>
+				<h3>Exemplo</h3>
+				<pre><code class="hljs" data-trim contenteditable>
+&lt;html&gt;
+&lt;body&gt;
+	&lt;p id="demo"&gt;&lt;/p&gt;
+
+	&lt;script&gt;
+		document.getElementById("demo").innerHTML = "Hello World!";
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+				</code></pre>
+			</section>
+			<section>
+				<h3>Elementos</h3>
+				<ul>
+					<li class="fragment nobullet"><img src="../img/DOMFind.png" height="40%"/></li>
+					<li class="fragment nobullet"><img src="../img/DOMChange.png" height="40%"/></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Elementos</h3>
+				<ul>
+					<li class="nobullet"><img src="../img/DOMDelete.png" height="80%"/></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Encontrando Elementos HTML</h3>
+				<ul>
+					<li class="fragment">Por ID</li>
+					<li class="fragment">Pelo nome da tag</li>
+					<li class="fragment">Pelo nome da classe</li>
+					<li class="fragment">Pelo selector css</li>
+					<li class="fragment">Pela coleçao de objetos HTML</li>
+					<li class="fragment"><pre><code class="hljs" data-trim contenteditable>
+						var myElement = document.getElementById("intro");
+					</code></pre></li>
+					<li class="fragment">Se encontrar. Retorna o objeto</li>
+					<li class="fragment">Se não, nulo</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Faça os exemplos</h3>
+				<ul>
+					<li ><a href="http://www.w3schools.com/js/js_htmldom_elements.asp">W3Schools HTMLDOM Elements</a></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Modificando elementos HTML</h3>
+				<pre><code class="hljs" data-trim contenteditable>
+&lt;html&gt;
+&lt;body&gt;
+	&lt;img id="myImage" src="smiley.gif"/&gt;
+
+	&lt;script&gt;
+		document.getElementById("myImage").src = "landscape.jpg";
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+				</code></pre></li>
+			</section>
+			<section>
+				<h3>Faça os exemplos</h3>
+				<ul>
+					<li ><a href="http://www.w3schools.com/js/js_htmldom_html.asp">W3Schools HTMLDOM HTML</a></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Modificando estilo de HTML</h3>
+				<pre><code class="hljs" data-trim contenteditable>
+&lt;html&gt;
+&lt;body&gt;
+	&lt;h1 id="id1"&gt;My Heading 1&lt;/h1&gt;
+
+	&lt;button type="button"
+		onclick="document.getElementById('id1').style.color = 'red'"&gt;
+	Click Me! &lt;/button&gt;
+
+	&lt;/body&gt;
+	&lt;/html&gt;
+					</code></pre></li>
+				</section>
+				<section>
+					<h3>Mais exercícios ! :-)</h3>
+					<ul>
+						<li ><a href="http://www.w3schools.com/js/js_htmldom_css.asp">W3Schools HTMLDOM CSS</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Reagir a elementos HTML</h3>
+					<ul>
+						<li class="fragment">Quando o mouse é clicado</li>
+						<li class="fragment">Quando a página carrega</li>
+						<li class="fragment">Quando uma imagem carrega</li>
+						<li class="fragment">Quando o mouse move</li>
+						<li class="fragment">Quando um input muda</li>
+						<li class="fragment">Quando um form é enviado</li>
+						<li class="fragment">Quando o usuário aperta um botão</li>
+						<li class="fragment"><a href="http://www.w3schools.com/js/js_htmldom_events.asp">Mais exercícios! =)</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Adicionar um event Handler</h3>
+					<pre><code class="hljs" data-trim contenteditable>
+element.addEventListerner("mouseover",myFunction);
+element.addEventListerner("click",mySecondFunction);
+element.addEventListerner("mouseout",myThirdFunction);
+				</code></pre></li>
+				</section>
+				<section>
+					<h3>Navegar pelo DOM</h3>
+					<img src="../img/DOMNavigate.png" height="80%" />
+				</section>
+				<section>
+					<h3>Criar novos elementos HTML</h3>
+					<pre><code class="hljs" data-trim contenteditable>
+&lt;div id="div1"&gt;
+	&lt;p id="p1"&gt; Isso é um paragrafo. &lt;/p&gt;
+	&lt;p id="p2"&gt; Isso é outro paragrafo. &lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+	var para = document.createElement("p");
+	var node = document.createTextNode("Isso é novo.");
+	para.appendChild(node);
+
+	var element = document.getElementById("div1");
+	element.appendChild(para);
+&lt;/script&gt;
+					</code></pre>
+				</section>
+				<section>
+					<h3>Remover um elemento HTML</h3>
+					<pre><code class="hljs" data-trim contenteditable>
+&lt;div id="div1"&gt;
+	&lt;p id="p1"&gt; Isso é um paragrafo. &lt;/p&gt;
+	&lt;p id="p2"&gt; Isso é outro paragrafo. &lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+	var element = document.getElementById("div1");
+	var child = document.getElementById("p1");
+	parent.removeChild(child);
+&lt;/script&gt;
+					</code></pre>
+
+				</section>
+				<section>
+					<h3>Modificar um elemento HTML</h3>
+					<pre><code class="hljs" data-trim contenteditable>
+&lt;div id="div1"&gt;
+	&lt;p id="p1"&gt; Isso é um paragrafo. &lt;/p&gt;
+	&lt;p id="p2"&gt; Isso é outro paragrafo. &lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+	var x = document.getElementsByTagName("p");
+	y = x[1];
+
+	var myNodelist = document.getElementsByTagName("p");
+	document.getElementById("demo").innerHTML = myNodelist.length;
+
+	var i;
+	for (i = 0; i &lt; myNodelist.length; i++){
+		myNodelist[i].style.backgroundColor = "red";
+	}
+&lt;/script&gt;
+					</code></pre>
+				</section>
+				<section>
+					<h3>Referências</h3>
+					<ul>
+						<li ><a href="http://www.w3schools.com/htmldom/default.asp">W3Schools HTML Dom</a></li>
+						<li ><a href="http://www.w3schools.com/jsref/default.asp">W3Schools JavaScript</a></li>
+						<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+					</ul>
+				</section>
+			</div>
+		</div>
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true }
+			]
+		});
+		Reveal.configure({
+			keyboard: {
+				38: 'next',
+				40: 'prev'
+			}
+		});
+		</script>
+
+	</body>
+	</html>
