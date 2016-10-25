@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>SM</title>
+
+	<meta name="description" content="SM">
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Serviço de Rede para Internet</h3>
+				<ul>
+					<li>Ajax</li>
+				</ul>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>O que é Ajax</h3>
+				<ul>
+					<li class="fragment">Ajax (Asynchronous Javascript and XML)</li>
+					<li class="fragment">Não precisamos recuperar todo um documento HTML</li>
+					<li class="fragment">Vai atualizar uma parte da página Web sem atualizar a página como um todo</li>
+					<li class="fragment nobullet"><img src="./../img/ajax.gif" height=50%/> </li>
+				</ul>
+			</section>
+			<section>
+				<h3>Ajax</h3>
+				<ul>
+					<li class="fragment">Faz uso de padrões da internet</li>
+					<li class="fragment">XMLHttpRequest</li>
+					<li class="fragment">JavaScript/DOM</li>
+				</ul>
+			</section>
+			<section>
+				<h3>XMLHttpRequest</h3>
+				<ul>
+					<li class="fragment">Todos os navegadores modernos suportam XMLHttpRequest</li>
+					<pre><code class="hljs" data-trim contenteditable>
+						var xhttp;
+						if (window.XMLHttpRequest) {
+							xhttp = new XMLHttpRequest();
+						} else {
+							// code for IE6, IE5
+							xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+						}
+					</code></pre>
+				</ul>
+			</section>
+			<section>
+				<h3>XMLHttpRequest</h3>
+				<pre><code class="hljs" data-trim contenteditable>
+					xhttp.open("GET", "demo_get2.asp?fname=Henry&lname=Ford", true);
+					xhttp.send();
+
+					xhttp.onreadystatechange = function() {
+						if (xhttp.readyState == 4 && xhttp.status == 200) {
+							document.getElementById("demo").innerHTML = xhttp.responseText;
+						}
+					};
+					xhttp.open("GET", "ajax_info.txt", true);
+					xhttp.send();
+				</code></pre>
+				<ul>
+					<li class="fragment">Async = true ou false. false não é recomendado</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Resposta do Servidor</h3>
+
+				<ul>
+					<li class="fragment">                    <pre><code class="hljs" data-trim contenteditable>
+						document.getElementById("demo").innerHTML = xhttp.responseText;
+					</code></pre></li>
+					<li class="fragment">Se a resposta for XML...</li>
+					<li class="fragment">
+						<pre><code class="hljs" data-trim contenteditable>
+							xmlDoc = xhttp.responseXML;
+							txt = "";
+							x = xmlDoc.getElementsByTagName("ARTIST");
+							for (i = 0; i < x.length; i++) {
+								txt += x[i].childNodes[0].nodeValue + "<br>";
+							}
+							document.getElementById("demo").innerHTML = txt;
+						</code></pre>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Eventos - onreadystatechange</h3>
+				<ul>
+					<li class="fragment">Esse evento é chamado sempre que ocorre uma mudança no readyState</li>
+					<li class="fragment">
+						<pre><code class="hljs" data-trim contenteditable>
+							function loadDoc() {
+								var xhttp = new XMLHttpRequest();
+								xhttp.onreadystatechange = function() {
+									if (xhttp.readyState == 4 && xhttp.status == 200) {
+										document.getElementById("demo").innerHTML = xhttp.responseText;
+									}
+								};
+							</code></pre>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Usando callback</h3>
+					<pre><code class="hljs" data-trim contenteditable>
+						function loadDoc(cFunc) {
+							var xhttp = new XMLHttpRequest();
+							xhttp.onreadystatechange = function() {
+								if (xhttp.readyState == 4 && xhttp.status == 200) {
+									cFunc(xhttp);
+								}
+							</code></pre>
+
+						</section>
+						<section>
+							<h3>Exemplos PHP e ASP</h3>
+							<ul>
+								<li class="fragment"><a href="http://www.w3schools.com/ajax/ajax_php.asp">PHP</a></li>
+								<li class="fragment"><a href="http://www.w3schools.com/ajax/ajax_asp.asp">ASP</a></li>
+								<li class="fragment"><a href="http://www.w3schools.com/ajax/ajax_database.asp"> Banco de Dados</a></li>
+								<li class="fragment"><a href="http://www.w3schools.com/ajax/ajax_xmlfile.asp">Arquivos XML</a></li>
+								<li class="fragment"><a href="http://www.w3schools.com/ajax/ajax_examples.asp">Exemplos</a></li>
+							</ul>
+						</section>
+						<section>
+							<h3>Referências</h3>
+							<ul>
+								<li><a href="http://www.w3schools.com/ajax/">W3Schools Ajax</a></li>
+							</ul>
+						</section>
+					</div>
+				</div>
+				<script src="../lib/js/head.min.js"></script>
+				<script src="../js/reveal.js"></script>
+
+				<script>
+
+				// Full list of configuration options available at:
+				// https://github.com/hakimel/reveal.js#configuration
+				Reveal.initialize({
+					controls: true,
+					progress: true,
+					history: true,
+					center: true,
+
+					transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+					// Optional reveal.js plugins
+					dependencies: [
+						{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+						{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+						{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+						{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+						{ src: '../plugin/zoom-js/zoom.js', async: true },
+						{ src: '../plugin/notes/notes.js', async: true }
+					]
+				});
+
+				Reveal.configure({
+					keyboard: {
+						38: 'next',
+						40: 'prev'
+					}
+				});
+				</script>
+
+			</body>
+			</html>
