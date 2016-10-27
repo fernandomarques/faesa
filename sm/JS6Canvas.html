@@ -51,20 +51,156 @@
 			<section>
 				<h3>Canvas - O que é?</h3>
 				<ul>
-					<li class="fragment"></li>
-					<li class="fragment"></li>
-					<li class="fragment"></li>
+					<li class="fragment">É um elemento HTML5 usado para desenhar em tempo real usando javascript</li>
+					<li class="fragment">O canvas é apenas um container, precisamos de script para desenhar nele</li>
+					<li class="fragment">Existem diversos métodos para desenhar linhas, caixas, círculos, textos e etc.</li>
 				</ul>
 			</section>
 			<section>
-				<h3></h3>
+				<h3>Canvas - Criando</h3>
 				<ul>
-					<li class="fragment"></li>
-					<li class="fragment"></li>
+					<li class="fragment"><pre><code>
+&ltcanvas width="40%" height="40%" &gt &lt/canvas&gt
+					</code></pre></li>
+					<li class="fragment">Mas não apareceu nada! Podemos adicionar uma borda só para ter certeza que o canvas está lá...</li>
+					<li class="fragment"><pre><code>
+&ltstyle&gt
+	canvas {
+		border: 1px solid black;
+	}
+&lt/style&gt
+					</code></pre></li>
+					<li class="fragment">Agora sim!</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Canvas - Desenhando</h3>
+				<ul>
+					<li class="fragment">Para desenhar precisamos de usar javascript, é aconselhado desenhar no evento de carregar o documento</li>
+					<li class="fragment"><pre><code>
+&lttscript&g
+	$(window).load(function(){ // Evento de carregar
+		var canvas = $("#myCanvas").get(0); // Recuperar o canvas
+		var ctx = canvas.getContext("2d"); // Temos que utilizar um context
+		ctx.fillRect(0,0,50,50);
+	}
+&lt/script&gt
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Canvas - Adicionando Cores</h3>
+				<ul>
+					<li><pre><code  data-trim data-noescape>
+&ltscript&gt
+	$(window).load(function(){ // Evento de carregar
+		var canvas = $("#myCanvas").get(0); // Recuperar o canvas
+		var ctx = canvas.getContext("2d"); // Temos que utilizar um context
+	<mark>	ctx.fillStyle = "red"; // Ou "#ff0000"</mark>
+		ctx.fillRect(0,0,50,50);
+	}
+&lt/script&gt
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Canvas - Desenhando Linhas</h3>
+				<ul>
+					<li><pre><code  data-trim data-noescape>
+&lttscript&gt
+	$(window).load(function(){ // Evento de carregar
+		var canvas = $("#myCanvas").get(0); // Recuperar o canvas
+		var ctx = canvas.getContext("2d"); // Temos que utilizar um context
+		ctx.strokeStyle = "blue";
+		<mark>ctx.moveTo(15,15);
+	  	ctx.lineTo(200-15,100-15);
+	  	ctx.stroke();</mark>
+	}
+&lt/script&gt
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Canvas - Desenhando Círculo</h3>
+				<ul>
+					<li><pre><code  data-trim data-noescape>
+&lttscript&gt
+	$(window).load(function(){ // Evento de carregar
+		var canvas = $("#myCanvas").get(0); // Recuperar o canvas
+		var ctx = canvas.getContext("2d"); // Temos que utilizar um context
+		ctx.strokeStyle = "blue";
+		<mark>ctx.beginPath();
+		ctx.arc(95,50,40,0,2*Math.PI);
+		ctx.stroke();
+</mark>
+	}
+&lt/script&gt
+					</code></pre></li>
+					<li>arc(x,y,r, startAngle, endAngle)</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Canvas - Desenhando Texto</h3>
+				<ul>
+					<li><pre><code  data-trim data-noescape>
+&lttscript&gt
+	$(window).load(function(){ // Evento de carregar
+		var canvas = $("#myCanvas").get(0); // Recuperar o canvas
+		var ctx = canvas.getContext("2d"); // Temos que utilizar um context
+		ctx.strokeStyle = "blue";
+		<mark>ctx.font = "30px Arial";
+		ctx.textAlign = "center";
+		ctx.strokeText("Hello World",canvas.width/2,canvas.height/2);
+</mark>
+	}
+&lt/script&gt
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Canvas - Pintando Gradiente</h3>
+				<ul>
+					<li><pre><code  data-trim data-noescape>
+&lttscript&gt
+	$(window).load(function(){ // Evento de carregar
+		var canvas = $("#myCanvas").get(0); // Recuperar o canvas
+		var ctx = canvas.getContext("2d"); // Temos que utilizar um context
+<mark>		var grd=ctx.createLinearGradient(0,0,25,25);
+	        grd.addColorStop(0,"red");
+	        grd.addColorStop(1,"white");
+	        ctx.fillStyle=grd;
+</mark>		ctx.fillRect(0,0,50,50);
+	}
+&lt/script&gt
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Canvas - Desenhando Imagem</h3>
+				<ul>
+					<li><pre><code  data-trim data-noescape>
+&lttscript&gt
+	$(window).load(function(){ // Evento de carregar
+		var canvas = $("#myCanvas").get(0); // Recuperar o canvas
+		var ctx = canvas.getContext("2d"); // Temos que utilizar um context
+		<mark>var img = $(new Image()).attr({
+		    'src':"pic_the_scream.jpg",
+		  })
+		  $(img).load(function(){
+		    ctx.drawImage(this,10,10)
+		  })
+</mark>
+	}
+&lt/script&gt
+					</code></pre></li>
 				</ul>
 			</section>
 				<section>
 					<ul>
+						<li>Desenhar a bandeira do Brasil</li>
+						<li>Desenhar um círculo e mover com setas</li>
+						<li>Desenhar um snowflake! </li>
+						<img class="top-right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/KochFlake.svg/2000px-KochFlake.svg.png" alt="" />
 						<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
 					</ul>
 				</section>
