@@ -111,16 +111,16 @@
 			</section>
 			<section>
 				  <pre><code>
-<!DOCTYPE html>
-<html>
-<body>
+&lt!DOCTYPE html&gt
+&lthtml&gt
+&ltbody&gt
 
-<h1>My First Heading</h1>
+&lth1&gtMy First Heading&lt/h1&gt
 
-<p>My first paragraph.</p>
+&ltp&gtMy first paragraph.&lt/p&gt
 
-</body>
-</html>
+&lt/body&gt
+&lt/html&gt
 					</code></pre>
 			</section>
 			<section>
@@ -156,23 +156,24 @@ body
 			</section>
 			<section>
 				  <pre><code>
-<!DOCTYPE html>
-<html>
-<body>
+&lt!DOCTYPE html&gt
+&lthtml&gt
+&ltbody&gt
 
 <h1>My First Web Page</h1>
 <p>My first paragraph.</p>
 
-<script>
+&ltscript&gt
 window.alert(5 + 6);
-</script>
+&lt/script&gt
 
-</body>
-</html>
+&lt/body&gt
+&lt/html&gt
 					</code></pre>
 			</section>
 			<section>
 				<h3>Ou Seja</h3>
+				<img class="top-right" src="img/htmlCss.jpg" alt="">
 				  <ul>
 							<li class="fragment">HTML: Conteúdo que é apresentado</li>
 							<li class="fragment">CSS: Forma que é apresentado</li>
@@ -191,8 +192,7 @@ window.alert(5 + 6);
 			<section>
           <h3>Avaliação de um minuto</h3>
           <ul>
-              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
-							<li>O formato foi tirado do One-minute paper da universidade de Oxford</li>
+              <li><a href="">Não esqueçam da Avaliação de Um Minuto no AVA!</a></li>
           </ul>
       </section>
       </div>
@@ -223,7 +223,12 @@ window.alert(5 + 6);
 					{ src: '../plugin/notes/notes.js', async: true }
 				]
 			});
-
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
+			});
 		</script>
 
 	</body>
