@@ -1,115 +1,118 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>SM - Aula HTML</title>
-		<meta name="author" content="Fernando Antonio Marques Filho">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<head>
+	<meta charset="utf-8">
+	<title>SM - Aula HTML</title>
+	<meta name="author" content="Fernando Antonio Marques Filho">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<link rel="stylesheet" href="../css/reveal.css">
-		<link rel="stylesheet" href="../css/misc.css">
-		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+	<link rel="stylesheet" href="../css/misc.css">
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="../lib/css/zenburn.css">
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
-	<body>
-		<div class="reveal">
-			<!-- Any section element inside of this container is displayed as a slide -->
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>
 				<h3>Introdução HTML</h3>
+				<img style="border:0px;" src="img/HTML.png" alt="">
 				<p>
 					<small>Created by Fernando Marques </small>
 				</p>
 			</section>
 			<section>
 				<h3>Introdução</h3>
-				  <ul>
-						  <li class="fragment">A linguagem HTML é uma linguagem de marcação</li>
-						  <li class="fragment">Os protocolos para transmitir HTML é o HTTP(1 e 2) e HTTPS</li>
-							<li class="fragment">Os documentos HTML são utilizados os programas chamados browser ou navegador</li>
-							<li class="fragment">Navegador interpreta tags e formatação</li>
-					</ul>
+				<ul>
+					<li class="fragment">A linguagem HTML é uma linguagem de marcação</li>
+					<li class="fragment">Os protocolos para transmitir HTML é o HTTP(1 e 2) e HTTPS</li>
+					<li class="fragment">Os documentos HTML são utilizados os programas chamados browser ou navegador</li>
+					<li class="fragment">Navegador interpreta tags e formatação</li>
+				</ul>
 			</section>
 			<section>
 				<h3>Conhecendo as tags</h3>
-				  <ul>
-						  <li class="fragment">A linguagem html é baseada em tags aninhadas</li>
-						  <li class="fragment">As tags são comandos escritos entre <nome> </li>
-						  <li class="fragment">Tags devem ser fechadas com seu equivalente</nome></li>
-						  <li class="fragment">Também é possível fechar a tag direto com <nome/></li>
+				<ul>
+					<li class="fragment">A linguagem html é baseada em tags aninhadas</li>
+					<li class="fragment">As tags são comandos escritos entre &ltnome&gt </li>
+						<li class="fragment">Tags devem ser fechadas com seu equivalente &lt/nome&gt</li>
+						<li class="fragment">Também é possível fechar a tag direto com &ltnome/&gt</li>
 					</ul>
-			</section>
-			<section>
-				<h3>Estrutura de página HTML</h3>
-				  <ul>
-							<li class="fragment">!DOCTYPE html indica a versão</li>
-						  <li class="fragment">html tag inicial de todo documento</li>
-						  <li class="fragment">head> informações gerais</li>
-							<li class="fragment">title titulo do arquivo, fica no head</li>
-						  <li class="fragment">body corpo do documento</li>
-						</ul>
-			</section>
-			<section>
-				<h3>HEAD</h3>
-				  <ul>
-						  <li class="fragment">title: define o título do documento</li>
-						  <li class="fragment">style: pode ser utilizado para colocar código css</li>
-						  <li class="fragment">link: funciona como um 'include'</li>
-						  <li class="fragment">meta: possui informações que, por exemplo, mecanismos de busca podem usar</li>
-						  <li class="fragment">script: códigos em js</li>
-						  <li class="fragment">Pelo html5 não é necessário colocar html,head e body, mas isso pode causar erro em alguns navegadores</li>
-						</ul>
-			</section>
-			<section>
-				<h3>Exemplo Meta</h3>
+					<img class="fragment"  src="img/HTML_anatomia_tag.jpg" alt="">
+				</section>
+				<section>
+					<h3>Estrutura de página HTML</h3>
+					<ul>
+						<li class="fragment">!DOCTYPE html indica a versão</li>
+						<li class="fragment">html tag inicial de todo documento</li>
+						<li class="fragment">head</li>
+						<ul>
+							<li class="fragment">Incluir CSS, meta</li>
+						<li class="fragment">title: titulo do arquivo</li>
+					</ul>
+						<li class="fragment">body corpo do documento</li>
+						<img class="fragment" src="img/HTMLhead-01.jpg" alt="">
+					</ul>
+				</section>
+				<section>
+					<h3>HEAD</h3>
+					<ul>
+						<li class="fragment">title: define o título do documento</li>
+						<li class="fragment">style: pode ser utilizado para colocar código css</li>
+						<li class="fragment">link: funciona como um 'include'</li>
+						<li class="fragment">meta: possui informações que, por exemplo, mecanismos de busca podem usar</li>
+						<li class="fragment">script: códigos em js</li>
+						<li class="fragment">Pelo html5 não é necessário colocar html,head e body, mas isso pode causar erro em alguns navegadores</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Exemplo Meta</h3>
 					<pre><code>
 <meta charset="UTF-8">
-<meta name="description" content="Free Web tutorials">
+<meta name="description" content="Aulda de Sistemas Multimidia">
 <meta name="keywords" content="HTML,CSS,XML,JavaScript">
-<meta name="author" content="Hege Refsnes">
-				</code></pre>
-			</section>
-			<section>
-				<h3>BODY</h3>
-				  <ul>
-						  <li class="fragment">No body ficam as tags de conteúdo</li>
-						  <li class="fragment">Cabeçalho: h1, h2 ..  h6 </li>
-						  <li class="fragment">Paragrafos: p</li>
-						  <li class="fragment">Espaços br</li>
-						  <li class="fragment">Divs</li>
-						</ul>
-			</section>
-			<section>
-				  <h3>Exercício</h3>
-				  <h4>Crie um Olá Mundo</h4>
-				  <h4>Tente criar uma página simple</h4>
-				  <h4>Use H, P e br para escrever mais texto</h4>
-			</section>
-			<section>
-          <h3>Avaliação de um minuto</h3>
-          <ul>
-              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
-							<li>O formato foi tirado do One-minute paper da universidade de Oxford</li>
-          </ul>
-      </section>
-      </div>
+<meta name="author" content="Fernando Marques">
+					</code></pre>
+				</section>
+				<section>
+					<h3>BODY</h3>
+					<ul>
+						<li class="fragment">No body ficam as tags de conteúdo</li>
+						<li class="fragment">Cabeçalho: h1, h2 ..  h6 </li>
+						<li class="fragment">Paragrafos: p</li>
+						<li class="fragment">Espaços br</li>
+						<li class="fragment">Divs</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Exercício</h3>
+					<ul>
+						<li>Crie um Olá Mundo</li>
+						<li>Tente criar uma página simple</li>
+						<li>Use H, P e br para escrever mais texto</li>
+						<li class="fragment highlight-red">Avaliação de Um Minuto no Ava!</li>
+					</ul>
+				</section>
+
+			</div>
 		</div>
 
 		<script src="../lib/js/head.min.js"></script>
@@ -117,28 +120,33 @@
 
 		<script>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-				// Optional reveal.js plugins
-				dependencies: [
-          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '../plugin/zoom-js/zoom.js', async: true },
-					{ src: '../plugin/notes/notes.js', async: true }
-				]
-			});
-
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true }
+			]
+		});
+		Reveal.configure({
+			keyboard: {
+				38: 'next',
+				40: 'prev'
+			}
+		});
 		</script>
 
 	</body>
-</html>
+	</html>

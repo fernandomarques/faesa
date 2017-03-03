@@ -8,3 +8,7 @@ img.top-right {
 .nobullet {
     list-style-type: none;
 }
+
+img {
+    border:0px;
+}
