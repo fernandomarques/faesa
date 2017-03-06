@@ -63,15 +63,9 @@
 							<li >Leia 5 números e calcule a média deles</li>
 							<li >Leia 5 números e informe qual o maior deles</li>
 						  <li >Faça um código que calcule o fatorial de n</li>
+							<li> Preencham a Enquete "Avaliação de Um Minuto!"</li>
 					</ol>
 			</section>
-      <section>
-          <h3>Avaliação de um minuto</h3>
-          <ul>
-              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
-							<li>O formato foi tirado do One-minute paper da universidade de Oxford</li>
-          </ul>
-      </section>
       </div>
 		</div>
 
@@ -99,6 +93,12 @@
 					{ src: '../plugin/zoom-js/zoom.js', async: true },
 					{ src: '../plugin/notes/notes.js', async: true }
 				]
+			});
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
 			});
 
 		</script>

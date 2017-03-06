@@ -40,25 +40,37 @@
 			<section>
 				<h3>Repetindo Código</h3>
 				<p>
+					<img src="../img/LoopEscherDrawingHands.jpg" alt="">
+					<br>
 					<small>Created by Fernando Marques </small>
 				</p>
 			</section>
 			<section>
-				<h3>Avaliação de um minuto</h3>
+				<h3>Avaliação de um minuto - Mais importante e Dúvidas </h3>
 				  <ul>
-							<li class="fragment">Declarar Variáveis</li>
-						  <li class="fragment">Dificuldade em abstrair</li>
-							<li class="fragment">Exemplo DOS</li>
-							<li class="fragment">Recordar que float usa-se . e não ,</li>
-						  <li class="fragment">Tipo de exercícios complica mais que ajuda</li>
+							<li class="fragment">Potencia pow, include math.h!</li>
+							<li class="fragment">M_PI, include math.h!</li>
+							<li class="fragment"><a href="http://zetcode.com/db/mysqlc/">Usando Banco de Dados em C</a></li>
+							<li class="fragment"><a href="https://digistump.com/wiki/digispark/tutorials/connecting">DigiSpark - avr-g++</a></li>
+							<li class="fragment"><a href="https://digistump.com/wiki/digispark/tutorials/programming">DigiSpark - link 2</a></li>
+					</ul>
+			</section>
+			<section>
+				<h3>Avaliação de um minuto - Dificuldades</h3>
+				  <ul>
+							<li class="fragment">Return 0, int antes da main</li>
+							<li class="fragment">Resolver o problema farenheit por funções</li>
+							<li class="fragment">Const, unsigned, signed e etc.</li>
+							<li class="fragment">Variável double</li>
 					</ul>
 			</section>
 			<section>
 				<h3>Repetição</h3>
 				  <ul>
 						  <li class="fragment">Repetição é coisa para máquina</li>
+							<img class="top-right fragment grow" src="../img/LoopCharlieChaplin.gif" alt="">
 						  <li class="fragment">As máquinas são feitas para repetir as mesmas operações</li>
-						  <li class="fragment">Logo... elas são boas nisso!</li>
+						  <li class="fragment">E elas são boas nisso!</li>
 					</ul>
 			</section>
 			<section>
@@ -75,13 +87,18 @@
 			<section>
 				<h3>Exemplo For</h3>
 				<pre><code>
-#include <stdio.h>
+#include &ltstdio.h&gt
 int main(){
-	for(int i=0; i < 10 ; i ++){
+	int i;
+	for(i=0; i < 10 ; i ++){
 		printf("%d\n",i);
 	}
 }
 							</code></pre>
+							<ol>
+							<li class="fragment">Façam um código que conte de 1 até 6 imprimindo na tela</li>
+							<li class="fragment">Façam um código que conte de 6 até 1 imprimindo na tela</li>
+						</ol>
 			</section>
 			<section>
 				<h3>Utilizando while</h3>
@@ -94,7 +111,7 @@ int main(){
 			<section>
 				<h3>Exemplo While</h3>
 				<pre><code>
-#include <stdio.h>
+#include &ltstdio.h&gt
 int main(){
 	int i = 0;
 	while(i < 10 ){
@@ -103,6 +120,19 @@ int main(){
 	}
 }
 							</code></pre>
+			</section>
+			<section>
+				<h3>Laços for aninhados</h3>
+				<pre><code>
+#include &ltstdio.h&gt
+int main(){
+	int i,j;
+	for(i=0; i < 10 ; i ++){
+		for(j = 9; j >= 0 ; j--)
+		printf("%d %d\n",i,j);
+	}
+}
+											</code></pre>
 			</section>
 			<section>
 				  <h3>Fechando ... </h3>
@@ -114,10 +144,27 @@ int main(){
 					</ul>
 			</section>
 			<section>
-          <h3>Avaliação de um minuto</h3>
+          <h3>Exercícios</h3>
           <ul>
-              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
-							<li>O formato foi tirado do One-minute paper da universidade de Oxford</li>
+              <li>Faça um programa que calcule a soma dos primeiros 50 números pares. Este algoritmo não recebe valor do teclado. Os primeiros número pares são: 2, 4, 6, ...</li>
+              <li>Imprima o triangulo a baixo <br>
+								9 8 7 6 5 4 3 2 1 <br>
+								8 7 6 5 4 3 2 1 <br>
+								7 6 5 4 3 2 1 <br>
+								6 5 4 3 2 1 <br>
+								5 4 3 2 1 <br>
+								4 3 2 1 <br>
+								3 2 1 <br>
+								2 1 <br>
+								1 </li>
+          </ul>
+      </section>
+			<section>
+          <h3>Exercícios</h3>
+          <ul>
+
+              <li>Crie um programa que imprima todos números Primos de 2 a 100</li>
+              <li>Avaliação de Um Minuto</li>
           </ul>
       </section>
 
