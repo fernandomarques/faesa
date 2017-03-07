@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Técnicas de Programação I</title>
+
+	<meta name="description" content="Técnicas de Programação I">
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Computador Simplificado e Computador Digital</h3>
+				<h5>Objetivos</h5>
+				<ul>
+					<li>Entender o princípio de funcionamento dos computadores</li>
+					<li>Entender o conceito de programa e sua dinâmica de execução</li>
+				</ul>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Funcionamento de um computador</h3>
+				<ul>
+					<li class="fragment">Um computador envolve um grande número de elementos e
+cada elemento envolve um grande número de conceitos</li>
+					<li class="fragment">Para introduzir alguns destes elementos vamos utilizar um
+computador simplificado</li>
+					<li class="fragment">O computador simplificado (CS) é uma analogia entre os
+componentes de um computador e elementos do dia a dia</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>É constituído por:</h5>
+				<ul>
+					<li class="">Um conjunto de 16 escaninhos desenhados em um quadro negro</li>
+					<img src="img/simplificadoEscaninho.png" alt="">
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>É constituído por:</h5>
+				<ul>
+					<li class="">Uma cadeira onde se sentará o operador</li>
+					<img src="img/simplificadoCadeira.png" alt="">
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>É constituído por:</h5>
+				<ul>
+					<li class="">Giz e apagador</li>
+					<img src="img/simplificadoGizApagador.png" alt="">
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>É constituído por:</h5>
+				<ul>
+					<li class="">Uma bandeja de cartões</li>
+					<img src="img/simplificadoCartoes.png" alt="">
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>É constituído por:</h5>
+				<ul>
+					<li class="">Uma máquina de calcular</li>
+					<img src="img/simplificadoCalculadora.png" alt="">
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>É constituído por:</h5>
+				<ul>
+					<li class="">Uma máquina de escrever</li>
+					<img src="img/simplificadoMaquinaEscrever.png" alt="">
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>Função dos escaninhos</h5>
+				<ul>
+					<li class="">Cada escaninho pode ter uma <i>instrução</i> ou um <i>número</i></li>
+					<img src="img/simplificadoEscaninho2.png" alt="">
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>Função do operador</h5>
+				<ul>
+					<li class="">Interpreta as instruções continas nos escaninhos e utiliza os elementos do CS para executá-las</li>
+					<li>As instruções estão previamente escritas nos escaninhos</li>
+					<img src="img/simplificadoCadeira2.png" alt="">
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>Função do operador</h5>
+				<ul>
+					<li>Executa as instruções contidas seguindo a ordem crescente de identificação (E1, E2, ..., E16) ou a partir do escaninho indicado (Volte a E2 ou Avance a E7).</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>Funções do giz e apagador</h5>
+				<ul>
+					<li>Números deverão ser escritos pelo
+operador nos escaninhos com giz</li>
+					<li>Se já houver um valor no
+escaninho, o operador deverá
+apagá-lo com o apagador antes
+de escrever um novo valor;</li>
+					<li>Exemplo:</li>
+					<ul>
+						<li><b>Copiar em E16 o valor contido em E15</b></li>
+					</ul>
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>Funções da bandeja de cartões</h5>
+				<ul>
+					<li>Contém uma pilha de cartões</li>
+					<li>Nos cartões estão escritos
+números que poderão ser copiados
+pelo operador para algum escaninho</li>
+					<li>Depois de lido, o cartão ficará virado na bandeja,
+ao lado da pilha original.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>Funções da bandeja de cartões</h5>
+				<ul>
+					<li>Pegue um cartão da bandeja e copie seu conteúdo em E16</li>
+					<li>Se uma instrução solicitar um cartão e não houver mais cartões, haverá uma condição de erro.</li>
+					<li>Depois de lido, o cartão ficará virado na bandeja,
+ao lado da pilha original.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>Funções da máquina de calcular</h5>
+				<ul>
+					<li>Operações aritméticas</li>
+					<li>Adição, Subtração, Divisão, Multiplicação, Raiz quadrada, ...</li>
+					<li>Somar o conteúdo de E16 com o conteúdo de E15 e colocar o resultado em E14</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado</h3>
+				<h5>Funções da máquina de escrever</h5>
+				<ul>
+					<li>Será usada para datilografar
+Valores numéricos ou frases.</li>
+					<li>Imprima o conteúdo de E14</li>
+					<li>Em caso de erro o operador irá datilografar a palavra ERRO e interrompe a execução das instruções</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Computador Simplificado - Exemplo</h3>
+				<table>
+					<tr>
+						<td>E1 <br>Pegue um cartão da bandeja e copie seu valor em E16</td>
+						<td>E2 <br>Pegue um cartão da bandeja e copie seu valor em E15</td>
+						<td>E3 <br> Some o conteúdo de E15 com E16 e coloque o resultado em E16</td>
+					</tr>
+					<tr>
+					<td>E4 <br>Impria o conteúdo de E16</td>
+					<td>E5 <br>Pare</td>
+				</tr>
+				</table>
+				<caption>Pilha: 2,5</caption>
+			</section>
+
+			<section>
+				<h3>Computador Simplificado - Exemplo</h3>
+				<table>
+					<tr>
+						<td>E1 <br>Pegue um cartão da bandeja e copie seu valor em E16</td>
+						<td>E2 <br>Pegue um cartão da bandeja e copie seu valor em E15</td>
+						<td>E3 <br>Se não houver mais cartões avance para E6</td>
+						<td>E4 <br>Some o conteúdo de E15 com o de E16 e co-loque o resultado em E16</td>
+					</tr>
+					<tr>
+						<td>E5 <br>Volte a E2</td>
+						<td>E6 <br>Imprima o conteúdo de E16</td>
+						<td>E7 <br>Pare</td>
+				</tr>
+				</table>
+				<caption>Pilha: 7,1,4,3,5,2</caption>
+			</section>
+
+			<section>
+				<h3> Exercícios </h3>
+				<ol>
+					<li class="">Faça um programa que conte quantos números estão na pilha</li>
+					<li class="">Faça um programa que leia todos os valores da pilha e calcule a sua média</li>
+					<li class="">Preencher a enquete <span style="color:red">Avaliação de Um Minuto</span></li>
+				</ol>
+			</section>
+
+		</div>
+	</div>
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+
+	<script>
+
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: '../plugin/zoom-js/zoom.js', async: true },
+			{ src: '../plugin/notes/notes.js', async: true }
+		]
+	});
+	Reveal.configure({
+		keyboard: {
+			38: 'next',
+			40: 'prev'
+		}
+	});
+
+	</script>
+
+</body>
+</html>
