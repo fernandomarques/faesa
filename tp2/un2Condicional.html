@@ -44,6 +44,14 @@
 				</p>
 			</section>
 			<section>
+				<h3>Avaliação de Um Minuto</h3>
+				<ul>
+					<li>onde e quando colocar chaves {</li>
+					<li>For aninhado, e os exercícios também achei bem complexos.</li>
+					<li>Como usar o for para fazer uma pirâmide</li>
+				</ul>
+			</section>
+			<section>
 				<h3>Revisão</h3>
 				  <ul>
 							<li class="fragment">Declarar e inicializar variáveis</li>
@@ -67,9 +75,58 @@
 				  <h3>Lógica em C</h3>
 					<ul>
 						  <li class="fragment">Para C, se 0 é Falso, Se não é Verdadeiro</li>
-							<li class="fragment">Operador Relacional: >, <, >=, <=, == e !=</li></li></li>
-							<li class="fragment">Operador lógicos || e &&</li>
+							<li class="fragment">Com o C99 foi criado a variavel bool</li>
+							<li class="fragment"><pre><code>#include &ltstdbool.h&gt
+int main(){
+	bool arr[2] = {true, false};
+	return 0;
+}
+							</code></pre></li>
+							<li class="fragment">Não é comum utilizar, mas é importante saber que existe!</li>
 					</ul>
+			</section>
+			<section>
+				  <h3>Lógica em C - Operador Relacional</h3>
+					<table>
+						<tr><th>Operador</th> <th>Operação</th> <th>Exemplo</th>	</tr>
+						<tr><td>></td></td> <td>Maior</td> <td>1 > 0</td></td>	</tr>
+						<tr><td>>=</td><td>Maior ou igual</td> <td>1 >= 1</td></td> 	</tr>
+						<tr><td><</td> <td>Menor</td>	<td>1 < 2</td</tr>
+						<tr><td><=</td> <td>Menor ou igual</td><td>1 <= 1</td	</tr>
+						<tr><td>==</td> <td>Igual</td>	<td>1 == 1</td</tr>
+						<tr><td>!=</td> <td>Diferente</td>	<td>1 != 0</td</tr>
+					</table>
+			</section>
+			<section>
+				  <h3>Lógica em C - Operadores Lógicos</h3>
+							<table>
+								<caption>A OU B (A || B)</caption>
+								<tr><th>A</th><th>B</th><th>Resultado</th></th></tr>
+								<tr><td>falso</td><td>falso</td><td class="fragment">falso</td></tr>
+								<tr><td>falso</td><td>verdadeiro</td><td class="fragment">verdadeiro</td></tr>
+								<tr><td>verdadeiro</td><td>falso</td><td class="fragment">verdadeiro</td></tr>
+								<tr><td>verdadeiro</td><td>verdadeiro</td><td class="fragment">verdadeiro</td></tr>
+							</table>
+			</section>
+			<section>
+				  <h3>Lógica em C - Operadores Lógicos</h3>
+							<table>
+								<caption>A E B (A && B)</caption>
+								<tr><th>A</th><th>B</th><th>Resultado</th></th></tr>
+								<tr><td>falso</td><td>falso</td><td class="fragment">falso</td></tr>
+								<tr><td>falso</td><td>verdadeiro</td><td class="fragment">falso</td></tr>
+								<tr><td>verdadeiro</td><td>falso</td><td class="fragment">falso</td></tr>
+								<tr><td>verdadeiro</td><td>verdadeiro</td><td class="fragment">verdadeiro</td></tr>
+							</table>
+			</section>
+			<section>
+				  <h3>Lógica em C - Operadores Lógicos</h3>
+							<table>
+								<caption>Não A (!A)</caption>
+								<tr><th>A</th><th>Resultado</th></th></tr>
+								<tr><td>falso</td><td class="fragment">verdadeiro</td></tr>
+								<tr><td>verdadeiro</td><td class="fragment">falso</td></tr>
+							</table>
 			</section>
 			<section>
 					<h3>Fluxograma</h3>
@@ -123,33 +180,79 @@ int main(){
 					</ul>
 			</section>
 			<section>
-				  <h3>If-else Endadeados</h3>
+				  <h3>If-else Encadeados</h3>
 					<ul>
 						  <li class="fragment">Não existe limite para a quantidade de if-else</li>
 						  <li class="fragment">Dentro de um bloco {} if ou else, podem existir mais condicionais</li>
 					</ul>
 			</section>
 			<section>
+				<h3>A qual If o else pertence?</h3>
+<pre><code>int main(){
+	if(count > 10)
+			if(count % 4 == 2)
+				printf("Condição 1");
+	else
+			printf("Condição 2");
+}</code></pre>
+				<ol>
+					<li>Primeiro if</li>
+					<li>Segundo if</li>
+					<li>Não é necessário se preocupar com isso se você nunca escrever códigos assim</li>
+				</ol>
+			</section>
+			<section>
+				<h3>If-else if vs. if if</h3>
+<pre><code></code>if (nota1 >= 50)
+	printf("Voce passou com nota %d",nota1);
+else if(nota2 >= 50)
+printf("Voce passou com nota %d",nota2);</code></code></pre>
+<pre><code></code>if (nota1 >= 50)
+	printf("Voce passou com nota %d",nota1);
+if(nota2 >= 50)
+printf("Voce passou com nota %d",nota2);</pre>
+			</section>
+			<section>
 				  <h3>Operador Ternário ?</h3>
 					<ul>
-						  <li class="fragment">Não é aconselhado o uso por deixar a leitura do código mais complexa</li>
+						  <li class="fragment">Não é utilizado com frequécia</li>
 							<li class="fragment">condição ? expressão1 : expressão2</li>
 						  <li class="fragment"><pre><code>
+#include &ltstdbool.h&gt
+#include &ltstdio.h&gt
 int main(){
-	float salario;
-	scanf("%f",&salario);
-	salario = salario > 1000 ? salario *1.05: salario * 1.07;
+	bool arr = true;
+	printf("%s", arr == 1 ? "true" : "false");
+	return 0;
 }
 							</code></pre></li>
 							<li class="fragment">Contrário do if-else o ? retorna um valor</li>
 					</ul>
 			</section>
 			<section>
+				<h3>Break</h3>
+				<ul>
+					<li class="fragment">O comando <b>break</b> faz com que o programa saia do loop mais próximo</li>
+					<li class="fragment"><pre><code>#include &ltstdio.h&gt
+int main(){
+	printf("Digite um numero.  0 para parar.\n");
+	for(;;){
+	   int input;
+	   scanf("%d", &input);
+	   if(input == 0)
+	       break;
+	   printf("%d\n", input);
+	}
+	return 0;
+}</code></pre></li>
+				</ul>
+			</section>
+			<section>
 				  <h3>Switch Case</h3>
 					<ul>
 						  <li class="fragment">É uma opção quando o número de possibilidades é elevado</li>
 						  <li class="fragment"><pre><code>
-#include <stdio.h>
+#include &ltstdio.h&gt
 int main (){
   int valor;
   printf ("Digite um valor de 1 a 7: ");
@@ -169,18 +272,13 @@ int main (){
 				  <h3>Exercícios</h3>
 					<ul>
 						  <li class="fragment">Termine o código que converte de número para dia.</li>
-						  <li class="fragment">Leia um valor inteiro em segundos, e imprima-o em horas, minutos e segundos.</li>
+						  <li class="fragment">Crie um programa que leia um número e verifica se ele é primo</li>
+						  <li class="fragment">Crie um programa que imprima todos números Primos de 2 a 100</li>
 						  <li class="fragment">Faça uma calculadora de adição, subtração, multiplicação e divisão. </li>
-						  <li class="fragment">Faça um programa que leia um numero positivo, calcule e imprima a sequência Fibonacci,  até o primeiro numero superior ao numero lido. </li>
+						  <li class="fragment">Preencha o enquete  "Avaliação de Um Minuto" </li>
 					</ul>
 			</section>
-			<section>
-          <h3>Avaliação de um minuto</h3>
-          <ul>
-              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
-							<li>O formato foi tirado do One-minute paper da universidade de Oxford</li>
-          </ul>
-      </section>
+
 
       </div>
 		</div>
@@ -210,7 +308,12 @@ int main (){
 					{ src: '../plugin/notes/notes.js', async: true }
 				]
 			});
-
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
+			});
 		</script>
 
 	</body>
