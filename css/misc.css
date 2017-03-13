@@ -13,7 +13,7 @@ img {
     border:0px;
 }
 
-#left {
+.left {
   left:-8.33%;
   text-align: left;
   float: left;
@@ -21,11 +21,15 @@ img {
   z-index:-10;
 }
 
-#right {
+.right {
   left:31.25%;
   top: 75px;
   float: right;
   //text-align: right;
   z-index:-10;
   width:50%;
+}
+
+.red {
+   color : red;
 }
