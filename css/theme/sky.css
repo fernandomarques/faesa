@@ -52,8 +52,8 @@ body {
   font-weight: normal;
   line-height: 1.2;
   letter-spacing: -0.08em;
-  text-transform: uppercase;
-  text-shadow: none;
+  text-transform: none;
+  text-shadow: #cccccc;
   word-wrap: break-word; }
 
 .reveal h1 {
@@ -151,7 +151,7 @@ body {
   width: 90%;
   margin: 20px auto;
   text-align: left;
-  font-size: 0.55em;
+  font-size: 0.65em;
   font-family: monospace;
   line-height: 1.2em;
   word-wrap: break-word;

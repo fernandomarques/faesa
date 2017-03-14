@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+<!-- App 30 min --> 
 	<head>
 		<meta charset="utf-8">
 
@@ -178,6 +178,12 @@ int main(){
 					{ src: '../plugin/zoom-js/zoom.js', async: true },
 					{ src: '../plugin/notes/notes.js', async: true }
 				]
+			});
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
 			});
 
 		</script>

@@ -33,25 +33,16 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>
-				<h3>Continuação HTML - frames</h3>
+				<h3>Continuação HTML - Multimidia</h3>
 				<p>
 					<small>Created by Fernando Marques </small>
 				</p>
 			</section>
 			<section>
 				  <h3>Avaliação de um minuto</h3>
-					<ol start="5">
-						  <li>Utilização do start na lista ordenada</li>
-							<li>
-<pre><code>
-<ol start="5">
-	  <li>teste</li>
-	  <li>teste</li>
-	  <li>teste</li>
-</ol>
-</code></pre>
-							</li>
-					</ol>
+					<blockquote cite="http://">
+						(...) espero que as avaliações não cobrem decorebas de tags, pois nosso tempo de prática em aula é extremamente curto e fora de aula temos outras matérias para nos dedicar (...)
+					</blockquote>
 			</section>
 			<section>
 				  <h3>Revisão</h3>
@@ -63,37 +54,37 @@
 					</ul>
 			</section>
 			<section>
-				<pre><code><table>
-  <tr>
-    <th>Nome</th>
-    <th>Sobrenome</th>
-    <th>Apelido</th>
-  </tr>
-  <tr>
-    <td>Bruce</td>
-    <td>Wayne</td>
-    <td>Batman</td>
-  </tr>
-  <tr>
-    <td>Peter</td>
-    <td>Park</td>
-    <td>Spiderman</td>
-  </tr>
-</table>
+				<pre><code class="html">&lttable&gt
+  &lttr&gt
+    &ltth&gtNome&lt/th&gt
+    &ltth&gtSobrenome&lt/th&gt
+    &ltth&gtApelido&lt/th&gt
+  &lt/tr&gt
+  &lttr&gt
+    &lttd&gtBruce&lt/td&gt
+    &lttd&gtWayne&lt/td&gt
+    &lttd&gtBatman&lt/td&gt
+  &lt/tr&gt
+  &lttr&gt
+    &lttd&gtPeter&lt/td&gt
+    &lttd&gtPark&lt/td&gt
+    &lttd&gtSpiderman&lt/td&gt
+  &lt/tr&gt
+&lt/table&gt
 				</code></pre>
 			</section>
 			<section>
-				  <pre><code>
-<ul>
-	<li> Elemento 1</li>
-	<li> Elemento 2</li>
-	<li> Elemento 3</li>
-</ul>
-<ol>
-	<li> Elemento 1</li>
-	<li> Elemento 2</li>
-	<li> Elemento 3</li>
-</ol>
+				  <pre><code class="html">
+&ltul&gt
+	&ltli&gt Elemento 1&lt/li&gt
+	&ltli&gt Elemento 2&lt/li&gt
+	&ltli&gt Elemento 3&lt/li&gt
+&lt/ul&gt
+&ltol&gt
+	&ltli&gt Elemento 1&lt/li&gt
+	&ltli&gt Elemento 2&lt/li&gt
+	&ltli&gt Elemento 3&lt/li&gt
+&lt/ol&gt
 					</code></pre>
 			</section>
 			<section>
@@ -105,9 +96,103 @@
 					</ul>
 			</section>
 			<section>
+				<h3>HTML Pré-Histórico</h3>
+				<p>Antes do HTML5, browsers só conseguiam exibir, de forma nativa, um tipo de mídia.</p>
+				<pre><code class="html"><img src="omgcat.gif"></code></pre>
+				<img src="../img/omgcat.gif">
+			</section>
+			<section>
+				<h3>A era dos Plugins</h3>
+				<ul>
+					<li>1991: Apple Quicktime (.mov)</li>
+					<li>1994: MIDI (background music)</li>
+					<li>1995: RealAudio (.ra, .ram)</li>
+					<li>1997: RealVideo (H.263)</li>
+					<li>1998: Windows Media Player</li>
+					<li>1999: Quicktime for Windows (.mov, .mp3, .mp4, .swf)</li>
+					<li>2002: Macromedia Shockwave Flash (.swf)</li>
+					<li>2007: Microsoft Silverlight (flash, vid, etc.)</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Suporte HTML para plugins</h3>
+				<ul>
+					<li class="">Para colocar um arquivo que o plugin usaria</li>
+					<li class="">embed - Introduzido no Netscape 2.0</li>
+					<li class="">object - Adicionado no html 4.01. Permitia configurações mais complexas</li>
+				</ul>
+			</section>
+			<section>
+				<h3>O Elemento embed</h3>
+				<p>Deve especificar src e type</p>
+				<pre><code class="html">
+&ltembed type="application/x-shockwave-flash"
+ src="img/zombie_walk.swf"/&gt
+				 </code></pre>
+ 				<embed type="application/x-shockwave-flash"
+ 				 src="img/zombie_walk.swf"/>
+			</section>
+			<section>
+				<h3>O Elemento Object</h3>
+				<p>Deve possuir um ou mais filhos param. Param dá informação ao navegador sobre o que é embed</p>
+				<pre><code class="html">
+&ltobject width="300" height="150"&gt
+  &ltparam name="movie" value="zombie_walk.swf"/&gt
+  &ltparam name="bgcolor" value="white"/&gt
+&lt/object&gt
+				 </code></pre>
+				 <object width="300" height="150">
+	   <param name="movie" value="img/zombie_walk.swf"/>
+	   <param name="bgcolor" value="white"/>
+	 </object>
+			</section>
+			<section>
+				<h3>Como era feito pelo Youtube</h3>
+				<pre><code class="html">&lt;object width="480" height="385"&gt;
+  &lt;param name="movie"
+     value="http://www.youtube.com/v/ddm5bbeqHVA"/&gt;
+  &lt;param name="allowFullScreen"
+     value="true"/&gt;
+  &lt;param name="allowscriptaccess"
+     value="always"/&gt;
+
+  &lt;embed src="http://www.youtube.com/v/ddm5bbeqHVA"
+         type="application/x-shockwave-flash"
+         allowscriptaccess="always"
+         allowfullscreen="true" width="480" height="385"/&gt;
+
+&lt;/object&gt;</code></pre>
+			</section>
+			<section>
+				<h3>Código do Slide Anterior</h3>
+				<object width="480" height="385">
+				  <param name="movie"
+				     value="http://www.youtube.com/v/ddm5bbeqHVA"/>
+				  <param name="allowFullScreen"
+				     value="true"/>
+				  <param name="allowscriptaccess"
+				     value="always"/>
+
+				  <embed src="http://www.youtube.com/v/ddm5bbeqHVA"
+				         type="application/x-shockwave-flash"
+				         allowscriptaccess="always"
+				         allowfullscreen="true" width="480" height="385"/>
+
+				</object>
+			</section>
+			<section>
+				<h3>Quais os problemas dos plugins?</h3>
+				<ul>
+					<li class="fragment">Má experiencia para o usuário (pop-ups)</li>
+					<li class="fragment">Difícil fazer plugins funcionarem juntos (costumavam travar)</li>
+					<li class="fragment">Problemas de segurança (malware)</li>
+					<li class="fragment">Não funcionava em todos lugares (flash no ipad)</li>
+				</ul>
+			</section>
+			<section>
 				  <h3>Frames e frameset</h3>
 					<ul>
-						  <li class="fragment"><font color="red">Não são mais suportados por html5</font></li>
+						  <li class="fragment red">Não são mais suportados por html5</li>
 						  <li class="fragment">Servia para colocar 'subpáginas' dentro da página principal</li>
 						  <li class="fragment">Continha os elementos frameset e frame</li>
 						  <li class="fragment"><a href="http://www.w3schools.com/tags/tryit.asp?filename=tryhtml_frame_cols">Exemplo</a></li>
@@ -115,17 +200,23 @@
 			</section>
 			<section>
 				  <h3>IFrame</h3>
+					<div class="left">
+					<img src="img/iframe_jobs.jpg" alt="">
+					<pre><code class="html">
+&ltiframe src="http://fernandomarques.github.io/faesa"&gt
+Seu navegador não suporta iframe
+&lt/iframe&gt
+					</code></pre>
+				</div>
+				<div class="right">
 					<ul>
 						  <li class="fragment">É um frame 'inline', ou seja, não precisa do frameset</li>
 						  <li class="fragment">Serve para colocar outro elemento dentro do html</li>
 						  <li class="fragment">Podemos colocar um texto entre as tags iframe para lidar com navegadores que não suportem iframe</li>
-						  <li class="fragment"><pre><code>
-<iframe src="http://fernandomarques.github.io/faesa">
-	Seu navegador não suporta iframe
-</iframe>
-							</code></pre></li>
-							<li class="fragment"><font color="red">Não pertence a Apple!</font></li>
+
+							<li class="fragment red">Não pertence a Apple!</li>
 				  </ul>
+				</div>
 			</section>
 			<section>
 				  <h3>Exemplo</h3>
@@ -142,8 +233,14 @@
 			</section>
 			<section>
 				  <h3>IFrame - Sandbox</h3>
+					<div class="left">
+						<br>
+						<p> O que é um sandbox?</p>
+					<img class="" src="../img/sandbox.png"/>
+				</div>
+				<div class="right">
+
 					<ul>
-							<img class="top-right" src="../img/sandbox.png"/>
 						  <li class="fragment">Html5 adicionou a opção de sandbox</li>
 						  <li class="fragment">Um dos problemas de trabalhar com iframe era vulnerabilidade</li>
 							<ul>
@@ -155,6 +252,7 @@
 								<li class="fragment">allow-top-navigation</li>
 							</ul>
 				  </ul>
+				</div>
 			</section>
 			<section>
 				  <h3>Desvantagens de utilizar iFrame</h3>
@@ -168,21 +266,34 @@
 					</ul>
 			</section>
 			<section>
-				<h3>Podemos adicionar um video do youtube como embed</h3>
-<pre><code>
-<iframe width="420" height="345" src="https://www.youtube.com/embed/XGSy3_Czz8k">
-</iframe>
-</code></pre>
+				<h3>Multimídia nativa</h3>
+				<p>Em HTML5 podemos adicionar áudio e vídeo de forma nativa. Se o navegador suportar ele vai mostrar os controles do vídeo
+				<br>Vantagens:</p>
+				<ul>
+					<li class="fragment">Não é necessário o uso de plugins</li>
+					<li class="fragment">Melhor Performance</li>
+					<li class="fragment">Nativo e com controles de acessibilidade</li>
+				</ul>
 			</section>
 			<section>
-<iframe width="420" height="315" src="https://www.youtube.com/embed/v2AC41dglnM" frameborder="0" allowfullscreen></iframe>
+				<h3>Podemos adicionar um video do youtube como embed</h3>
+				<div class="left">
+				<iframe width="420" height="315" src="https://www.youtube.com/embed/nKIu9yen5nc?ecver=2" frameborder="0" allowfullscreen></iframe>
+			</div>
+				<div class="right">
+					<pre><code>
+&ltiframe width="420" height="345"
+ src=""https://www.youtube.com/embed/nKIu9yen5nc?ecver=2"&gt
+&lt/iframe&gt
+					</code></pre>
+				</div>
 			</section>
 			<section>
 				  <h3>Video</h3>
 					<ul>
 						  <li class="fragment">A tag video permite adicionar um video dentro de uma página web</li>
 						  <li class="fragment">Os formatos suportados são: mp4, WebM e Ogg</li>
-						  <li class="fragment"><pre><code>
+						  <li class="fragment"><pre><code class="html">
 <video width="320" height="240" controls>
   <source src="movie.mp4" type="video/mp4">
   <source src="movie.ogg" type="video/ogg">
@@ -208,7 +319,7 @@
 				  <h3>Audio</h3>
 					<ul>
 						  <li class="fragment">Assim como video, também existe uma tag para audio</li>
-						  <li class="fragment"><pre><code>
+						  <li class="fragment"><pre><code class="html">
 <audio controls>
   <source src="horse.ogg" type="audio/ogg">
   <source src="horse.mp3" type="audio/mpeg">
@@ -236,6 +347,23 @@
 					</ul>
 			</section>
 			<section>
+				<h3>Codecs</h3>
+				<ul>
+					<li>Áudio: mp3, aac e ogg</li>
+					<li>Vídeo Container: mp4, ogv, webm </li>
+					<li>Vídeo Codec: H.264, Theora, VP8 </li>
+				</ul>
+			</section>
+			<section>
+				<h3>Multimidia Sources</h3>
+				<p>Como não existem formatos que funcionem em todos navegadores, podemos disponibilizar mais de um source</p>
+				<pre><code class="html">&lt;video height="200" controls=""&gt;
+  &lt;source src="chrome-japan.webm" type="video/webm"/&gt;
+  &lt;source src="chrome-japan.mp4" type="video/mp4"/&gt;
+  &lt;source src="chrome_japan.ogv" type="video/ogg"/&gt;
+&lt;/video&gt;</code></pre>
+			</section>
+			<section>
 				  <h3>Adicionando PDF</h3>
 					<ul>
 						  <li class="fragment">Podemos usar a tag embed</li>
@@ -256,7 +384,7 @@
 						  <li>Faça uma página que mostre vários documentos (por exemplo, vários links para vídeos de youtube separados por estilo)</li>
 						  <li>Tentem usar a maior quantidade de elementos que já aprendemos, o importante é treinar!</li>
 						  <li>Logo logo, vamos deixar as páginas bonitas, não se preocupem</li>
-							<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+							<li>Avaliação de Um Minuto</li>
 					</ul>
 			</section>
       </div>
