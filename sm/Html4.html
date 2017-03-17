@@ -368,8 +368,9 @@ Seu navegador não suporta iframe
 					<ul>
 						  <li class="fragment">Podemos usar a tag embed</li>
 						  <li class="fragment">
-								<pre><code>
-<embed src="http://example.com/the.pdf" width="500" height="375" type='application/pdf'></li>
+								<pre><code class="html">
+<embed src="http://example.com/the.pdf"
+width="500" height="375" type='application/pdf'></li>
 									</code></pre>
 					</ul>
 			</section>
@@ -415,7 +416,12 @@ Seu navegador não suporta iframe
 					{ src: '../plugin/notes/notes.js', async: true }
 				]
 			});
-
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
+			});
 		</script>
 
 	</body>
