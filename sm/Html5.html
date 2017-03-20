@@ -259,7 +259,12 @@ Acho que a falta de interesse seja porque eles ainda não perceberam o que se po
 					{ src: '../plugin/notes/notes.js', async: true }
 				]
 			});
-
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
+			});
 		</script>
 
 	</body>

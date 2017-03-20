@@ -44,6 +44,14 @@
 				</p>
 			</section>
 			<section>
+				<h3>Avaliação de um minuto</h3>
+				<ul>
+					<li>Como Imprimir matriz e \t</li>
+					<li>Identidade de Matriz</li>
+					<li>Dificuldade: <span class="red">Não tive</span></li>
+				</ul>
+			</section>
+			<section>
 				<h3>Revisão</h3>
 				  <ul>
 							<li class="fragment">Operadores lógicos e relacionais</li>
@@ -55,7 +63,7 @@
 			</section>
 			<section>
 				<h3>Operadores lógicos e Condicionais</h3>
-<pre><code>
+<pre><code class="C">
 int main(){
 	int a = 5;
 	if(a == 5 && a <6)
@@ -87,7 +95,7 @@ int main(){
 			</section>
 			<section>
 				<h3>For e Vetores</h3>
-<pre><code>
+<pre><code class="C">
 const int tamanho = 20;
 int main(){
 	int i, V[tamanho] = {0};
@@ -104,7 +112,7 @@ int main(){
 			</section>
 			<section>
 				<h3>While e Do-While</h3>
-<pre><code>
+<pre><code class="C">
 int main(){
 	int valor;
 	do{
@@ -117,7 +125,7 @@ int main(){
 			</section>
 			<section>
 				<h3>Matrizes</h3>
-<pre><code>
+<pre><code class="C">
 int maint(){
 	int matriz[2][2] = {0};
 	int determinante = 0,i,j;
@@ -131,14 +139,7 @@ int maint(){
 </code></pre>
 			</section>
 			<section>
-				  <ul>
-						<li.nobullet><a href="https://www.codingame.com/games/training/easy">Link Treino Fácil</a></li>
-						<li><font color="green">Onboarding</font></li>
-						<li><font color="green">Power of Thor</font></li>
-					  <li><font color="yellow">Temperatures</font></li>
-					  <li><font color="red">The Bridge</font></li>
-					  <li><font color="red">Horse-Racing</font></li>
-					</ul>
+				<h3>Enquete avaliação de um minuto!</h3>
 			</section>
       </div>
 		</div>
@@ -168,7 +169,12 @@ int maint(){
 					{ src: '../plugin/notes/notes.js', async: true }
 				]
 			});
-
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
+			});
 		</script>
 
 	</body>
