@@ -79,22 +79,22 @@ h1 {
 					  <h3>CSS - Como usar</h3>
 						<ul>
 							  <li class="fragment">Dentro de uma tag html</li>
-							  <li class="fragment nobullet"><pre><code>
-<h1 style="color:red;">Olá Mundo</h1>
-								</code></pre></li>
-							  <li class="fragment">Internamente</li>
-							  <li class="fragment nobullet"><pre><code>
-<head>
-	  <style>
+							  <li class="fragment nobullet"><pre><code class="html">
+&lthead&gt
+	  &ltstyle&gt
 		  h1 {
 				color:red;
 				font-family:monospace;
 			}
-		</style>
-</head>
-<body>
-	  <h1>Olá Mundo</h1>
-</body>
+		&lt/style&gt
+&lt/head&gt
+&ltbody&gt
+	  &lth1&gtOlá Mundo&lt/h1&gt
+&lt/body&gt
+								</code></pre></li>
+								<li class="fragment">Internamente</li>
+								<li class="fragment nobullet"><pre><code class="html">
+<h1 style="color:red;">Olá Mundo</h1>
 								</code></pre></li>
 						</ul>
 				</section>
@@ -103,7 +103,7 @@ h1 {
 						<ul>
 							<li class="fragment">Arquivo .css!</li>
 							<li class="fragment">No arquivo meu.css</li>
-							<li class="fragment nobullet"><pre><code>
+							<li class="fragment nobullet"><pre><code class="css">
 h1 {
 	color:red;
 	font-family:monospace;
@@ -111,22 +111,22 @@ h1 {
 							</code></pre></li>
 							<li class="fragment">No arquivo meu.html</li>
 							<li class="fragment nobullet">
-<pre><code>
-<html>
-<head>
-	  <link rel="stylesheet" type="text/css" href="meu.css">
-</head>
-<body>
-	  <h1> Olá Mundo!</h1>
-</body>
-</html>
+<pre><code class="html">
+&lthtml>
+&lthead>
+	  &ltlink rel="stylesheet" type="text/css" href="meu.css">
+&lt/head>
+&ltbody>
+	  &lth1> Olá Mundo!&lt/h1>
+&lt/body>
+&lt/html>
 							</code></pre></li>
 						</ul>
 				</section>
 				<section>
 					  <h3>CSS - Span</h3>
 						<ul>
-							  <li class="fragment">A tag <span style="color:red;">span</span> é muito usada para colorir parte do texto</li>
+							  <li class="fragment">A tag <span class="red">span</span> é muito usada para colorir parte do texto</li>
 							  <li class="fragment">Assim, <span style="color:#005500;font-family:unicode;">podemos mudar</span> <span style="size:10;color:blue;font-family:fantasy;">parte</span> de um paragrafo</li>
 							  <li class="fragment"><pre><code>
 A tag <span style="color:red;">span</span> é muito usada para colorir parte do texto
@@ -139,7 +139,7 @@ Assim, <span style="color:#005500;font-family:unicode;">podemos mudar</span> <sp
 						<ul>
 							  <li class="fragment">Como vimos, podemos usar as tags HTML como seletor</li>
 							  <li class="fragment">Também podemos agrupar várias tags</li>
-							  <li class="fragment"><pre><code>
+							  <li class="fragment"><pre><code class="css">
 h1, h2, p {
 	color: #005500;
 }
@@ -150,17 +150,19 @@ h1, h2, p {
 					  <h3>CSS - Outros tipos de seletores</h3>
 						<ul>
 							  <li class="fragment">Outros seletores são o de identificador </li>
-								<li class="fragment"><pre><code>
-#para1 {
+								<li class="fragment"><pre><code class="css">#para1 {
 	text-align: center;
 	color: blue;
 }
 <p id="para1"> Texto azul</p>
 <p> Texto normal</p>
 								</code></pre></li>
+							</ul>
+						</section>
+							<section>
+							<ul>
 							  <li class="fragment">E as classes</li>
-								<li class="fragment"><pre><code>
-.center {
+								<li class="fragment"><pre><code class="css">.center {
 	text-align: center;
 	color: blue;
 }
@@ -220,8 +222,8 @@ h1, h2, p {
 						  <li>Testem cores com transparencia e o hsl!</li>
 						  <li>Testem fontes diferentes e tipos de textos!</li>
 						</ol>
-						<li.nobullet><a href="https://color.adobe.com/">Adobe Colors</a></li>
-						<li.nobullet><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+						<li><a href="https://color.adobe.com/">Adobe Colors</a></li>
+						<li>Enquete Avaliação de Um Minuto</a></li>
 					</ul>
 			</section>
 		</div>
@@ -250,6 +252,12 @@ h1, h2, p {
 					{ src: '../plugin/zoom-js/zoom.js', async: true },
 					{ src: '../plugin/notes/notes.js', async: true }
 				]
+			});
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
 			});
 
 		</script>
