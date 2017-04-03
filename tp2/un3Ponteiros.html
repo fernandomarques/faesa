@@ -59,7 +59,6 @@
 			<section>
 				  <h3>Ponteiros e Memórias - Conceito Básico</h3>
 					<ul>
-						<li class="fragment" style="color:red">Não se desesperem, esse conceito é difícil</li>
 						<li class="fragment">Valor da variável</li>
 						<li class="fragment">Endereço da varíavel</li>
 						<li class="fragment">Quase tudo do computador passa pela memória RAM</li>
@@ -75,7 +74,7 @@
 						<li class="fragment">Para inicializar o ponteiro podemos usar a constante simbólica <em>NULL</em></li>
 						<li class="fragment">Para atribuir o endereço de uma variável a um ponteiro, utilizamos <em>&nome_variável</em></li>
 						<li class="fragment">
-<pre><code>int main(){
+<pre><code class="C">int main(){
 	int a=5, b=7;
 	int *ptr = NULL;
 	ptr = &a;
@@ -111,8 +110,7 @@
 			</section>
 			<section>
 				  <h3>Passagem de Ponteiros em Função</h3>
-<pre><code>
-	void incrementa(int *a){
+<pre><code class="C">void incrementa(int *a){
 		*a +=1;
 }
 int main(){
@@ -128,8 +126,7 @@ int main(){
 						<li class="fragment">Como as outras variáveis, os ponteiros também são armazenados em memória</li>
 						<li class="fragment">Logo... também possuem endereço!</li>
 						<li class="fragment">Assim, se armazenarmos o endereço de um ponteiro, temos um ponteiro de ponteiro</li>
-						<li class="fragment"><pre><code>
-int main(){
+						<li class="fragment"><pre><code class="C">int main(){
 	int x =5;
 	int *ptr_x;
 	int **ptr_ptr_x;
@@ -137,7 +134,7 @@ int main(){
 	ptr_ptr_x = &ptr_x;
 	printf("x = %d - &x = %ld\n",x,&x);
 	printf("x = %d - &x = %ld\n",*ptr_x,ptr_x);
-	printf("x = %d - &x = %ld\n",**ptr_x,*ptr_x	);
+	printf("x = %d - &x = %p\n",**ptr_ptr_x,*ptr_ptr_x);
 }
 						</code></pre></li>
 					</ul>
@@ -145,7 +142,7 @@ int main(){
 			<section>
 				  <h3>Cuidados</h3>
 					<ul>
-						<li class="fragment">Em ponteiros é ainda mais importante inicialos antes de utilizar</li>
+						<li class="fragment">Em ponteiros é ainda mais importante iniciar antes de utilizar</li>
 						<li class="fragment">int *ptr = NULL;</li>
 						<li class="fragment">O programa pode travar se for atribuído um valor a um ponteiro ainda não inicializado</li>
 					</ul>
