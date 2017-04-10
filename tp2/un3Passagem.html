@@ -44,6 +44,12 @@
 				</p>
 			</section>
 			<section>
+				<h3>Enquete de Um Minuto</h3>
+				<ul>
+					<li>Qual a utilidade dos ponteiros.</li>	<li>Como não houve prática, ainda estou confuso sobre quando uso o asterisco e quando não uso o asterisco no ponteiro</li>
+				</ul>
+			</section>
+			<section>
 				<section>
 					<h3>Revisão - Ponteiros</h3>
 					  <ul>
@@ -80,7 +86,7 @@
 			</section>
 			<section>
 				  <h3>Conceitos básicos de função</h3>
-<pre><code>
+<pre><code class="C">
 int Maior(int a, int b){
 	return (a > b) ? a : b;
 }
@@ -122,7 +128,7 @@ int main(){
 						<li class="fragment">Para trocar o conteúdo de dois copos precisamos de um terceiro</li>
 						<li class="fragment">O mesmo acontece para trocar o conteúdo de 2 variáveis</li>
 						<li class="fragment">Como podemos fazer essa função?</li>
-						<li class="fragment"><pre><code>void troca(int a, int b){
+						<li class="fragment"><pre><code class="C">void troca(int a, int b){
  int temp = a;
  a = b;
  b = temp;
@@ -144,7 +150,7 @@ int main(){
 						<li class="fragment">Na passagem de parâmetros por referência não é enviado o valor mas sim a própria varíavel ou uma referência</li>
 						<li class="fragment">Assim, qualquer alteração corresponde a uma alteração no valor</li>
 						<li class="fragment">Em C precisamos da utilização de ponteiros</li>
-						<li class="fragment"><pre><code>void troca(int *a, int *b){
+						<li class="fragment"><pre><code class="C">void troca(int *a, int *b){
  int temp = *a;
  *a = *b;
  *b = temp;
@@ -168,7 +174,7 @@ int main(){
 			<section>
 				  <h3>Passar parametros em main</h3>
 					<ul>
-						<li class="fragment"><pre><code>
+						<li class="fragment"><pre><code class="C">
 main(int argc, char *argv[]){
 	int i;
 	for(i=0; i < argc; i++)

@@ -116,7 +116,7 @@
 							  <li class="fragment">Para consertar alguns navegadores antigos diminuiam a página para caber na tela</li>
 							  <li class="fragment">A tag meta no html5 permite escolhermos o viewport</li>
 							  <li class="fragment">
-<pre><code><meta name="viewport" content="width=device-width, initial-scale=1.0"></code></pre></li>
+<pre><code class="html"><meta name="viewport" content="width=device-width, initial-scale=1.0"></code></pre></li>
 							  <li class="fragment">width=device-width: faz com que a largura da página seja a largura do dipositivo</li>
 							  <li class="fragment">Evitem usar elementos com largura grande e fixa</li>
 							  <li class="fragment">Não deixe o conteúdo depender de uma largura específica</li>
@@ -169,7 +169,7 @@
 				  <ul>
 						<li class="nobullet"><a href="https://color.adobe.com/">Adobe Colors</a></li>
 						<li class="nobullet"><a href="https://flatuicolors.com/">Flat Colors</a></li>
-						<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+						<li class="nobullet">Enquete de Um Minuto</li>
 					</ul>
 			</section>
 		</div>
@@ -198,6 +198,12 @@
 					{ src: '../plugin/zoom-js/zoom.js', async: true },
 					{ src: '../plugin/notes/notes.js', async: true }
 				]
+			});
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
 			});
 
 		</script>
