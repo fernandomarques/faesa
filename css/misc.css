@@ -37,3 +37,14 @@ img {
 .green {
    color : #27ae60;
 }
+
+div.small-box {
+	float: left;
+	display: block;
+	width: 45%;
+	border: 1px black solid;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	box-shadow: 3px 3px #ccc;
+	background: rgba(204,204,204,0.4);
+}
