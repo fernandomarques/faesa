@@ -98,7 +98,7 @@
 				<section>
 					  <h3>Funções</h3>
 						<ul>
-							  <li class="fragment"><pre><code>
+							  <li class="fragment"><pre><code class="js">
 function foo(p1, p2){
 	return p1 + p2;
 }
@@ -109,7 +109,7 @@ function foo(p1, p2){
 					  <h3>Objetos</h3>
 						<ul>
 							  <li class="fragment">Objetos sem métodos:</li>
-							  <li class="fragment"><pre><code>
+							  <li class="fragment"><pre><code class="js">
 var carro = { type:'Fiat', model:'500', color:'white'};
 console.log(carro.model);
 carro['cv'] = 107;
@@ -127,7 +127,7 @@ delete carro.type;
 				<section>
 					  <h3>Objetos Construtores</h3>
 						<ul>
-							  <li class="fragment"><pre><code>
+							  <li class="fragment"><pre><code class="js">
 function pessoa(nome, sobrenome, nickname){
 	this.nome = nome;
 	this.sobrenome = sobrenome;
@@ -141,7 +141,7 @@ var luke = new pessoa('Luke','Cage', 'Powerman');
 				<section>
 					  <h3>Objetos Métodos</h3>
 						<ul>
-							  <li class="fragment"><pre><code>
+							  <li class="fragment"><pre><code class="js">
 function pessoa(nome, sobrenome, nickname){
 	this.nome = nome;
 	this.sobrenome = sobrenome;
@@ -159,7 +159,7 @@ var luke = new pessoa('Luke','Cage', 'Powerman');
 					  <h3>Objetos Protótipos</h3>
 						<ul>
 							  <li class="fragment">Todo objeto js tem um protótipo. O protótipo também é um objeto</li>
-							  <li class="fragment"><pre><code>
+							  <li class="fragment"><pre><code class="js">
 function pessoa(nome, sobrenome, nickname){
 	this.nome = nome;
 	this.sobrenome = sobrenome;
@@ -177,7 +177,7 @@ var luke = new pessoa('Luke','Cage', 'Powerman');
 				<section>
 					  <h3>Objetos Protótipos-Herança</h3>
 						<ul>
-							  <li class="fragment"><pre><code>
+							  <li class="fragment"><pre><code class="js">
 function Mammal(name){
 	this.name=name;
 	this.offspring=[];
@@ -205,7 +205,7 @@ alert('myPet is '+myPet);             // results in 'myPet is [Cat "Felix"]'
 					  <h3>Eventos</h3>
 						<ul>
 							  <li class="fragment">Eventos são coisas que acontecem na página. Quando o evento ocorre, o js reage</li>
-							  <li class="fragment"><pre><code>
+							  <li class="fragment"><pre><code class="js">
 <button onclick="document.getElementById('demo').innerHTML=Date()">Clique-me</button>
 								</code></pre></li>
 							  <li class="fragment">onchange - Quando um elemento html mudar</li>
@@ -220,7 +220,7 @@ alert('myPet is '+myPet);             // results in 'myPet is [Cat "Felix"]'
 				<section>
 					  <h3>Input</h3>
 						<ul>
-							  <li class="fragment"><pre><code>
+							  <li class="fragment"><pre><code class="js">
 var r = confirm("Press a button");
 if (r == true) {
     x = "You pressed OK!";
@@ -237,7 +237,7 @@ if (person != null) {
 				</section>
 				<section>
 				  <ul>
-						<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+						<li class="nobullet">Enquete de Um Minuto</li>
 					</ul>
 			</section>
 		</div>
