@@ -102,7 +102,7 @@
 					<ul>
 						<li class="fragment">Seletor de elemento:$("p"), seleciona todos paragrafos </li>
 
-						<li class="fragment"><pre><code> $(document).ready(fuction(){
+						<li class="fragment"><pre><code class="js"> $(document).ready(fuction(){
 	$("p").hide(); // Esconde todos os paragrafos
 });
 											</code></pre></li>
@@ -174,14 +174,14 @@
 				<h3>jQuery - Eventos</h3>
 				<ul>
 					<li class="fragment">Depois de utilizar o seletor, para atribuir um evento basta colocar em seguida. Exemplo:</li>
-					<li class="fragment"><pre><code>$(document).ready(function(){
+					<li class="fragment"><pre><code class="js">$(document).ready(function(){
     $("p").click(function(){
         $(this).hide();
     });
 });</code></pre></li>
 					<li class="fragment">Outro evento é o $("document").ready()</li>
 					<li class="fragment">dblclick(), mouseenter(), mouseleave(), mousedown(), mouseup(), hover(),  </li>
-					<li class="fragment"><pre><code>$("#p1").hover(function(){
+					<li class="fragment"><pre><code class="js">$("#p1").hover(function(){
     alert("You entered p1!");
 },
 function(){
@@ -192,7 +192,7 @@ function(){
 			<section>
 				<h3>jQuery - Atribuir vários eventos ao mesmo tempo</h3>
 				<ul>
-					<li class="fragment"><pre><code>$("p").on({
+					<li class="fragment"><pre><code class="js">$("p").on({
     mouseenter: function(){
         $(this).css("background-color", "lightgray");
     },
@@ -218,7 +218,7 @@ function(){
 				<ul>
 					<li class="fragment">GET - .text(), .html(), .val(), .attr("href")</li>
 					<li class="fragment">SET - .text("valor"), .html("valor"), .val("valor"), .attr("href","valor")</li>
-					<li class="fragment"><pre><code>$("button").click(function(){
+					<li class="fragment"><pre><code class="js">$("button").click(function(){
 	$("#w3s").attr({
 			"href" : "http://www.w3schools.com/jquery",
 			"title" : "W3Schools jQuery Tutorial"
@@ -226,7 +226,7 @@ function(){
 });
 					</code></pre></li>
 					<li class="fragment">ADD - append, prepend, after, before</li>
-					<li class="fragment"><pre><code>function appendText() {
+					<li class="fragment"><pre><code class="js">function appendText() {
     var txt1 = "<p>Text.</p>";               // Create element with HTML
     var txt2 = $("<p></p>").text("Text.");   // Create with jQuery
     var txt3 = document.createElement("p");  // Create with DOM
@@ -241,13 +241,13 @@ Try it Yourself »
 				<h3>jQuery - HTML</h3>
 				<ul>
 					<li class="fragment">REMOVE - remove e empty</li>
-					<li class="fragment"><pre><code>$("p").remove(".test");</code></pre></li>
+					<li class="fragment"><pre><code class="js">$("p").remove(".test");</code></pre></li>
 				</ul>
 			</section>
 				<section>
 					<h3>Referências</h3>
 					<ul>
-						<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
+						<li class="nobullet red">Avaliação de Um Minuto</li>
 					</ul>
 				</section>
 			</div>
