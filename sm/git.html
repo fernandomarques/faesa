@@ -42,7 +42,6 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-                    <h3>Serviçoes de Rede </h3>
 					<h4>Versionamento de código e Git</h4>
 					<p>
 						<small>Created by Fernando Marques </small>
@@ -80,15 +79,42 @@
                         <li class="fragment">Todo Software precisa evoluir...</li>
                         <li class="fragment">Podemos criar "branches" de novas funcionalidades</li>
                         <li class="fragment">Enquanto a funcionalidade é criada, e ainda não está estável, podem surgir bugs...</li>
-                        <li class="fragment">O bug é corrigido é a branch continua</li>
+                        <li class="fragment">O bug é corrigido e a branch continua</li>
                         <li class="fragment">Ao terminar, fazemos o merge</li>
                     </ul>
                 </section>
 				<section>
 					<img src="../img/VERSION-branchmergetag.png" width="80%" />
-				</section>
+                </section>
                 <section>
-                    <h3>Git</h3>
+                        <h3>Git  - Comandos Básicos</h3>
+                        <ul>
+                            <li class="fragment">git init</li>
+                            <li class="fragment">git status</li>
+                            <li class="fragment">git add "file" ou .</li>
+                            <li class="fragment">git commit -m "Motivo do commit"</li>
+                            <li class="fragment">git pull</li>
+                            <li class="fragment">git push</li>
+                            <li class="fragment">git clone</li>
+                            <li class="fragment">arquivo .gitignore</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <img src="../img/gitLifeCycle.png" width="80%" />
+                    </section>
+                    <section>
+                        <h3>Praticando, local</h3>
+                        <ol>
+                            <li>Criar um novo repositório <i>git init</i></li>
+                            <li>Criar um arquivo .txt e escrever algo</li>
+                            <li>Adicionar o arquivo <i>git add .</i></li>
+                            <li>Comitar o arquio <i>git add -m "mensagem"</i></li>
+                            <li>Modificar o arquivo</li>
+                            <li>Comitar novamente!</li>
+                        </ol>
+                    </section>
+                <section>
+                    <img class="top-right" src="../img/VERSION-Git-Logo.png" />
                     <ul>
                         <li class="fragment">Atualmente é o sistema de versionamento mais utilizado</li>
                         <li class="fragment">Foi criado por Linus Torvalds</li>
@@ -97,7 +123,6 @@
                         <li class="fragment">Ao contrário de outros sistemas de versionamentos que já foram populares (svn e cvs). Cada desenvolvedor tem uma cópia do código</li>
                         <li class="fragment">Além de ser distribuído, foi desenvolvido levando em conta performance, segurança e flexibilidade</li>
                     </ul>
-					<img class="top-right" src="../img/VERSION-Git-Logo.png" />
                 </section>
 				<section>
 					<img src="../img/VERSION-xkcdGit.png" height="110%" />
@@ -153,19 +178,7 @@
                         <li class="fragment"><a href="https://github.com">GitHub</a></li>
                     </ul>
                 </section>
-                <section>
-                    <h3>Git  - Comandos Básicos</h3>
-                    <ul>
-                        <li class="fragment">git init</li>
-                        <li class="fragment">git status</li>
-                        <li class="fragment">git add "file" ou .</li>
-                        <li class="fragment">git commit -m "Motivo do commit"</li>
-                        <li class="fragment">git pull</li>
-                        <li class="fragment">git push</li>
-                        <li class="fragment">git clone</li>
-                        <li class="fragment">arquivo .gitignore</li>
-                    </ul>
-                </section>
+
                 <section>
 					<img src="../img/VERSION-git_commit.png" width="80%" />
 				</section>
