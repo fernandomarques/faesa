@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Laboratório de Programação</title>
+
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Java</h3>
+				<img src="./img/java.svg" width="50%" style="border:0px" alt="">
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Código básico</h3>
+				<ul>
+					<li class="fragment">
+						<pre><code class="JAVA">
+public class Main{
+	public static void main(String[] args){
+
+	}
+}
+								</code></pre>
+					</li>
+					<li class="fragment"><i>Lembre: Se a classe é 'Main', o arquivo deve se chamar <b>Main.java</b>!</i></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Imprimindo no terminal</h3>
+				<ul>
+					<li class="fragment">
+						<pre><code class="JAVA">
+public class Main{
+	public static void main(String[] args){
+		System.out.println("Ola Mundo!");
+	}
+}								</code></pre>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h3 class="">Comentários</h3>
+						<pre><code class="JAVA">
+public class Main{
+	public static void main(String[] args){
+		System.out.println("Ola Mundo!");
+		// Primeiro comentário
+		/* segundo
+		comentário */
+	}
+}
+	</code></pre>
+					<blockquote>
+						&ldquo;Bons programadores escrevem bons códigos, os melhores escrevem bons comentários.&rdquo;
+					</blockquote>
+			</section>
+			<section>
+				<h3 class="">Declarando variável e atribuindo valor</h3>
+					<img src="../img/VARIAVELnotation.png" style="border:0px" alt="">
+						<pre><code class="java">
+public class Main{
+	public static void main(String[] args){
+		int i = 10;
+		i = 4;
+	}
+}	
+								</code></pre>
+			</section>
+			<section>
+				<h3>Tipos de variáveis</h3>
+				<ul>
+					<li class="fragment">boolean</li>
+					<li class="fragment">byte</li>
+					<li class="fragment">char</li>
+					<li class="fragment">short</li>
+					<li class="fragment">int</li>
+					<li class="fragment">long</li>
+					<li class="fragment">float</li>
+					<li class="fragment">double</li>
+					<li class="fragment">String</li>
+				</ul>
+			</section>
+			<section>				<pre><code class="Java">
+public class Main{
+	public static void main(String[] args){
+		System.out.println(Integer.MAX_VALUE);
+	}
+}	
+													</code></pre>
+</section>
+			<section>
+				<table>
+					<caption>Operadores e funções</caption>
+					<tr>
+						<th>Operador</th>
+						<th>Exemplo</th>
+						<th>Comentário</th>
+					</tr>
+					<tr>
+						<td>=</td>
+						<td>x =y</td>
+						<td>Conteúdo da variável x é atribuído a y</td>
+					</tr>
+					<tr>
+						<td>+</td>
+						<td>x+y</td>
+						<td>Soma conteúdo de x e y</td>
+					</tr>
+					<tr>
+						<td>-</td>
+						<td>x-y</td>
+						<td>Subtrai o conteúdo de y do conteúdo de x</td>
+					</tr>
+					<tr>
+						<td>*</td>
+						<td>x*y</td>
+						<td>Multiplica o conteúdo de x pelo de y</td>
+					</tr>
+					<tr>
+						<td>/</td>
+						<td>x/y</td>
+						<td>Obtém o quociente da divisão de x por y (inteiro vs float)</td>
+					</tr>
+					<tr>
+						<td>%</td>
+						<td>x % y</td>
+						<td>Obtém o resto da divisão de x por y</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<table>
+					<caption>Operadores matemáticos de atribuição</caption>
+					<tr>
+						<th>Operador</th>
+						<th>Exemplo</th>
+						<th>Equivalente</th>
+					</tr>
+					<tr>
+						<td>+=</td>
+						<td>x += y</td>
+						<td> x = x + y</td>
+					</tr>
+					<tr>
+						<td>-=</td>
+						<td>x -= y</td>
+						<td> x = x - y</td>
+					</tr>
+					<tr>
+						<td>*=</td>
+						<td>x *= y</td>
+						<td> x = x*y</td>
+					</tr>
+					<tr>
+						<td>/=</td>
+						<td>x /= y</td>
+						<td> x = x / y</td>
+					</tr>
+					<tr>
+						<td>%=</td>
+						<td>x %= y</td>
+						<td> x = x % y</td>
+					</tr>
+					<tr>
+						<td>++</td>
+						<td>x++</td>
+						<td> x = x + 1</td>
+					</tr>
+					<tr>
+						<td>++</td>
+						<td>x = y++</td>
+						<td>y = x e depois x = x+1</td>
+					</tr>
+					<tr>
+						<td>++</td>
+						<td>x = ++y</td>
+						<td>x = x=1 e depois y = x </td>
+					</tr>
+					<tr>
+						<td>--</td>
+						<td>x--</td>
+						<td> x = x -1</td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<table>
+					<caption>Operadores relacionais ou comparativos</caption>
+					<tr>
+						<th>Operador</th>
+						<th>Exemplo</th>
+						<th>Comentário</th>
+					</tr>
+					<tr>
+						<td>==</td>
+						<td> x == y</td>
+						<td>x é igual a y</td>
+					</tr>
+					<tr>
+						<td>!=</td>
+						<td> x != y</td>
+						<td>x é diferente de y</td>
+					</tr>
+					<tr>
+						<td>
+							<=</td> <td> x <= y</td> <td>x é menor ou igual a y
+						</td>
+					</tr>
+					<tr>
+						<td>>=</td>
+						<td>x >= y</td>
+						<td>x é maior ou igual a y</td>
+					</tr>
+					<tr>
+						<td>
+							<</td> <td> x < y</td> <td>x é menor que y
+						</td>
+					</tr>
+					<tr>
+						<td>></td>
+						<td> x > y</td>
+						<td>x é maior que y</td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<h3>Exercícios</h3>
+				<ol>
+					<li class="">Faça um programa que converta 52ºF para Celsius</li>
+					<li class="">Calcule o volume de uma esfera de raio 3</li>
+					<li>Faça a "Avaliação de Um Minuto" no AVA!</li>
+				</ol>
+			</section>
+		</div>
+	</div>
+
+
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+
+	<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true }
+			]
+		});
+
+	</script>
+
+</body>
+
+</html>
