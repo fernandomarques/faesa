@@ -27,7 +27,12 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+	<style> 
+		.flex-container {
+			display: flex;
+		}
 
+	</style>
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -49,129 +54,76 @@
 					</p>
 				</section>
 				<section>
-					<section>
-						  <h3>Revisão</h3>
-							<ul>
-							  <li class="fragment">Navigation Bar</li>
-								<li class="fragment" style="border:3px solid green;border-radius:100px;">border-radius</li>
-								<li class="fragment">novas tags de fundo</li>
-								<li class="fragment">Novas formas de colocar cor: RGBA, HSL, HSLA e opacity</li>
-								<li class="fragment"><a href="http://www.w3schools.com/css/css3_gradients.asp" style="background: linear-gradient(blue,green)">Gradientes</a></li>
-								<li class="fragment"><a href="http://www.w3schools.com/css/css3_shadows.asp" style="text-shadow: 2px 4px blue">Sombras</a></li>
-								<li class="fragment"><a href="http://www.w3schools.com/cssref/css3_pr_transform.asp">Transformações</a></li>
-								<li class="fragment">li a </li>
-								<li class="fragment">:hover:not(.active) </li>
-							</ul>
-					</section>
-
-					<section>
-						  <h3>Revisão</h3>
-							<ul>
-								<li class="fragment">border-radius: arredonda as pontas</li>
-							  <li class="fragment">input[type="text"]</li>
-							  <li class="fragment">:focus e :hover</li>
-							  <li class="fragment">nth-child(), numero, even, odd ou An + B</li>
-							  <li class="fragment">Float e Clear</li>
-							  <li class="fragment">Divs</li>
-							  <li class="fragment">Flexible Box</li>
-							</ul>
-					</section>
-					<section>
-						  <h3>Revisão</h3>
-							<ul>
-								  <li class="fragment">Sintaxe</li>
-								  <li class="fragment">inline, interno e externo</li>
-								  <li class="fragment">ids e classes</li>
-								  <li class="fragment">Cores</li>
-								  <li class="fragment">Texto</li>
-								  <li class="fragment">Fonts</li>
-							</ul>
-					</section>
-			</section>
-				<section>
-						<h3>Novas Propriedades CSS3</h3>
+						<h3>O que é flex?</h3>
 						<ul>
-								<li class="fragment"><a href="http://www.w3schools.com/css/css3_transitions.asp">Transições</a></li>
-								<li class="fragment"><a href="http://www.w3schools.com/css/css3_animations.asp"> Animações :)</a></li>
-								<li class="fragment">Imagens com borda redonda e <a href="http://www.w3schools.com/cssref/css3_pr_filter.asp">filtros</a></li>
-								<li class="fragment">E muito mais</li>
+								<li class="fragment">Teve seu primeiro working draft em 2009	</li>
+								<li class="fragment">Virou W3C Candidate Recomendation em 2017</li>
+								<li class="fragment">É suportado pelos principais navegadores</li>
+								<li class="fragment">Pode expandir itens para ocupar espaços vazios</li>
+								<li class="fragment">Ou encolher para caber</li>
 						</ul>
 				</section>
 				<section>
-					  <h3>O que é responsividade ?</h3>
-						<ul>
-							  <li class="fragment">Desenvolvimento responsivo permite criar páginas web que funcionam bem em qualquer dispositivo</li>
-							  <li class="fragment">Não é um programa ou javascript</li>
-							  <li class="fragment">É necessário para acessar as páginas de um dispositivo móvel</li>
-							  <li class="fragment"><a href="http://www.w3schools.com/css/trycss_rwd_simple.htm">Exemplo de Design Responsivél com um CSS simples</a></li>
-								<li class="fragment"><a href="http://www.w3schools.com/css/trycss_rwd_bootstrap.htm">Outra forma é usando um Framework (veremos em outra aula)</a></li>
-								<li class="fragment"><a href="http://www.w3schools.com/w3css/tryw3css_templates_blog.htm">Outra forma é usando um Framework2 (veremos em outra aula)</a></li>
-						</ul>
+						<h3>Container vs Itens</h3>
+						<img width="60%" src="img/flex-container.svg" alt="">
+						<img width="60%" src="img/flex-itens.svg" alt="">
 				</section>
 				<section>
-					  <h3>Viewport</h3>
-						<ul>
-							  <li class="fragment">O que é? É a parte visível pelo usuário</li>
-							  <li class="fragment">A viewport varia dependendo do dispositivo e é menor com dispositivos móveis</li>
-							  <li class="fragment">Para consertar alguns navegadores antigos diminuiam a página para caber na tela</li>
-							  <li class="fragment">A tag meta no html5 permite escolhermos o viewport</li>
-							  <li class="fragment">
-<pre><code class="html"><meta name="viewport" content="width=device-width, initial-scale=1.0"></code></pre></li>
-							  <li class="fragment">width=device-width: faz com que a largura da página seja a largura do dipositivo</li>
-							  <li class="fragment">Evitem usar elementos com largura grande e fixa</li>
-							  <li class="fragment">Não deixe o conteúdo depender de uma largura específica</li>
-						</ul>
+						<h3>Container</h3>
+<pre><code class="css">
+.container {
+	display: flex;
+	flex-direction: row | row-reverse | column | column-reverse;
+	flex-wrap: nowrap | wrap | wrap-reverse;
+	flex-flow: &lt;‘flex-direction’&gt; || &lt;‘flex-wrap’&gt;
+}
+</code></pre>
 				</section>
 				<section>
-					  <h3>GridView</h3>
-						<ul>
-							  <li class="fragment">Muitas páginas web são baseadas em um grid-view sendo dividida em colunas</li>
-							  <li class="fragment"><a href="http://www.w3schools.com/css/tryresponsive_grid.htm">Exemplo de gridview com 12 colunas</a></li>
-							  <li class="fragment"><a href="http://www.w3schools.com/css/tryit.asp?filename=tryresponsive_webpage">Exemplo com duas colunas</a></li>
-							  <li class="fragment"><a href="http://www.w3schools.com/css/tryit.asp?filename=tryresponsive_styles">Criando as 12 Colunas.</a></li>
-							  <li class="fragment"><a href="https://getbootstrap.com/examples/grid/">Grid do Bootstrap</a></li>
-						</ul>
+						<h3>Container </h3>
+<pre ><code class="css">
+.container {
+	display: flex;
+	justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+	align-items: stretch | flex-start | flex-end | center | baseline;
+	align-content: flex-start | flex-end | center | space-between | space-around | stretch;	
+	}
+</code></pre>
 				</section>
 				<section>
-					  <h3>Media Query</h3>
-						<ul>
-							  <li class="fragment">Media query é uma técnica inserida no CSS3</li>
-							  <li class="fragment">Permitindo aplicar uma propriedade apenas se uma condição for verdadeira</li>
-							  <li class="fragment"><a href="http://www.w3schools.com/css/tryit.asp?filename=tryresponsive_mediaquery">Exemplo Simples</a></li>
-							  <li class="fragment"><a href="http://www.w3schools.com/css/tryit.asp?filename=tryresponsive_col-s">Assim, conseguimos usar um breakpoint no exemplo do slide passado.</a></li>
-							  <li class="fragment">@media only screen and (orientation: landscape) permite diferenciar entre a orientação da tela</li>
-							  <li class="fragment">Permite saber largura e comprimento do viewport e do dispositivo, a orientação e muito mais</li>
-
-						</ul>
+						<h3>Items</h3>
+<pre><code class="css">
+.item {
+	order: &lt;integer&gt;; /* default is 0 */
+	flex-grow: &lt;number&gt;; /* default 0 */
+	flex-shrink: &lt;number&gt;; /* default 1 */
+	// Tamanho padrao do elemento, auto = width, height
+	flex-basis: &lt;length&gt; | auto; /* default auto */
+	flex: none | [ &lt;'flex-grow'&gt; &lt;'flex-shrink'&gt;? || &lt;'flex-basis'&gt; ]
+	align-self: auto | flex-start | flex-end | center | baseline | stretch;
+}
+</code></pre>
+						
 				</section>
 				<section>
-					  <h3>Imagens</h3>
-						<ul>
-							  <li class="fragment">Se a width da imagem for em porcentagem, ela mudará de tamanho com a tela</li>
-							  <li class="fragment">Ao usarmos max-width a imagem não ficará maior que seu tamanho real</li>
-							  <li class="fragment"><a href="http://www.w3schools.com/css/tryit.asp?filename=tryresponsive_image3">Página exemplo com imagem</a></li>
-							  <li class="fragment">background-size pode ser usado para mudar o tamanho da imagem de fundo. %, contain e cover</li>
-							  <li class="fragment"><a href="http://www.w3schools.com/css/tryit.asp?filename=tryresponsive_image_mediaq">Com Media também possível mostrar figuras diferentes</a></li>
-							  <li class="fragment"><a href="http://www.w3schools.com/css/tryit.asp?filename=tryresponsive_image_picture">Também temos o elemento do html5 picture</a></li>
-
-						</ul>
+						<h3>Exemplos</h3>
+						<ol>
+								<li class="fragment">Magica em Centralizar (margin auto)</li>
+								<li class="fragment">Itens de tamanho fixo, espalhados horizontalmente (row wrap)</li>
+								<li class="fragment">Navegacao</li>
+								<ul class="fragment">
+									<li>Desktop - Alinhado a direita</li>
+									<li>Tablet - Centralizado 800px</li>
+									<li>Celular - Em linhas 500px</li>
+								</ul>
+								<li class="fragment">Site com cabeçalho, main, rodape e laterais</li>
+								<ul class="fragment">
+									<li>Celular - Em linhas</li>
+									<li>Tablet - Laterais dividem espaço 600px</li>
+									<li>Desktop - main e laterais dividem espaco 800px</li>
+									</ul>
+						</ol>
 				</section>
-				<section>
-					  <h3>Frameworks e Templates</h3>
-						<ul>
-							  <li class="fragment">Apesar de muito divertido fazer tudo isso para garantir que a nossa página vai aparecer bem em todos os dispositivos, existem alguns frameworks que já fazem isso!</li>
-							  <li class="fragment"><a href="http://www.w3schools.com/w3css/">W3.css</a></li>
-							  <li class="fragment"><a href="http://getbootstrap.com/">Bootstrap.css</a></li>
-							  <li class="fragment"><a href="http://www.w3schools.com/css/css_rwd_templates.asp">Templates Diversos</a></li>
-						</ul>
-				</section>
-				<section>
-				  <ul>
-						<li class="nobullet"><a href="https://color.adobe.com/">Adobe Colors</a></li>
-						<li class="nobullet"><a href="https://flatuicolors.com/">Flat Colors</a></li>
-						<li class="nobullet">Enquete de Um Minuto</li>
-					</ul>
-			</section>
 		</div>
 		</div>
 		<script src="../lib/js/head.min.js"></script>
