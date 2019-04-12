@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Laboratório de Programação</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Condicionais</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			
+			<section>
+				<h3>Revisão</h3>
+				  <ul>
+							<li class="fragment">Declarar e inicializar variáveis</li>
+							<li class="fragment">Expressões</li>
+							<li class="fragment">print</li>
+							<li class="fragment">scanner</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Aula de Hoje</h3>
+				  <ul>
+						  <li class="fragment">Verdadeiro e Falso</li>
+						  <li class="fragment">Operadores relacionais</li>
+						  <li class="fragment">Operadores lógicos</li>
+						  <li class="fragment">if-else</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Introdução</h3>
+				<ul>
+					<li class="fragment">Uma <b>expressão condicional</b> é uma expressão cujo valor pode ser <i>falso</i> ou <i>verdadeiro</i></li>
+					<li class="fragment">Uma condição simples é uma expressão condicional cujo valor é dado por um operador relacional</li>
+					<li class="fragment">Uma condição composta é uma expressão condicional formata por duas ou mais condições simples ligadas por operadores lógicos</li>
+					<li class="fragment"><pre><code class="JAVA">(a + 1 > 2*b);
+(2*c == 6)</code></code></pre></li>
+				</ul>
+			</section>
+			<section>
+				  <h3>Lógica em JAVA - Operador Relacional</h3>
+					<table>
+						<tr><th>Operador</th> <th>Operação</th> <th>Exemplo</th>	</tr>
+						<tr><td>></td></td>   <td>Maior</td> <td>1 > 0</td></td>	</tr>
+						<tr><td>>=</td>       <td>Maior ou igual</td> <td>1 >= 1</td></td> 	</tr>
+						<tr><td><</td>        <td>Menor</td>	<td>1 < 2</td</tr>
+						<tr><td><=</td> <td>Menor ou igual</td><td>1 <= 1</td	</tr>
+						<tr><td>==</td> <td>Igual</td>	<td>1 == 1</td</tr>
+						<tr><td>!=</td> <td>Diferente</td>	<td>1 != 0</td</tr>
+					</table>
+			</section>
+		<section>
+			<h4>Operadores relacionais - Exercícios</h4>
+			<h5>X = 1, Y = 2, Z = 3</h5>
+			<ol type="a" style="font-size:90%">
+				<li>X > 1</li>
+				<li>Y >= 2</li>
+				<li>Z == 4</li>
+				<li>(X + Y) != Z</li>
+				<li>X > (Y – Z)</li>
+				<li>(X+1) / 2 == 0</li>
+				<li>(Y*2) < (Z/3)</li>
+				<li>((X+Y) / (Z-Y) <= (X+2))</li>
+				<li>(Y % 2) != 0</li>
+				<li>(Y % 2) == 1</li>
+				<li>(6 % Y) != 0</li>
+				<li>X != Y</li>
+				<li>(X + 1) != ((X+Y+1) / 2)</li>
+			</ol>
+		</section>
+		<section>
+				<h3>Lógica em C - Operadores Lógicos</h3>
+				<ul>
+					<li>Se chover <b>ou</b> relampejar eu fico em casa</li>
+					<li>Quando eu fico em casa?</li>
+				</ul>
+				<hr>
+				<table>
+					<caption>A OU B (A || B)</caption>
+					<tr>
+						<th>A</th>
+						<th>B</th>
+						<th>Resultado</th>
+						</th>
+					</tr>
+					<tr>
+						<td>falso</td>
+						<td>falso</td>
+						<td class="fragment">falso</td>
+					</tr>
+					<tr>
+						<td>falso</td>
+						<td>verdadeiro</td>
+						<td class="fragment">verdadeiro</td>
+					</tr>
+					<tr>
+						<td>verdadeiro</td>
+						<td>falso</td>
+						<td class="fragment">verdadeiro</td>
+					</tr>
+					<tr>
+						<td>verdadeiro</td>
+						<td>verdadeiro</td>
+						<td class="fragment">verdadeiro</td>
+					</tr>
+				</table>
+
+			</section>
+			<section>
+				<h3>Lógica em C - Operadores Lógicos</h3>
+				<ul>
+					<li>Se chover <b>e</b> relampejar eu fico em casa</li>
+					<li>Quando eu fico em casa?</li>
+				</ul>
+				<hr>
+				<table>
+					<caption>A E B (A && B)</caption>
+					<tr>
+						<th>A</th>
+						<th>B</th>
+						<th>Resultado</th>
+						</th>
+					</tr>
+					<tr>
+						<td>falso</td>
+						<td>falso</td>
+						<td class="fragment">falso</td>
+					</tr>
+					<tr>
+						<td>falso</td>
+						<td>verdadeiro</td>
+						<td class="fragment">falso</td>
+					</tr>
+					<tr>
+						<td>verdadeiro</td>
+						<td>falso</td>
+						<td class="fragment">falso</td>
+					</tr>
+					<tr>
+						<td>verdadeiro</td>
+						<td>verdadeiro</td>
+						<td class="fragment">verdadeiro</td>
+					</tr>
+				</table>
+
+			</section>
+			<section>
+				<h3>Lógica em C - Operadores Lógicos</h3>
+				<table>
+					<caption>Não A (!A)</caption>
+					<tr>
+						<th>A</th>
+						<th>Resultado</th>
+						</th>
+					</tr>
+					<tr>
+						<td>falso</td>
+						<td class="fragment">verdadeiro</td>
+					</tr>
+					<tr>
+						<td>verdadeiro</td>
+						<td class="fragment">falso</td>
+					</tr>
+				</table>
+				<hr>
+				<ul>
+					<li>Se <b>não</b> chover eu fico em casa</li>
+					<li>Quando eu fico em casa?</li>
+				</ul>
+			</section>
+			<section>
+					<h3>Operadores Lógicos</h3>
+					<ul>
+						<li class="fragment">Quando avaliados, tanto os operadores relacionais quantos os operadores lógicos
+							resultam em valor true ou false</li>
+						<li class="fragment">Em uma expressão condicionar os <b>operadores aritméticos</b> são avaliados
+							antes dos <b>operadores relacionais</b> que são avaliados antes dos <b>lógicos</b></li>
+						<li class="fragment">Exemplo verificar se um aluno foi aprovado</li>
+						<li class="fragment">
+							<pre><code class="C"> (media >= 5.0) && (frequencia >= 75);</code></code></code></pre>
+						</li>
+						<li class="fragment">O que acontece se trocar o && por || ?</li>
+					</ul>
+				</section>
+						<section>
+						<h3>Operadores lógicos - Exercícios</h3>
+						<h5>X=1, Y=2, Z=3</h5>
+						<ol type="a">
+							<li>(X > 1) && (Y < 2)</li> <li>(Y >= 2) || (2 > 3)</li>
+							<li>(Z == 4) && (X == 1)</li>
+							<li>((X + Y) != Z) || (X == 1)</li>
+							<li>!(X > (Y - Z))</li>
+							<li>!(X != Y)</li>
+							<li>!((X + 1) > 2) || !((X+Y+1) / 2 == 1)</li>
+						</ol>
+					</section>
+			<section>
+				  <h3>If-else</h3>
+					<ul>
+						  <li class="fragment">O condicional permite criar trechos de código que só são executados quando uma condição ocorre.</li>
+						  <li class="fragment">If ... </li>
+						  <li class="fragment"><pre><code code="JAVA">
+public static void main(String args[]){
+	if(10 < 20){
+		System.out.println("10 é menor que 20");
+	}
+}
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+					<h3>Problema 1</h3>
+					<img src="img/imc.gif" alt="" width="80%">
+					<p>Leia o peso e altura da pessoa e diga em qual faixa a pessoa se encontra</p>
+				</section>
+			<section>
+				  <h3>If-else</h3>
+					<ul>
+						  <li class="fragment">A condição Else indica o que deve acontecer caso a condição seja falsa</li>
+						  <li class="fragment"><font color="red">Não é obrigatória, mas precisa de um if!</font></li>
+						  <li class="fragment"><pre><code>
+public static void main(String args[]){
+	if (10 < 20){
+		System.out.println("10 é menor que 20");
+	}else{
+		System.out.println("10 não é menor que 20");
+	}
+}
+							</code></pre></li>
+					</ul>
+			</section>
+			<section>
+				  <h3>If-Else If</h3>
+					<ul>
+						  <li class="fragment">Caso a primeira comparação não seja verdadeira, ainda podemos fazer mais uma pergunta</li>
+						  <li class="fragment">Assim como o else, também não é obrigatório</li>
+						  <li class="fragment"><pre><code>
+public static void main(String args[]){
+	if (10 < 20){
+		System.out.println("10 é menor que 20");
+	}else if (10 > 20){
+		System.out.println("10 é maior que 20");
+	}
+}
+								</code></pre>
+							</li>
+					</ul>
+			</section>
+			<section>
+					<h3>Problema 1.1</h3>
+					<img src="img/imc.gif" alt="" width="80%">
+					<p>Leia o peso e altura da pessoa e diga em qual faixa a pessoa se encontra</p>
+				</section>
+			<section>
+				  <h3>If-else Encadeados</h3>
+					<ul>
+						  <li class="fragment">Não existe limite para a quantidade de if-else</li>
+						  <li class="fragment">Dentro de um bloco {} if ou else, podem existir mais condicionais</li>
+					</ul>
+			</section>
+			<section>
+				<h3>A qual If o else pertence?</h3>
+<pre><code>public static void main(String args[]){
+	if(count > 10)
+			if(count % 4 == 2)
+			System.out.println("Condição 1");
+	else
+	System.out.println("Condição 2");
+}</code></pre>
+				<ol>
+					<li>Primeiro if</li>
+					<li>Segundo if</li>
+					<li>Não é necessário se preocupar com isso se você nunca escrever códigos assim</li>
+				</ol>
+			</section>
+			<section>
+				<h3>If-else if vs. if if</h3>
+<pre><code>if (nota1 >= 50)
+	System.out.println("Voce passou com nota %d",nota1);
+else if(nota2 >= 50)
+System.out.println("Voce passou com nota %d",nota2);</code></pre>
+<pre><code>if (nota1 >= 50)
+		System.out.println("Voce passou com nota %d",nota1);
+if(nota2 >= 50)
+System.out.println("Voce passou com nota %d",nota2);</code></pre>
+			</section>
+
+				<section>
+					<h3>Problema 2</h3>
+					<p style="text-align:left"> Em uma empresa, paga-se R$ 19,50 por hora trabalhada e desconta-se 25% de
+						imposto de
+						renda dos salários superiores a R$ 2.500,00. Dado o número de horas trabalhadas por um
+						funcionário dessa empresa, informe o valor do desconto de IR (se houver) e o valor do salário a
+						ser pago ao funcionário.</p>
+					<p style="text-align:left"><b>Exemplo:</b> um funcionário trabalhando 40 horas por semana totaliza no
+						fim de um mês 160
+						horas trabalhadas. Então seria 160 horas * 19,50 valor da hora = R$ 3.120,00. Logo o
+						desconto dele será de R$ 780,00. O salário a ser pago para este funcionário será de R$
+						2.340,00.</p>
+				</section>
+				<section>
+					<h3>Problema 3</h3>
+					<p style="text-align:left">Em uma universidade, a aprovação em um disciplina requer no mínimo 75% de
+						presença e no
+						mínimo média 6.0. Se o aluno estourar em faltas, ele é reprovado diretamente; caso contrário, se
+						ele não alcançar a média mínima, ele fica para recuperação. Dada a média de um aluno, bem
+						como o número de aulas da disciplina e o número de faltas do aluno, informe a sua situação.</p>
+				</section>
+
+      </div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
+			});
+		</script>
+
+	</body>
+</html>
