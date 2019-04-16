@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-br">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Sistemas Multimidia</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+          <h3>Sistemas Multimidia</h3>
+					<ul>
+						<li>CSS Grid Layout</li>
+					</ul>
+					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+				</section>
+				<section>
+						<h3>O que é CSS Grid Layout?</h3>
+						<ul>
+								<li class="fragment">É o melhor sistema de layout no CSS até o momento	</li>
+								<li class="fragment">Contrário do flex, é bidimencional</li>
+								<li class="fragment">Funciona muito bem em conjunto com o flex!</li>
+								<li class="fragment">A maioria dos navegadores passou a dar suporte em 2017</li>
+						</ul>
+				</section>
+				<section>
+						<h3>Elementos</h3>
+		<ul>
+			<li>Grid Container</li>
+			<li>Grid Item</li>
+			<li>Grid Line</li>
+			<li>Grid Track (espaço entre duas linhas)</li>
+			<li>Grid Cel</li>
+			<li>Grid Area</li>
+		</ul>
+				</section>
+				<section>
+						<h3>Container</h3>
+<pre><code class="css">
+.container {
+	display: grid;
+	grid-template-rows: 40px 50px auto 50px 40px;
+	grid-template-columns:  25% 100px auto;
+	
+}
+</code></pre>
+				</section>
+				<section>
+						<h3>Container</h3>
+<pre><code class="css">
+.container {
+	display: grid;
+	grid-template-columns: repeat(5,20%);
+	grid-template-rows: 1fr 2fr 1fr 100px;
+}
+</code></pre>
+				</section>
+				<section>
+						<h3>Container </h3>
+<pre ><code class="css">
+.item-a {
+	grid-area: header;
+}
+.item-b {
+	grid-area: main;
+}
+.item-c {
+	grid-area: sidebar;
+}
+.item-d {
+	grid-area: footer;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 50px 50px 50px 50px;
+	grid-template-rows: auto;
+	grid-template-areas: 
+		"header header header header"
+		"main main . sidebar"
+		"footer footer footer footer";
+}
+/* footer-start footer-end */
+</code></pre>
+				</section>
+				<section>
+						<h3>Container </h3>
+<pre ><code class="css">
+.container {
+	grid:flex;
+	grid-template: 25px 1fr 25px / 1fr repeat(3,25px);
+	grid-columns-gap: 5px;
+	grid-rows-gap: 10px;
+	/* grid-gaps: 10px 5px; */
+	justify-items: start | end | center | stretch;
+	align-items: start | end | center | stretch;
+	/* place-items: start / start */
+	justify-content: start | end | center | stretch | space-around | space-between | space-evenly;	
+	align-content: start | end | center | stretch | space-around | space-between | space-evenly;
+	/* place-content: start / start */
+}
+</code></pre>
+				</section>
+				<section>
+						<h3>Container </h3>
+<pre ><code class="css">
+.container {
+	grid:flex;
+	grid-auto-columns : 60px;
+	grid-auto-flow: row | column | row dense | column dense;
+	/* dense - tenta preencher buracos no grid */
+}
+.item {
+	grid-column: 4/5;
+}
+</code></pre>
+				</section>
+
+				<section>
+						<h3>Items</h3>
+<pre><code class="css">
+.item {
+	grid-column-start: 2;
+	grid-column-end: 5;
+	grid-row-start : 1;
+	grid-row-end: span 2;
+	/* grid-column: 2 / 5; */
+	grid-area: header;
+	/* grid-area: 1 span 2 / 2 5;
+}
+</code></pre>
+</section>
+<section>
+						<h3>Items</h3>
+<pre><code class="css">
+.item {
+	justify-self: start | end | center | stretch;
+	align-self: start | end | center | stretch;
+	/* place-self: start / start;
+}
+</code></pre>
+						
+				</section>
+				<section>
+						<h3>Animações</h3>
+							<ul>
+									<li>gap, suporte nos navegadores menos safari</li>
+									<li>rows e columns, suporte no firefox</li>
+							</ul>						
+				</section>
+				<section>
+						<h3>Exemplos</h3>
+						<ol>
+								<li class="fragment">Magica em Centralizar (margin auto)</li>
+								<li class="fragment">Itens de tamanho fixo, espalhados horizontalmente (row wrap)</li>
+								<li class="fragment">Navegacao</li>
+								<ul class="fragment">
+									<li>Desktop - Alinhado a direita</li>
+									<li>Tablet - Centralizado 800px</li>
+									<li>Celular - Em linhas 500px</li>
+								</ul>
+								<li class="fragment">Site com cabeçalho, main, rodape e laterais</li>
+								<ul class="fragment">
+									<li>Celular - Em linhas</li>
+									<li>Tablet - Laterais dividem espaço 600px</li>
+									<li>Desktop - main e laterais dividem espaco 800px</li>
+									</ul>
+						</ol>
+				</section>
+				<section>
+					<h3>Referencias					</h3>
+					<ul>
+						<li><a href="https://vgpena.github.io/using-css-grid-the-right-way/">Css Grid the right way</a>						</li>
+						<li><a href="https://css-tricks.com/getting-started-css-grid/">Getting Started</a>						</li>
+						<li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">Complete Guide</a>						</li>
+					</ul>
+				</section>
+		</div>
+		</div>
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+                    { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+			Reveal.configure({
+				keyboard: {
+					38: 'next',
+					40: 'prev'
+				}
+			});
+
+		</script>
+
+	</body>
+</html>
