@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Laboratório de Programação</title>
+
+	<meta name="description" content="Laboratório de Programação">
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Switch</h3>
+				<img src="../img/NintendoSwitch.jpg" alt="">
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+		
+			<section>
+				<h3>Estrutura Case</h3>
+				<ul>
+					<li class="fragment">Em alguns problemas existem situações mutuamente exclusivas</li>
+					<li class="fragment">Se uma for executada, as outras não serão</li>
+					<li class="fragment"><pre><code class="JAVA">
+switch(variavel){
+	case valor1: 
+		lista de comandos;
+		break;
+	case valor2: 
+		lista de comandos;
+		break;
+	default: 
+		lista de comandos;
+}
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+<pre><code class="JAVA">
+switch(variavel){
+	case 1: 
+		System.out.println("Um");
+		break;
+	case 2: 
+		System.out.println("Dois");
+		break;
+	default: 
+		System.out.println("Valor nao encontrado");
+}
+					</code></pre>
+			</section>
+			<section>
+				<h3>Problema 1</h3>
+				<p style="text-align:left">Escreva um programa que, a partir de um mês fornecido (número inteiro de 1 a 12), apresente o
+	nome dele por extenso ou uma mensagem de mês inválido.</p>
+			</section>
+			<section>
+				<h3>Resumo</h3>
+				<ul>
+					<li>Declarações em um bloco são cercadas por { e }</li>
+					<li>Declarações switch verificam diversos valores de uma variável de forma eficiente</li>
+					<li>break serve para sair do switch</li>
+					<li>default é chamado quando nenhuma das opções são selecionadas</li>
+					<li>case só aceita valores inteiros ou caracter</li>
+				</ul>
+			</section>
+			<section>
+				<ol >
+					<li class="">Preencher a <span class="red">enquete de Um Minuto</span></li>
+				</ol>
+			</section>
+
+		</div>
+	</div>
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+
+	<script>
+
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: '../plugin/zoom-js/zoom.js', async: true },
+			{ src: '../plugin/notes/notes.js', async: true }
+		]
+	});
+	Reveal.configure({
+		keyboard: {
+			38: 'next',
+			40: 'prev'
+		}
+	});
+
+	</script>
+
+</body>
+</html>
