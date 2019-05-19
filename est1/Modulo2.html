@@ -42,7 +42,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h3>Análise Exploratória de Dados</h3>					<p>
+					<h3>Análise Exploratória de Dados II</h3>					<p>
 						<small>Created by Fernando Marques </small>
 					</p>
 		</section>
@@ -306,6 +306,297 @@ mad(state[["Population"]])
 		- Métricas mais robustas incluem média e mediana dos desvios absolutos da média e percentil
 		- [Desvios da média e robustez](https://www.r-bloggers.com/absolute-deviation-around-the-median/)
 		- [Percentil](http://onlinestatbook.com/2/introduction/percentiles.html)
+	</section>
+	<section data-markdown>
+		## Explorando a distribuição dos dados
+		- **Boxplot** - Criado por Tukey para visualizar distribuição de dados
+		- **Tabela de Frequência** - Contagem de valores dentro de um intervalo
+		- **Histograma** - Gráfico da tabela de frequência
+		- **Gráfico de densidade** - Versão do histograma
+	</section>
+	<section data-markdown>
+		## Percentil e Boxplot
+		`quantile(state[["murder.rate"]],p=c(0.05,0.25,0.5,0.75,0.95)`
+		`boxplot(state[["Population"]]/1000000, ylab = "Population (millions)"`
+		- Boxplot oferece uma forma de visualizar a distribuição de dados utilizando percentil
+	</section>
+	<section data-markdown>
+		![Boxplot](./img/UN1boxplot.png)	
+	</section>
+	<section data-markdown>
+		## Boxplot
+		- O topo e o fundo representam 75% e 25% dos dados
+		- A mediana é mostrada pela barra horizontal
+		- As linhas pontilhadas, "bigodes", mostram os extremos dos dados. Em R não passa de 1.5 do IQR 
+		- Dados fora do intervalo são mostrados como pontos únicos
+	</section>
+	<section>
+		<h3>Tabelas de Frequência e Histogramas</h3>
+		<pre><code class="R">
+breaks <- seq(from=min(state[["Population"]]),
+		to=max(state[["Population"]]), length=11)
+pop_freq <- cut(state[["Population"]], breaks = breaks,
+		right=TRUE, include.lowest=TRUE)
+table(pop_freq)
+		</code></pre>
+	</section>
+	<section data-markdown>
+		## Tabelas de Frequência e Histogramas
+		- Histograma é uma forma de visualizar a tabela de frequência
+		- Barras continuas sem espaços entre
+		- Número de barras depende do usuário
+		- Barras tem a mesma largura
+		- Barras vazias são incluídas no gráfico
+	</section>
+	<section data-markdown>
+		##Histograma
+		![Gráfico de Histograma](./img/UN1histogram.png)
+	</section>
+	<section>
+		<h3>Código de Histograma</h3>
+		<pre><code class="R">
+hist(state[["Population"]], breaks=breaks)
+		</code></pre>
+	</section>
+	<section data-markdown>
+		## Momentos estatísticos
+		- Em estatística teórica localização e variabilidade são referidos como primeiro e segundo momento
+		da distribuição
+		- __Assimetria__ é o terceiro e indica se os dados tendem para valores grandes ou pequenos
+		- __Curtose__ é o quarto momento e indica a propensão dos dados a terem valores extremos
+		- Esses dois últimos momentos, geralmente, não são medidos sendo usados gráficos sua identificação
+	</section>
+	<section data-markdown>
+		## Estimativas de densidade
+		- Relacionado ao histograma é o diagrama de densidade
+		- Mostra a distribuição dos valores como uma linha contínua
+		- Pode ser pensado como uma versão atenuada do histograma
+		- Uma diferença é a escala de Y, que é uma proporção ao invés de contagem
+		- Estimativas de densidade são muito estudadas e existem mais de 20 pacotes R para calcular
+		- Para Data Science a estimativa padrão é suficiente
+	</section>
+	<section data-markdown>
+		## Gráfico de densidade
+		![Gráfico de Densidade](./img/UN1density.png)
+	</section>
+	<section>
+			<h3>Código gráfico de densidade</h3>
+		<pre><code class="R">
+hist(state[["Murder.Rate"]], freq=FALSE )
+lines(density(state[["Murder.Rate"]]), lwd=3, col="blue")
+			</code></pre>
+			
+		</section>
+	<section data-markdown>
+		- __Histogramas__ mostram a frequência de contagem dos valores em Y e os valores em X
+		- __Tabela de frequência__ é uma versão em tabela do histograma
+		- __Boxplot ou diagrama em caixa__ tem como topo e fundo da caixa os percentis 25% e 75%. Normalmente é usado para 
+		comparar distribuições
+		- __Gráfico de Densidade__ é uma versão alisada do histograma e requer uma função de densidade
+	</section>
+	<section data-markdown>
+		## Explorando dados binários e categóricos
+		- __Moda__ o valor mais comum da série
+		- __Valor esperado__, quando categorias são associadas com valores numéricos, dá um valor médio na probabilidade
+		de ocorrência
+		- __Gráfico de Barra__ a frequência ou proporção mostrados como barras
+		- __Gráfico de Pizza__ a frequência ou proporção mostrados como fatias de pizza
+	</section>
+	<section data-markdown>
+		## Gráfico de Barra
+		- Muito usado para visualizar variáveis categóricas
+		- Categorias ficam no eixo X e a frequência ou proporção no eixo Y
+	</section>
+	<section data-markdown>
+		- Histograma possui valores de uma variável na escala numérica no eixo X
+		- Enquanto o gráfico de barra apresenta diferentes categorias
+		- No histograma as barras 'encostam'
+		- Gráficos de Pizza também são usado como alternativa da barra, mas pouco usado por experts
+	</section>
+	<section data-markdown>
+	![Gráfico de Barra](./img/UN1barplot.png)
+	</section>
+	<section data-markdown>
+		## Moda 
+		- Moda é o valor que aparece com mais frequência
+		- Moda é uma estatística para dados categóricos e pouco usado para dados numéricos
+	</section>
+	<section data-markdown>
+		## Valor Esperado
+		- Ocorre quando os valores categóricos podem ser mapeados para valores discretos na mesma categoria
+		- Uma empresa pode ter dois tipos de serviço, $300/mês ou $50/mês
+		- A empresa faz um Webnário gratuito e sabe que 5% vão optar pelo serviço premium e 15% pelo básico
+		\begin{aligned}
+		EV = (0.05)\times(300) + (0.15)\times(50) + (0.8)\times(0)
+		\end{aligned}
+		- Funciona como uma média ponderada!
+	</section>
+	<section data-markdown>
+		- Dados categóricos são somados em proporções e podem ser exibidos com gráfico de barra
+		- Dados categóricos podem representar coisas distintas, níveis de uma variável ou dados numéricos agrupados
+		- Valor esperado é a soma dos valores pela probabilidade que elas aconteçam
+		- _Misleading Graphs_
+	</section>
+	<section data-markdown>
+		## Correlação
+		- Na análise exploratória de dados muitas vezes temos que examinar a correlação entre preditores e entre
+		preditores e a variável alvo
+		- Duas variáveis X e Y possuem correlação positiva se valores altos de X vão com altos de Y e baixos de X com baixos de Y
+		- Se valores altos de X vão com valores baixos de Y e vice-versa, as variáveis são negativamente correlacionadas
+	</section>
+	<section data-markdown>
+		## Correlação
+		- __Coeficiente de Correlação__, métrica que mede a associação entre variáveis, vai de -1 a 1
+		- __Matriz de Correlação__, uma tabela onde as variáveis são mostradas nas colunas e nas linhas, a célula 
+		contém a correlação entre as variáveis
+		- __Diagrama de Dispersão__, um gráfico onde o eixo X mostra os valores de uma variável e o eixo Y os valores de outra
+	</section>
+	<section data-markdown>
+		## Coeficiente de correção de Pearson
+		![Coeficiente de Pearson](./img/UN1Pearson.png)
+	</section>
+	<section data-markdown>
+		## Coeficiente de correção de Pearson
+		- Variáveis podem ter associações não lineares, nesse caso o coeficiente pode não ser uma métrica útil
+		- Exemplo: com o aumento de imposto crescendo de 0, o valor arrecadado também cresce
+		- Mas quando o imposto fica alto e se aproxima de 100% sobe a sonegação de impostos
+	</section>
+	<section data-markdown>
+		![Exemplo Gráfico de Correlação](./img/UN1CorrelationETF.png)
+		- SPY e DIA alto
+		- QQQ e XLK são tecnológicas e relacionadas
+		- GLD, USO e VXX tendem a ter relacionamento negativos com outras
+	</section>
+	<section data-markdown>
+		## Correlação
+		- Assim como média e desvio padrão a correlação é sensível a _outliers_
+		- Pacotes como _robust_ oferecem alternativas para o calculo do coeficiente
+		- Existem outras métricas como Spearman's rho e Kendall's tau, mas para data science Pearson's é suficiente
+	</section>
+	<section data-markdown>
+		## Gráficos de Dispersão
+		- A forma padrão de visualizar a relação entre duas variáveis é através dos gráficos de dispersão
+		- No eixo X os valores de uma variável e no Y os valores da outra
+		- O gráfico a seguir mostra os retornos diários da Verizon e ATT, ambas de telecomunicação
+	</section>
+	<section data-markdown>
+		![Gráfico de Dispersão](./img/UN1scatterplot.png)
+	</section>
+	<section data-markdown>
+		- O Coeficiente de correlação mede a associação entre duas variáveis
+		- Podem ser positivamente associado o negativamente
+		- Os valores variam de -1 a 1
+		- Um coeficiente de zero indica que não há correlação
+		- _Correlation is not causation_
+	</section>
+	
+	<section data-markdown>
+		## Explorando duas ou mais variáveis
+		- Estimativas como média e variância olham apenas uma variável por vez
+		- Correlação é um método importante para comparar duas variáveis
+	</section>
+	<section data-markdown>
+		## Explorando duas ou mais variáveis
+		-__Tabela de Contingência__ Contagem de contagens entre duas ou mais variáveis categóricas
+		-__Arrumação Hexagonal__ Gráfico de duas variáveis numéricas agrupadas em hexágonos
+		-__Gráfico de Contorno__ mostra a densidade de duas variáveis numéricas como uma mapa topológicos
+		-__Gráfico de Violino__ Similar ao diagrama em caixas mas mostrando a estimativa de densidade
+	</section>
+	<section data-markdown>
+		## Arrumação Hexagonal
+		- Gráficos de dispersão são suficientes quando temos um número relativamente pequeno de pontos, no gráfico passado 
+		são aproximadamente 750 pontos
+		- Para gráficos com milhares ou milhões de pontos o gráfico de dispersão vai ficar muito denso
+		- Os pontos são agrupados em hexágonos com cores demonstrando o número de observações naquele hexágono
+		- Outro exemplo de gráfico são os mapas de calor
+	</section>
+	<section>
+		<pre><code class="R">
+kc_tax0 &lt- subset(kc_tax, TaxAssessedValue &lt 750000 & SqFtTotLiving &gt 100 &
+SqFtTotLiving &lt 3500)
+ggplot(kc_tax0, (aes(x=SqFtTotLiving, y=TaxAssessedValue))) + 
+	stat_binhex(colour="white") + 
+	theme_bw() + 
+	scale_fill_gradient(low="white", high="black") +
+	labs(x="Finished Square Feet", y="Tax Assessed Value")</code></pre>
+	</section>
+	<section data-markdown>
+		![Hexágono Pés Quadrados Acabados](./img/UN1finishedSquareFeet.png)
+	</section>
+	<section data-markdown>
+<pre><code class="R">
+	ggplot(kc_tax0, aes(SqFtTotLiving, TaxAssessedValue)) +
+	theme_bw() + 
+	geom_point( alpha=0.1) + 
+	geom_density2d(colour="white") + 
+	labs(x="Finished Square Feet", y="Tax Assessed Value")</code></pre>
+	</section>
+	<section data-markdown>
+		![Gráfico de Contorno](./img/UN1FinishedSquareTopo.png)
+	</section>
+	<section data-markdown>
+		## Duas variáveis categóricas
+		-  Uma forma de resumir duas variáveis categóricas é através de uma tabela de contingência
+		- A tabela mostra as contagens e porcentagens
+		- Empréstimos com nota alta possuem poucos atrasos e _charge-off_
+		- Uma das formas mais comuns são o uso de _pivot table_ no excel
+		- Em R a biblioteca _descr_ possui a função CrossTable
+	</section>
+	<section data-markdown>
+		![Tabela de Contingência](img/UN1TabelaContingencia.png)
+	</section>
+	<section data-markdown>
+		## Dados categóricos de numéricos
+		- Boxplot são uma forma simples de visualizar a distribuição de dados
+		- Podemos querer comparar como os atrasos variam dependendo da empresa aérea
+		- `boxplot(pct_delay ~ airline, data=airline_stats, ylim=c(0,50))		`
+	</section>
+	<section data-markdown>
+		![Boxplot de atraso aéreo](./img/UN1boxplotAirlines.png)
+	</section>
+	<section data-markdown>
+		- Outro tipo de gráfico existente é o de violino
+		- Mostra a estimativa de densidade no eixo Y
+		- A densidade é espelhada, virada e preenchida
+		- A vantagem é que dá para perceber diferenças na distribuição que não são vistas no Boxplot
+		- A desvantagem é que no boxplot os _outliers_ são mostrados de forma mais clara
+	</section>
+	<section>
+		<pre><code class="R">
+ggplot(data=airline_stats, aes(airline, pct_carrier_delay))  + 
+ylim(0, 50) + 
+geom_violin() +
+labs(x="", y="Daily % of Delayed Flights")
+		</code></pre>
+	</section>
+	<section data-markdown>
+		![Gráfico de Violino](./img/UN1violin.png)
+	</section>
+	<section data-markdown>
+		## Visualizando Múltiplas Variáveis
+		- Os gráficos usados para duas variáveis (dispersão, hexagonal e boxplot) podem ser estendidos a várias variáveis
+		usando a noção de condicionamento
+		- Lembram do gráfico de hex? Podemos quebrar eles por zip code (cep) e identificar as diferenças
+		- Variáveis de condicionamento são usados em vários sistemas como lattice e ggplot2 em R, e Seaborn e Bokeh em python
+		- Tableau e Spotfire também são exemplos
+	</section>
+	<section>
+<pre><code class="R">
+ggplot(subset(kc_tax0, ZipCode %in% c(98188, 98105, 98108, 98126)),
+	aes(x=SqFtTotLiving, y=TaxAssessedValue)) + 
+ stat_binhex(colour="white") + 
+ theme_bw() + 
+ scale_fill_gradient( low="white", high="black") +
+ labs(x="Finished Square Feet", y="Tax Assessed Value") +
+ facet_wrap("ZipCode")</code></pre>
+	</section>
+	<section data-markdown>
+		![Gráfico de imposto por Zip Code](./img/UN1finishedSquareFeetx4.png)
+	</section>
+	<section data-markdown>
+		- Arrumação hexagonal e gráficos de contorno são formas de ver a relação de dois valores numéricos 
+		- Tabelas de Contingência são a forma padrão de ver contagens de duas categorias
+		- Boxplot e Violinos permitem plotar valores numéricos com valores categóricos
 	</section>
 	<section data-markdown>
 		## Links relevantes
