@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Laboratório de Programação</title>
+
+	<meta name="description" content="Laboratório de Programação">
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Array ou Vetores</h3>
+				<img src="../img/Vetores.png" alt="">
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>O que são vetores</h3>
+				<img src="../img/VetorArrayTrain.jpg" alt="">
+				<ul>
+					<li class="fragment">Vimos exercícios de calcular média de notas, mas e se fossem 100 notas? Como
+						declarar as variáveis?</li>
+					<li class="fragment">Podemos salvar um número pré-determinado de valores</li>
+				</ul>
+			</section>
+		<section>
+			<h3>Definição</h3>
+			<ul>
+				<li class="fragment">Vetor é uma variável composta homogênea unidimensional</li>
+				<li class="fragment">É um conjunto de variáveis do mesmo tipo</li>
+				<li class="fragment">Possuem o mesmo identificador e são alocados sequencialmente</li>
+				<li class="fragment">O índice indica a posição dentro do vetor</li>
+			</ul>
+		</section>
+		<section>
+			<img width="60%" src="../img/VetorExample.png" alt="Imagem mostrando uma representação de vetor">
+		</section>
+		<section>
+			<h3>Declaração</h3>
+			<ul>
+				<li class="fragment">É capaz de armazenar uma coleção de dados do mesmo tipo</li>
+				<li class="fragment">Cada dado armazenado em um vetor é chamado item ou elemento</li>
+				<li class="fragment">O índice começa do valor 0</li>
+				<li class="fragment">Para dizer que uma variável é um vetor devemos colocar o sufixo [n], onde n é seu
+					tamanho</li>
+				<li class="fragment">
+					<pre><code class="JAVA">
+int[] valores = new int[3];
+float[] precos = new float[3];					</code></pre>
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h3>Acessando elementos e índices</h3>
+			<img src="../img/VetorLength.gif" alt="">
+			<ul>
+				<li class="fragment">Depois de declarar o vetor, podemos acessar seus elementos</li>
+				<li class="fragment">Para atribuir o valor 10 ao 21º elemento: notas[20]= 10;</li>
+				<li class="fragment"><b>O índice do primeiro elemento é o 0</b></li>
+				<li class="fragment">
+					<font color="red">Se tentar acessar um índice maior que o tamanho do vetor teremos um erro!</font>
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h3>Inicializar vetor</h3>
+			<pre><code class="JAVA">
+{
+int notas[] = { 1,2,3};
+// ou
+int notas[] = new int[] { 1,2,3};
+}
+			  </code></pre>
+		</section>
+		<section>
+			<h3>Acessando elementos do vetor com for</h3>
+			<pre><code class="JAVA">
+{
+	int i;
+	int v[] = new int[10];
+	for(i=0; i &lt; v.length; i++){
+		v[i];
+		System.out.println(i);
+	}
+}
+			</code></pre>
+		</section>
+		<section data-markdown>
+			## Vamos resolver 
+			1. Criar um vetor de tamanho 10
+			1. Ler valores e armazenar no vetores
+			1. Imprimir os elementos do vetor
+			1. Encontrar o maior elemento do vetor
+		</section>
+		<section data-markdown>
+			## Exercícios
+			1. Crie um vetor de tamanho 10
+			1. Preencha o vetor com valores aleatórios
+			1. Calcule a média e a soma do vetor
+			1. Encontre o maior e menor valor do vetor
+		</section>
+	</div>
+	</div>
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+
+	<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true }
+			]
+		});
+		Reveal.configure({
+			keyboard: {
+				38: 'next',
+				40: 'prev'
+			}
+		});
+
+	</script>
+
+</body>
+
+</html>
