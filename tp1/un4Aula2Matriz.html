@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt">
 
 <head>
 	<meta charset="utf-8">
@@ -42,15 +42,45 @@
 		<div class="slides">
 			<section>
 				<h3>Matrizes</h3>
+				<img src="../tp2/img/matrix.jpg" alt="">
 				<p>
 					<small>Created by Fernando Marques </small>
 				</p>
 			</section>
 			<section>
+				<h3>Aula de Hoje</h3>
+				  <ul>
+						  <li class="fragment">Formas de facilitar a mudança de tamanho</li>
+						  <li class="fragment">Vetores multidimensionais</li>
+						  <li class="fragment">Declaração e Inicialização de Matriz</li>
+						  <li class="fragment">Acessando Elementos da Matriz</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Facilitando mudanças no tamanho</h3>
+								<pre><code data-trim class="C">
+const int tam = 10;
+int main(){
+  int vet[tam];
+  for(i=0; i &lt; tam; i++){
+	  vet[i] = i;
+  }
+}
+								  </code></pre>
+		  </section>
+		  <section>
+			<h3>Vetores Multidimensionais</h3>
+			  <ul>
+					<li class="fragment">Vimos como utilizar vetores com apenas uma dimensão</li>
+					<li class="fragment"><strong>Vetores podem possuir qualquer número de dimensões</strong></li>
+					<li class="fragment nobullet"><blockquote>tipo vetor[dim<sub>1</sub>] [dim<sub>2</sub>] ... [dim<sub>n</sub>]</blockquote></li>
+			  </ul>
+	  </section>
+			<section>
 				<h3>Definição</h3>
 				<ul>
 					<li class="fragment">Matriz é um vetor cujos itens também são vetores</li>
-					<li class="fragment">Uma matriz pode ter qualquer número de dimensões, mas a mais comum é a bidimensional</li>
+					<li class="fragment">Um vetor pode ter qualquer número de dimensões, a matriz é um vetor bidimensional</li>
 					<li class="fragment">É uma variável composta homogênea multidimensional</li>
 					<li class="fragment">Uma variável do tipo matriz tem um índice para cada dimensão</li>
 				</ul>
@@ -59,7 +89,7 @@
 				<h3>Introdução</h3>
 				<ul>
 					<li class="fragment">Uma matriz representa um conjunto bidimensional de valores</li>
-					<li class="fragment">Devemos especificas as duas dimensões, número de linhas e número de colunas</li>
+					<li class="fragment">Devemos especificar as duas dimensões, número de linhas e número de colunas</li>
 					<li class="fragment">Indices começam com 0</li>
 					<li class="fragment">O índice deve ser inteiro</li>
 					<li class="fragment"><pre><code class="C">
@@ -69,15 +99,25 @@ float p[2][5];					</code></pre></li>
 				</ul>
 			</section>
 			<section>
+				<h3>Declaração de Matriz</h3>
+				  <ul>
+						<li class="fragment">Matriz nada mais é que um vetor de duas dimensões</li>
+						<li class="fragment">Essas dimensões podem ser vistas como x,y ou linha e coluna</li>
+						<li class="fragment">Para declarar um vetor 3x3</li>
+						<li class="fragment"><pre><code class="C">
+const int dim = 3;
+int main(){
+  int matriz[dim][dim]; /* temos uma matriz com 3 linhas e 3 colunas */
+}
+						  </code></pre></li>
+				  </ul>
+		  </section>
+			<section>
 				<h3>Representação gráfica de uma matriz</h3>
 				<ul>
 					<img class="" src="img/matriz1.png" alt="" width="80%">
 					<li class="fragment">A declaração <b>int  m[5][4]</b> cria uma matriz com 20 posições</li>
-					<li class="fragment nobullet"><pre><code class="C">int m[5][4] = {{5,9,3,0},
-{0,2,7,-1},
-{6,-3,5,0},
-{3,5,4,8},
-{1,2,-6,9}};		</code></pre></li>
+					
 				</ul>
 			</section>
 			<section>
@@ -89,39 +129,64 @@ float p[2][5];					</code></pre></li>
 				<img class="" src="img/matriz2-2.png" alt="" width="120%">
 			</section>
 			<section>
+				<h3>Inicialização de Matriz</h3>
+				  <ul>
+						<li class="fragment">Como então iremos iniciar uma matriz?</li>
+						<li class="fragment"><pre><code class="C">
+#define dim 3
+int main(){
+  int mat[dim][dim] = {0}; // Será que funciona???
+}
+						  </code></pre></li>
+				  </ul>
+		  </section>
+		  <section>
+				<h3>Inicialização de Matriz</h3>
+				  <ul>
+						  <li class="fragment">E nesse caso, o que acontece?</li>
+						<li class="fragment"><pre><code class="C">
+#define dim 3
+int main(){
+  int mat[dim][dim] = {1,2,3,4,5,6,7,8,9};
+}
+						  </code></pre></li>
+				  </ul>
+		  </section>
+		  <section>
+				<h3>Inicialização de Matriz</h3>
+				  <ul>
+						  <li class="fragment">E nesse caso, o que acontece?</li>
+						<li class="fragment"><pre><code class="C">
+#define dim 3
+int main(){
+  int mat[dim][dim] = {{1,2,3} , {4,5,6} , {7,8,9}};
+}
+						  </code></pre></li>
+				  </ul>
+		  </section>
+			<section>
 				<h3>Declaração, atribuição e exibição de valores</h3>
-				<ul>
-					<li class="fragment">Sem o for</li>
-					<li class="fragment">Com 1 for</li>
-					<li class="fragment">Com 2 for</li>
-				</ul>
+				<pre><code class="C">
+#define dim 3
+int main(){
+	int mat[dim][dim];
+	int i,j;
+	for(i=0; i &lt; dim ; i++){
+		for(j=0; j &lt; dim ; j++){
+			mat[i][j] = i+j;
+			printf("%i ",mat[i][j]);
+		}
+		printf("\n"); // Pq?
+	}
+}
+											  </code></pre>
 			</section>
-			<section>
-				<h3>Estudo de caso - Matriz transposta</h3>
-				<ol>
-					<li class="fragment">Matriz transposta é uma matriz onde ocorre a troca de linhas por colunas</li>
-					<li class="fragment">Uma matriz simétrica é toda matriz que é igual à sua transposta</li>
-					<li class="fragment">A matriz identidade é simétrica. Portanto a simetrica da identidade é igual a própria matriz identidade</li>
-					<img class="fragment" src="img/matrizTransposta.png" alt="" width="50%">
-				</ol>
-			</section>
-			<section>
-				<h4>Estudo de caso - Matriz transposta</h4>
-				<ol>
-					<li>Pedir para a pessoa informar o tamanho da matriz (linhas e colunas)</li>
-					<li>Declarar uma matriz do tipo inteiro a partir dos dados fornecidos</li>
-					<li>Ler os dados da matriz e armazenar os mesmos em suas respectivas posições</li>
-					<li>Apresentar os elementos da matriz original</li>
-					<li>Percorrer a matriz do início ao fim trocando o elemento que está na linha da matriz pela coluna da mesma</li>
-					<li>Para simplificar o processamento basta trocar os índices da matriz quando estiver percorrendo a mesma e colocar o elemento na matriz transposta invertendo os índices</li>
-					<li>Apresentar os elementos da matriz transposta</li>
-				</ol>
-			</section>
+
 			<section>
 				<h3>Estudo de caso - Matriz identidade</h3>
 				<h5>A matriz identidade é uma matriz quadrada em que todos os elementos da diagonal principal são iguais a 1</h5>
 				<ol>
-					<li>Perdir para a pessoa informar o tamanho da matriz</li>
+					<li>Pedir para a pessoa informar o tamanho da matriz</li>
 					<li>Declarar uma matriz do tipo inteiro a partir dos dados fornecidos</li>
 					<li>Ler os dados da matriz e armazenar os mesmos em suas respectivas posições</li>
 					<li>Apresentar os elementos da matriz</li>
@@ -135,8 +200,6 @@ float p[2][5];					</code></pre></li>
 					<li>Construir um programa para mostrar os dados de uma matriz de ordem 3x3 seguindo a orientação <b>a<sub>ij</sub>=3i+2j</b></li>
 					<li>Construir um programa para mostrar os dados de uma matriz de ordem 4x4. de modo que <b>a<sub>ij</sub>=i+j se i = j e i - j se i != j></b></li>
 					<li>Construir um programa para calcular o determinante de uma matriz de ordem 2x2. A pessoa irá informar os dados da matriz.</li>
-					<li>Construir um programa para calcular o determinante de uma matriz de ordem 3x3. A pessoa irá informar os dados da matriz.</li>
-					<li class="">Preencher a <span class="red">enquete de Um Minuto</span></li>
 				</ol>
 			</section>
 		</div>

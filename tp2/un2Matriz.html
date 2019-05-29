@@ -44,25 +44,7 @@
 					<small>Created by Fernando Marques </small>
 				</p>
 			</section>
-			<section>
-				<h3>Avaliação de um minuto:</h3>
-				  <ul>
-						<li>Acessar os vetores</li>
-							<li>Em pegar/perguntar numeros que estão dentro do vetor </li>
-							<li>A dificuldade foi imprimir os números de um vetor de trás para frente. E um pouco da lógica de posicionamento dentro do vetor.</li>
-							<li class=""><pre><code class="C" data-trim>
-const int tam = 10;
-int main(){
-	int vet[tam] = {};
-	int i;
-	for(i=0; i < tam;i++){
-		printf("%d\n",vet[i]);
-	}
-
-}
-							</code></pre></li>
-					</ul>
-			</section>
+		
 			<section>
 				<h3>Aula de Hoje</h3>
 				  <ul>
@@ -179,8 +161,8 @@ int main(){
 							<li class="fragment"><pre><code class="C">
 int main(){
 ...
-	for(i=0;i < dim; i++){
-		for(j=0; j < dim;j++){
+	for(i=0;i &lt; dim; i++){
+		for(j=0; j &lt; dim;j++){
 			mat[i][j] = i + j;
 		}
 	}
@@ -196,8 +178,8 @@ int main(){
 							<li class="fragment"><pre><code class="C">
 int main(){
 	// ...
-	for(i=0; i < dim; i++){
-		for(j=0; j < dim; j++){
+	for(i=0; i &lt; dim; i++){
+		for(j=0; j &lt; dim; j++){
 			printf("%d\t",mat[i][j]);
 		}
 		printf("\n");
