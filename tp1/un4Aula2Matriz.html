@@ -60,6 +60,8 @@
 				<h3>Facilitando mudanças no tamanho</h3>
 								<pre><code data-trim class="C">
 const int tam = 10;
+// ou
+#define tam 3
 int main(){
   int vet[tam];
   for(i=0; i &lt; tam; i++){
@@ -184,13 +186,12 @@ int main(){
 
 			<section>
 				<h3>Estudo de caso - Matriz identidade</h3>
-				<h5>A matriz identidade é uma matriz quadrada em que todos os elementos da diagonal principal são iguais a 1</h5>
+				<h5>A matriz identidade é uma matriz quadrada em que todos os elementos da diagonal principal são iguais a 1 e os demais 0</h5>
 				<ol>
 					<li>Pedir para a pessoa informar o tamanho da matriz</li>
 					<li>Declarar uma matriz do tipo inteiro a partir dos dados fornecidos</li>
-					<li>Ler os dados da matriz e armazenar os mesmos em suas respectivas posições</li>
+					<li>Criar a matriz identidade</li>
 					<li>Apresentar os elementos da matriz</li>
-					<li>Percorrer a matriz verificando se a diagonal principal é 1 e os demais 0</li>
 				</ol>
 			</section>
 
