@@ -50,332 +50,96 @@
 				</p>
 			</section>
 			<section data-markdown>
-				## Bootstrap
-				- Uma forma simples e efetiva de calcular estatísticas de distribuição amostral é remover amostras, 
-				com reposição, e recalcular a estatística ou modelo para cada nova amostra
-				- Esse procedimento é conhecido como Bootstrap
-				- Não é necessário que os dados ou estatísticas sigam a distribuição normal
+				## teste-T
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				
 			</section>
 			<section data-markdown>
-				## Bootstrap
-				- __Amostra Bootstrap__ uma amostra feita com reposição dos dados observados
-				- __Reamostragem__ é o processo de criar novas amostras a partir dos dados. Pode ser por bootstrap ou permutação			
-				- Conceitualmente imagine que o bootstrap replica a amostra original milhares ou milhões de vezes para que tenha
-				uma população hipotética 
+				-
+				-
+				-
 			</section>
 			<section data-markdown>
-				![Imagem do conceito de bootstrap](img/modulo4Boostrap.webp)
-				- Na prática não precisamos replicar as amostras, basta retirar com reposição
-				- Assim, a probabilidade de um elemento ser retirado permanece sempre igual
+				## Multiplos testes
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				
 			</section>
 			<section data-markdown>
-				## Algoritmo Bootstrap
-				1. Retire um valor, registre, devolva
-				1. Repita _n_ vezes
-				1. Calcule a média dos _n_ valores retirados
-				1. Repita os passos 1-3 _R_ vezes
-				1. Use os resultados de R para:
-					1. Calcular o desvio padrão
-					1. Produzir o histograma ou boxplot
-					1. Encontrar o intervalo de confiança
+				-
+				-
+				-
 			</section>
 			<section data-markdown>
-				## Bootstrap
-				- R é o número de iterações do bootstrap
-				- É selecionado, de certa forma, arbitráriamente
-				- Quanto mais iterações, mais preciso as estimativas de erro padrão e intervalo
-				de confiança
-			</section>
-			<section>
-				<pre><code class="R">
-library(boot)
-stat_fun &lt;- function(x, idx) median(x[idx])
-boot_obj &lt;- boot(df, R=1000, statistic = stat_fun)
-# Mostrar o código
-				</code></pre>
+				## Graus de Liberdade
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				
 			</section>
 			<section data-markdown>
-				## Bootstrap Multivariado
-				- Também podemos usar o bootstrap para dados multivariados, onde a linha é amostrada
-				como uma unidade
-				- O modelo pode rodar no bootstrap para estimar estabilidade dos parâmetros do modelo
-				- Com classificação e árvores de regressão, rodar várias árvores no bootstrap e tirar a média
-				é mais eficiênte que uma única árvore
+				-
+				-
+				-
 			</section>
 			<section data-markdown>
-				## Bootstrap
-				- O processo de reamostragem do bootstrap é simples mas computacionalmente custoso
-				- Foi mais utilizado por pesquisadores que não eram estatísticos
-				- __ O bootstrap não compensa amostras com tamanho pequeno, não cria novos dados
-				nem 'tapa buracos'. Apenas mostra como as amostras se comportam quando retiradas__
+				## ANOVA
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				
 			</section>
 			<section data-markdown>
-				## Reamostragem vs. Bootstrap 
-				- Em alguns casos os dois termos podem ser usados como sinônimos
-				- Bootstrap sempre é feito com reposição
-				- Procedimentos de permutação também podem ser chamados de reamostragem
+				-
+				-
+				-
 			</section>
 			<section data-markdown>
-				- O bootstrap é uma poderosa ferramenta para verificar a variabilidade de uma estatística
-				- Pode ser aplicado em diversas circunstâncias
-				- Permite estimar estatísticas que não possuem aproximação matemática
-				- Quando aplicado a modelos preditivos, é mais eficiente que um modelo único
+				## Algoritmo Multi-Armed Bandit
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				
 			</section>
 			<section data-markdown>
-				## Intervalo de confiança
-				- __Nível de Confiança__ A porcentagem de confiança da estatística de interesse
-				- __Pontos finais do intervalo de confiança__ 
+				-
+				-
+				-
 			</section>
 			<section data-markdown>
-				## Intervalo de confiança
-				- Sempre vem com probabilidade de cobertura
-				- 90% de probabilidade de cobertura é como imaginar os 90% central  do bootstrap
-				- O algoritmo para intervalo de confiança do bootstrap é 
-					1. Tirar uma amostra com reposição de tamanho _n_
-					1. Guardar a estatística
-					1. Repetir 1-2 _R_ vezes
-					1. Para um intervalo de confianca de x% remover [(100-x)/2]% das reamostras
-					1. Os pontos aparados são os pontos finais
+				## Tamanho da Amostra
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				- ____ 
+				
 			</section>
 			<section data-markdown>
-				- O Bootstrap é uma ferramenta que pode ser utilizada para gerar intervalos de confiança
-				- Também existem formulas, especialmente distribuição-t
-				- A pergunta que realmente importa é "Qual a probabilidade que o valor real esteja dentro de um intervalor"
-				- A pergunta relacionada a intervalo de confiança é "Dado um procedimento de amostragem e uma população ..."
-				- Em DataScience o IntC é uma ferramenta para ter uma ideia de quão variável a amostra pode ser
+				-
+				-
+				-
 			</section>
-			<section data-markdown>
-				- Intervalo de confiança é a forma mais comum de apresentar estimativas
-				- Quanto maior a quantidade de dados, menor a variação da estimativa amostrada
-				- Quanto menor o intervalo tolerável, mais estreito o intervalo de confiança
-				- Bootstrap é uma forma efetiva de construir intervalo de confiança
-			</section>
-			<section data-markdown>
-				## Distribuição normal
-				- A distribuição em forma de sino é icônica em estatística
-				- O fato da distribuição de estatísticas de amostras terem esse formato a transformou
-				em uma ferramenta para aproximações
-			</section>
-			<section data-markdown>
-				## Distribuição normal
-				![Imagem Distribuição Normal](img/Modulo4NormalDistribution.png) 
-				- 68% dos dados estão a um desvio padrão da média
-			</section>
-			<section data-markdown>
-				## Distribuição normal
-				- __Erro__ a diferença entre os pontos e a predição ou média
-				- __Padronizar__ subtrair da média e dividir pelo desvio padrão
-				- __Escore-z__ é o número de desvios padrão acima ou abaixo da média da população
-				- __Normal padrão__ distribuição normal com média 0 e desvio 1 
-				- __Gráfico Q-Q__ é um gráfico para visualizar o quão próximo a distribuição amostrada
-				está próxima da distribuição padrão
-			</section>
-			<section data-markdown>
-				## Distribuição normal
-				- É um equívoco achar que a distribuição normal tem esse nome pois a maioria
-				dos dados a seguirem, ou seja, ser o normal
-				- Na verdade, a maioria dos dados puros não são normalmente distribuídos
-				- A maioria das estatísticas de distribuição amostral são distribuídas normalmente 
-				- Também é chamada de distribuição gaussiana
-			</section>
-			<section data-markdown>
-				## Distribuição normal padrão e Q-Q
-				- A distribuição normal padrão tem as unidades em termo de desvio padrão de distância da média
-				- Para comparar dados com a normal padrão subtraímos a média e dividimos pelo desvio padrão
-				- Converter os dados para escore-z não os tornam normalmente distribuídos,
-				apenas os colocam na mesma escala para comparação
-			</section>
-			<section>
-				<pre><code class="R">
-norm_samp &lt;- rnorm(100)
-qqnorm(norm_samp)
-abline(a=0, b=1, col='grey')
-				</code></pre>
-			</section>
-			<section data-markdown>
-				![Imagem de um qqplot](img/Modulo4QQPlot.png)
-			</section>
-			<section data-markdown>
-				- A distribuição normal foi essencial para o desenvolvimento de estatísticas, permitindo aproximação matemática
-				- Apesar de dados não serem normalmente normalmente distribuídos, os erros, médias e totais 
-				em amostras grandes são
-				- Para converter para escore-z subtraímos a média e dividimos pelo desvio padrão
-			</section>
-			<section data-markdown>
-				## Distribuições de cauda longa
-				- __Cauda__ porção longa e estreita de uma distribuição de frequência, valores extremos ocorrem com baixa frequência
-				- __Assimetria__ quando uma cauda é maior do que a outra
-			</section>
-			<section data-markdown>
-				## Distribuição de cauda longa
-				- Em alguns casos a distribuição é altamente assimétrica (renda)
-				- Os valores extremos correspondem as caudas
-				- A teoria do Cisne Negro de Nassim Taleb prevê que eventos anômalos são mais
-				prováveis de acontecer do que se fosse previsto pela distribuição normal
-			</section>
-			<section data-markdown>
-				![Cisne Negro](img\Modulo4CisneNegro.jpg)
-			</section>
-			<section>
-				<pre><code class="R">
-nflx &lt;-sp400_px[,'NFLX']
-nflx &lt;-diff(log(nflx[fxlf>0]))
-qqnorm(nflx)
-abline(a=0,b=1,col="grey")
-				</code></pre>
-			</section>
-			<section data-markdown>
-				![QQPlot de uma distribuição long-tailed](img/Modulo4QQPlotLongTailed.png)
-			</section>
-			<section data-markdown>
-				- Contrário do outro Q-Q os valores extremos estão mais longe da linha
-				- Isso significa que é mais provável de observar valores extremos do que seria
-				esperado em uma distribuição normal
-				- Reparem também que a um desvio padrão da média os pontos estão mais próximos da reta
-				- Dados não costumam ser normalmente distribuídos
-			</section>
-			<section data-markdown>
-				## Student's Distribuição-t
-				- É chamada de Student T pois W.S. Gosset submeteu o artigo sob o nome de "Student"
-				- Gosset trabalhava para a Guiness, por isso submissão anônima
-				- Tenta responder a pergunta
-				> Qual é a distribuição amostral da média de uma amostra de uma população grande?
-			</section>
-			<section data-markdown>
-				## Student's Distribuição-t
-				- Se a computação fosse mais acessível em 1908, estatísticos teriam utilizado métodos de
-				reamostragem computacionalmente intensivos
-				- Como não foi o caso, foi necessário fazer uso da matemática para aproximar a distribuição amostral
-				- Apesar do bootstrap responder a maioria das perguntas, alguns outputs de software estatísticos fazem uso de t-statistics
-				- Por exemplo testes A/B e regressões
-			</section>
-			<section data-markdown>
-				- A distribuição-t é uma família de distribuições que lembram a distribuição normal
-				- Mas possuem cauda mais longa
-				- É muito utilizado como base de referência para média de amostras, diferenças entre amostras
-				e parâmetros de regressão
-			</section>
-			<section data-markdown>
-				## Distribuição binomial
-				- __Ensaio__ evento com resultado discreto
-				- __Sucesso__ o resultado de interesse. Cara em uma moeda ou 1.
-				- __Binomial__ dois resultados possíveis
-				- __Ensaio binomial__ Ensaio com dois resultados
-			</section>
-			<section data-markdown>
-				## Distribuição binomial
-				- Jogar uma moeda 10 vezes é um experimento com 10 ensaios, cada um podendo ter 2 resultados
-				- Não é necessário que a probabilidade seja 50/50
-				- Qualquer probabilidade cuja soma dê 1 é suficiente
-				- Normalmente o resultado 1 é sucesso, e também costuma ser o evento mais raro
-				- O uso do termo sucesso não quer dizer que o resultado é algo desejável ou benéfico
-			</section>
-			<section data-markdown>
-				## Distribuiçção binomial
-				- A distribuição binomial é a distribuição de frequências do número de sucessos
-				- A distribuição binomial responde perguntas como
-				> Se a probabilidade de converter um clique em venda é de 0.02, qual a probabilidade
-				de não observar nenhuma venda em 200 clicks?
-				- `dbinom(x=0,size=200,p=0.02)`
-			</section>
-			<section data-markdown>
-				## Distribuição binomial
-				- Muitas vezes estamos interessados em _x_ ou menos sucessos, nesse caso
-				- `pbinom(10,size=200,p=0.02)`
-				- Ou seja, 99% de chance de 10 vendas ou menos
-				- A média da distribuição binomial é _n_ x _p_. Sendo _n_ o número de ensaios e
-				_p_ a probabilidade de sucesso
-				- A variância é de _n_ x _p_(1-_p_)
-				- A distribuição binomial é quase indistinguível da distribuição normal, muitos procedimentos
-				estatísticos usam a normal.
-			</section>
-			<section data-markdown>
-				- A distribuição binomial é importante de modelar pois representa eventos como
-				comprar ou não comprar, clicar ou não clicar
-				- Um ensaio binomial é um experimento com dois resultados possíveis um com probabilidade
-				_p_ e outro 1-_p_
-				- Com um grande valor de _n_ e _p_ não muito próximo de 1 ou 0, a distribuição binomial
-				pode ser aproximada pela distribuição normal
-			</section>
-			<section data-markdown>
-				## Poisson e outras distribuições
-				- __Lambda__ velocidade (por unidade de tempo ou espaço) em que um evento ocorre
-				- __Distribuição de Poisson__ a distribuição de frequência do número de eventos 
-				em uma unidade amostral em unidade de tempo ou espaço
-				- __Distribuição exponencial__ a distribuição de frequência de tempo ou distância de um evento
-				para o próximo evento
-				- __Distribuição de Weibull__ versão generalizada da exponencial, onde o taxa de eventos pode mudar com o tempo
-			</section>
-			<section data-markdown>
-				## Distribuição de Poisson
-				- De dados antigos, conseguimos calcular a média de número de eventos por unidade de tempo ou espaço
-				> Quanto de capacidade precisamos para ter 95% de certeza que conseguimos processar o tráfico de internet
-				durante qualquer período de 5 segundo?
-				- O parâmetro principal de Poisson é lambda &lambda;, a média de eventos que ocorrem em um intervalo de tempo
-				- A variância de uma distribuição de poisson também é &lambda;
-	
-			</section>
-			<section data-markdown>
-				## Distribuição de Poisson
-				- Uma técnica comum é gerar números aleatórios de uma distribuição de poisson
-				- `rpois(100,lambda=2)`
-				- Por exemplo, se uma chamada é recebida em média a cada 2 minutos, o código simula 100 minutos
-				- Retornando quantas ligações em cada um dos 100 minutos 
-			</section>
-			<section data-markdown>
-				## Distribuição Exponencial
-				- Usando o mesmo parâmetro &lambda; também conseguimos modelar a distribuição
-				de tempo entre eventos
-				- Tempo entre visitas a um site na web
-				- Também é utilizado para modelar o tempo para falhas, ou o tempo para atender um serviço
-				- `rexp(n=100, rate=.2)`
-				- Gera 100 números aleatórios onde a média de eventos por minutos é de 0.2 
-			</section>
-			<section data-markdown>
-				- Tanto Poisson quanto exponencial assumem que a taxa de &lambda; é constante durante o período considerado
-				- Sabemos que isso dificilmente acontece &rarr; horários de pico no trânsito
-				- É possível dividir em segmentos homogêneos
-				- Em muitas aplicações a taxa de &lambda; é conhecida, mas para eventos raros isso pode não acontecer
-				- Mas, por exemplo, se uma evento não aconteceu nas últimas 20 horas, podemos concluir que &lambda; não é 1 por hora
-				- Através de simulação é possível estimar eventos hipotéticos
-				- O teste de qui-quadrado também pode ser usado
-			</section>
-			<section data-markdown>
-				## Distribuição Weibull
-				- Quando a taxa de acontecimento muda em intervalos de tempo, a distribuição de poisson não é útil
-				- Um exemplo é falha mecânica, o risco aumenta com o passar do tempo 
-				- A distribuição de Weibull é uma extensão da Exponencial, mas &lambda; pode ser modificado por um
-				parâmetro de formato &beta; 
-				- Se > 1 a probabilidade cresce com o tempo
-				- Por ser utilizado em análises de tempo para falhar, o segundo parâmetro é expresso em termos de características
-				de vida, e não frequência de evento por intervalo
-			</section>
-			<section data-markdown>
-				## Distribuição Weibull
-				- A letra usada é &eta; e também conhecido como parâmetro de escala
-				- O código em R recebe 03 parâmetros: quantidade de números gerados, 
-				formato e escala
-				- `rweilbull(100,1.5,5000)` 
-			</section>
-			<section>
-				<img src="img/Modulo4WeibullBeta.gif" alt="">
-			</section>
-			<section>
-				<img src="img/Modulo4WeibullFalha.gif" alt="">
-			</section>
-			<section>
-				<img src="img/Modulo4WeibullScale.gif" alt="">
-			</section>
-			<section data-markdown>
-				- Eventos que ocorrem de forma constante podem ser modelados por Poisson
-				- Caso queira o tempo entre os eventos, temos a exponencial
-				- Se a taxa variar com o tempo (aumenta a chance de falha), podemos usar Weibull
-			</section>
-			<section data-markdown>
-				- Seleção aleatória de amostras pode reduzir o viés e produzir dados com melhor qualidade
-				- Conhecer os métodos de amostragem e as distribuições permite estimar errors 
-				- Bootstrap é um método atrativo para determinar erros nas amostras
-			</section>
+
 			<section data-markdown>
 				## Links relevantes
 				- [Glossário Ingles-PT de estatística](http://glossario.spestatistica.pt/)
