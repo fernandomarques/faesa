@@ -51,37 +51,32 @@
 			</section>
 			<section data-markdown>
 				## teste-T
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
+				- __Estatística de Teste__ Métrica para a diferença ou efeito de interesse
+				- __Estatística t__ razão entre valor estimado e valor hipotético para o erro padrão
+				- __Distribuição-t__ Distribuição de referência a qual a hipótese será comparada
 				
 			</section>
 			<section data-markdown>
-				-
-				-
-				-
+				- Antes do uso de computadores reamostragens não eram viáveis e eram usadas distribuições de referência
+				- Uma estatística de teste pode ser padronizada e comparada a uma distribuição
+				- Uma das estatísticas mais usadas é a t
 			</section>
 			<section data-markdown>
 				## Multiplos testes
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
+				- __Erro Tipo 1__ concluir de forma equivocada que o resultado é significante, false positivo
+				- __Taxa de descoberta falsa__ frequência em que o erro tipo 1 acontece
+				- __Overfitting__ Descreve bem o modelo mas não prevê novos resultados
 				
 			</section>
 			<section data-markdown>
-				-
-				-
-				-
+				- Muitas comparações entre muitas variáveis e modelos aumenta o risco de concluir que é significatipo
+				por acaso
+				- Em situações que muita comparações estatísticas são feitos, existem procedimentos de ajuste estatístico
+				- Em data mining, o uso de uma amostra de verificação pode ajudar a evitar resultados enganosos
 			</section>
 			<section data-markdown>
 				## Graus de Liberdade
-				- ____ 
+				- __n__ número de observações nos dados 
 				- ____ 
 				- ____ 
 				- ____ 
@@ -90,62 +85,68 @@
 				
 			</section>
 			<section data-markdown>
-				-
-				-
-				-
+				- O grau de liberdade é parte dos calculos feitos para padronizar estatísticas de teste, permitindo
+				que elas sejam comparadas com distribuições de referência
+				- O conceito de graus de liberdade está por trás da fatoração de variáveis categóricas ao fazer uma regressão,
+				para evitar multicolinearidade
 			</section>
 			<section data-markdown>
 				## ANOVA
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
+				- __Comparação em pares__ teste de hipótese entre dois grupos entre muitos grupos 
+				- __Teste omnibus__ teste de hipóteses simples da variância entre as médias de muitos grupos
+				- __Decomposição de variância__ separação dos componentes que contribuem para um valor individual
+				- __Estatística-F__ Estatística padrão que mede até que ponto a diferença entre grupos excede o que
+				seria esperado pelo acaso
 				
 			</section>
 			<section data-markdown>
-				-
-				-
-				-
+				- ANOVA é um procedimento para analizar o resultado de um experimento com multiplos grupos
+				- É a extensão de procedimentos como A/B para testar se a variação entre os grupos está na faixa
+				de variação do acaso
+				- Um resultado útil de uma ANOVA é a identificação dos componentes de variância associados aos tratamentos em grupo
+			</section>
+			<section data-markdown>
+				## Teste Qui-quadrado
+				- __Estatística qui-quadrado__ medida que um dado observado afasta-se do experado
+				- __Esperança matemática ou valor médio__ como esperamos que o dado se comporte dado uma suposição
+				
+			</section>
+			<section data-markdown>
+				- Um procedimento comum é testar se os dados observados são consistêntes com a suposição de independência
+				( propensão de comprar uma item dependendo do gênero)
+				- A distribuição qui-quadrado é a distribuição de referência que valores de estatística qui-quadrado devem
+				ser comparados
 			</section>
 			<section data-markdown>
 				## Algoritmo Multi-Armed Bandit
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
+				- __Multi-arm Bandit__ Uma máquina caça níqueis imaginária com diversos retornos, analogia para um
+				experimento com multiplos tratamentos 
+				- __Braço ou Arm__ Um tratamento no experimento 
+				- __Sucesso__ o análogo de vencer em um caça níqueis 
 				
 			</section>
 			<section data-markdown>
-				-
-				-
-				-
+				- Testes A/B usam amostragem aleatória, o que pode fazer com que haja menor exposição ao tratamento
+				- O Multi-armed Bandit modifica o processo de amostragem para incorporar informações aprendidas 
+				durante o experimento, e reduzir a frequência dos tratamentos inferiores
+				- Facilita o tratamento eficiente de mais de dois tratamentos
+				- Existem diversos algoritmos para dividir as probabilidades
 			</section>
 			<section data-markdown>
 				## Tamanho da Amostra
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
+				- __Tamanho do efeito__ Número mínimo do efeito para ser capaz de detectar em um teste estatístico
+				"20% de melhoria no número de clicks"
+				- __Poder__ A probabilidade de detectar um tamanho de efeito dado o tamanho da amostra
+				- __Nível de significância__ nível de significância estatística em que o teste será conduzido
 				
 			</section>
 			<section data-markdown>
-				-
-				-
-				-
+				- Para identificar o tamanho da amostra é necessário pensar qual teste estatístico será conduzido
+				- Deve-se especificar o tamanho mínimo do efeito detectado
+				- Também deve-se especificar a probabilidade de detectar o efeito esperado 
+				- Também temos que especificar o nível de significância em que o teste será conduzido
 			</section>
 
-			<section data-markdown>
-				## Links relevantes
-				- [Glossário Ingles-PT de estatística](http://glossario.spestatistica.pt/)
-				- [Taxonomia de dados em R](http://www.r-tutor.com/r-introduction/basic-data-types)
-				
-			</section>
 		</div>
 	</div>
 
