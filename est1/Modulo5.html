@@ -50,6 +50,12 @@
 				</p>
 			</section>
 			<section data-markdown>
+				- O processo começa com uma hipótese (site A gera mais cliques que B)
+				- Um experimento é criado para testar a hipótese
+				- Os dados são coletados
+				- É tirada a conclusão ou inferência
+			</section>
+			<section data-markdown>
 				## Teste A/B
 				- __Tratamento__ Algo (tratamento, droga, preço, site) que o indivíduo vai ser exposto
 				- __Grupo de Tratamento__ O grupo que é exposto ao tratamento
@@ -57,6 +63,33 @@
 				- __Randomização__ Processo de escolher os indivíduos de forma aleatória ao tratamento
 				- __Indivíduos__ Indivíduos que estão expostos ao tratamento
 				- __Estatística de Teste__ A métrica usada para medir o efeito do tratamento
+			</section>
+			<section data-markdown>
+				## Exemplos de teste A/B
+				- Testar dois tipos de solo para saber qual tem melhor germinação
+				- Testar dois tratamentos para saber qual é mais eficaz contra câncer
+				- Testar dois preços para saber qual gera melhor retorno
+				- Testar dois anúncios para saber qual tem melhor conversão
+
+			</section>
+			<section data-markdown>
+				## Teste A/B
+				- Um teste A/B tem indivíduos que vão receber um tratamento ou outro, qualquer diferença
+				entre os grupos de tratamento é devido a:
+					- O efeito do tratamento diferente
+					- Acaso
+				- O grupo de controle deve estar sujeito às mesmas condições
+				- Em um ensaio simples cego, o indivíduo não tem ciência de qual tratamento está recebendo
+				- Um ensaio duplamente cego, tanto o indivíduo quanto quem está aplicando não tem a ciência
+			</section>
+			<section data-markdown>
+				## Teste A/B
+				- Normalmente são usado para páginas Web
+				- Uma métrica deve ser escolhida antes da coleta, a escolha depois dos estudos prontos pode
+				gerar um viés
+				> Existe uma diferença significativa entre o preço A e B?
+
+				> Qual dos muitos preços é o melhor?
 			</section>
 			<section data-markdown>
 				- Indivíduos são atribuídos a dois ou mais grupos e devem ser tratados iguais, exceto
@@ -72,7 +105,21 @@
 				- __Teste Bidirecional__ Teste que conta a chance em duas direções
 			</section>
 			<section data-markdown>
-				- O teste de hipótese nula é uma construção lógica que traz a noção de que nada
+				- O teste de hipótese foi criado como forma de evitar que pesquisadores sejam enganados
+				pela aleatoriadade
+				- É fácil subestimar eventos raros e tentar dar significado a eles
+				- O teste de hipótese nula usa a seguinte lógica
+				> Como os humanos tem a tendência de dar significado a eventos frutos do acaso,
+				a diferença entre os grupos deve ser mais extrema do que pode acontecer por acaso
+			</section>
+			<section data-markdown>
+				- O teste unidirecional queremos saber se o tratamento B é melhor do que o tratamento A que já existe
+				- Se não, continuamos com A. Nesse caso, se o valor extremo 'puxar' para A, não tem problema
+				- Já o teste bidirecional protege contra variação nos dois sentidos
+				- R costuma assumir bidirecional!
+			</section>
+			<section data-markdown>
+			- O teste de hipótese nula é uma construção lógica que traz a noção de que nada
 				de especial aconteceu e qualquer valor observado foi por acaso
 			</section>
 
@@ -81,6 +128,47 @@
 				- __Teste de Permutação__ Combinar duas ou mais amostras e realocar 
 				aleatoriamente as observações para novas amostras
 				- __Com ou sem reposição__ O item é retornado?
+			</section>
+			<section data-markdown>
+				- Duas ou mais amostras estão envolvidas 
+					1. Combine os resultados em um data set
+					1. Embaralhe e retire valores sem reposição para o grupo A
+					1. O grupo restante é o grupo B
+					1. Calcule a mesma estatística para os grupos 
+					1. Repita R vezes
+				- Se o resultado tiver fora da distribuição da permutação, acaso não é a causa
+			</section>
+			<section>
+				<pre><code>
+ggplot(session_times, aes(x=Page,y=Time)) + 
+   geom_boxplot()
+mean_a &lt; mean(session_times[session_times['Page'] == 'Page A'],'Time')
+mean_b &lt; mean(session_times[session_times['Page'] == 'Page B'],'Time')
+meab_b - mean_a
+
+perm_fun &lt; function(x, n1,n2){
+	n &lt;- n1+ n2
+	idx_b &lt;- sample(1:n,n1)
+	idx_a &lt;- setdiff(1:n,idx_b)
+	mean_diff &lt;- mean(x[idx_b] - mean(x[idx_a]))
+	return mean_diff
+}
+				</code></pre>
+			</section>
+			<section>
+				<pre><code>
+perm_difs &lt;- rep(0,100)
+for(i in 1:1000)
+	perm_diffs[i] = perm_fun(session_times[,Time],21,15)
+hist(perm_diffs)
+abline(v=mean_b - mean_a)
+</code></pre>
+			</section>
+
+			<section data-markdown>
+				- Um teste exaustivo de permutação ou bootstrap encontra todas as possíveis combinação,
+				não é viável para grandes valores
+				- É uma heuristica muito interessante para verificar o acaso
 			</section>
 			<section data-markdown>
 				- Em um teste de permutação várias amostras são combinadas e embaralhadas
@@ -99,6 +187,55 @@
 				
 			</section>
 			<section data-markdown>
+				## Exemplo
+				| Resultado     | Preço A | Preço B |
+				|---------------|---------|---------|
+				| Conversão     | 200     | 182     |
+				| Sem conversão | 23539   | 22406   |
+			> A diferença é acaso?
+			</section>
+
+			<section data-markdown>
+				1. Criar uma urna que represente todos os valores
+				1. Misturar e reamostrar 23739 para A, quantos 1s?
+				1. Quantos 1s no que sobrou?
+				1. Calcular a diferença de proporção
+				1. Repita
+				1. Com que frequência o valor é maior que 0.0368?
+			</section>
+			<section>
+				<pre><code>
+obs_pct_diff &lt;- 100*(200/23739 - 182/22588)
+conversion &lt;- c(rep(0,45945),rep(1,382))
+for(i in 1:1000)
+	perm_diffs[i] = 100*perm_fun(conversion,23739,22588)
+hist(perm_diffs)
+abline(v = obs_pct_diff)
+				</code></pre>
+			</section>
+			<section data-markdown>
+				- Apenas olhando o gráfico não é uma forma ideal de medir a significância estatística
+				- Valor-p é a frequência em que o acaso produz um valor mais extremo do que os observados
+				-`mean(perm_diffs > obs_pct_diff)`
+				- Ou seja, 30% das vezes temos um valor tão grande quanto ou maior do que o observado
+			</section>
+			<section data-markdown>
+				- `prop.test(x=c(200,182), n=c(23739,22588), alternative="greater")`
+				- O limite para aceitar (alpha) costuma ser entre 5% e 1%
+				> Dado o modelo, qual é a probabilidade de um resultado tão extremo?
+				- O que é diferente de
+				> Qual a chance de ter acontecido ao acaso?
+			</section>
+			<section data-markdown>
+				![Quadrinho xkcd sobre p-value](https://imgs.xkcd.com/comics/p_values.png)
+			</section>
+			<section data-markdown>
+				- Existe muita controvérsia com relação ao valor-p
+				- Um jornal de psicologia já baniu artigos que o usassem!
+				- A associação americana de estatísticas fez uma declaração sobre valor-p
+				- [Link explicando](  https://ncbi.nlm.nih.gov/pmc/articles/PMC5187603/)
+			</section>
+			<section data-markdown>
 				-  Teste de significância são usados para determinar se o valor observado está
 				entre os valores esperados pelo modelo de hipótese nula
 				- O Valor-p é a probabilidade que resultados extremos como os observados aconteçam
@@ -112,6 +249,7 @@
 
 			<section data-markdown>
 				## Links relevantes
+				- [Google analytics experimentos](https://support.google.com/analytics/answer/1745149?hl=en&ref_topic=1745207)
 				- [Glossário Ingles-PT de estatística](http://glossario.spestatistica.pt/)
 				- [Taxonomia de dados em R](http://www.r-tutor.com/r-introduction/basic-data-types)
 				
