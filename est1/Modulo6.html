@@ -44,7 +44,7 @@
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>
-				<h3>Bootstrap e Distribuições</h3>
+				<h3>Experimentos Estatísticos</h3>
 				<p>
 					<small>Created by Fernando Marques </small>
 				</p>
@@ -53,8 +53,17 @@
 				## teste-T
 				- __Estatística de Teste__ Métrica para a diferença ou efeito de interesse
 				- __Estatística t__ razão entre valor estimado e valor hipotético para o erro padrão
-				- __Distribuição-t__ Distribuição de referência a qual a hipótese será comparada
-				
+				- __Distribuição-t__ Distribuição de referência a qual a hipótese será comparada				
+			</section>
+			<section data-markdown>
+				- Todos os testes de significância precisam de uma estatística para medir o efeito
+				- No teste de permutação a escala do teste não influência
+				- MAS... como que faz teste de permutação em 1920?
+				- Então, uma boa aproximação do teste de permutação é o test-t, baseado na distribuição-t
+				- MAS... uma forma padronizada deve ser utilizada
+			</section>
+			<section data-markdown>
+				- `t.test(Time ~ Page, data=session_times, alternative='less')`
 			</section>
 			<section data-markdown>
 				- Antes do uso de computadores reamostragens não eram viáveis e eram usadas distribuições de referência
@@ -69,47 +78,118 @@
 				
 			</section>
 			<section data-markdown>
+				- Se tivermos 20 variáveis e um output, todos gerados de forma aleatória, as chances
+				de que uma variável seja estatísticamente relevante, com alpha 0.05, são altas!
+				- A chance de uma ser testada corretamente é de 0.95
+				- 0.95 x 0.95 ... = 0.95^20 = 0.36
+				- A probabilidade de todas serem não significante é de 1 - 0.36 = 0.64!!!
+				- Em 2011 a Bayer tentou replicar 67 estudos e só conseguiu replicar 14 deles!
+			</section>
+			<section data-markdown>
+				- [Extrapolação](https://xkcd.com/605/)
+				- [Fitting](https://xkcd.com/2048/)
+			</section>
+			<section data-markdown>
 				- Muitas comparações entre muitas variáveis e modelos aumenta o risco de concluir que é significatipo
 				por acaso
 				- Em situações que muita comparações estatísticas são feitos, existem procedimentos de ajuste estatístico
 				- Em data mining, o uso de uma amostra de verificação pode ajudar a evitar resultados enganosos
 			</section>
 			<section data-markdown>
-				## Graus de Liberdade
-				- __n__ número de observações nos dados 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				- ____ 
-				
-			</section>
-			<section data-markdown>
-				- O grau de liberdade é parte dos calculos feitos para padronizar estatísticas de teste, permitindo
-				que elas sejam comparadas com distribuições de referência
-				- O conceito de graus de liberdade está por trás da fatoração de variáveis categóricas ao fazer uma regressão,
-				para evitar multicolinearidade
-			</section>
-			<section data-markdown>
 				## ANOVA
 				- __Comparação em pares__ teste de hipótese entre dois grupos entre muitos grupos 
 				- __Teste omnibus__ teste de hipóteses simples da variância entre as médias de muitos grupos
-				- __Decomposição de variância__ separação dos componentes que contribuem para um valor individual
 				- __Estatística-F__ Estatística padrão que mede até que ponto a diferença entre grupos excede o que
-				seria esperado pelo acaso
-				
+				seria esperado pelo acaso				
 			</section>
 			<section data-markdown>
-				- ANOVA é um procedimento para analizar o resultado de um experimento com multiplos grupos
+				- E se ao invés de teste A/B o teste for A,B,C ou D?
+				- Os visitantes podem mudar dependendo de quando entrou!
+				-_boxplot e ver os dados_
+				> Podem todas as páginas ter o mesmo 'stickness' e a diferença ser por acaso?
+			</section>
+			<section data-markdown>
+				1. Combine todos os dados em uma caixa
+				1. Misture e retire 4 amostras de tamanho 5
+				1. Calcule a média de cada um dos quatro grupos
+				1. Calcule a variância entre os grupos
+				1. Repita várias vezes
+			</section>
+			<section>
+<pre><code class="R">
+	library(lmPerm)
+	summary(aovp(Time ~ Page, data=four_sessions))
+	# Df são os graus de liberdade
+</code></pre>
+			</section>
+			<section data-markdown>
+				- Assim como existe o test-t, para ANOVA temos a estatística-f
+				- `summary(aov(Time ~ Page, data=four_sessions))`
+				- É baseado na relação de variância entre os grupos
+				- Quanto maior, mais estatísticamente significante
+			</section>
+			<section data-markdown>
+				- O teste demonstrado é de uma via, só um fator varia que é o grupo
+				- Se fosse variar outro fator (dia da semana), teríamos um ANOVA de duas vias
+			</section>
+				<section data-markdown>
+				- ANOVA é um procedimento para analisar o resultado de um experimento com multiplos grupos
 				- É a extensão de procedimentos como A/B para testar se a variação entre os grupos está na faixa
 				de variação do acaso
 				- Um resultado útil de uma ANOVA é a identificação dos componentes de variância associados aos tratamentos em grupo
 			</section>
 			<section data-markdown>
 				## Teste Qui-quadrado
-				- __Estatística qui-quadrado__ medida que um dado observado afasta-se do experado
+				- __Estatística qui-quadrado__ medida que um dado observado afasta-se do esperado
 				- __Esperança matemática ou valor médio__ como esperamos que o dado se comporte dado uma suposição
-				
+			</section>
+			<section data-markdown>
+					| Resultado | A   | B    | C   |
+					|-----------|-----|------|-----|
+					| Click     | 14  | 1828 | 12  |
+					| Sem Click | 986 | 992  | 988 |
+			</section>
+			<section data-markdown>
+					| Resultado | A      | B      | C      |
+					|-----------|--------|--------|--------|
+					| Click     | 11.33  | 11.33  | 11.33  |
+					| Sem Click | 988.67 | 988.67 | 988.67 |
+			</section>
+			<section data-markdown>
+				- Resíduo de Pearson
+					\begin{aligned}
+					R = \frac{Obs - Exp}{\sqrt{Exp}}
+					\end{aligned}
+			</section>
+			<section data-markdown>
+					| Resultado | A      | B      | C      |
+					|-----------|--------|--------|--------|
+					| Click     |  0.792 | -0.990 | 0.198  |
+					| Sem Click | -0.085 |  0.106 | -0.021 |
+			</section>
+			<section data-markdown>
+				- A estatística qui-quadrado é a soma dos quadrados do resíduo de Pearson
+					\begin{aligned}
+					X = \sum{\sum{R^2}}
+					\end{aligned}
+			</section>
+			<section data-markdown>
+				1. Caixa com 34 clicks e 2966 não clicks
+				1. Misture e separe em 3 pilhas de 1000
+				1. Encontre as diferenças ao quadrado do valor encontrado e o experado e as some
+				1. Repita
+				1. Com que frequência excede o valor observado? Esse é o p-value
+			</section>
+			<section data-markdown>
+				- `chisq.test(clicks, simulate.p.value=TRUE)`
+			</section>
+			<section data-markdown>
+				- Qui-quadrado é uma boa aproximação para teste de reamostragem, exceto quando as contagens são
+				extremamente baixas 
+				- Nesse caso a reamostragem vai ter um valor-p mais preciso
+				- Existe um processo que enumera todas as possibilidades que podem ocorrer e tabula suas frequências
+				- É chamado de teste exato de fisher
+				- `fisher.test(clicks)`
 			</section>
 			<section data-markdown>
 				- Um procedimento comum é testar se os dados observados são consistêntes com a suposição de independência
@@ -126,6 +206,29 @@
 				
 			</section>
 			<section data-markdown>
+				- Muitas vezes data scientists estão mais interessados em otimizar os resultados, e não na significância estatística
+				- São muito usados na Web e permitem chegar a conclusões mais rapidamente que métodos tradicionais
+					- Braço A: 10 vitórias em 50
+					- Braço B: 2 vitórias em 50
+					- Braço C: 4 vitórias em 50
+				> Qual o melhor braço?
+			</section>
+			<section data-markdown>
+				![Imagem do Multi-Armed Bandit](img/Modulo6MultArmedBandit.jpg)
+			</section>
+			<section data-markdown>
+				1. Gere um número entre 0 e 1
+				1. Se for entre 0 e epsilon jogue uma moeda
+					a. Se cara A
+					b. Se coroa B
+				1. Se menor que epsilon, escolha a melhor opção
+				- Se epsilon = 1, temos A/B, se 0, apenas o melhor
+			</section>
+			<section data-markdown>
+				- [Exemplo Multi-Armed em Python](https://towardsdatascience.com/solving-the-multi-armed-bandit-problem-b72de40db97c)
+				- [Exemplo animado em R](https://pavlov.tech/2019/03/02/animated-multi-armed-bandit-policies/)
+			</section>
+			<section data-markdown>
 				- Testes A/B usam amostragem aleatória, o que pode fazer com que haja menor exposição ao tratamento
 				- O Multi-armed Bandit modifica o processo de amostragem para incorporar informações aprendidas 
 				durante o experimento, e reduzir a frequência dos tratamentos inferiores
@@ -138,6 +241,9 @@
 				"20% de melhoria no número de clicks"
 				- __Poder__ A probabilidade de detectar um tamanho de efeito dado o tamanho da amostra
 				- __Nível de significância__ nível de significância estatística em que o teste será conduzido
+			</section>
+			<section data-markdown>
+				- Quanto maior a diferença dos entre os dados, maior a probabilidade de um experimento o revelar
 				
 			</section>
 			<section data-markdown>
