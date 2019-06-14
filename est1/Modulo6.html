@@ -244,7 +244,17 @@
 			</section>
 			<section data-markdown>
 				- Quanto maior a diferença dos entre os dados, maior a probabilidade de um experimento o revelar
-				
+				- Se vamos comparar dois anuncios e queremos uma melhoria de 50% precisaremos de menos dados
+				- Se uma melhoria de 10% é suficiente, precisamos de mais dados
+				- Se temos um anuncio com taxa de 1.1% e queremos melhorar em 10% para 1.21%, podemos ter a caixa A
+				com 110 1s e 9890 0s, e caixa B com 121 1s e 9879 0s.
+				- 300 valores de cada caixa poderia ser algo como 3 para 5. Mas não é relevante...
+				- Se aumentar para 50% e 2000 valores podemos ter algo como 19 e 34
+							</section>
+				<section data-markdown>
+					- `library(pwr)`
+					- `pwr.2p.test(h = efeito, n = tamanho amostra, sig.level = alpha, power = probabilidade de detectar)`
+					- Usam o power de 0.8, mas alguns jornais de psicologia aceitam 0.6
 			</section>
 			<section data-markdown>
 				- Para identificar o tamanho da amostra é necessário pensar qual teste estatístico será conduzido
