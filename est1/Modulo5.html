@@ -151,13 +151,13 @@ perm_fun &lt;- function(x, n1,n2){
 	idx_b &lt;- sample(1:n,n1)
 	idx_a &lt;- setdiff(1:n,idx_b)
 	mean_diff &lt;- mean(x[idx_b]) - mean(x[idx_a])
-	return mean_diff
+	return (mean_diff)
 }
 				</code></pre>
 			</section>
 			<section>
 				<pre><code>
-perm_difs &lt;- rep(0,1000)
+perm_diffs &lt;- rep(0,1000)
 for(i in 1:1000)
 	perm_diffs[i] = perm_fun(session_times[,"Time"],21,15)
 hist(perm_diffs)
