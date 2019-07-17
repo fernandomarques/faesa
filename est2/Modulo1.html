@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Estatística para Data Science II</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<style>
+			img {
+				border : 0px !important;
+			}
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Regressão e Predição</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown>
+			- Um dos objetivos em estatística é responder a pergunta de se a variável X está relacionada a Y, qual a relação
+			e se podemos prever Y
+			- A estatística e ciência de dados possuem grandes laços no campo de predição, qual o valor do alvo levando em conta as variáveis preditoras
+			- Outra parte importante é a detecção de anomalias
+			- A regressão linear simples modela a relação de uma variável X com outra Y. Outra forma que vimos de relacionar variáveis é a correlação.
+			- Correlação indica a forma de relacionamento e regressão quantifica a natureza do relacionamento
+		</section>
+		<section data-markdown>
+			## Regressão linear simples
+			- Exemplo, anos exposto a poeira de algodão vs. perf (peak expiratory flow rate)
+			- `ggplot(LungDisease, aes(y=PEFR,x=Exposure)) + geom_point()`
+			- `cor(LungDisease$Exposure, LungDisease$PEFR)`
+			- `model &lt;- lm(PEFR ~ Exposure, data= LungDisease)`
+			- `model &lt;- lm(PEFR ~ Exposure, data= LungDisease)`
+			- Coeficientes e Intercept
+			- `ggplot(data=LungDisease, aes(y=PEFR, x= Exposure)) + geom_point() + geom_abline(slope = model$coefficients[2], intercept = model$coefficients[1])`
+			- ` + geom_smooth` 
+		</section>
+		<section data-markdown="">
+			## Regressão linear simples
+			- Então a regressão linear tem a fórmula
+			\begin{aligned}
+			Y = b_0 + b_1X
+			\end{aligned}
+			ou
+			\begin{aligned}
+			PEFR = b0 + b_1Exposure
+			\end{aligned}
+			- b0 pode ser interpretado como o valor para nenhuma exposição
+			- b1 seria para cada ano, em quanto cai o valor de PEFR
+		</section>
+		<section data-markdown>
+			## Valores Ajustados e Resíduos
+			- Como visto, os dados não cabem todos na linha a linha de regressão seria algo como
+			\begin{aligned}
+			Y = b_0 + b_1X + e_i
+			\end{aligned}
+			- Valores ajustados, também conhecido como valores previstos podem ser denotados por 
+			\begin{aligned}
+			\hat{Y} = \hat{b}_0 + \hat{b}_1X
+			\end{aligned}
+			- o ^ indica que os coeficientes são estimativas
+			- O resíduo é calculado por 
+			\begin{aligned}
+			\hat{e}_i = Y_i - \hat{Y}_i
+			\end{aligned}
+		</section>
+		<section data-markdown="">
+			## Quadrados mínimos
+			- Quão bom é o modelo para o nosso dado?
+			- Quando a relação é clara, conseguimos ver a linha formada
+			- Na prática, a linha de regressão é a linha que miniminiza a soma dos quadrados dos resíduos (RSS - residual sum of squares)
+			\begin{aligned}
+			RSS = \sum{ (Y_i - \hat{Y}_i)^2}
+			\end{aligned}
+			- É computacionalmente eficiente
+			- Não é robusto
+		</section>
+		<section data-markdown="">
+			## Predição e Explicação
+			- Históricamente o uso de regressão é mais comum para tentar a relação entre as variáveis
+			- Qual a relação entre consumo e GDP?
+			- Com o _big data_ as regressões são usadas para prever novos dados
+			- Só lembrando, que isso não garante nenhuma conclusão de causa
+		</section>
+		<section data-markdown="">
+			- A equação de regressão mostra a relação entre uma variável dependente Y e a variável preditora ou independente X como uma linha
+			- O modelo de predição retorna valores ajustados e resíduos
+			- Normalmente são feitos usando o método de menor quadrado
+			- Pode ser usado para explicação e para predição
+		</section>
+		<section data-markdown="">
+			## Regressão Linear Múltipla
+			- Quando temos multiplos preditores, a equação pode ser estendida para acomodar todos eles
+			\begin{aligned}
+			Y = b_0 + b_1X_1 + b_2X_2 + ... + b_pX_p + e
+			\end{aligned}
+			- Ao invés de uma linha temos um modelo linear, a relação entre cada coeficiente e sua variável é linear
+			- Todos os outros conceitos como quadrado mínimo, valores ajustados e resíduo também são considerados
+		</section>
+		<section data-markdown="">
+			## Regressão linear Múltipla
+			- Vamos usar a regressão linear para descobrir qual seria o preço de uma casa baseado em alguns parâmetros
+			- `head(house[, c("AdjSalePrice", "SqFtTotLiving", "SqFtLot", "Bathrooms", "Bedrooms", "BldgGrade")])` 
+			- `house_lm &lt;- lm(AdjSalePrice ~ SqFtTotLiving + SqFtLot + Bathrooms + Bedrooms + BldgGrade,  
+			data=house, na.action=na.omit)`
+			- na.omit ignora registros que tenham valores faltando
+			- `house_lm` 
+			- Adicionar um finished square aumenta o preço em $229
+
+		</section>
+		<section data-markdown="">
+			## Avaliando o modelo
+			- Do ponto de vista do data science a métrica de performance mais importante é o desvio padrão empírico ou 
+			raiz quadrada do erro quadrático médio do inglês _root mean squared error_ ou RMSE
+			\begin{aligned}
+			RMSE = \sqrt{\frac{\sum{(y_i - \hat{y}_i)^2}}{n}}
+			\end{aligned}
+
+		</section>
+		<section data-markdown="">
+			## Avaliando o modelo
+			- Também temos o RSE (residual standard error) com p preditores
+			\begin{aligned}
+			RSE = \sqrt{\frac{\sum{(y_i - \hat{y}_i)^2}}{n-p-1}}
+			\end{aligned}
+			- A única diferença é que o RSE leva em conta os graus de liberdade, para dados grandes a diferença entre os dois é pequena
+			- `summary(house_lm)`
+		</section>
+		<section data-markdown="">
+			## Avaliando o modelo
+			- Outra métrica usada é o coeficiente de determinação ou R-squarred R²
+			- Ela retorna valores entre 0 e 1 e mede a proporção de variação dos dados que são levados em conta no modelo
+			\begin{aligned}
+			R^2 = 1- \frac{\sum{(y_i - \hat{y}_i)^2}}{\sum{(y_i-\bar{y}_i)^2}}
+			\end{aligned}
+			- Mostra o quão bem o modelo é ajustado aos dados
+			- Outras estatísticas são t-statistic e valor-p, O valor p quanto menor melhor, já o t quanto maior melhor
+		</section>
+		<section data-markdown="">
+			## Validação Cruzada
+			- As estatísticas vistas são todas 'in-sample', ou seja, são usadas nos mesmos dados que foram usados para treinar o modelo
+			- O ideal é separar uma parte da base para treinar o modelo e uma outra parte para testar
+			- Esse método não é novo mas só é possível com maiores quantidades de dados
+		</section>
+		<section data-markdown="">
+			## Validação Cruzada 
+			### k-fold cross validation
+			1. Separar 1/k dos dados
+			1. Treinar o modelo com o restante dos dados
+			1. Testar e salvar o valor
+			1. Restaurar os dados e separar mais 1/k
+			1. Repetir passos 2 e 3
+			1. Repetir até que todos os dados tenham sido usados
+			1. Tirar a média ou combinar as métricas testadas
+				- A divisão dos dados em uma parte de teste é chamada de fold
+		</section>
+		<section>
+			<pre><code class="R">
+#Randomly shuffle the data
+yourData&lt;-yourData[sample(nrow(yourData)),]
+
+#Create 10 equally size folds
+folds &lt;- cut(seq(1,nrow(yourData)),breaks=10,labels=FALSE)
+
+#Perform 10 fold cross validation
+for(i in 1:10){
+	#Segement your data by fold using the which() function 
+	testIndexes &lt;- which(folds==i,arr.ind=TRUE)
+	testData &lt;- yourData[testIndexes, ]
+	trainData &lt;- yourData[-testIndexes, ]
+	#Use the test and train data partitions however you desire...
+}
+			</code></pre>
+		</section>
+		<section>
+			<pre><code class="R">
+require(caret)
+flds &lt;- createFolds(LungDisease$Exposure)
+train &lt;- LungDisease [ -flds[[1]],]
+test &lt;- LungDisease[ flds[[1]],]
+			</code></pre>
+		</section>
+		<section data-markdown="">
+			## Regressão passo a passo
+			- Em muitos modelos, mais variáveis podem ser adicionadas como preditoras da regressão
+			- Para prever o valor da casa, podemos adicionar o tamanho do porão ou ano que a casa foi construída
+			- `house_full &lt;- lm(AdjSalePrice ~ SqFtTotLiving + SqFtLot + Bathrooms + Bedrooms + BldgGrade + PropertyType + NbrLivingUnits + 	SqFtFinBasement + YrBuilt + YrRenovated + NewConstruction, data=house, na.action=na.omit)`
+		</section>
+		<section data-markdown="">
+			## Regressão passo a passo
+			- Novas variáveis nem sempre significam melhores modelos!
+			- Novas variáveis reduzem o RMSE e aumentam o R²
+			- Por isso, Hirotugu Akaike criou uma métrica que penaliza o uso de novos termos
+			\begin{aligned}
+			AIC = 2P + n log(RSS/n)
+			\end{aligned}
+			- P é o número de variáveis no modelo e n o número de registros
+		</section>
+		<section data-markdown="">
+			## Regressão passo a passo
+			\begin{aligned}
+			RSS = \sqrt{\sum{(y_i - \hat{y}_i)^2}}
+			\end{aligned}
+			- Existem outras métricas como AICc, BIC e Mallow Cp
+			> Como encontrar um modelo que minimize o AIC?
+			- É computacionalmente caro para problemas com muitas variáveis
+			- Um outro método é adicionar e remover preditores até encontrar um modelo com AIC baixo
+		</section>
+		<section data-markdown="">
+			## Regressão passo a passo
+			`library(MASS)`
+
+			`step &lt; stepAIC(house_full, direction="both")`
+			- forward selection &rArr; Adiciona o preditor que aumenta mais R², para quando não for significante
+			- backward selection &rArr; Começa com modelo completo e remove preditores que não são significantes
+			- outros exemplos são regressões penalizadas como ridge e lasso, que penalizam modelos com muitos preditores
+		</section>
+		<section data-markdown="">
+			## Regressão passo a passo
+			- A regressão passo a passo é in-sample e pode sofrer de overfitting
+			- Em geral, os riscos de overfitting são menores quando a regressão é Linear
+			- Para modelos mais sofisticados é importante usar validação cruzada
+		</section>
+		<section data-markdown="">
+			# Regressão ponderada
+			- Quando observações possuem precisão diferente
+			- A análise de dados é de forma agregada, de tal forma que a variável de peso codifica quantas observações originais cada linha nos dados agregados representa
+			- Por exemplo, vendas antigas são menos relevantes que as mais recentes
+		</section>
+		<section>
+			<pre><code class="R">
+house$Year = year(house$DocumentDate)
+house$Weight = house$Year - 2005
+house_wt &lt;- lm(AdjSalePrice ~ SqFtTotLiving + SqFtLot + Bathrooms + 
+					Bedrooms + BldgGrade,
+				data=house, weight=Weight, na.action=na.omit)
+round(cbind(house_lm=house_lm$coefficients, 
+			house_wt=house_wt$coefficients), digits=3)
+			</code></pre>
+		</section>
+		<section data-markdown="">
+			- Regressão linear múltipla modela a relação da variável resposta e multiplos preditores
+			- A métricas mais importantes são RMSE e R²
+			- O erro padrão dos coeficientes pode ser usado para media a confiabilidade
+			- Regressão passo a passo é uma forma de identificar quais variáveis devem ser incluídas
+			- Regressão balanceada permite dar mais ou menos peso as variáveis
+		</section>
+			</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
