@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Estatística para Data Science II</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<style>
+			img {
+				border : 0px !important;
+			}
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Classificação</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown="">
+			## Classificação
+			- Muitas vezes queremos responder há algumas perguntas de forma automática
+				- É span? O usuário vai clicar no anúncio?
+			- A Classificação pode ser binária como visto, ou então categórica
+			- No gmail, um email pode ser primary, social, promotional, forum...
+			- Muitas vezes queremos mais que uma resposta binária, qual a probabilidade de ser verdadeiro ou falso?
+		</section>
+		<section data-markdown="">
+			## Classificação
+			- Ao invés de retornar um valor binário, a maioria dos algoritmos retornam uma pontuação
+			- É escolhido um limite, se o valor estiver acima do limite, é considerado dentro da categoria
+		</section>
+		<section data-markdown="">
+			## Probabilidade Condicional
+			- Probabilidade de observar um evento B dado que um outro evento A já aconteceu
+			\begin{aligned}
+			P(B|A)
+			\end{aligned}
+			- Quem comprou X também comprou Y
+			- P(A,B) é a probabilidade de A e B acontecerem
+			\begin{aligned}
+			P(B|A) = \frac{P(A,B)} {P(A)}
+			\end{aligned}
+		</section>
+		<section data-markdown="">
+			## Probabilidade Condicional
+			- Foi passado um teste para os alunos
+			- 60% passou nos dois testes
+			- Como o primeiro teste foi mais fácil, 80% passou nele
+			- Qual porcentagem que passou no primeiro também passou segundo teste?
+			\begin{aligned}
+			P(B|A) = \frac{P(A,B)} {P(A)} = \frac{0.6}{0.8} = 0.75
+			\end{aligned}
+			- Se A e B fossem independentes, P(B|A) seria próximo de P(B)
+		</section>
+		<section data-markdown="">
+			## Teorema de Bayes
+			\begin{aligned}
+			P(A|B) = \frac{P(A)P(B|A)} {P(B)} 
+			\end{aligned}
+			- A probabilidade de algo que depende de B, depende das probabilidades básicas de A e B
+			- A probabilidade de detectar um usuário de drogas é alto, mas não necessáriamente significa que a chance de ser usuário de drogas é alto já que o teste deu positivo
+		</section>
+		<section data-markdown="">
+			## Teorema de Bayes
+			- Testes de drogas com acurácia boa podem gerar mais falsos positivos que verdadeiros positivos
+			- Um teste de droga identifica um usuário com 99% de chance
+			- E tem 99% de chance de dar negativo com não usuários
+			- Mas apenas 0.3% da população usa a droga
+			\begin{aligned}
+			P(A|B) = \frac{P(A)P(B|A)} {P(B)} =  \frac{0.003*0.99} {P(0.013)}
+			\end{aligned}
+		</section>
+		<section data-markdown="">
+			## Teorema de Bayes
+			- A &rarr; é usuário da droga
+			- B &rarr; a droga deu positiva
+			- P(B) = 0.99x0.003 + 0.01 x 0.997 = 0.013 
+			- P(B) é probabilidade de positivo se usa e positivo se não usa
+			\begin{aligned}
+			P(A|B) = \frac{P(A)P(B|A)} {P(B)} =  \frac{0.003*0.99} {P(0.013)} = 0.228
+			\end{aligned}
+			- A probabilidade de ser usuário é de 22.8%!
+		</section>
+		<section data-markdown="">
+			## Naive Bayes
+			- Usa a probabilidade de observar um valor de preditor, dado o resultado para estimar a probabilidade de observar o resultado dado os preditores
+		</section>
+		<section data-markdown="">
+			## Non-naive Bayes
+			- Para comparar, imagine esse classificador não ingênuo
+				1. Encontre todos os registros com o mesmo perfil de preditores (iguais)
+				1. Determine a qual classe eles pertencem e qual classe é mais provável
+				1. Atribua a classe ao novo registro
+			- Esse tipo de classificador só funciona se encontrar perfis iguais
+			- Dá para perceber que vai ser difícil encontrar registros com os mesmo valores se tivermos alguns preditores
+			- Uma casa, reformada ano passado, com 3 quartos e dois banheiros, de frente para o mar...
+		</section>
+		<section data-markdown="">
+			## Naive Bayes
+			- Apesar do nome, não é um método bayesiano da estatística
+			- Não olhamos apenas para registros iguais ao que será previsto
+				1. Para uma resposta binária Y = i, estimar a probabilidade de cada preditor P(X|Y=i), feita usando proporção na <base href="">
+				1. Multiplica as probabilidades e multiplicar a proporção de valores Y = i
+				1. Repita 1 e 2 para todas as classes
+				1. Estimar a probabilidade de i, pegando o valor do passo 2 e dividido pela soma dos valores para todas as classes
+				1. Definir o valor para a classe com maior probabilidade
+		</section>
+		<section data-markdown="">
+			## Naive Bayes
+			\begin{aligned}
+			P(X_1,X_2,...,X_p) = P(Y=0)(P(X_1|Y=0)P(X_2|Y=0)
+			\end{aligned}
+			\begin{aligned}
+			...P(X_p|Y=0)) + P(Y=1)...
+			\end{aligned}
+			- É considerado ingênuo pois estamos considerando que as variáveis preditoras são independentes
+		</section>
+		<section >
+<pre><code>
+library(klaR)
+naive_model &lt;- NaiveBayes(outcome ~ purpose_ + home_ + emp_len_, 
+                          data = na.omit(loan_data))
+naive_model$table
+
+</code></pre>
+<p>Os resultados são as probabilidades P(Xj|Y=i)</p>
+		</section>
+		<section >
+<pre><code>
+new_loan &lt;- loan_data[147, c('purpose_', 'home_', 'emp_len_')]
+row.names(new_loan) &lt;- NULL
+new_loan
+
+predict(naive_model, new_loan)
+
+</code></pre>
+<p>Também mostra a probabilidade</p>
+<p>Esse classificador conhecidamente gera estimativas enviesadas, mas quando o objetivo
+	é ordenar os registros pela probabilidade de Y=1 ele gera bons resultados
+</p>
+		</section>
+		<section >
+<pre><code>
+less_naive &lt- NaiveBayes(outcome ~ borrower_score + payment_inc_ratio + 
+		purpose_ + home_ + emp_len_, data = loan_data)
+less_naive$table[1:2]
+
+stats &lt- less_naive$table[[1]]
+ggplot(data.frame(borrower_score=c(0,1)), aes(borrower_score)) +
+	stat_function(fun = dnorm, color='blue', linetype=1, 
+	arg=list(mean=stats[1, 1], sd=stats[1, 2])) +
+	stat_function(fun = dnorm, color='red', linetype=2, 
+	arg=list(mean=stats[2, 1], sd=stats[2, 2])) +
+	labs(y='probability')
+
+</code></pre>
+<p></p>
+		</section>
+		<section data-markdown="">
+			## Preditores numéricos
+			- Pela definição do classificado bayesiano ele só aceita preditores categóricos
+			- Existem duas soluções para aplicar esse classificador com preditores numéricos
+				1. Agrupar valores numéricos em preditores categóricos, como fizemos com ZipCode
+				1. Usar um modelo de probabilidade, como a distribuição normal, para estimar P(Xj|Y=i)
+		</section>
+		<section data-markdown="">
+			- Naive Bayes funciona bem com preditores categóricos
+			- Responde a pergunta "Dentre as categorias de resultado, quais categorias de preditores são mais prováveis"
+			- A informação é invertida para estimar a probabilidade de uma categoria resultado, dado os valores do preditor
+		</section>
+			</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
