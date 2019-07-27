@@ -178,9 +178,9 @@ less_naive$table[1:2]
 stats &lt- less_naive$table[[1]]
 ggplot(data.frame(borrower_score=c(0,1)), aes(borrower_score)) +
 	stat_function(fun = dnorm, color='blue', linetype=1, 
-	arg=list(mean=stats[1, 1], sd=stats[1, 2])) +
+	args=list(mean=stats[1, 1], sd=stats[1, 2])) +
 	stat_function(fun = dnorm, color='red', linetype=2, 
-	arg=list(mean=stats[2, 1], sd=stats[2, 2])) +
+	args=list(mean=stats[2, 1], sd=stats[2, 2])) +
 	labs(y='probability')
 
 </code></pre>
@@ -197,6 +197,90 @@ ggplot(data.frame(borrower_score=c(0,1)), aes(borrower_score)) +
 			- Naive Bayes funciona bem com preditores categóricos
 			- Responde a pergunta "Dentre as categorias de resultado, quais categorias de preditores são mais prováveis"
 			- A informação é invertida para estimar a probabilidade de uma categoria resultado, dado os valores do preditor
+		</section>
+		<section data-markdown="">
+			## Análise Discriminante
+			-  A análise de discriminante é um dos classificadores estatísticos mais antigos, de 1936 por R.A. Fisher
+			- Covariância é uma medida para saber como uma variável varia com relação a outra
+			- [Covariance vs. Correlation](https://www.linkedin.com/pulse/covariance-vs-correlation-kumar-p)
+			- Apesar da análise de discriminante incluir muitas técnicas a mais comum é a análise de discriminante linear (LDA)
+			- LDA é menos usado com o surgimento de técnicas como árvores e regressão logística
+			- Ajuda a encontrar preditores mais importantes e é uma medida eficiente para seleção de características
+		</section>
+		<section data-markdown="">
+			## Análise de Discriminante
+			- O primeiro artigo de LDA foi em um journal de eugenics
+			- Não confundir LDA Linear Discriminant Analysis com LDA Latent Dirichlet Allocation
+			- O segundo é usado para processamento de linguagem natural e não são relacionados
+		</section>
+		<section data-markdown="">
+			## LDA - Matriz Covariância
+			- Covariância mede a relação entre duas variáveis x e z
+			\begin{aligned}
+			s_{x,z} = \frac{\sum{(x_i - \bar{x})(z_i - \bar{z})}}{n-1}
+			\end{aligned}
+		</section>
+		<section>
+
+			<table>
+				<tr><td>s²<sub>x</sub></td><td>s <sub>x,z</sub></td></tr>
+				<tr><td>s <sub>z,x</sub></td><td>s²<sub>z</sub></td></tr>
+			</table>
+		</section>
+		<section data-markdown="">
+			## Discriminante Linear de Fisher
+			- Para simplicidade vamos classificar um resultado binário y usando duas variáveis numéricas e contínuas x e z
+			- Em teoria assume que as variáveis são normalmente distribuídas mas também funciona em casos não extremos
+			- O discriminante de fisher diferencia variação entre grupos e dentre os grupos 
+			- LDA foca em maximizar a soma dos quadrados entre os grupos em relação a soma dos quadrados dentre os grupos
+			
+		</section>
+		<section data-markdown="">
+			## Discriminante Linear de Fisher
+			\begin{aligned}
+			\frac{SS_{between}}{SS_w}
+			\end{aligned}
+			- A soma dos quadrados __entre__ é o quadrado da distância entre a média dos dois grupos
+			- A soma dos quadrados __dentre__ é a dispersão em torno da média dentro de cada grupo
+			- Ponderados pela matriz de covariância
+			- Maximizando a soma dos quadrados entre, esse método consegue boa separação entre os grupos
+		</section>
+		<section>
+			<h2>Exemplo</h2>
+			<pre><code>
+loan_lda &lt;- lda(outcome ~ borrower_score + payment_inc_ratio,
+	data=loan3000)
+loan_lda$scaling
+
+pred &lt;- predict(loan_lda)
+head(pred$posterior)
+			</code></pre>
+		</section>
+		<section>
+			<h2>Exemplo</h2>
+			<pre><code>
+lda_df &lt;- cbind(loan3000, prob_default=pred$posterior[,'default'])
+x &lt;- seq(from=.33, to=.73, length=100)
+y &lt;- seq(from=0, to=20, length=100)
+newdata &lt;- data.frame(borrower_score=x, payment_inc_ratio=y)
+pred &lt;- predict(loan_lda, newdata=newdata)
+lda_df0 &lt;- cbind(newdata, outcome=pred$class)
+
+ggplot(data=lda_df, aes(x=borrower_score, y=payment_inc_ratio, color=prob_default)) +
+	geom_point(alpha=.6) +
+	scale_color_gradient2(low='white', high='blue') +
+	scale_x_continuous(expand=c(0,0)) + 
+	scale_y_continuous(expand=c(0,0), lim=c(0, 20)) + 
+	geom_line(data=lda_df0, col='green', size=2, alpha=.8) +
+	theme_bw()
+			</code></pre>
+		</section>
+		<section data-markdown="">
+			## LDA
+			- Quando mais longe o valor da linha, maior o nível de confiança
+			- LDA também funciona com mais de duas variáveis preditoras, mas precisa de um certo número de registros para fazer a correlação, o que em data science não costuma ser problema
+			- Análise de discriminante funciona com preditores contínuos e categóricos e com resultados categóricos
+			- Usando a matriz de covariância é calculado a função de discriminante linear que separa os registros em classes
 		</section>
 			</div>
 		</div>
