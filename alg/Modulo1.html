@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Estatística para Data Science II</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<style>
+			img {
+				border : 0px !important;
+			}
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Introdução Algoritmos</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown>
+			## Algoritmos
+			- O que são algoritmos?
+		</section>
+		<section data-markdown>
+			## Algoritmos
+			- Um __algoritmo__  é qualquer procedimento computacional bem definido que 
+			toma algum valor ou conjunto de valores como __entrada__ e produz algum valor
+			 ou conjunto de valores como __saída__. 
+			 - Um algoritmo é uma sequência de passos computacionais que transformam 
+			 a entrada na saída
+		</section>
+		<section data-markdown>
+			## Algoritmos
+			- Dada uma sequência de números {2,4,6,1,3} um algoritmo de ordenação retorna
+			- {1,2,3,4,6}
+			- Como escrever de forma matemática a entrada e saída do algoritmo?
+		</section>
+		<section data-markdown>
+			## Algoritmos
+			\begin{aligned}
+			Entrada = { a_1, a_2, a_3, ... , a_n} 
+			\end{aligned}
+			\begin{aligned}
+			Saída = { a'_1, a'_2, a'_3, ... , a'_n}
+			\end{aligned}
+			\begin{aligned}
+			a'_1 \leq a'_2 \leq a'_3 \leq ... \leq a'_n
+			\end{aligned}
+		</section>
+		<section data-markdown>
+			## Algoritmos
+			- Como para solucionar muitos problemas a ordenação é necessária, ela é vista
+			como fundamental na ciência da computação
+			- O melhor algoritmo para ordenar depende, entre outros fatores, do número de itens a ordenar,
+			do grau de ordenação já apresentado, das restrições, do tipo de dispositivo...
+		</section>
+		<section data-markdown>
+			## Algoritmos
+			- Dizemos que um algoritmo é __correto__ se para toda entrada, ele gera
+			a saída esperada
+			- Um algoritmo incorreto pode não tratar alguns casos e não dar o resultado esperado
+		</section>
+		<section data-markdown>
+			## Problemas que veremos
+			- Temos um mapa rodoviário no qual a distância entre cada par de interseções
+			 adjacentes é marcada, e nossa meta é determinar a menor rota de uma interseção 
+			 até outra. O número de rotas possíveis pode ser enorme, ainda que sejam descartadas
+			  as rotas que cruzam sobre si mesmas. Como escolher qual de todas as rotas 
+			  possíveis é a mais curta? Aqui, modelamos o mapa rodoviário (que é ele próprio
+			   um modelo das estradas reais) como um grafo e desejamos encontrar o caminho mais
+				curto de um vértice até outro no grafo.
+		</section>
+		<section data-markdown>
+			## Problemas que veremos
+			- Temos um projeto mecânico apresentado como um catálogo de peças no qual uma pode incluir
+			instâncias de outras peças e precisamos organizar uma lista ordenada de eças de modo 
+			que cada uma apareça antes de qualquer peça que a utilize. Se o projeto compreender n peças,
+			então haverá n! ordenações possíveis. Como a função fatorial cresce ainda mais rápido
+			que a exponencial, não é viável gerar cada ordenação possível
+		</section>
+		<section data-markdown>
+			- Temos n pontos no plano e desejamos encontrar a envoltória convexa desses pontos.
+			A envoltória convexa é o menor polígono convexo que contém os pontos. Intuitivamente,
+			podemos imaginar que cada ponto é representado por um prego furado a uma tábua. 
+			A envoltória convexa seria representada por um elástico apertado que cercasse todos os
+			pregos. Cada prego pelo qual o elástico passa é um vértice da envoltória convexa. 
+			Quaisquer dos 2, subconjuntos dos pontos poderiam
+			ser os vértices da envoltória convexa. Saber quais pontos são vértices da envoltória
+			convexa não é suficiente, pois também precisamos conhecer a ordem em que eles
+			aparecem. Portanto, há muitas escolhas para os vértices da envoltória convexa. 
+		</section>
+		<section data-markdown>
+			## Problemas que veremos
+			Temos duas sequências ordenas de símbolos, X e Y e queremos determinar uma subsequência
+			comum mais longa de X e Y. 
+		</section>
+		<section data-markdown>
+			## Algoritmos
+			- Esse problemas possuem soluções candidatas, encontrar uma solução que resolva
+			ou que seja a melhor pode ser um desafio significativo
+			- Todos eles possuem aplicação prática
+		</section>
+		<section data-markdown>
+			## Exercícios
+			1. Quais são métricas relevantes de eficiência? Qual a mais importante? Por que?
+			1. Pense em um problema real que precise de ordenação
+			1. Pense em um problema que precise da envoltória convexa
+			1. Escolha uma estrutura de dados e pense nos seus pontos fortes e fracos
+		</section>
+		<section data-markdown>
+			## Algoritmos
+			- Com memória infinita e poder de processamento infinito, para que estudar algoritmos?
+			- Para garantir que ele termina
+			- Para garantir que ele gere a solução esperada 
+			- Como isso não acontece, o tempo e a memória são recursos limitados
+		</section>
+		<section data-markdown>
+				## Algoritmos
+				- Suponha um algoritmo A que leve c1n² para ordenar itens
+				- Suponha um algoritmo B que leve c2nlg n
+				- Suponha que A execute 10^10 instruções por segundo e B 10^7
+				- A é 1000 vezes mais rápido que B!
+				- Suponha ordenar 10 milhões de números
+			</section>
+			<section data-markdown>
+				## Algoritmos
+				\begin{aligned}
+				\frac{2(10^7)^2 instruções}{10^{10}instruções/s} = 20000 s \approx 5.5 h
+				\end{aligned}
+				<br>
+				\begin{aligned}
+				\frac{50(10^7)lg(10^7) instruções}{10^{7}instruções/s} \approx 1163 s \approx 20 min
+				\end{aligned}
+				- Temos uma diferença de 17x!!!
+			</section>
+			<section data-markdown>
+				## Algoritmos
+				- Se a ordenação por inserção leva 8n² passos e a por intercalação 64n lg(n) passos
+				- Para quais valores de n a por inserção será melhor?
+				- Qual é o menor valor de n tal que um algoritmo cujo tempo de execução é 100n² funciona
+				mais rapidamente que um algoritmo com tempo de execução 2^n ?
+			</section>
+			<section data-markdown>
+				## Algoritmos
+				- Se o algoritmo leva f(n) microsegundos = 1e-6s
+				- 1 segundo, 1 minuto, 1 hora, 1 mês, 1 ano, 1 século
+				- Calcular n para:
+					- lg n
+					- raiz n
+					- n
+					- n log n
+					- n²
+					- n³
+					- 2^n
+					- n!
+			</section>
+		<section data-markdown>
+			## Algoritmos
+			- [Implementação de algoritmos em Python](https://github.com/TheAlgorithms/Python)
+			- [Implementação de algoritmos em JS](https://github.com/trekhleb/javascript-algorithms)			
+		</section>
+		<section data-markdown>
+<pre><code>
+for j = 2 to A-comprimento
+	chave = A[j]
+	i = j - 1
+	while i > 0 e A[i] > chave
+		A[i+j] = A[i]
+		i = i -1
+	A[i+1] = chave
+</code></pre>
+		</section>
+		<section data-markdown>
+<pre><code>
+def insertion_sort(collection):
+	for loop_index in range(1, len(collection)):
+		insertion_index = loop_index
+		while insertion_index > 0 and collection[insertion_index - 1] > collection[insertion_index]:
+			collection[insertion_index], collection[insertion_index - 1] = collection[insertion_index - 1], collection[insertion_index]
+			insertion_index -= 1
+	return collection
+	
+</code></pre>
+		</section>
+	
+	</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
