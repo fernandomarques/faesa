@@ -282,6 +282,363 @@ ggplot(data=lda_df, aes(x=borrower_score, y=payment_inc_ratio, color=prob_defaul
 			- Análise de discriminante funciona com preditores contínuos e categóricos e com resultados categóricos
 			- Usando a matriz de covariância é calculado a função de discriminante linear que separa os registros em classes
 		</section>
+		<section data-markdown="">
+			##	Regressão Logística
+			- É análoga a múltiplas regressões lineares, mas o resultado é binário
+			- É um procedimento estruturado, não sendo centrado em dados como KNN e Naive Bayes
+			- É muito rápido e por isso sua popularidade
+			- __Logit__ é a função que mapeia a probabilidade de pertencer a uma classe com alcance de 	&plusmn;&infin;
+		</section>
+		<section data-markdown="">
+			##	Regressão Logística
+			- A regressão logística funciona utilizando a logística de resposta e o _Logit_
+			- Eles mapeia uma probabilidade de 0-1 para uma escale que seja mais adequada para a regressão linear
+			- Vimos a regressão no formato
+			\begin{aligned}
+			p = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_qx_q 
+			\end{aligned}
+		</section>
+		<section data-markdown="">
+			##	Regressão Logística
+			- Mas ajustar a esse modelo não garante que o resultado esteja entre 0 e 1, como toda probabilidade deve estruturado
+			- Por isso usamos a função logística
+			\begin{aligned}
+			p = \frac{1}{1 + e^{-(\beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_qx_q)}}
+			\end{aligned}
+			- Essa transformação garante que p esteja entre 0 e 1
+			- Para tirar a expressão exponencial do denominador, devemos considerar chance ao invés de probabilidade
+		</section>
+		<section data-markdown="">
+			##	Regressão Logística
+			\begin{aligned}
+			Odd(Y=1) = \frac{p}{1-p}
+			\end{aligned}
+			\begin{aligned}
+			p = \frac{Odds}{1+Odds}
+			\end{aligned}
+			- Chance a probabilidade de um evento dividido pela probabilidade de que ele não ocorra
+			- Se a probabilidade de um cavalo ganhar é de 0.5, a de não ganhar é 1 - 0.5 = 0.5
+			- Então, as chances são de 1
+		</section>
+		<section data-markdown="">
+			##	Regressão Logística
+			\begin{aligned}
+			Odds(Y=1) = e^{\beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_qx_q}
+			\end{aligned}
+			\begin{aligned}
+			log(Odds(Y=1)) = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_qx_q
+			\end{aligned}
+			- O logit mapeia a probabilidade p de (0,1) para (-&infin;,+&infin;)
+			- Agora podemos classificar, temos um modelo linear para prever a probabilidade
+			- Podemos usar um limite para mapear qualquer registro com probabilidade maior que ele a uma classe
+		</section>
+<section>
+	<pre><code>
+p &lt;- seq(from=0.01, to=.99, by=.01)
+df &lt;- data.frame(p = p ,
+	logit = log(p/(1-p)),
+	odds = p/(1-p))
+library(ggplot2)
+ggplot(data=df, aes(x=p, y=logit)) +
+	geom_line() +
+	labs(x = 'p', y='logit(p)') +
+	theme_bw()
+			
+	</code></pre>
+</section>
+		<section data-markdown="">
+			![Função Logística](img/Modulo3FuncaoLogistica.png)
+		</section>
+		<section data-markdown="">
+			## Regressão logística e GLM 
+			- Apenas observamos o resultado binário, não o log da chance. Métodos estatísticos
+			são usados para ajustar a curva
+			- Regressão logística são um caso especial do modelo linear generalizado (GLM)
+			- Foram criados para estender a regressão linear para outras configurações
+			- Para usar a regressão logística em R, usamos a função glm com parâmetro `family='binomial'`
+		</section>
+		<section>
+			<pre><code>
+logistic_model &lt- glm(outcome ~ payment_inc_ratio + purpose_ + 
+	home_ + emp_len_ + borrower_score,
+	data=loan_data, family='binomial')
+
+			</code></pre>
+		</section>
+		<section data-markdown="">
+			## Modelos Lineares Generalizados
+			- São a segunda mais importante classe de modelos, perdendo para regressão
+			- Possuem dois componentes
+				- Uma função de distribuição de probabilidade ou família (quando binomial)
+				- Uma função que mapeia a resposta aos preditores (como a logit)
+			- A logística é a mais comum
+			- Outros exemplos são Poisson, binomial negativa e gamma. São usadas para modelar tempo decorrido
+			- Tome cuidado ao trabalhar com essas outras 
+
+		</section>
+		<section data-markdown="">
+			## Valores Preditos
+			\begin{aligned}
+			\hat{p} = \frac{1}{1 + e^{-\hat{Y}}}
+			\end{aligned}
+			`pred &lt;- predict(logistic_model)`
+			 <br>
+			`prob &lt;- 1/(1+exp(-pred))`
+			- Poderíamos estabelecer o limite como 0.5. Na prática, um valor menor é necessário para casos raros
+		</section>
+		<section data-markdown="">
+			### Coeficientes e Razão de Chances
+			- Uma das vantagens da regressão logística é que nela é fácil adicionar novos dados
+			- Para sua interpretação é importante entender o conceito de razão de chances
+			\begin{aligned}
+			razão de chances = \frac{Chance(Y = 1 | X = 1)}{Chance(Y=1 | X = 0)}
+			\end{aligned}
+			- Se a razão é 2, significa que a chance de Y=1 quando X=1 é duas vezes maioria
+			- Na regressão logística &beta;1 é o log da razão de chances para Xp 
+			- Para propósito de pequeno negócio o coeficiente foi 1.21, fazendo exp(1.21) a razão é de 3.37
+		</section>
+
+		<section data-markdown="">
+			![Razão de Chances](img/Módulo3Razão.png)
+			- Se o coeficiente cresce em 1, a razão de chances cresce em 2.72
+		</section>
+		<section data-markdown="">
+			## Comparando com Linear
+			- Ambos consideram uma função paramétrica entre o preditor e a resposta
+			- A exploração dos coeficientes é semelhante
+			- Também é possível aplicar spline e integração passo a passo
+			- Diferenças
+				- O ajustamento não usa menores quadrados, já que não são aplicados
+				- A natureza e a análise de resíduos
+		</section>
+		<section data-markdown="">
+			## Ajustando
+			- Em Logistic o ajuste usa MLE _maximum likehood estimation_
+			- O MLE encontra o modelo que melhor estima o log das chances para a resposta 1
+			- Para fatores, devemos fazer como na regressão lineares
+		</section>
+		<section data-markdown="">
+			## Avaliando o modelo
+			- `summary(logistic_model)`
+			- O p-value é mais relevante para identificar a importância da variável
+			- Não temos RMSE nem R²
+			- Alguns parâmetros do summary como dispersão podem ser ignorados, sendo mais relevantes para outros GLMs
+		</section>
+		<section>
+			<pre><code>
+logistic_gam &lt;- gam(outcome ~ s(payment_inc_ratio) + purpose_ + 
+	home_ + emp_len_ + s(borrower_score),
+	data=loan_data, family='binomial')
+terms &lt;- predict(logistic_gam, type='terms')
+partial_resid &lt;- resid(logistic_gam) + terms
+df &lt;- data.frame(payment_inc_ratio = loan_data[, 'payment_inc_ratio'],
+			   terms = terms[, 's(payment_inc_ratio)'],
+			   partial_resid = partial_resid[, 's(payment_inc_ratio)'])
+
+ggplot(df, aes(x=payment_inc_ratio, y=partial_resid, solid = FALSE)) +
+geom_point(shape=46, alpha=.4) +
+geom_line(aes(x=payment_inc_ratio, y=terms), 
+		  color='red', alpha=.5, size=1.5) +
+labs(y='Partial Residual') +
+xlim(0, 25) +
+theme_bw()
+			</code>
+			</pre>
+		</section>
+		<section data-markdown="">
+			- Logística é parecida com Linear, mas o resultado é binário
+			- Algumas transformações são necessárias
+			- É popular por ser rápido e gerar um modelo que pode ser pontuado a novos dados sem recalcular
+		</section>
+		<section data-markdown="">
+			## Avaliando modelos de Classificação
+			- Uma forma simples é contar a proporção de predições corretas
+			<br>
+			\begin{aligned}
+			acurácia = \frac{\sum{Verdadeiro Positivo} + \sum{Verdadeiro Negativo}}{Tamanho Amostra}
+			\end{aligned}
+		</section>
+		<section data-markdown="">
+			## Matriz de Confusão 
+			- Mostra as predições corretas e incorretas categorizados pelo tipo da resposta
+		</section>
+		<section>
+<pre><code>
+pred &lt;- predict(logistic_gam, newdata=loan_data)
+pred_y &lt;- as.numeric(pred > 0)
+true_y &lt;- as.numeric(loan_data$outcome=='default')
+true_pos &lt;- (true_y==1) & (pred_y==1)
+true_neg &lt;- (true_y==0) & (pred_y==0)
+false_pos &lt;- (true_y==0) & (pred_y==1)
+false_neg &lt;- (true_y==1) & (pred_y==0)
+conf_mat &lt;- matrix(c(sum(true_pos), sum(false_pos),
+	sum(false_neg), sum(true_neg)), 2, 2)
+colnames(conf_mat) &lt;- c('Yhat = 1', 'Yhat = 0')
+rownames(conf_mat) &lt;- c('Y = 1', 'Y = 0')
+conf_mat
+
+# precision
+conf_mat[1,1]/sum(conf_mat[,1])
+# recall
+conf_mat[1,1]/sum(conf_mat[1,])
+# specificity
+conf_mat[2,2]/sum(conf_mat[2,])
+</code></pre>
+		</section>
+		<section data-markdown="">
+			## Problema de classes raras
+			- Muitas vezes existe um desequilíbrio com uma classe sendo mais prevalente que outras
+			- A classe rara costuma ser a classe de interesse, geralmente o 1
+			- Geralmente classificar errôneamente um 1 como 0, costuma ser pior que um 0 como 1
+			- Se uma fraude for identificada errôneamente, é feita uma análise manual para verificar
+			- Se o evento raro ocorre com 0.1% de chance, um modelo que sempre responde 0 tem precisão de 99.9%,
+			__isso é bom!?__
+		</section>
+		<section data-markdown="">
+			## Precision, Recall e Specificity
+			\begin{aligned}
+			precision = \frac{\sum{Verdadeiro Positivo}}{\sum{Verdadeiro Positivo} + \sum{Falso Positivo}}
+			\end{aligned}
+			<br>
+			- Mede a acurácia de predizer um resultado positivo
+			<br>
+			\begin{aligned}
+			recall = \frac{\sum{Verdadeiro Positivo}}{\sum{Verdadeiro Positivo} + \sum{Falso Negativo}}
+			\end{aligned}
+			<br>
+			- Recall ou sensitividade (usado, também, em biomedicina) mostra a força do modelo de medir corretamente os resultados
+			positivos
+		
+		</section>
+		<section data-markdown="">
+			## Precision, Recall e Specificity
+			\begin{aligned}
+			specificity = \frac{\sum{Verdadeiro Negativo}}{\sum{Verdadeiro Negativo} + \sum{Falso Positivo}}
+			\end{aligned}
+			- Probabilidade do modelo de predizer um resultado negativo
+		</section>
+		<section data-markdown="">
+			## Curva ROC
+			- Existe um _tradeoff_ entre especificidade e recall, Identificar mais 1s pode classificar errôneamente mais 0s e 1s
+			- A métrica que captura o tradeoff é a curva de  _Receiver Operating Characteristics_
+			- Para gerar a curva:
+				1. Ordene os registros pela probabilidade de ser 1
+				1. Compute a especificidade e recall cumulativo
+		</section>
+		<section>
+<pre><code>
+
+idx <- order(-pred)
+recall <- cumsum(true_y[idx]==1)/sum(true_y==1)
+specificity <- (sum(true_y==0) - cumsum(true_y[idx]==0))/sum(true_y==0)
+roc_df <- data.frame(recall = recall, specificity = specificity)
+ggplot(roc_df, aes(x=specificity, y=recall)) +
+	geom_line(color='blue') + 
+	scale_x_reverse(expand=c(0, 0)) +
+	scale_y_continuous(expand=c(0, 0)) + 
+	geom_line(data=data.frame(x=(0:100)/100), aes(x=x, y=1-x),
+			linetype='dotted', color='red') +
+	theme_bw()
+</code></pre>
+<p>A linha pontilhada mostra um classificador 'aleatório'</p>
+<p>Outra curva é de Precisão-Recall, mas agora é ordenado do maior para o menor</p>
+		</section>
+		<section data-markdown="">
+			## AUC
+			- Apesar de gráficamente útil, o ROC sozinho não tem uma única medida de performance
+			- O AUC é a área a baixo da curva ROC
+			- Um valor de 1 indica um classificador perfeito
+			- 0.5 indica um classificador ineficáz 
+			- `sum(roc_df recall[-1] * diff(1-roc_df specificity))`
+		</section>
+		<section data-markdown="">
+			## Lift
+			- AUC é uma boa métrica pois verifica o tradeoff entre acurácia e os 1s
+			- Não trata o problema de classes raras , onde temos que deixar o limite a baixo de 0.5, podendo de 0.4, 0.3 ou menor!
+			- Como resultado classificamos mais 1s, refletindo a importância
+			- Modificar o limite aumenta as chances de identificar 1s ao custo de classificar errado 0s e 1s, qual é o melhor limite?
+
+		</section>
+		<section data-markdown="">
+			- Acurácia é apenas uma das formas de avaliar o modelo
+			- Métricas como recall, specificity e precision focam em características mais específicas de performance
+			- AUC é uma métrica para identifica a habilidade do modelo de distinguir 1s de 0s
+			- lift mostra quão efetivo o modelo é em identificar 1s
+		</section>
+		<section data-markdown="">
+			## Técnicas para dados desbalanceados
+			- Vimos o caso de classe raras
+			- Veremos outras técnicas para tratar esse mesmo tipo de problema
+		</section>
+		<section data-markdown="">
+			## Undersampling
+			- A ideia é que a classe dominante possui muitos registros redundantes
+			- Quanto mais distinguível forem as duas classes, menos dados precisamos
+			- Assim, removemos os registros que estão em 'excesso' antes de treinar o modelo
+			- A classe comum com a variabilidade dos preditores faz com que mesmo preditores que indicariam o raro,
+			possuem equivalentes da mais comum
+		</section>
+		<section>
+			<pre><code>
+mean(full_train_set$outcome=='default')
+# 19% dos dados é default
+full_model <- glm(outcome ~ payment_inc_ratio + purpose_ + 
+	home_ + emp_len_+ dti + revol_bal + revol_util,
+	data=full_train_set, family='binomial')
+pred <- predict(full_model)
+mean(pred > 0)
+# Apenas 0.39% foram preditos como default, 1/12 do valor esperado!
+			</code></pre>
+		</section>
+		<section data-markdown="">
+			## Oversampling e Ajustes para Cima e Baixo
+			- Uma crítica ao undersampling é que deixamos de usar dados, não usando todos os dados a nossa disposição
+			- Para um data set pequeno, isso pode ser um problema!
+			- Uma solução é, ao invés de downsampling o caso dominante, fazer oversample do caso raro
+			- Podemos fazer isso usando reposição (bootstrap) nos casos raros
+			- Para alcançar um efeito similar podemos ajustar os dados
+		</section>
+		<section>
+			<pre><code>
+wt <- ifelse(full_train_set$outcome=='default', 1/mean(full_train_set$outcome == 'default'), 1)
+full_model <- glm(outcome ~ payment_inc_ratio + purpose_ + 
+	home_ + emp_len_+ dti + revol_bal + revol_util,
+	data=full_train_set, weight=wt, family='quasibinomial')
+pred <- predict(full_model)
+mean(pred > 0)
+# A soma dos pesos para default e não default é quase igual
+			</code></pre>
+		</section>
+		<section data-markdown="">
+			## Geração de dados
+			- É uma variação de upsampling, onde geramos perturbação nos dados existentes para gerar novos dados
+			- O método SMOTE encontra um registro similar ao que está sendo upsampled e cria um registro sintético
+			que é uma média aleatória do registro original e seus vizinhos
+			- O pacote mais usado em R para geração de dados é o `unbalanced` que possui um algoritmo `Racing`
+			para encontrar o melhor método
+			- SMOTE também é implementado pelo pacote `FNN` e costuma ser uma boa escolha
+		</section>
+		<section data-markdown="">
+			## Classificação Baseada em Custo
+			- Muitas vezes é possível estimar custos relacionados com o resultado positivo ou negativo
+			- Se R é o custo de um default e o retorno de paid-off é R
+			\begin{aligned}
+				retorno = P(Y=0) \times R + P(Y = 1) \times C
+			\end{aligned}
+			- Ao invés de identificar a probabilidade de não pagar, podemos verificar se há um retorno positivo
+			- Nesse caso, a probabilidade de inadimplência é um passo intermediário
+		</section>
+		<section data-markdown="">
+			## Explorando Predições
+			- Em muitos casos, uma única métrica como AUC não consegue capturar todos aspectos relevantes para a situação
+			- Na figura, os valores a cima das curvas são default
+			![Comparação entre regras de classificação de métodos diferentes](img/Modulo3Metodos.png)
+		<section data-markdown="">
+			- Dados desbalanceados são problema para algoritmos de classificação
+			- Uma estratégia é balancear os dados com undersample ou Oversampling
+			- SMOTe permite criar dados sintéticos
+			- Dados desbalanceados indica que classificar corretamente uma classe tem mais valor, essa razão deve ser levada em conta
+		</section>
 			</div>
 		</div>
 
