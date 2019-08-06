@@ -47,11 +47,331 @@
 					</p>
 		</section>
 		<section data-markdown="">
-			## 
-			- 
+			- Avanços recentes na estatística tem sido voltado para técnicas autônomas para modelos preditivos
+			- Eles são data-driven, ou seja, não se preocupam em ter uma relação linear ou outro tipo de relação
+			- Uma das técnicas mais utilizadas é agrupamento (ensemble) aplicado a árvores de decisão, onde diversos
+			modelos são criados para formar a predição
+
 		</section>
+		<section data-markdown="">
+			## K-Nearest Neighbors
+			- Ou K vizinhos mais próximos usa um algoritmo simples para fazer a classificação
+				1. Encontre k registros que tenham características semelhantes 
+				1. Para classificação, encontre qual é a classe majoritária dentre os vizinhos e a atribua ao novo registro
+				1. Para predição, calcule a média e atribua ao novo valor
+		</section>
+		<section data-markdown="">
+			## KNN
+			- É uma das técnicas mais simples para predição e classificação
+			- Não é necessário treinar um modelo
+			- A predição depende da escala das características, da métrica de similaridade e do tamanho de K
+			- Todos os preditores devem ser numéricos
+		</section>
+		<section data-markdown="">
+			## KNN - Exemplo
+			- _Mostrar a tabela do lending club_
+			- Considerando um modelo simples com dois preditores
+				- dit - razão de dívidas para renda
+				- payment_inc_ratio - razão de pagamento de empréstimo por renda
+			- Apesar de R ter KNN de forma nativa, a biblioteca FNN tem melhor escalabilidade e flexibilidade
+		</section>
+		<section>
+			<pre><code>
+newloan <- loan200[1, 2:3, drop=FALSE]
+knn_pred <- knn(train=loan200[-1,2:3], test=newloan, cl=loan200[-1,1], k=20)
+knn_pred == 'paid off'
+
+## look at the nearest 20 records
+loan200[attr(knn_pred, 'nn.index')-1, ]
+dist <- attr(knn_pred, 'nn.dist')
+			</code></pre>
+		</section>
+		<section>
+			<pre><code>
+circleFun <- function(center = c(0,0), r = 1, npoints = 100){
+	tt <- seq(0, 2*pi, length.out = npoints-1)
+	xx <- center[1] + r * cos(tt)
+	yy <- center[2] + r * sin(tt)
+	return(data.frame(x = c(xx, xx[1]), y = c(yy, yy[1])))
+}
 	
-			</div>
+circle_df <- circleFun(center=unlist(newloan), r=max(dist), npoints=201)
+loan200_df <- bind_cols(loan200, circle_df)
+
+ggplot(data=loan200_df, aes(x=payment_inc_ratio, dti, color=outcome, shape=outcome)) +
+  geom_point(size=2) +
+  scale_color_manual(values=c("#999999", "#E69F00", "#56B4E9")) +
+  scale_shape_manual(values = c(1, 4, 15)) +
+  geom_path(aes(x=x, y=y), color='black') +
+  xlim(3, 15) + 
+  ylim(17, 29) +
+  theme_bw() 
+			</code></pre>
+		</section>
+		<section data-markdown="">
+			## Métricas de Distância
+			- A similaridade entre dois registros é medida usando métricas de distância
+			- A métrica mais popular é a distância euclidiana
+			\begin{aligned}
+			\sqrt{(x_1 - u_1)^2+(x_2 - u_2)^2+\dots+(x_p - u_p)^2}
+			\end{aligned}
+			- Outra métrica comum é a Distância Manhattan
+			\begin{aligned}
+			|x_1 - u_1| + |x_2 - u_2| + \dots +|x_p - u_p| 
+			\end{aligned}
+			- A distância euclidiana é uma linha reta entre dois pontos, já manhattan anda uma direção por vez
+			- Existem outras métricas como Mahalanobis que considera correlação mas é mais custosa computacionalmente
+		</section>
+		<section data-markdown="">
+			## One Hot Encoder
+			- Vimos que para regressão o One Hot Encoder pode causar problemas com multicolinearidade, esse não é
+			o caso para KNN e outros métodos
+		</section>
+		<section data-markdown="">
+			## Normalização
+			- Muitas vezes não estamos interessados em quanto e sim em quão diferente da média
+			- Normalização coloca todas as variáveis na mesma escala, subtraindo a média e dividindo pelo desvio padrão
+			\begin{aligned}
+			z = \frac{x-\hat{x}}{s}
+			\end{aligned}
+			- Isso garante que a variável não vai influenciar muito o modelo simplesmente pelo seu 'tamanho'
+		</section>
+		<section>
+			<pre><code>
+loan_df <- model.matrix(~ -1 + payment_inc_ratio + dti + revol_bal + revol_util, data=loan_data)
+newloan = loan_df[1,, drop=FALSE]
+loan_df = loan_df[-1,]
+outcome <- loan_data[-1,1]
+knn_pred <- knn(train=loan_df, test=newloan, cl=outcome, k=5)
+knn_pred
+loan_df[attr(knn_pred,"nn.index"),]
+			</code></pre>
+			<p>notar os valores de revol_bal</p>
+		</section>
+		<section>
+			<pre><code>
+loan_df <- model.matrix(~ -1 + payment_inc_ratio + dti + revol_bal + revol_util, data=loan_data)
+loan_std <- scale(loan_df)
+target_std = loan_std[1,, drop=FALSE]
+loan_std = loan_std[-1,]
+outcome <- loan_data[-1,1]
+knn_pred <- knn(train=loan_std, test=target_std, cl=outcome, k=5)
+knn_pred
+loan_df[attr(knn_pred,"nn.index"),]
+			</code></pre>
+			<p>Apesar de mostrar na escala original, foi calculado com os dados padronizados</p>
+		</section>
+		<section data-markdown="">
+			## Normalização
+			- É possível utilizar outras métricas mais robustas para normalizar, como a mediana ou quartis
+			- Também poderíamos transformar as variáveis em escala de 0 a 1
+			- Finalmente, se uma variável tiver mais importância que outras, podemos escalar ela para representar a importância
+		</section>
+		<section data-markdown="">
+			## Escolhendo K
+			- Se K = 1, procuramos o registro mais próximo e o usamos como referência. Quase sempre teremos performance melhor
+			para K>1
+			- Se K for muito baixo, podemos estar overfitting
+			- Se K for muito alto, o modelo perde a capacidade de identificar estruturas locais
+			- Uma forma de testar valores de K é separando base para testes 
+			- Para bases com poucos ruídos, um valor de K baixo é aceitável
+			- Tipicamente K fica entre 1 e 20, com valores impares evitando empates
+		</section>
+		<section data-markdown="">
+			## KNN como mecanísmo de características
+			- KNN ganhou popularidade por sua simplicidade e fácil entendimento
+			- Porém, em termos de performance, ele perde para técnicas mais sofisticadas de classificação
+			- No entanto, podemos usar o KNN para adicionar 'conhecimento local' aos dados
+				1. KNN é executado e adiciona uma nova classificação aos dados
+				1. Essa classificação é colocada como característica e outros métodos de classificação são usados
+		</section>
+		<section data-markdown="">
+			## KNN como mecanísmo de características
+			- Esse processo não adiciona multicolinearidade pois os valores usados são locais
+			- Se imaginarmos, intuitivamente fazemos algo parecido
+			- Quanto vale um carro X em boas condições adicionais I,J,K de 2017?
+			- Procuramos carros com características semelhantes e temos uma idéia do preço!
+		</section>
+		<section>
+			<pre><code>
+borrow_df <- model.matrix(~ -1 + dti + revol_bal + revol_util + open_acc +
+	delinq_2yrs_zero + pub_rec_zero, data=loan_data)
+borrow_knn <- knn(borrow_df, test=borrow_df, cl=loan_data[, 'outcome'], prob=TRUE, k=20)
+prob <- attr(borrow_knn, "prob")
+borrow_feature <- ifelse(borrow_knn=='default', 1-prob, prob)
+summary(borrow_feature)
+
+loan_data$borrower_score <- borrow_feature
+
+			</code></pre>
+			<p>Cria uma feature que preve a chance de inadimplência com base no histórico de crédito</p>
+		</section>
+		<section data-markdown="">
+			- KNN Classifica usando as classes dos vizinhos
+			- A similaridade pode ser distância euclidiana ou outras
+			- O número de K determina quão bem o algoritmo funcionará
+			- Tipicamente devemos normatizar os dados
+			- Pode ser usado como primeiro estágio em um modelo preditivo
+		</section>
+		<section data-markdown="">
+			## Modelos de Árvores
+			- Modelos de árvores, em conjunto com florestas aleatórias e boosting, formam as ferramentas mais poderosas
+			e usadas para regressão e predição
+			- Um modelo de árvore é um conjunto de regras "se, se não" que são fácilmente entendidos e implementados
+		</section>
+		<section >
+			<img src="img/Modulo4DecisionTree.jpg" alt="Árvore de Decisão" >
+		</section>
+		<section>
+			<pre><code>
+library(rpart)
+loan_tree <- rpart(outcome ~ borrower_score + payment_inc_ratio,
+data=loan3000, 
+control = rpart.control(cp=.005))
+plot(loan_tree, uniform=TRUE, margin=.05)
+text(loan_tree, cex=.75)
+# Para o Pedro podemos fazer
+library(rattle)
+fancyRpartPlot(loan_tree, cex = 0.8)
+			</code></pre>
+		</section>
+		<section >
+			<h3> Particionamento Recursivo</h3>
+			<ul>
+				<li>Para particionar os dados o algoritmo usa valores de preditores que façam o melhor possível para separar os dados de forma homogenia </li>
+				<li>Suponha que tenhamos uma variável de resposta Y e um conjunto P de preditores Xj</li>
+			</ul>
+			<ol>
+				<li>Para cada preditor Xj</li>
+				<ol>
+						<li>Para cada valor sj de Xj</li>
+						<ol type="A">
+							<li>Divida os registros maiores e menores</li>
+							<li> Meça a homogeneidade de cada partição</li>
+							</ol>
+						<li> Selecione sj que teve maior homogeneidade entre partição</li>
+				</ol>
+			</ol>
+				
+				</section>
+		<section >
+			<h3> Particionamento Recursivo</h3>
+			<ul>
+				<li>A parte recursiva do algoritmo </li>
+			</ul>
+			<ol>
+				<li>Inicie A com todo o dataset</li>
+				<li>Aplique o algoritmo de partição para gerar A1 e A2</li>
+				<li>Repita o passo 2 para A1 e A2</li>
+				<li>O algoritmo termina quando nenhuma partição pode ser feita para melhorar a homogeneidade</li>
+			</ol>
+				
+				</section>
+				<section>
+					<pre><code>
+r_tree <- data_frame(x1 = c(0.575, 0.375, 0.375, 0.375, 0.475),
+x2 = c(0.575, 0.375, 0.575, 0.575, 0.475),
+y1 = c(0,         0, 10.42, 4.426, 4.426),
+y2 = c(25,       25, 10.42, 4.426, 10.42),
+rule_number = factor(c(1, 2, 3, 4, 5)))
+r_tree <- as.data.frame(r_tree)
+
+labs <- data.frame(x=c(.575 + (1-.575)/2, 
+	.375/2, 
+	(.375 + .575)/2,
+	(.375 + .575)/2, 
+	(.475 + .575)/2, 
+	(.375 + .475)/2
+	),
+y=c(12.5, 
+	12.5,
+	10.42 + (25-10.42)/2,
+	4.426/2, 
+	4.426 + (10.42-4.426)/2,
+	4.426 + (10.42-4.426)/2
+	),
+decision = factor(c('paid off', 'default', 'default', 'paid off', 'paid off', 'default')))
+
+
+
+ggplot(data=loan3000, aes(x=borrower_score, y=payment_inc_ratio)) +
+geom_point( aes(color=outcome, shape=outcome), alpha=.5) +
+scale_color_manual(values=c('blue', 'red')) +
+scale_shape_manual(values = c(1, 46)) +
+# scale_shape_discrete(solid=FALSE) +
+geom_segment(data=r_tree, aes(x=x1, y=y1, xend=x2, yend=y2, linetype=rule_number), size=1.5, alpha=.7) +
+guides(colour = guide_legend(override.aes = list(size=1.5)),
+linetype = guide_legend(keywidth=3, override.aes = list(size=1))) +
+scale_x_continuous(expand=c(0,0)) + 
+scale_y_continuous(expand=c(0,0), limits=c(0, 25)) + 
+geom_label(data=labs, aes(x=x, y=y, label=decision)) +
+		 theme_bw()
+					</code></pre>
+				</section>
+		<section data-markdown="">
+			## Medindo homogeneidade
+			- Pelo algoritmo que vimos, precisamos de uma forma de medir a homogeneidade, ou pureza, das partições
+			- A precisão das predições é uma proporção de p dados classificados errados dentro da partição
+			- Varia de 0 (não houve erro) a 0.5 (chutes aleatórios)
+			- Porém precisão não é uma boa métrica, as métricas usadas são Impuridade de Gini e Entropia da Informação
+		</section>
+		<section data-markdown="">
+			## Medindo homogeneidade
+			- Gini impurity
+			\begin{aligned}
+			I(A) = p(1-p)
+			\end{aligned}
+			- Entropia
+			\begin{aligned}
+			I(A) = -p log_2(p) - (1 - p) log_2(1-p)
+			\end{aligned}
+		</section>
+		<section data-markdown="">
+			![Comparação de impuridade](img/Modulo4Impuridade.png)
+		</section>
+		<section data-markdown="">
+			## Parando o crescimento
+			- Se a árvore crescer muito, ela para de identificar grandes regras e começa
+			a identificar para pequenas regras
+			- Uma árvore completamente crescida acertará 100% nos dados em que foi treinada
+			- Precisamos determinar quando a árvore deve parar de crescer
+				- Não deixar dividir se a subpartição resultante for muito pequeno ou se a folha terminal for muito pequena.
+		 `minbucket` e `minsplit`
+				- Não dividir se a nova partição não reduzir significativamente a impureza `cp`
+		</section>
+		<section data-markdown="">
+			## Parando o crescimento
+			- `minbucket` e `minsplit` são arbitrários e podem ser úteis para análise exploratória, mas não existem valores
+			ótimos
+			- Se `cp` for muito pequeno, a árvore vai ter overfit
+			- Se for muito grande, a árvore será muito pequena e terá baixo poder de predição
+			- O padrão é 0.01, o que pode ser muito alto para data sets muito grandes
+			- A melhor forma de estimar um bom valor para cp é usando validação cruzada
+			- o `rpart` tem o argumento `cptable` que mostra a tabela de valores de cp e o erro cruzado associado (xerr)
+		</section>
+		<section data-markdown="">
+			## Poda
+			- Uma outra forma é deixar a árvore crescer e depois ir podando
+			- A poda remove terminais e pequenos ramos da árvore
+			- Uma forma de saber até onde poder é usar o erro da validação cruzada como referência
+		</section>
+		<section data-markdown="">
+			## Como usar as árvores
+			- Um dos grandes problemas em modelos preditivos é que muitas vezes é visto como 'caixa preta'
+			- Nesse sentido as árvores possuem duas vantagens
+				1. Fornecem uma ferramenta visual para explorar os dados, identificar quais variáveis são importantes e
+				detectar relações não lineares
+				1. Fornecem um conjunto de regras que não especialistas entendem
+			- Porém, quando se trata de predição um conjunto de árvores costuma ser mais potente que uma só árvore
+			- Só que ao usar as técnicas de boosting e random forest, perdemos as duas vantagens...
+		</section>
+		<section data-markdown="">
+			- Árvores de decisão fornecem um conjunto de regras para classificar ou predizer
+			- As regras são geradas pelo particionamento dos dados
+			- Cada partição referência um valor de uma variável preditora
+			- A cada estágio o algoritmo escolhe a divisão que minimiza a impuridade
+		</section>
+				</div>
 		</div>
 
 		<script src="../lib/js/head.min.js"></script>
