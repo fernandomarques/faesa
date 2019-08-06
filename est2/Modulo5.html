@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Estatística para Data Science II</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<style>
+			img {
+				border : 0px !important;
+			}
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Árvores Aleatórias e Boosting</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown="">
+			> Em 1906 o estatístico Sir Francis Galton visitava uma feira na Inglaterra.
+			Os participantes deveriam adivinhar o peso de um touro adornado que estava em exposição.
+			Foram 800 tentativas e apesar dos valores individuais variarem muito, tanto a média
+			quanto a mediana ficaram a 1% do peso real do animal.			
+
+		</section>
+	<section data-markdown="">
+		## Ensemble
+		- Ensemble, formar uma predição com base em vários modelos, é usado em diferentes modelos
+		- A versão simples funciona da seguinte forma
+			1. Crie um modelo preditivo e registre as predições para os dados
+			1. Repita para vários modelos nos mesmo dados
+			1. Para cada registro predito calcule a média (ou média pondera, ou maioria dos votos)
+		- Para árvores existem duas variações mais comuns:
+			1. Bagging, que em árvore é random forest
+			1. Boosting
+	</section>
+	<section data-markdown="">
+		## Bagging
+		- Vem de "bootstrap aggregating" foi introduzido em 1994, suponha que tenhamos uma resposta Y com P preditores
+		X = X1, X2, ... , Xp com N registros
+		- Ao invés de criar vários modelos do mesmo dado, cada modelo é ajustado a uma reamostra de bootstrap
+			1. Inicialize M, número de modelos e n (n&lt;N), número de registros. m = 1
+			1. Tire uma amostra do bootstrap de tamanho n para formar Ym e Xm
+			1. Treine o modelo usando Ym e Xm para criar uma regra fm(X)
+			1. Incremente o contador m = m + 1. Se m &lt; M, volte para 2.
+	</section>
+	<section data-markdown="">
+		## Bagging
+		- Depois de terminar o algoritmo teremos a fórmula
+		\begin{aligned}
+		\hat{f} = \frac{1}{M}(\hat{f}_1(X) + \hat{f}_2(X) + \dots + \hat{f}_M(X))
+		\end{aligned}
+	</section>
+	<section data-markdown="">
+		## Floresta Aleatória
+		- Random Forest é um trademark!
+		- A floresta aleatória aplica o bagging a árvores com uma extensão:
+			- Além de fazer amostragem dos dados, também faz amostragem das variáveis preditoras
+		- Em árvores tradicionais o algoritmo cria subpartições minimizando a impureza com critérios como Gini Impurity
+		- Na floresta aleatória a cada estágio o algoritmo escolha variáveis de um subset aleatório de variáveis
+		- Comparado ao algoritmo da árvore é adiciona um passo para o bagging e bootstrap das variáveis
+	</section>
+	<section data-markdown="">
+		## Floresta Aleatória
+		- Mas então quantas variáveis devemos ter para cada passo? Uma regra é usar &radic;P onde P é o número de preditores
+		- O pacote `randomForest` implementa florestas aleatórias
+		- Por padrão são treinadas 500 árvores
+		- A estimativa _out-of-bag_ (OOB) estima a taxa de erro para os modelos treinados, usando dados que não foram usados no treinados
+		- A taxa de erro caí rápidamente até estabilizar
+	</section>
+	<section>
+		<pre><code>
+library(randomForest)
+rf <- randomForest(outcome ~ borrower_score + payment_inc_ratio,
+	data=loan3000)
+rf
+		</code></pre>
+	</section>
+	<section>
+		<pre><code>
+error_df = data.frame(error_rate = rf$err.rate[,'OOB'],
+	num_trees = 1:rf$ntree)
+ggplot(error_df, aes(x=num_trees, y=error_rate)) +
+geom_line()  +
+theme_bw()
+		</code></pre>
+	</section>
+	<section>
+		<pre><code>
+pred <- predict(rf, prob=TRUE)
+rf_df <- cbind(loan3000, pred = pred)
+
+ggplot(data=rf_df, aes(x=borrower_score, y=payment_inc_ratio, 
+	shape=pred, color=pred)) +
+geom_point(alpha=.6, size=2) +
+scale_shape_manual( values=c( 46, 4)) +
+scale_x_continuous(expand=c(0,0)) + 
+scale_y_continuous(expand=c(0,0), lim=c(0, 20)) + 
+theme_bw()
+		</code></pre>
+	</section>
+	<section data-markdown="">
+		## Random Forest
+		- O método funciona como uma caixa preta
+		- Apesar de produzir predições mais precisas que árvores, as regras intuítivas das árvores são perdidas
+		- Reparem que alguns empréstimos com um score alto foram marcados como inadimplentes, pode ser resultado
+		de registros incomuns e mostra os perigos de overfitting com florestas aleatórias
+	</section>
+	<section data-markdown="">
+		## Variáveis de Importância
+		- O poder da floresta aleatória aparece quando criamos um modelo com muitos preditores
+		- Ela tem a habilidade de determinar quais preditores são mais importantes e encontrar relações complexas
+
+	</section>
+	<section>
+		<pre><code>
+rf_all <- randomForest(outcome ~ ., data=loan_data, importance=TRUE)
+rf_all
+
+varImpPlot(rf_all, type=1)
+
+
+		</code></pre>
+	</section>
+	<section>
+		<pre><code>
+imp1 <- importance(rf_all, type=1)
+imp2 <- importance(rf_all, type=2)
+idx <- order(imp1[,1])
+nms <- factor(row.names(imp1)[idx], levels=row.names(imp1)[idx])
+imp <- data.frame(Predictor = rep(nms, 2),
+	Importance = c(imp1[idx, 1], imp2[idx, 1]),
+	Type = rep( c('Accuracy Decrease', 'Gini Decrease'), rep(nrow(imp1), 2)))
+ggplot(imp) + 
+geom_point(aes(y=Predictor, x=Importance), size=2, stat="identity") + 
+facet_wrap(~Type, ncol=1, scales="free_x") + 
+theme(
+	panel.grid.major.x = element_blank() ,
+	panel.grid.major.y = element_line(linetype=3, color="darkgray") ) +
+theme_bw()
+		</code></pre>
+	</section>
+	<section data-markdown="">
+		![Output da RandomForest](img/Modulo5OutputArvore.png)
+	</section>
+	<section data-markdown="">
+		![Output da RandomForest](img/Modulo5Importancia.png)
+	</section>
+	<section data-markdown="">
+		## Variáveis de Importância
+		- Existem duas formas de medir a importância das variáveis
+			1. A diminuição da acurácia do modelo quando as variáveis são permutadas
+			1. Pela diminuição do valor do Gini Impurity Score
+		- Por padrão o modelo calcula Gini como subproduto do algoritmo, enquanto a acurácia requer computação extra
+		- Em casos onde a complexidade computacional é muito alta, o Gini pode ser suficiente 
+		- O Gini também mostra quais variáveis estão sendo sendo mais usadas para fazer o particionamento
+	</section>
+	<section data-markdown="">
+		## Hiperparâmetros
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+	<section data-markdown="">
+		##
+		-
+	</section>
+				</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
