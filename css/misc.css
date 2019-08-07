@@ -52,7 +52,7 @@ div.small-box {
 	background: rgba(204,204,204,0.4);
 }
 
-.code-big{
-  font-size:1.5em;
-   line-height: 120%;
+.code-big {
+  font-size:1.5em !important;
+   line-height: 120% !important;
 }
