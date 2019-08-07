@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Complexidade de Algoritmos</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="../css/misc.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>InsertionSort</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown>
+			## Objetivos
+			- Recordar InsertionSort
+			- Registrar a necessidade de se determinar o número de operações realizadas por um algoritmo
+			- Analisar a complexidade do InsertionSort
+		</section>
+		<section data-markdown>
+			## Problema de ordenação
+			\begin{aligned}
+			Entrada = { a_1, a_2, a_3, ... , a_n} 
+			\end{aligned}
+			\begin{aligned}
+			Saída = { a'_1, a'_2, a'_3, ... , a'_n}
+			\end{aligned}
+			\begin{aligned}
+			a'_1 \leq a'_2 \leq a'_3 \leq ... \leq a'_n
+			\end{aligned}
+			- Os números ordenados também são conhecidos como __chaves__, apesar de estarmos ordenando números, pode ser qualquer
+			arranjo de _n_ elementos
+		</section>
+		<section data-markdown="">
+			## Ordenação por inserção
+			- É um algoritmo eficiente para ordenar uma pequena quantidade de números
+			- Se começarmos com as cartas do baralho viradas para baixo, vamos pegando as cartas e as inserindo de
+			forma ordenada
+		</section>
+		<section >
+			<pre><code class="code-big">
+for j = 2 to A-comprimento
+	chave = A[j]
+	i = j - 1
+	while i > 0 e A[i] > chave
+		A[i+j] = A[i]
+		i = i -1
+	A[i+1] = chave
+			</code></pre>
+					</section>
+					<section >
+			<pre><code >
+def insertion_sort(collection):
+	for loop_index in range(1, len(collection)):
+		insertion_index = loop_index
+		while insertion_index > 0 and collection[insertion_index - 1] > collection[insertion_index]:
+			collection[insertion_index], collection[insertion_index - 1] = collection[insertion_index - 1], collection[insertion_index]
+			insertion_index -= 1
+	return collection
+val = list(range(1000))				
+random.shuffle(val)
+insertion_sort(val)
+			</code></pre>
+					</section>
+		<section data-markdown="">
+			## Invariantes e Correção
+			- Sendo j o índice da 'carta atual' podemos afirmar que A[1..j-1] constitui a mão ordenada e o conjunto restante
+			A[j+1..n] corresponde à pilha de cartas que ainda está sobre a mesa
+			- Afirmamos as propriedades de `A[1..j-1]` formalmente como um de _invariante do laço_
+			- No início de cada iteração para o laço __for__ o subarranjo consiste nos elementos que estavam em A, porém na sequência ordenada
+			- Usamos invariantes de laço para nos ajudar a entender por que um algoritmo é correto
+		</section>
+		<section data-markdown="">
+			## Invariantes e Correção
+			- Devemos mostrar três detalhes sobre um invariante de laço:
+				1. __Inicialização__: ele é verdadeiro antes da primeira iteração do laço lógico
+				1. __Manutenção__: Se ele for verdadeiro antes de uma iteração do laço, permanecerá verdadeiro antes da próxima iteração
+				1. __Término__: Quando o laço termina, o invariante nos fornece uma propriedade útil que ajuda a mostrar que o algoritmo é correto
+			- Quando as duas primeiras propriedades são válidas, o invariante de laço é verdadeiro antes de toda iteração do laço
+			- Para provar que uma propriedade é válida, provamos uma base e um passo de indução
+			- Provar que o invariante é válido antes da primeira iteração é a base
+			- Provar que o invariante é válido de uma iteração para a outra equivale ao passo
+		</section>
+		<section data-markdown="">
+			## Invariantes e Correção
+			- A terceira propriedade pode ser a mais importante, já que usamos o invariante de laço para mostrar a correção
+			- Normalmente usamos a invariante do laço com a condição que provocou o término do laço
+			- Paramos a indução quando o laço termina
+		</section>
+		<section data-markdown="">
+			## Invariantes Insort 
+			- __Inicialização__
+			- Temos que mostrar que o invariante é válido antes da primeira iteração do laço, quando j=2
+			- Assim, o sub-arranjo A[1.. j-1] consiste apenas de A[1]
+			- O sub-arranjo é trivialmente ordenado
+			- Temos então que o invariante é válido para a primeira parte 
+		</section>
+		<section data-markdown="">
+			## Invariantes Insort 
+			- __Manutenção__
+			- Temos que mostrar agora que o invariante é mantido a cada iteração do loop
+			- Informalmente, o laço for funciona deslocando A[j-1], A[j-2] ... e assim por diante, uma posição para a direita
+			até encontrar a posição adequada para A[j], nesse ponto A[j] é inserido
+			- Então, o Sub-arranjo A[1..j] consiste dos elementos iniciais A[1..j] mas em sequência ordenada
+			- Portanto, incrementar j para a próxima iteração do laço preserva o invariante
+			- _Um tratamento mais formal poderia ser feito considerando o invariante do segundo loop_
+		</section>
+		<section data-markdown="">
+			## Invariantes Insort 
+			- __Término__
+			- Agora examinamos o que ocorre quando o laço termina
+			- A condição de parada é j > A.comprimento = n 
+			- Como cada iteração do laço aumenta j de 1, devemos ter j = n + 1
+			- Substituindo j por n+1 no invariante do laço, temos que o sub-arranjo A[1..n] consiste nos elementos originalmente contidos em A
+			mas em sequência ordenada
+			- Observando que A[1..n] é o arranjo inteiro, concluímos que o arranjo inteiro está ordenado
+		</section>
+		<section data-markdown="">
+			1. Considere o problema de busca:
+				- __Entrada__: Uma sequência de A = { a1, a2, .. an} e um valor v
+				- __Saída__: Um índice i tal que v=A[i] ou o valor especial NULL, se v não aparecer em A
+				- Escreva o pseudocódigo para busca linear. Usando um invariante prove que seu algoritmo é correto.
+				- Certifique-se que seu invariante de laço satisfaz as três propriedades necessárias
+			1. _Para casa_: Considere o problema de somar dois inteiros binários de _n_ bits armazenados em dois vetores
+			de _n_ elementos A e B. A soma dos dois inteiros deve ser armazenada em forma binária em um vetor _n+1_ C. 
+			Enuncie o problema formalmente e escreva o pseudocódigo para somar os inteiros
+		</section>
+		<section data-markdown="">
+			## Análise de Algoritmos
+			- Analisar um algoritmo significa prever os recursos de que o algoritmo necessita
+			- Ocasionalmente recursos como banda, memória ou hardware são a preocupação, porém mais frequentemente é o tempo
+			de computação
+			- Entenderemos que no nosso modelo genérico de computação teremos um único processador e as instruções serão resolvidas
+			uma após a outra, sem operações concorrentes
+			- É importante lembrar que acessos a memória RAM podem ser custosos, um algoritmo que usa muita memória RAM poderia ser problemático,
+			porém para os estudos desconsideraremos esses casos
+		</section>
+		<section data-markdown="">
+			## Análise de Algoritmos
+			- Consideraremos instruções como potência que demora um tempo dependendo do valor de _n_ como sendo de tempo fixo
+			- Também desconsideraremos questões como paginação ou memória virtual
+			- Dependendo do algoritmo, mesmo simplificando o funcionamento do computador, podemos ter que utilizar análise combinatória,
+			teoria das probabilidades, algebra e termos mais significativos em uma fórmula
+		</section>
+		<section data-markdown="">
+			## Análise Insort
+			- O tempo gasto pelo algoritmo insort depende da entrada: ordenar mil números demora mais que ordenar três
+			- Além disso, o insort pode demorar tempos diferentes para ordenar sequências de mesmo tamanho!
+			- Em geral, o tempo gasto por um algoritmo cresce com o tamanho da entrada, assim, é tradicional descrever
+			o tempo de execução de um programa em função de sua entrada
+			- A melhor noção para __tamanho da entrada__ depende do problema, no insort temos a quantidade de elementos a serem ordenados
+		</section>
+		<section data-markdown="">
+			## Análise Insort
+			- Outra forma pode ser número total de bits
+			- Podemos ter também que descrever o tamanho da entrada como dois inteiros ao invés de um como, por exemplo,
+			 se a entrada for número de nós e vértices de um grafo
+			- O __tempo de execução__ de um algoritmo em determinada entrada é o número de operações primitivas ou passos
+			executados
+			- É importante definir a noção de passos de forma que ela seja independente de máquina
+			- Uma quantidade de tempo constante é exigida para executar cada linha do nosso processo
+		</section>
+		<section data-markdown="">
+			## Análise Insort
+			- Uma linha pode demorar uma quantidade de tempo diferente de outra linha, mas consideraremos que cada i-ésima
+			execução da mesma linha levará _ci_, onde _ci_ é uma constante
+			- A nossa expressão para o tempo de execução evoluirá de uma fórmula confusa até uma notação mais simples
+			- Essa notação simples também facilitará a comparação entre algoritmos
+		</section>
+		<section>
+			<table>
+				<tr><th>Insertion</th><th>custo</th><th>vezes</th></tr>
+				<tr><td>for j=2 to A.comp</td><td>C<sub>1</sub></td><td>n</td></tr>
+				<tr><td>| chave = A[j]   </td><td>C<sub>2</sub></td><td>n-1</td></tr>
+				<tr><td>| i = j - 1	     </td><td>C<sub>3</sub></td><td>n-1</td></tr>
+				<tr><td>| while i > 0 e A[i] > chave</td><td>C<sub>4</sub></td><td>&sum;<sub>j=2</sub>(t<sub>j)</sub></td></tr>
+				<tr><td>|| A[i+j] = A[i]  </td><td>C<sub>5</sub></td><td>&sum;<sub>j=2</sub>(t<sub>j-1)</sub></td></tr>
+				<tr><td>|| i = i - 1      </td><td>C<sub>6</sub></td><td>&sum;<sub>j=2</sub>(t<sub>j-1)</sub></td></tr>
+				<tr><td>| A[i+1] = chave  </td><td>C<sub>7</sub></td><td>n-1</td></tr>
+			</table>
+			<p>O tempo de execução do algoritmo é a soma dos tempos de execução para cada instrução</p>
+		</section>
+		<section data-markdown="">
+			## Análise Insort
+			- Para obter o tempo de execução T(n) somamos os produtos das colunas custo e vezes
+			\begin{aligned}
+			T(n) = c_1n + c_2(n-1) + c_3(n-1) + c_4\sum{t_j} + c_5\sum{t_j-1} 
+			\end{aligned}
+			\begin{aligned}
+			+c_6\sum{t_j -1} + c_7(n-1)
+			\end{aligned}
+		</section>
+		<section data-markdown="">
+			## Análise Insort
+			- Mesmo para entradas de tamanho igual o tempo de execução do algoritmo pode mudar
+			- O melhor caso ocorre quando o vetor está ordenado, então para j = 2,3,...,n A[i] &le; chave
+			- Portanto tj= 1, então o tempo de execução será
+			\begin{aligned}
+			T(n) = c_1n + c_2(n-1) + c_3(n-1) + c_4(n-1) + c_7(n-1)
+			\end{aligned}
+			\begin{aligned}
+			  = (c_1 + c_2 + c_3 + c_4 + c_7)n - (c_2 + c_3 + c_3 + c_7)
+			\end{aligned}
+		</section>
+		<section data-markdown="">
+			## Análise Insort
+			- Podemos expressar esse tempo de execução como an+b para constantes a e b que dependem de ci, assim, ela é uma __função linear__
+			- Se tivermos o pior caso, ordem inversa, devemos comparar cada elemento A[j] com cada elemento do sub-arranjo
+			- Então tj = j
+			$$ \sum_{j=2}^n j = \frac{n(n+1)}{2} -1 $$
+
+			$$ \sum_{j=2}^n j -1  = \frac{n(n+1)}{2}  $$
+		</section>
+		<section data-markdown="">
+			## Análise Insort
+			\begin{aligned}
+			T(n) = c_1n + c_2(n-1) + c_3(n-1) + c_4(\frac{n(n-1)}{2}-1) +
+			\end{aligned}
+			\begin{aligned}
+			c_5(\frac{n(n-1)}{2}) +c_6\sum(\frac{n(n-1)}{2}-1) + c_7(n-1)
+			\end{aligned}
+		</section>
+		<section data-markdown="">
+			## Análise Insort
+			\begin{aligned}
+			T(n) = (\frac{c_4}{2} + \frac{c_5}{2}+\frac{c_6}{2})n^2 +
+			\end{aligned}
+			\begin{aligned}
+			(c_1 + c_2 + c_3 + \frac{c_4}{2} - \frac{c_5}{2} - \frac{c_6}{2} + c_7)n + 
+			\end{aligned}
+			\begin{aligned}
+			(c_2 + c_3 + c_4 + c_7)
+			\end{aligned}
+			- Podemos expressar esse tempo de execução do pior caso como $an^2 + bn+c$
+			- Portanto, é uma função quadrática
+			- Em geral o tempo de execução é fixo para uma entrada mas veremos algoritmos aleatorizados cujo comportamento
+			pode variar com a mesma entrada
+		</section>
+		<section data-markdown="">
+			## Análise do pior caso
+			- Vimos a análise para melhor e pior caso, mas iremos estudar mais o pior caso
+				1. O pior caso estabelece um limite superior para o tempo de execução
+				1. Para alguns algoritmos o pior caso acorre com frequência, por exemplo, quando buscamos um valor que 
+				não existe
+				1. Muitas vezes o caso médio é tão ruim quanto o pior
+		</section>
+	<section data-markdown="">
+		## Ordem de crescimento
+		- Usamos algumas análises simplificadoras, como ignorar o custo real de cada instrução
+		- Nem mesmo as constantes $c_i$ nos dão mais detalhes do que precisamos
+		- Expressamos o tempo de execução no pior caso como $an^2 + bn + c$ para constantes a,b e c
+		- Faremos outra abstração simplificadora a __taxa de crescimento__ ou __ordem de crescimento__
+		- Consideraremos apenas o maior termo $an^2$ já que os termos de ordem mais baixa são menos importantes
+		- Também ignoraremos a constante, visto que valores constantes são menos significativos que a taxa de crescimento
+	</section>
+	<section data-markdown="">
+		## Ordem de crescimento
+		- Restando apenas o fator $n^2$
+		- Então afirmamos que o insort tem um tempo de ordenação no pior caso de $ \Theta(n^2)$
+		- Consideramos um algoritmo mais eficiente que outro se seu tempo de execução do pior caso apresentar uma ordem de 
+		crescimento mais baixa
+		- Para entradas suficientemente grandes um algoritmo $\Theta(n^2)$ será executado mais rapidamente no pior caso que
+		um algoritmo $\Theta(n^3)$
+	</section>
+	<section data-markdown="">
+		## Exercícios
+		1. Expresse a função $n^3/1000 - 100n^2 - 100n + 3$ em notação &Theta;
+		1. Qual o tempo de execução no melhor caso, caso médio e pior caso para a busca linear na notação &Theta;
+	</section>
+	</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
