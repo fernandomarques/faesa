@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Complexidade de Algoritmos</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="../css/misc.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Crescimento de Funções</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown>
+			## Objetivos
+			- Comportamento assintótico de funções; A notação O, ômega e theta; 
+		</section>
+		<section data-markdown>
+			- Vimos que seria possível calcular exatamente quanto tempo um algoritmo levaria para ser executado
+			- Porém, quando vamos comparar, é suficiente saber que o seu \Theta(n), já que para números grandes os 
+			"por menores" são irrelevantes
+			- A ordem de crescimento do tempo de execução é conhecida como eficiência assintótica
+			- Veremos algumas notações e faremos uma revisão de algumas funções comuns
+		</section>
+		<section data-markdown>
+			## Notação Assintótica
+			- Usaremos a notação assintótica primariamente para definir o tempo de execução do algoritmo
+			- Vimos que no pior caso o insertionSort é $ \Theta(n^2) $
+			- Na realidade a notação assintótica é aplicada em funções
+			- Caracterizamos o tempo no pior caso como $an^2 + bn + c$ para constantes a,b e c
+			- Ao afirmar que o tempo de execução é de $ \Theta(n^2)$ estamos abstraindo alguns detalhes da função
+			- Como a notação assintótica se aplica a funções $ \Theta(n^2)$ era a função $an^2 + bn + c$ que, por acaso,
+			caracteriza o tempo de execução no pior caso
+		</section>
+		<section data-markdown>
+			## Notação &Theta;
+			- Vimos que o tempo de execução no pior caso do InsertionSort foi de $T(n) = \Theta(n^2)$
+			- Para uma dada função $g(n)$, denotamos por $\Theta(g(n))$ o conjunto de funções:
+			$$ \Theta(g(n)) = [ f(n)  \exists c_1,c_2,n_0 $$
+			$$ 0 \leq c_1g(n) \le f(n) \le c_2g(n), \forall  n \ge n_0 ] $$
+			- _a notação correta é {} mas a fórmula não aceitava..._
+		</section>
+		<section data-markdown>
+			## Notação &Theta;
+			- Uma função f(n) pertence ao conjunto $\Theta(g(n))$ se existirem constantes positivas $c_1,c_2$ tais que
+			ela possa ser encaixada entre $c_1g(n)$ e $c_2g(n)$ para um n suficientemente grade
+			- Como $\Theta(g(n))$ é um conjunto poderíamos escrever $ f(n) \in \Theta(g(n))$ para indicar que f(n) é um
+			membro de $\Theta(g(n))$
+			- Dizemos então que g(n) é um __limite assintoticamente restrito__ para f(n)
+			- A definição de $\Theta(g(n))$ exige que todo membro seja assintoticamente não negativo, ou seja, que seja
+			positiva para todo _n_ suficientemente grande
+		</section>
+		<section>
+			<img src="img/Modulo1Theta.png" alt="Exemplo de notação theta" width="100%">
+		</section>
+		<section data-markdown>
+			## Notação &Theta;
+			- Vimos a notação &Theta; de forma informal dizendo que bastava descartar os termos de ordem mais baixa
+			e ignorar o coeficiente do termo de ordem maior
+			- Vamos mostrar que $\frac{1}{2} n^2 - 3n = \Theta(g(n^2))$
+		</section>
+		<section>
+			$$ c_1, c_2, n_0 $$ tal que
+			$$c_1n^2 \le \frac{1}{2}n^2 -3n \le c_2n^2 $$ Dividindo por $n^2$
+			$$ c_1 \le \frac{1}{2} - \frac{3}{n} \le c_2 $$
+			<p>Se $c_1 = 1/14$ e $c_2 = 1/2$ para n=7 podemos verificar que $\frac{1}{2} n^2 - 3n = \Theta(g(n^2))$</p>
+		</section>
+		<section>
+			<p> Podemos também mostrar que $6n^3 \neq \Theta(g(n^2))$</p>
+			<p> Suponha $c_2$ e $n_0$ tais que $6n^3 \le c_2n^2$ se dividirmos por n²</p>
+			<p> $$ n \le \frac{c_2}{6}$$ o que não é válido para um valor arbitráriamente grande de n já que $c_2$ é constante</p>
+		</section>
+		<section>
+			<p> Também conseguimos demostrar que os termos de ordem mais baixa podem ser ignorados</p>
+			<p>Considere qualquer função quadrática $ f(n) = an^2 + bn + c$  onde $a,b,c$ são constantes e a > 0</p>
+			<p> Teremos $ f(n) = \Theta(n^2) $ e podemos verificar que  </p>
+			<p> $ 0 \le c_1n^2 \le an^2 + bn + c \le c_2n^2 $</p>
+			<p>Podemos afirmar então que para todo $p(n) = \sum_{i=0}^d a_in^i $ temos $$p(n) = \Theta(n^d) $$</p>
+		</section>
+		<section>
+			<p>Tendo em vista, ainda, que qualquer constante é um polinômio de grau 0 podemos expressar qualquer
+				função constante como $\Theta(n^0)$ ou $\Theta(1)$
+			</p>
+			<p>Essa notação é um pequeno abuso pois não indica qual variável está tendendo a infinito, mas a usaremos
+				com frequência para indicar uma constante ou função constante em relação a uma variável
+			</p>
+		</section>
+		<section>
+			<p> Na próxima aula veremos outras notações</p>
+		</section>
+	</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
