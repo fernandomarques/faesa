@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Complexidade de Algoritmos</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="../css/misc.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Notações e Propriedades</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown>
+			## Objetivos
+			- Comportamento assintótico de funções; o e w; 
+			- Propriedades 
+		</section>
+		<section data-markdown>
+			## Notação o
+			- O limite assintótico da notação O pode ser ou não assintóticamente justo
+			- $ 2n^2 = O(n^2) $ é assintóticamente justo
+			- Mas $ 2n = O(n^2) $ não é 
+			$$ o(g(n) = [ f(n): \forall \: c>0, \exists n_0>0 | $$
+			$$ 0 \le f(n) &lt; cg(n) \, \forall n \ge n_0 ] $$
+			- Por exemplo $ 2n =  o(n^2) $ mas $ 2n^2 \neq o(n^2) $
+			- A principal diferença é que em O é válido para alguma constante c,
+			em o é valido para toda constante c
+		</section>
+		<section data-markdown>
+			## Notação o
+			- Intuitivamente, f(n) se torna insignificante perto de g(n) a medida que n chega a infinito
+			$$ \lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} = 0 $$
+			- $ n^2 \in O(n^2) $ mas $ n^2 \in o(n^3) $
+			- $ n^2 \in o(n!) $
+			- $ ln(n) \in o(n) $
+			- $ O \implies \le $
+			- $ o \implies &lt; $
+		</section>
+		<section data-markdown>
+			## Notação &omega; (small omega)
+			- Por analogia, a notação &omega; está para &Omega; assim como o está para O
+			- $ f(n) \in \omega(g(n)) \Leftrightarrow g(n) \in o(f(n)) $
+			$$ \omega(g(n) = [ f(n): \forall \: c>0, \exists n_0>0 | $$
+			$$ 0 \le cg(n) &lt; f(n) \, \forall n \ge n_0 ] $$
+			- Por exemplo $ 2n =  o(n^2) $ mas $ 2n^2 \neq o(n^2) $
+			- A principal diferença é que em O é válido para alguma constante c,
+			em o é valido para toda constante c
+		</section>
+		<section data-markdown>
+			## Transitividade
+			$$ f(n) = \Theta(g(n))\,e \,g(n) = \Theta(h(n)) \implies f(n) = \Theta(h(n)) $$
+			$$ f(n) = O(g(n))\,e \,g(n) = O(h(n)) \implies f(n) = O(h(n)) $$
+			$$ f(n) = \Omega(g(n))\,e \,g(n) = \Omega(h(n)) \implies f(n) = \Omega(h(n)) $$
+			$$ f(n) = o(g(n))\,e \,g(n) = o(h(n)) \implies f(n) = o(h(n)) $$
+			$$ f(n) = \omega(g(n))\,e \,g(n) = \omega(h(n)) \implies f(n) = \omega(h(n)) $$
+		</section>
+		<section data-markdown="">
+			## Reflexidade
+			$$ f(n) = \Theta(f(n)) $$
+			$$ f(n) = O(f(n)) $$
+			$$ f(n) = \Omega(f(n)) $$
+		</section>
+		<section data-markdown="">
+			## Simetria
+			$$ f(n) = \Theta(g(n)) \Leftrightarrow g(n) = \Theta(f(n)) $$
+		</section>
+		<section data-markdown="">
+			## Simetria de transposição
+			$$ f(n) = O(g(n)) \Leftrightarrow g(n) = \Omega(f(n)) $$
+			$$ f(n) = o(g(n)) \Leftrightarrow g(n) = \omega(f(n)) $$
+		</section>
+		<section data-markdown>
+			## Comparações
+			- $ f(n) = O(g(n)) $ é como $ a \le b $
+			- $ f(n) = \Omega(g(n)) $ é como $ a \ge b $
+			- $ f(n) = \Theta(g(n)) $ é como $ a = b $
+			- $ f(n) = o(g(n)) $ é como $ a &lt; b $
+			- $ f(n) = \omega(g(n)) $ é como $ a &gt; b $
+			- Porém uma propriedade de números reais não pode ser transpostada
+				- Tricotomia: Para quaisquer números reais a,b exatamente uma das
+				propriedades devem ser verdadeira a>b ou a&lt;b ou a=b
+			- Não podemos comparar $n$ com $n^{1 + sen\,n}$
+			- Já que os valores do exponente variam de 0 a 2
+		</section>
+		<section data-markdown>
+			## Exercícios
+			1. Sejam f(n) e g(n) funções assintoticamente não negativas. Usando a definição básica
+			da notação &Theta; prove que max(f(n), g(n)) = &Theta;(f(n)+g(n))
+			1. Explique por que a declaração "O tempo de execução no algoritmo A é no mínimo O(n²)" não
+			faz sentido
+			1. É verdade que $ 2^{n+1} = O(2^n) $? É verdade que $2^{2n} = O(2^n) $?
+			1. Prove que $ o(g(n)) \bigcap \omega(g(n)) $ é um conjunto vazio
+			1. Faça um algoritmo para encontrar o maior e segundo maior elemento de um conjunto. Qual o tempo de execução no pior e melhor caso?
+			Prove informalmente que o algoritmo funciona
+		</section>
+		<section data-markdown>
+			## Desafio
+			### Problema dos ovos
+			- Dado um edifício de $n$ andares e $k$ ovos especiais, nós desejamos resolver o seguinte problema:
+			qual é o andar mais alt do qual podemos arremessar um ovo sem que ele se quebre? Apresente o melhor algoritmo
+			para cada um dos casos a seguir.
+				1. Temos apenas um ovo
+				1. Temos dois ovos
+				1. Temos três ovos
+		</section>
+	</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
