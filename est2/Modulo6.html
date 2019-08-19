@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Estatística para Data Science II</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<style>
+			img {
+				border : 0px !important;
+			}
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Aprendizagem Não Supervisionada</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section>
+			<img src="img/machinelearning.jpg" alt="Infografico machine learning" >
+		</section>
+
+		<section data-markdown="">
+			> O termo _aprendizagem não supervisionada_ se aplica a métodos estatísticos que extraem significado de dados
+			sem trainar o modelo em dados não rotulados.
+			> Na aprendizagem não supervisionado também teremos um modelo dos dados, mas não há distinção entre variáveis
+			preditoras e variáveis de resposta
+
+		</section>
+		<section data-markdown>
+			## Aprendizagem não supervisionada
+			- Podemos ter objetivos diferentes como identificar grupos significativos
+			- Pode ser usado para definir perfis de usuários
+			- Também pode ser utilizado para reduzir a dimensão dos dados
+			- Ou até mesmo como uma extensão da análise exploratória dos dados
+		</section>
+		<section data-markdown>
+			## Aprendizagem não supervisionada
+			- Pode ser importante para classificações e regressões, quando queremos uma categoria de dados não rotulados
+				- Identificar tipo de vegetação com base em dados de satélite, como não temos a resposta, clustering identifica
+				regiões com padrões similares
+			- Clustering também é uma ferramenta para problemas de partida a frio, quando ainda não temos uma resposta para 
+			treinar o modelo, vamos aprendendo sobre os dados com a evolução do negócio
+		
+		</section>
+		<section data-markdown>
+			## Aprendizagem não supervisionada
+		
+			- Também pode ser útil para os casos de classe rara como em subpopulações, o clustering pode criar features
+			que representem a subpopulação. Pode ser criado modelos para cada tipo de população, ou forçar que o modelo
+			use a subpopulação como preditor
+		</section>
+		<section data-markdown>
+			## Análise de Componentes Principais
+			- Muitas vezes variáveis vão variar juntas, o PCA é uma técnica para descobrir como variáveis numéricas 
+			covariam
+			- A ideia é combinar múltiplos preditores numéricos em um conjunto de variáveis
+			- Os pesos usados para formar os componentes principais revelam as contribuições das variáveis originais
+		</section>
+		<section data-markdown>
+			## PCA
+			- Para duas variáveis $X_1$ e $X_2$ existem dois componentes principais $Z_i(i=1\,ou\,2)$
+			$$ Z_i = w_i1 X_1 + w_i2X_2 $$
+			- Os pesos w(i,1) e w(i,2) são conhecidos como carregamentos do componente e transformam as variáveis originais
+			no PCA
+			- O primeiro componente $Z_1$ é a combinação linear que melhor explica a variação total
+			- $Z_2$ explica o restante da variação
+		</section>
+		<section>
+			<pre><code>
+oil_px &lt;- sp500_px[, c('CVX', 'XOM')]
+oil_px = as.data.frame(scale(oil_px, scale=FALSE))
+pca &lt;- princomp(oil_px)
+pca$loadings
+			</code></pre>
+			<p>O primeiro componente é uma média dos dois, refletindo a correlação entre as empresas de energia</p>
+			<p>O segundo componente mede quando os valores entre as duas divergem</p>
+		</section>
+		<section>
+			<pre><code>
+loadings &lt; pca$loadings
+ggplot(data=oil_px, aes(x=CVX, y=XOM)) +
+	geom_point(alpha=.3) +
+	scale_shape_manual(values=c(46)) +
+	stat_ellipse(type='norm', level=.99, color='grey25') +
+	geom_abline(intercept = 0, slope = loadings[2,1]/loadings[1,1], color='grey25', linetype=2) +
+	geom_abline(intercept = 0, slope = loadings[2,2]/loadings[1,2],  color='grey25', linetype=2) +
+	scale_x_continuous(expand=c(0,0), lim=c(-3, 3)) + 
+	scale_y_continuous(expand=c(0,0), lim=c(-3, 3)) +
+	theme_bw()
+			</code></pre>
+			<p>As linhas mostram os dois componentes principais. A primeira é a linha no maior eixo da elipse e mostra a maior parte da variabilidade</p>
+		</section>
+		<section data-markdown>
+			## Calculando PC
+			- Para ir de duas variáveis para mais basta incluir o preditor adicional na combinação linear e colocar 
+			pesos que optimizem a coleção de covariação de todas variáveis preditoras no primeiro componente principal
+			- O cálculo do componente principal é um método estatístico clássico que usa a matriz de correlação ou 
+			a matriz de covariância
+			- Sua execução é extremamente rápida e não possui iterações
+			- Só funciona com variáveis numéricas
+		</section>
+		<section data-markdown>
+			## Calculando PC
+			1. PCA encontra combinações lineares de preditores que maximize o percentual de variância explicado
+			1. Essa combinação linear é o primeiro preditor $Z_1$
+			1. PCA repete o processo usando as mesmas variáveis e pesos diferentes é gerado o segundo preditor $Z_2$, os
+			pesos são feitos de forma que $Z_1$ e $Z_2$ não sejam correlacionados
+			1. O processo continua até que você tenha tantas variáveis, ou componentes, quanto o número original de variáveis
+			1. Escolha quantos componentes necessários para considerar a maior parte da variância
+		</section>
+		<section data-markdown>
+			## Calculando PC
+			- O resultado é um conjunto de pesos para cada componente, o passo final é converter os dados originais em novos
+			componentes principais aplicando os pesos aos valores
+		</section>
+		<section data-markdown>
+			## Interpretando PC
+			- A natureza dos componente principais revela informações a respeito da estrutura dos dados
+			- Um método de ver os componentes é o _screeplot_ 
+		</section>
+		<section><pre><code>
+syms &lt;- c( 'AAPL', 'MSFT', 'CSCO', 'INTC', 'CVX', 'XOM', 'SLB', 'COP',
+	'JPM', 'WFC', 'USB', 'AXP', 'WMT', 'TGT', 'HD', 'COST')
+ top_cons &lt;- sp500_px[row.names(sp500_px)>='2011-01-01', syms]
+ sp_pca &lt;- princomp(top_cons)
+ par(mar=c(6,3,0,0)+.1, las=2)
+ screeplot(sp_pca, main='')
+		</code></pre>
+		<p>O eixo Y mostra a variância, dá para ver que o primeiro é bem grande</p>
+	</section>
+	<section>
+		<pre><code>
+library(tidyr)
+loadings = sp_pca$loadings[,1:5]
+loadings &lt;- as.data.frame(loadings)
+loadings$Symbol &lt;- row.names(loadings)
+loadings &lt;- gather(loadings, "Component", "Weight", -Symbol)
+loadings$Color = loadings$Weight > 0
+ggplot(loadings, aes(x=Symbol, y=Weight, fill=Color)) +
+	geom_bar(stat='identity', position = "identity", width=.75) + 
+	facet_grid(Component ~ ., scales='free_y') +
+	guides(fill=FALSE)  +
+	ylab('Component Loading') +
+	theme_bw() +
+	theme(axis.title.x = element_blank(),
+		axis.text.x  = element_text(angle=90, vjust=0.5))
+		</code></pre>
+		<p>Comentários no proximo slide</p>
+	</section>
+	<section data-markdown>
+		## Interpretando PC
+		- No primeiro componente todos possuem o mesmo sentido, é comum para dados em que todas colunas tenham um fator em comum
+		- O segundo componente compara a as mudanças de preço de ações de energia comparadas a outras ações
+		- O terceiro mostra o contraste entre Apple e CostCo.
+		- O quarto mostra ações da Schlumberger a outras ações de energia
+		- A quinta é dominada por empresas de finanças
+	</section>
+	<section data-markdown>
+		## Quantos componentes?
+		- O mais comum é usar uma regra ad hoc para selecionar os componentes que mais explicam a variância
+		- Também podemos escolher os primeiros até explicar 80% do total
+		- Um método mais formal é utilizar validação cruzada!
+	</section>
+	<section data-markdown>
+		- Componentes principais são combinações lineares das variáveis preditoras numéricas
+		- É calculado minimizando a correlação entre os componentes
+		- Um número limitado de componentes costuma explicar a maior parte dos dados
+		- Um conjunto limitados dos componentes pode ser usado no lugar dos preditores originais, diminuindo a dimensionalidade
+	</section>
+	<section data-markdown>
+		## K-Means Clustering
+		- Clustering é uma técnica que divide os dados em grupos diferentes, onde os dados são similares entre os grupos
+		- Um dos objetivos é identificar grupos significativos
+		- Foi o primeiro método de clustering desenvolvido e ainda é muito utilizado
+		- K-means significa dividir os dados em K clusters minimizando a soma do quadrado das distâncias dos registros ao 
+		centro do cluster (mean)
+		- Não garante que os clusters terão mesmo tamanho mas encontra clusters que se separam melhor
+		- NORMALIZAR!!!
+	</section>
+	<section data-markdown>
+		## K-means
+		- Comece considerando uma base com n registros e apenas duas variáveis
+		- Queremos dividir os dados em K=4, cada registro será ligado a um dos 4 clusters
+		- O centro de um cluster é a média dos pontos do cluster
+		$$ \bar{x} = \frac{1}{n_k} \sum x_i, i \in cluster \, k $$
+		- O mesmo para $\bar{y} $
+		- A soma dos quadrados do cluster é
+		$$ SS_k = \sum_i (x_i - \bar{x}_k)^2 + (y_i + \bar{y}_k)^2, i  \in Cluster\,K$$
+	</section>
+	<section data-markdown>
+		## K-means
+		- O algoritmo minimiza a soma dos quadrados dos clusters para todos os clusters
+		$$ \sum_{k=1}^4 SS_k $$
+		- Pode ser usado para gerar insight de como a movimentação nos preços de ações se agrupam
+		- Os retornos das ações já são dados de forma que não seja necessário normalizar
+	</section>
+	<section>
+		<pre><code>
+set.seed(1010103)
+df &lt;- sp500_px[row.names(sp500_px)>='2011-01-01', c('XOM', 'CVX')]
+km &lt;- kmeans(df, centers=4, nstart=1)
+
+df$cluster &lt;- factor(km$cluster)
+head(df)
+
+centers &lt;- data.frame(cluster=factor(1:4), km$centers)
+centers
+		</code></pre>
+		<p>Alguns  representam quedas nas bolsas e os outros clusters subidas</p>
+	</section>
+	<section>
+		<pre><code>
+ggplot(data=df, aes(x=XOM, y=CVX, color=cluster, shape=cluster)) +
+geom_point(alpha=.3) +
+scale_shape_manual(values = 1:4,
+	guide = guide_legend(override.aes=aes(size=1))) + 
+geom_point(data=centers,  aes(x=XOM, y=CVX), size=2, stroke=2)  +
+theme_bw() +
+scale_x_continuous(expand=c(0,0), lim=c(-2, 2)) + 
+scale_y_continuous(expand=c(0,0), lim=c(-2.5, 2.5)) 
+		</code></pre>
+	</section>
+	<section data-markdown>
+		## Kmeans Algoritmo
+		- Pode ser aplicado a dados com P preditores, apesar da solução exata ser difícil, heurísticas são eficientes
+		- O algoritmo começa com um K e um conjunto de média de clusters
+			1. Adicione cada registro ao cluster mais próximo
+			1. Calcule o a nova média do cluster
+			1. Repita
+		- Como não há garantia de que o algoritmo encontre a melhor solução, é recomendado executar algumas vezes com reamostras
+		- O parâmetro `nstart` indica quantos inícios diferentes e retorna o melhor
+	</section>
+	<section>
+		<pre><code>
+syms &lt;- c( 'AAPL', 'MSFT', 'CSCO', 'INTC', 'CVX', 'XOM', 'SLB', 'COP',
+'JPM', 'WFC', 'USB', 'AXP', 'WMT', 'TGT', 'HD', 'COST')
+df &lt;- sp500_px[row.names(sp500_px)>='2011-01-01', syms]
+
+set.seed(10010)
+km &lt;- kmeans(df, centers=5, nstart=10)
+km$size
+centers &lt;- km$centers
+		</code></pre>
+		<p>Temos cluster para alta e baixa no mercado, alto no mercado de consumo e baixa de energia e
+			consumo em alta e energia em baixa
+		</p>
+	</section>
+	<section data-markdown>
+		## Escolhendo K
+		- Não existe um método padrão para melhor número de K
+		- Se queremos dividir os consumidores, K=2 pode ser pouco
+		- Uma forma usada para definir K é o _método do cotovelo_
+		- Não funciona para todos os dados
+	</section>
+	<section>
+		<pre><code>
+pct_var &lt;- data.frame(pct_var = 0, num_clusters=2:14)
+totalss &lt;- kmeans(df, centers=14, nstart=50, iter.max = 100)$totss
+for(i in 2:14){
+pct_var[i-1, 'pct_var'] &lt;- kmeans(df, centers=i, nstart=50, iter.max = 100)$betweenss/totalss
+}
+
+png(filename=file.path(PSDS_PATH, 'figures', 'psds_0706.png'), width = 4, height=3, units='in', res=300)
+
+ggplot(pct_var, aes(x=num_clusters, y=pct_var)) +
+geom_line() +
+geom_point() +
+labs(y='% Variance Explained', x='Number of Clusters') +
+scale_x_continuous(breaks=seq(2, 14, by=2))   +
+theme_bw()
+		</code></pre>
+		<p>Esse comportamento é comum em dados que não tem clusters bem definidos</p>
+	</section>
+	<section>
+		<img src="img/Modulo6Elbow.png" alt="Exemplo do Elbow Method">
+	</section>
+	<section data-markdown>
+		## Escolhendo K
+		- Outra forma de avaliar é identificando se esses clusters apareceriam em novos dados, ou fazendo validação cruzada
+		- Existem outras formas de identificar o K como a estatística _gap_ definida por Robert Tibshirani et al.
+	</section>
+	<section data-markdown>
+		- O número de clusters é definido pelo usuário
+		- O algoritmo adiciona registros de forma iterativa ao cluster mais próximo
+		- __O número de clusters é definido pelo usuário__
+	</section>
+				</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
