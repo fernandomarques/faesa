@@ -315,6 +315,343 @@ theme_bw()
 		- O algoritmo adiciona registros de forma iterativa ao cluster mais próximo
 		- __O número de clusters é definido pelo usuário__
 	</section>
+	<section data-markdown>
+		## Clustering Hierárquico
+		- É uma alternativa ao Kmeans e acomoda variáveis não numéricas mais facilmente
+		- Encontra outliers ou grupos anômalos com mais facilidade
+		- Cria uma saída gráfica e mais intuitiva
+		- Não escala bem para dados com milhões de registros e pode ser computacionalmente intenso
+		- A maior parte de sua aplicabilidade é para pequenos dados
+	</section>
+	<section>
+		<h3>Clustering Hierárquico</h3>
+		<ul>
+			<li>Funciona em datasets com _n_ registros e _p_ variáveis sendo baseados em duas métricas</li>
+			<ol>
+				<li>Uma medida de distância $d_{i,j}$ que mede a distância entre os registros $i$ e $j$</li>
+				<li>Métrica de dissimilaridade $D_{A,B}$ que mede a diferença entre dois clusters $A$ e $B$, baseado
+					na distância $d_{i,j}$
+				</li>
+			</ol>
+			<li>A métrica mais importante é a dissimilaridade, começamos com cada registro como um único cluster 
+				e combinamos os menos dissimilares
+			</li>
+		</ul>
+	</section>
+	<section>
+		<pre><code>
+## Hieraquical Clustering
+syms1 &lt;- c('GOOGL', 'AMZN', 'AAPL', 'MSFT', 'CSCO', 'INTC', 'CVX', 
+           'XOM', 'SLB', 'COP', 'JPM', 'WFC', 'USB', 'AXP',
+           'WMT', 'TGT', 'HD', 'COST')
+
+df &lt;- sp500_px[row.names(sp500_px)>='2011-01-01', syms1]
+d &lt;- dist(t(df))
+hcl &lt;- hclust(d)
+		</code></pre>
+	</section>
+	<section data-markdown>
+		## Dendrograma
+		- O clustering hierárquico tem um formato natural de árvore conhecido como _dendrograma_
+		- Do grego _dendro_ &rarr; árvore e _gramma_ &rarr; desenho
+		- `plot(hcl)`
+		- [Formas de Desenhar dendrograma](http://www.sthda.com/english/wiki/beautiful-dendrogram-visualizations-in-r-5-must-known-methods-unsupervised-machine-learning)
+		- A altura da árvore indica os graus de dissimilaridade
+		- Amazon e Google são bem diferente das outras, já as outras ações são agrupadas por energia, finanças e consumo
+	</section>
+	<section data-markdown>
+		## Clustering Hierárquico
+		- Contrário ao K-means, não precisamos indicar o valor de K, é possível fazer usando o comando 
+		- `cutree(hcl,k=4)` 
+	</section>
+	<section data-markdown>
+		## Algoritmo Aglomerativo
+		- É o algoritmo principal que vai juntando clusters similares, cada registro começa sendo um cluster
+		- Para cada par de registros $(x_1,x_2,\dots,x_p)$ e $(y_1,y_2,\dots,y_p)$
+		- Usamos a distância euclidiana
+		$$ d(x,y) = \sqrt[2]{(x_1 - y_2)^2 + (x_2-y_2)^2 + \dots + (x_p - y_2)^2} $$
+		- Agora devemos medir a distância entre clusters
+	</section>
+	<section data-markdown>
+		## Algoritmo Aglomerativo
+		- Tendo dos clusters $ A = (a_1, a_2 , \dots, a_m) $ e $ B = (b_1,b_2, \dots, b_q) $
+		- Uma medida de dissimilaridade é o _complete-linkage_ que considera a maior distância entre todos pares de A e B
+		$$ D(A,B) = max\, d(a_p,b_j) \forall pares\,i,j $$
+	</section>
+	<section data-markdown>
+		## Algoritmo Aglomerativo
+		1. Crie um conjunto inicial de clusters onde cada registro é um clusters para todos os registros
+		1. Calcule a dissimilaridade $D(C_k,C_l)\, \forall \, pares\,k,l $
+		1. Junte os dois clusters $C_k$ e $C_l$ que tiverem a menor dissimilaridade 
+		1. Se existir mais de um cluster, volte para 2
+	</section>
+	<section data-markdown>
+		## Medidas de Dissimilaridade
+		- Existem 4 medidas comuns de dissimilaridade: _complete-linkage_, _average linkage_, _single linkage_ e
+		_minimum variance_ 
+		- Essas medidas e outras são suportados pela maioria das funções de clustering hierárquico como hclust
+		- O _complete-linkage_ tende a ser o que forma membros mais similares
+		- _single linkage_ usa a menor distância e gera clusters com elementos dispares
+		- A linkagem média tira a média das distâncias e é um meio termo entre complete e single
+		- Já o minimum miniminiza a soma dos quadrados entre os clusters (kmeans)
+	</section>
+	<section>
+		<pre><code>
+cluster_fun &lt;- function(df, method)
+{
+	d &lt;- dist(df)
+	hcl &lt;- hclust(d, method=method)
+	tree &lt;- cutree(hcl, k=4)
+	df$cluster &lt;- factor(tree)
+	df$method &lt;- method
+	return(df)
+}
+
+df0 &lt;- sp500_px[row.names(sp500_px)>='2011-01-01', c('XOM', 'CVX')]
+df &lt;- rbind(cluster_fun(df0, method='single'),
+	cluster_fun(df0, method='average'),
+	cluster_fun(df0, method='complete'),
+	cluster_fun(df0, method='ward.D'))
+df$method &lt;- ordered(df$method, c('single', 'average', 'complete', 'ward.D'))
+
+ggplot(data=df, aes(x=XOM, y=CVX, color=cluster, shape=cluster)) +
+	geom_point(alpha=.3) +
+	scale_shape_manual(values = c(46, 3, 1,  4),
+		guide = guide_legend(override.aes=aes(size=2))) +
+	facet_wrap( ~ method) +
+	theme_bw()
+		</code></pre>
+	</section>
+	<section data-markdown>
+		- Começa com "cada um no seu quadrado"
+		- Vai juntando os clusters mais similares
+		- É mantido o histórico do algoritmo aglomerativo e pode ser visualizado 
+		- A distância entre clusters pode ser calculada de formas diferentes 
+	</section>
+	<section data-markdown>
+		## Clustering baseado em modelos
+		- Clusters Hierárquico e K-means são baseados em heurísticas e tentam encontrar registros próximos, sem considerar
+		modelos de probabilidade
+		- Clusters baseados em modelos usam teorias da estatísticas e fornecem formas mais rigorosas
+		- Podem identificar grupos similares mas que podem não estar próximos
+	</section>
+	<section data-markdown>
+		## Distribuição Normal
+		- A forma mais comum é o método da _distribuição normal multivariada_ 
+		- É uma generalização da distribuição normal para $p$ variáveis  $X_1, X_2, \dots, X_p $
+		- A distribuição é formada por um conjunto de médias $\mu = \mu_1, \mu_2, \dots, \mu_p $ e a matriz de covariância
+		$ \sum $
+		- Lembrando que a matriz de covariância tem as variâncias na diagonal principal e a covariância i,j nas outras células
+	</section>
+	<section><pre><code>
+library(ellipse)
+mu &lt;- c(.5, -.5)
+sigma &lt;- matrix(c(1, 1, 1, 2), nrow=2)
+prob &lt;- c(.5, .75, .95, .99) ## or whatever you want
+names(prob) &lt;- prob ## to get id column in result
+x &lt;- NULL
+for (p in prob){
+  x &lt;- rbind(x,  ellipse(x=sigma, centre=mu, level=p))
+}
+df &lt;- data.frame(x, prob=factor(rep(prob, rep(100, length(prob)))))
+names(df) &lt;- c("X", "Y", "Prob")
+
+dfmu &lt;- data.frame(X=mu[1], Y=mu[2])
+
+ggplot(df, aes(X, Y)) + 
+  geom_path(aes(linetype=Prob)) +
+  geom_point(data=dfmu, aes(X, Y), size=3) +
+  theme_bw()
+	</code></pre></section>
+	<section data-markdown>
+		## Mistura de normais
+		- A ideia do cluster baseado em modelo é assumir que cada registro é distribuído como uma das K distribuições
+		multivariadas, onde K é o número de clusters
+		- Podemos usar o pacote `mclust`
+	</section>
+	<section><pre><code>
+library(mclust)
+df &lt;- sp500_px[row.names(sp500_px)>='2011-01-01', c('XOM', 'CVX')]
+mcl &lt;- Mclust(df)
+summary(mcl)
+	</code></pre></section>
+	<section><pre><code>
+cluster &lt;- factor(predict(mcl)$classification)
+
+ggplot(data=df, aes(x=XOM, y=CVX, color=cluster, shape=cluster)) +
+	geom_point(alpha=.8) +
+	theme_bw() +
+	scale_shape_manual(values = c(1, 3),
+		guide = guide_legend(override.aes=aes(size=2))) 
+	</code></pre>
+
+</section>
+<section data-markdown>
+	## Model Clustering
+	- Podemos extrair os parâmetros da distribuição normal usando `summary(mcl, parameters= TRUE)$mean`
+	- `summary(mcl, parameters= TRUE)$variance`
+	- A primeira distribuição tem médias e variância similar, já a segunda é muito maior
+	- O objetivo é encontrar o conjunto de distribuições normais multivariadas que encaixa melhor
+	- Contrário do Kmeans e hierárquivo, mclust seleciona o número de clusters
+	- É escolhido o número de clusters para que o BIC (_Bayesian Information Criteria_) tenha o maior valor
+</section>
+<section data-markdown>
+	## Model Clustering 
+	- Lembrem que como AIC o BIC é usado para regressão passo a passo
+	- BIC encontra o modelo melhor ajustado com penalidade para número de parâmetros no modelo
+	- No caso de clustering, aumentar o número de clusters sempre melhora o ajuste mas adiciona parâmetros ao modelo
+	- `plot(mcl, what='BIC', ask=FALSE)` 
+	- O plot lembra o _elbow plot_ , são 14 linhas pois são ajustados 14 modelos e o melhor é escolhido
+</section>
+<section data-markdown>
+	## Model Clustering
+	- São criados vários modelos pois existem diferentes formas de parametrizar a matriz de covariância para
+	ajustar o modelo
+	- Model-based é uma área que está sendo muito desenvolvida e tem diversas formas de usar
+	- Talvez os detalhes do model-based sejam mais esforço do que o necessário para data science 
+	- É computacionalmente caro e depende de assumir um modelo para os dados 
+</section>
+<section data-markdown>
+	- Assumem que os clusters derivam de diferentes distribuições de probabilidade
+	- Diversos modelos são encaixados, assumindo diferentes números de distribuições
+	- O método escolhe o modelo que encaixa bem os dados sem muitos parâmetros
+</section>
+<section data-markdown>
+	## Escala e Categorias
+	- Técnicas não supervisionadas costumam precisas que os dados sejam escalados
+	- Como vimos no caso do loan_data, temos variáveis com unidades e magnitudes diferentes, isso é um problemas para
+	PCA, K-means e outros métodos de clustering
+	- Outro problemas são variáveis categóricas, se usarmos _one-hot encoder_ os dados só terão dois valores, o que pode
+	ser problemático
+</section>
+<section>
+	<pre><code>
+defaults &lt;- loan_data[loan_data$outcome=='default',]
+df &lt;- defaults[, c('loan_amnt', 'annual_inc', 'revol_bal', 'open_acc', 'dti', 'revol_util')]
+km &lt;- kmeans(df, centers=4, nstart=10)
+centers &lt;- data.frame(size=km$size, km$centers) 
+round(centers, digits=2)
+			
+	</code></pre>
+	<p> annual_inc e revol_bal dominam os clusters, notem também a diferença no número de elementos por cluster</p>
+</section>
+<section data-markdown>
+	## Escalando
+	- Uma técnica já vista é transformar as variáveis em escore-z, subtraindo a média e dividindo pelo desvio padrão
+	$$ z = \frac{x-\hat{x}}{s} $$
+	- O escalonamento também é importante para PCA, fazer isso é equivalente a usar a matrix de correlação no lugar
+	da de covariância, algumas funções dão essa opção (usar a matriz de correlação)
+	- No `princomp` temos o argumento `cor`
+</section>
+<section>
+	<pre><code>
+df0 &lt;- scale(df)
+km0 &lt;- kmeans(df0, centers=4, nstart=10)
+centers0 &lt;- scale(km0$centers, center=FALSE, scale=1/attr(df0, 'scaled:scale'))
+centers0 &lt;- scale(centers0, center=-attr(df0, 'scaled:center'), scale=FALSE)
+centers0 &lt;- data.frame(size=km0$size, centers0) 
+round(centers0, digits=2)
+
+km &lt;- kmeans(df, centers=4, nstart=10)
+centers &lt;- data.frame(size=km$size, km$centers) 
+round(centers, digits=2)
+	</code></pre>
+</section>
+<section data-markdown>
+	## Variáveis Dominante
+	- Mesmo em casos que as variáveis são medidas na mesma escala e informam de forma precisa sua importância
+	pode ser útil reescalar as variáveis
+	- Se a gente adicionar GOOGL e AMZN à análise do PCA vemos que elas dominam os dois primeiros componentes
+	- Isso acontece porque a movimentação de preço dessas duas ações dominam a variabilidade
+	- Podemos manter, reescalar ou então eliminar a variável dominante e tratar de forma separada
+</section>
+<section>
+	<pre><code>
+syms <- c('GOOGL', 'AMZN', 'AAPL', 'MSFT', 'CSCO', 'INTC', 'CVX', 'XOM', 
+	'SLB', 'COP', 'JPM', 'WFC', 'USB', 'AXP', 'WMT', 'TGT', 'HD', 'COST')
+  top_15 <- sp500_px[row.names(sp500_px)>='2011-01-01', syms]
+  sp_pca1 <- princomp(top_15)
+  
+screeplot(sp_pca1, main='')
+  
+round(sp_pca1$loadings[,1:2], 3)
+	</code></pre>
+</section>
+<section data-markdown>
+	### Dados Categóricos e distância de Gower
+	- Para dados categóricos devemos converter eles para valores numéricos seja através de ranking no cado de fatores
+	ordenados ou usando variáveis dummy
+	- Quando isso acontece é interessante escalar os dados e um método popular é a distância de gower
+		- Para variáveis numéricas e fatores ordenadas a distância é calculada como o valor absoluto da distância dos registros (Manhattan) 
+		- Para variáveis categóricas a distância é 1 se as categorias são diferentes e 0 se são iguais
+</section>
+<section data-markdown>
+	## Distância Gower
+	1. Compute a distância $d_{i,j} \forall \, i,j \, pares $
+	1. Escale cada par $d_{i,j} $ de forma que o menor seja 0 e o maior 1
+	1. Some as distâncias escaladas entre as variáveis calculando uma média ou média ponderada
+</section>
+<section>
+	<pre><code>
+x 7lt;- loan_data[1:5, c('dti', 'payment_inc_ratio', 'home_', 'purpose_')]
+x
+
+daisy(x, metric='gower')			
+	</code></pre>
+	<p>Todas as distâncias ficam entre 0 e 1, o par com maior distância é 2,3 e não compartilha home e purpose,
+		além de valores diferentes de dti. Já 3 e 5 são os mais próximos e possuem mesmo home e purpose
+	</p>
+</section>
+<section>
+	<pre><code>
+set.seed(301)
+df &lt;- loan_data[sample(nrow(loan_data), 250),
+				c('dti', 'payment_inc_ratio', 'home_', 'purpose_')]
+d = daisy(df, metric='gower')
+hcl &lt;- hclust(d)
+dnd &lt;- as.dendrogram(hcl)
+
+par(mar=c(0,5,0,0)+.1)
+plot(dnd, leaflab='none', ylab='distance')
+	</code></pre>
+</section>
+<section><pre><code>
+dnd_cut &lt;- cut(dnd, h=.5)
+df[labels(dnd_cut$lower[[2]]),]
+</code></pre>
+ <p>Todos tem home e purpose iguais! Isso ilustra que variáveis categóricas tendem a ser agrupadas nos clusters</p>
+</section>
+<section data-markdown>
+	## Problemas com Clustering
+	- K-means e PCA são mais apropriados para variáveis contínuas
+	- Para poucos dados hierárquico com distância de Gower é uma boa técnica
+	- Poderíamos usar _one hot encoder_ mas vimos que PCA e K-means têm dificuldade com variáveis binárias
+	- Se usarmos Escore-Z as variáveis binárias vão dominar os clusters
+	- Poderíamos escalar as categóricas para reduzir seu impacto ou então fazer clusters separados de cada motivo de 
+	empréstimo
+</section>
+<section>
+	<pre><code>
+df &lt;- model.matrix(~ -1 + dti + payment_inc_ratio + home_ + pub_rec_zero, data=defaults)
+df0 &lt;- scale(df)
+km0 &lt;- kmeans(df0, centers=4, nstart=10)
+centers0 &lt;- scale(km0$centers, center=FALSE, scale=1/attr(df0, 'scaled:scale'))
+round(scale(centers0, center=-attr(df0, 'scaled:center'), scale=FALSE), 2)
+	</code></pre>
+</section>
+<section data-markdown>
+		- Variáveis em escalas diferentes devem ser transformadas para a mesma escala
+		- Podemos usar a normalização para escalar
+		- Outro método é a distância de Gower 
+	</section>
+	<section data-markdown>
+		- Para redução de dimensionalidade as ferramentas principais são PCA e K-means, ambas devem ser escaladas
+		- Para clusters altamente estruturados, todos métodos vão produzir resultados parecidos
+		- K-means escala bem para grandes quantidades de dados
+		- Hierárquico pode ser aplicado para dados de tipos misturados (categóricos e numéricos) além de gerar o dendrograma
+		- Em dados com muitos ruídos a escolha é mais difícil com cada um gerando soluções bem diferentes
+		- Não existe uma regra do que fazer, vai depender do objetivo e tamanho dos dados
+	</section>
 				</div>
 		</div>
 
