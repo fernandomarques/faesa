@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Complexidade de Algoritmos</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="../css/misc.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Divisão e Conquista</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown >
+			## Divisão e Conquista
+			- Muitos algoritmos úteis são __recursivos__, chamando a si mesmo para resolver um problema
+			- O problema é quebrado em vários subproblemas semelhantes mas de menor tamanho
+			- O paradigma de divisão e conquista envolve três passos:
+				1. _Divisão_ do problema em subproblemas, resolvendo-os recursivamente
+				1. _Conquista_ os subproblemas 
+				1. _Combinação_ as soluções dadas aos subproblemas na solução do problema original
+		</section>
+		<section data-markdown>
+			## Ordenação por intercalação
+			- __Divisão__ divide a sequência de n elementos que deve ser ordenada em duas subsequências de n/2 elementos cada
+			- __Conquista__ Ordena as duas subsequências recursivamente, utilizando a ordenação por intercalação
+			- __Combinação__ Intercala as duas subsequências para produzir a resposta ordenada
+		</section>
+		<section>
+			<pre><code>
+def merge(left, right):
+	if not len(left) or not len(right):
+	return left or right
+	result = []
+	i, j = 0, 0
+	while (len(result) &lt; len(left) + len(right)):
+		if left[i] &lt; right[j]:
+			result.append(left[i])
+			i+= 1
+		else:
+			result.append(right[j])
+			j+= 1
+		if i == len(left) or j == len(right):
+			result.extend(left[i:] or right[j:])
+			break 
+
+	return result			</code></pre>
+		</section>
+		<section>
+			<pre><code>
+def mergesort(list):
+	if len(list) &lt; 2:
+		return list
+	middle = len(list)/2
+	left = mergesort(list[:middle])
+	right = mergesort(list[middle:])
+	return merge(left, right)
+			</code></pre>
+		</section>
+		<section data-markdown>
+			## Divisão e Conquista
+			- Quando os problemas são suficientemente grandes para serem resolvidos recursivamente, trate-se de um caso recursivo
+			- Logo que o subproblema se torna pequeno e não recorremos a recursão, dizemos que a recursão se esgotou
+			- As vezes os subproblemas menores não são exatamente iguais ao problema original
+		</section>
+		<section data-markdown>
+			## Relações de Recorrência
+			- As recorrências andam juntas dos algoritmos de divisão e conquista
+			- São equações de igualdade ou desigualdade que define uma função em termos de seu valor para entradas menores
+			$$ T(n) =  \Theta(1), se \, n=1 $$
+			$$ 2T(n/2) + \Theta(n), se\, n >1 $$
+			- Nesse casso a solução é $ T(n) = \Theta(n\,lgn) $
+		</section>
+		<section data-markdown>
+			## Relações de Recorrência
+			- As recorrências podem tomar muitas formas, podendo dividir em tamanhos desiguais como 2/3 e 1/3
+			- Tal algoritmo daria origem à recorrência $ T(n) = T(2n/3) + T(n/3) + \Theta(n) $
+			- Os subproblemas não estão necessariamente restritos a ser uma fração constante do tamanho do problema original
+			- Uma versão recursiva da busca linear criaria um subproblema contendo um elemento a menos que o original
+			- $T(n) = T(n-1) + \Theta(1) $
+		</section>
+		<section data-markdown>
+			## Relações de recorrência 
+			- Veremos três métodos para resolver recorrências
+				1. __método de substituição__ arriscamos um palpite para um limite e então usamos indução matemática para provar o palpite
+				1. __método da árvore de recursão__ converte a recorrência em uma árvore cujos nós representam os custos envolvidos em vários
+				níveis de recursão 
+				1. __método metre__ dá limite a recorrências da forma $T(n) = aT(n/b) + f(n) $
+	</section>
+	<section data-markdown>
+		## Relações de recorrência
+		- Veremos recorrência que não são igualdades, porém, desigualdades como $T(n) \le 2T(n/2) + \Theta(n) $
+		- Como a recorrência declara um limite superior, expressaremos sua solução usando a notação O em vez de &Theta;
+		- Também poderíamos utilizar a notação &Omega; para uma recorência de limite inferior
+		- Também ignoraremos o fato que para, por exemplo, valores ímpares o merge não terá divisão igual
+		- A relação do merge pode ser enunciada como $ T(n) = 2T(n/2) + \Theta(n) $
+	</section>
+	<section data-markdown>
+		## Relações de recorrência
+		- A relação do merge pode ser enunciada como $ T(n) = 2T(n/2) + \Theta(n) $
+		- Apesar do valor de T(1) alterar o resultado exato, normalmente a solução não muda por mais de um fator constante, e assim
+		a ordem de crescimento não é alterada
+		- Muitas vezes omitiremos pisos, tetos e condições de contorno e mais tarde determinaremos se eles tem importância ou não
+	</section>
+	<section data-markdown>
+		## Exercício
+		- Faça algoritmos recursivos para:
+			- Calcule a soma de um vetor
+			- Fibonacci. T(1) = 1, T(2) = 1, T(3) = 2, T(4) = 3, T(5) = 5 ...
+			- Torre de Hanoi. 3 colunas com pilhas de discos, mova de A para C sem colocar disco maior a cima de um menor
+	</section>
+	<section data-markdown>
+		## Problema do Subarranjo máximo
+		- Suponha que lhe tenha sido oferecida a oportunidade de investir na _Volatile Chemical Corporation_ 
+		- Assim os produtos produzidos, as ações da empresa também é bastante volátil
+		- Você só pode comprar uma única unidade de ação e então vender em data posterior
+		- Você poderá saber o preço da ação no futuro, o objetivo é maximizar o lucro
+		- Você poderia achar que basta achar o menor e maior preço, mas será?
+	</section>
+	<section>
+		<img src="img/Modulo2TabelaSubarranjo.png" alt="" width="200%">
+		<img src="img/Modulo2GraficoSubarranjo.png" alt="">
+	</section>
+	<section>
+		<img src="img/Modulo2TabelaSubarranjo2.png" alt="" width="200%">
+		<img src="img/Modulo2GraficoSubarranjo2.png" alt="">
+	</section>
+	<section data-markdown>
+		## Solução em Força Bruta
+		- Como solucionar?
+	</section>
+	<section data-markdown>
+		## Transformação
+		- Vamos considerar uma entrada ligeiramente diferente
+		- Queremos identificar a sequencia de dias a qual a mudança líquida do primeiro ao último dia é máxima
+		- Em vez de examinar os preços diários, vamos examinar a alteração diária
+		- Dessa forma queremos identificar o subarranjo máximo
+	</section>
+	<section>
+		<img src="img/Modulo2TabelaSubarranjo.png" alt="" width="">
+		<p>Como seria o algoritmo de força bruta?</p>
+		<p>Na próxima aula veremos a solução recursiva</p>
+	</section>
+	</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
