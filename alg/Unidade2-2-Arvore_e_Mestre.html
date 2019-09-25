@@ -92,7 +92,54 @@
 		<section data-markdown>
 			- Como seria para $ T(n) = T(n/3) + T(2n/3) + cn $
 		</section>
-
+		<section data-markdown>
+			- $T(n) \le T(n/3) + T(2n/3) + cn $
+			- $ \le d(n/3)lg(n/3) + d(2n/3)lg(2n/3) + cn $
+			- $ = (d(n/3) lgn - d(n/3)lg3) + (d(2n/3) -d(2n/3lg(3/2)) + cn $
+			- $ = dnlgn - d((n/3) lg3+(2n/3)lg(3/2))+cn $
+			- $ = dnlgn - d((n/3)lg3+(2n/3)lg3-(2n/3)lg2) + cn$
+			- $ = dnlgn - dn(lg3 - 2/3) + cn $
+			- $ \le dnlgn $
+			- Desde que $ d \ge c/(lg3 - (2/3)) $
+		</section>
+			<section data-background='img/yoda.jpg' > 
+			<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+			<h1>Método Mestre</h1>
+		</section>
+		<section data-markdown>
+			## Método Mestre
+			- Fornece uma 'receita' para resolver recorrências da forma $T(n) = aT(n/b) + f(n) $
+			- Onde $ a\ge1$ e $b>1 $ e f(n) assintóticamente positivo
+				1. Se $ f(n) = O(n^{log_ba-\epsilon}) $ para $ \epsilon > 0 $, então $ T(n) = \Theta(n^{log_ba})$
+				1. Se $ f(n) = \Theta(n^{log_ba}) $, então $ T(n) = \Theta(n^{log_ba}lgn) $
+				1. Se $ f(n) = \Omega(n^{log_ba+\epsilon}) $ para $ \epsilon > 0 $ e se $af(n/b) \le cf(n) $ para constante 
+				$ c < 1 $ então $ T(n) = \Theta(f(n)) $
+		</section>
+		<section data-markdown>
+			## Método Mestre
+			- No primeiro caso, não só deve ser assintóticamente maior, como polinomialmente maior, ou seja, tem que ser
+			maior por um fator $ n^\epsilon $ para $\epsilon > 0$
+			- No terceiro caso além de ser polinomialmente maior também deve satisfazer a condição de regularidade expressa por
+			$af(n/b) \le cf(n) $
+			- Os três casos não abrangem todas as possibilidades! Existem lacunas entre as regras 1 e 2 e as regras 2 e 3
+		</section>
+		<section data-markdown>
+			## Exercícios
+			- $ T(n) = 9T(n/3) + n$
+			- $ T(n) = T(2n/3) + 1$
+			- $ T(n) = 3T(n/4) + nlgn$
+			- $ T(n) = 2T(n/2) + nlgn$ se aplica?
+			- $ T(n) = 2T(n/2) + \Theta(n)$
+			- $ T(n) = 8T(n/2) + \Theta(n^2)$
+			- $ T(n) = 7T(n/2) + \Theta(n^2)$
+		</section>
+		<section data-markdown>
+			## Exercícios
+			- $ T(n) = 2T(n/4) + 1$
+			- $ T(n) = 2T(n/4) + \sqrt1$
+			- $ T(n) = 2T(n/4) + n $
+			- $ T(n) = 2T(n/4) + n^2 $
+		</section>
 	</div>
 		</div>
 
