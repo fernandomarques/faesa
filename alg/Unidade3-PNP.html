@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Complexidade de Algoritmos</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="../css/misc.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>P = NP ? E algoritmos</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown>
+			## NP-Completos
+			- Quase todos algoritmos que estudamos até agora são de tempo polinomialmente complexos
+			- Para uma entrada _n_ seu tempo de execução no pior caso é de $O(n^k) $
+			- Poderíamos imaginar que isso seria verdadeiro para TODOS os problemas
+			- Um exemplo é o "problema da parada" de Turing que não pode ser resolvido por qualquer computador, não importa por quanto tempo seja executa
+			- Em geral pensamos que problemas que podem ser resolvidos por algoritmo em tempo polinomial são tratáveis, ou fáceis
+			- Já os superpolinomiais são intratáveis ou difíceis
+		</section>
+		<section data-markdown>
+			## NP-Completos
+			- Problemas NP-Completos tem _status_ desconhecidos, não foram encontrados nenhum algoritmo polinomial para solucionar-los
+			- Mas também não existe nenhuma prova de que não exista uma solução polinomial
+			- Essa questão denominada $ P \neq NP $ continua sendo um dos mais profundos e intrigantes problemas de pesquisa ainda em aberto na teoria
+			da ciência da computação, desde que foi proposto pela primeira vez em 1971
+			- [Video NP](https://www.youtube.com/watch?v=YX40hbAHx3s)
+			- [Problema da Parada de Turing](https://www.youtube.com/watch?v=92WHN-pAFCs)
+		</section>
+		<section data-markdown>
+			## Problemas NP-Completos
+			- Caminhos simples mínimos e caminho simples de comprimento máximo
+				- Determinar se um grafo contém um caminho simples com pelo menos um determinado número de arestas
+				é NP-Completo
+			- Passeio de Euler e Ciclo hamiltoniano
+				- Um passeio de euler de um grafo conexo dirigido é um ciclo que percorre cada aresta
+				exatamente uma vez, mas pode visitar cada vértice mais de uma vez
+				- Um ciclo hamiltoniano é um ciclo simples que contém cada vértice, determinar se um grafo tem um
+				ciclo hamiltoniano é difícil!
+		</section>
+		<section data-markdown>
+			## P, NP, NPC
+			- P: consiste nos problemas que podem ser resolvidos em tempo polinomial, mais especificamente, são problemas
+			que podem ser resolvidos no tempo $O(n^k)$
+			- A classe NP consiste nos problemas que são __verificáveis__ em tempo polinomial. 
+				- Se tivéssemos um certificado de solução, poderíamos verificar se o certificado é correto em tempo polinomial
+			- NPC, ou NP-Completo, é um problema que está em NP e é tão difícil quanto qualquer problema em NP
+			- Se __existe um__ problema NPC que possa ser resolvido em tempo polinomial, então, __TODOS__ problemas NP
+			tem um algoritmo em tempo polinomial
+	</section>
+	<section data-markdown>
+		![XKCD Caixeiro Viajante](https://imgs.xkcd.com/comics/travelling_salesman_problem.png)
+	</section>
+	<section data-markdown>
+		![XKCD NPC](https://imgs.xkcd.com/comics/np_complete.png)
+	</section>
+	<section data-markdown>
+		## Como mostrar que um problema é NPC
+		- Quando dizemos que um problema é NPC dizemos que trata-se de um problema difícil de resolver
+		- Não tentamos provar um algoritmo eficiênte, mas que provavelmente não existe nenhum algoritmo eficiênte
+		- De certa forma tentamos mostrar o limite inferior
+	</section>
+	<section data-markdown>
+		## Decisão _versus_ otimização
+		- Problemas de otimização tem um valor associado e desejamos encontrar uma solução viável com o melhor valor
+		- Por exemplo, encontrar o menor caminho (menor número de arestas) entre dois vértices u e v 
+		- A NP-Completude não se aplica diretamente a problemas de otimização e sim problemas de Decisão
+		- Nos problemas de decisão a resposta é apenas __sim__ ou __não__
+	</section>
+	<section data-markdown>
+		## Decisão _versus_ otimização
+		- Embora os problemas NPC estejam confinados ao reino dos problemas de decisão, podemos tirar proveito
+		de uma relação conveniente entre problemas de otimização e decisão
+		- Exemplo.: Dao um grafo dirigido G, vértices u e v, e um inteiro k, existe um caminho de u e v que consiste em no
+		máximo k arestas?
+		- Essa relação age a nosso favor ao mostrar que um problema de otimização é difícil
+		- Assim, se o problema de decisão é difícil, o problema de otimização é ao menos tão difícil quanto
+	</section>
+	<section data-markdown>
+		## Reduções
+		- Mostrar que um problema não é mais difícil ou não é mais fácil que outro também se aplica quando ambos são
+		problemas de decisão
+		- Denominamos a entrada de um problema por __instância__ desse problema
+		- Suponha que sabemos resolver um problema de decisão diferente B em tempo polinomial
+		- Finalmente, suponha que temos um procedimento que transforma qualquer instância &alpha; de A em uma instância 
+		&beta; de B com as seguintes características
+			- A transformação demora tempo polinomial
+			- As respostas são as mesma, se um é sim, o outro também
+	</section>
+	<section data-markdown>
+		## Reduções
+		- Denominamos tal procedimento um __algoritmo de redução__, ele proporciona um meio para resolver A em tempo polinomial
+			1. Dada uma instância &alpha; do problema A, use um algoritmo de redução de tempo polinomial
+			para transformá-la em uma instância &beta; de B
+			2. Execute o algoritmo de redução de tempo polinomial para B para a instância &beta;
+			3. Use a resposta de &beta; como resposta para &alpha;
+		- A NP-Completude consiste em mostrar o quanto um problema é difícil, e não, fácil
+	</section>
+	<section data-markdown>
+		## Reduções
+		- Suponha que tenhamos um problema de decisão A que saibamos que não pode haver nenhum algoritmo polinomial
+		- Suponha que tenhamos uma redução polinomial para B
+		- Por contradição mostramos que não pode existir nenhum algoritmo de tempo polinomial para B
+		- Suponha que B tenha tempo polinomial
+		- Logo, teríamos uma forma de resolver o problema A em tempo polinomial, o que contradiz a hipótese
+	</section>
+	<section data-markdown>
+		## Reduções
+		- Para NP-Completude não podemos supor que não exista absolutamente nenhum algoritmo de tempo polinomial
+		- Contudo, a metodologia da prova é semelhante no sentido que provamos que se A é NPC então B também é
+		- Como o problema da redução se baseia no fato de ter um problema conhecidamente NPC, para provar um
+		problema diferente precisamos de um "primeiro" problema NPC
+	</section>
+	<section data-markdown>
+		## O primeiro problema
+		> Temos um circuito combinacional booleano composto por portas AND, OR e NOT, e desejamos saber se existe um conjunto
+		de entradas booleanas para esse circuito que faça sua saída ser 1.
+	</section>
+	<section data-markdown>
+		## RSA
+		- [Video RSA](https://www.youtube.com/watch?v=wXB-V_Keiu8)
+	</section>
+	</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
