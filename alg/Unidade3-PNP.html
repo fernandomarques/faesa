@@ -149,6 +149,80 @@
 		de entradas booleanas para esse circuito que faça sua saída ser 1.
 	</section>
 	<section data-markdown>
+		## Tempo Polinomial
+		- Problemas polinomiais são considerados tratáveis mais por questões filosóficas do que matemáticas
+		- Temos três argumentações:
+			1. Embora seja razoável considerar um problema $\Theta(n^{100})$ como intratável, poucos problemas tem essa ordem
+			polinômio. Normalmente, assim que uma solução polinomial é encontrada, algoritmos mais eficiêntes são encontrados em seguida. 
+
+	</section>
+	<section data-markdown>
+		## Tempo Polinomial
+		- 2- A classe de problemas polinomiais resolvidos pela máquina de acesso aleatório serial é igual à classe
+			de problemas resolvíveis em tempo polinomial em máquinas abstratas de Turing, que também é igual
+			aos problemas resolvíveis em tempo polinomial em um computador paralelo quando o número de processadores cresce
+			polinomialmente com o tamanho da entrada
+	</section>
+	<section data-markdown>
+		## Tempo Polinomial
+		- 3- A classe de problemas resolvíveis em tempo polinomial tem propriedades de fechamento interessantes, 
+		já que os polinômios são fechados por multiplicação, adição e composição
+		- Se a saída de um algoritmo polinomial é alimentada na entrada de outro, o algoritmo composto é polinomial
+		- Se um algoritmo chama sub-rotinas de tempo polinomial e realiza uma quantidade adicional de trabalho, também
+		polinomial, a execução do algoritmo é polinomial
+	</section>
+	<section data-markdown>
+		## Problemas abstratos
+		- Para entender a classe de problemas de tempo polinomial resolvíveis, precisamos de uma noção de o que é problema
+		- Um __problema abstrato__ Q é uma relação binária entre um conjunto _I_ de instâncias e um conjunto _S_ de soluções
+		- Uma instância do menor-caminho é um grafo com dois vértices
+		- Uma solução é uma sequência de vértices no gráfo, talvez uma sequência vazia. Sendo o menor caminho, pode ter mais de uma solução
+		</section>
+	<section data-markdown>
+		## Problemas abstratos
+		- Vimos que a NP-Completude se restringe a __problemas de decisão__
+		- Esse problema pode ser uma função que mapeia uma instância i = {G,u,v,k} para PATH(i) = 1 se existe um 
+		caminho mínimo de u a v com no máximo k arestas ou PATH(i) = 0 caso contrário
+		- Apesar de muitos problemas abstratos serem de otimização, vimos que podemos reformular para um problema de decisão
+		que não é mais difícil que o primeiro
+		</section>
+		<section data-markdown>
+			## Verificação em tempo polinomial
+			- Agora examinaremos algoritmos que "verificam" soluções
+			- Dado a instância {G,u,v,k} do problema de decisão, é fácil verificar se o caminho p é um caminho
+			em G, e se o comprimento de p é no máximo k. 
+			- Podemos visualizar p como um certificado de que a instância de fato pertence a PATH
+			- Para o problema de decisão PATH o certificado não nos dá muito, afinal, $ PATH \in P $, assim
+			podemos verificar a validade de p em tempo polinomial! Basta refazer do zero...
+		</section>
+		<section data-markdown>
+			## Ciclos Hamiltonianos
+			- É um problema estudado a mais de 100 anos
+			- Um __ciclo hamiltoniano__ de um grafo não dirigido G = (V,E) é um ciclo simples que contém cada vértice
+			de V. 
+			- O nome é uma homenagem a W.R. Hamilton, que descreveu o jogo no dodecaedro. No qual o jogador fixa cinco alfinetes
+			em quaisquer cinco vértices consecutivos e o outro jogador deve completar o caminho para formar um ciclo que tenha todos os vértices
+			- Podemos definir o problema como: "Um grafo G tem um ciclo hamiltoniano?"
+		</section>
+		<section data-markdown>
+			## Ciclos Hamiltonianos
+			- Uma solução seria gerar todas as permutações dos vértices de G e depois verificar cada permutação
+			para ver se ela é um caminho hamiltoniano
+			- Se usarmos a codificação de um grafo como sua matriz de adjacência, um número $m$ de vértices no grafo
+			será $\Omega(\sqrt n)$, onde $n$ igual comprimento da codificação de G
+			- Existem $m!$ permutações, portanto $\Omega(m!) = \Omega(\sqrt n!) = \Omega(2^{\sqrt n})$
+			- Que não é $O(n^k)$ para nenhuma constante $k$
+			- Assim esse algoritmo não é polinomial, na verdade, é NP-Completo
+
+		</section>
+		<section data-markdown>
+			## Algoritmo de Verificação
+			- Se um amigo diz que um gráfico é hamiltoniano e oferece como certificado a sequência de vértices
+			- Para verificar basta confirmar que ele é uma permutação dos vértices de V e que cada uma das arestas consecutivas realmente existe
+			- Seria possível identificar que isso é verdade usando um algoritmo $O(n^2)$
+			- Assim, uma uma prova de que um ciclo hamiltoniano existe em um grafo pode ser verificada em tempo polinomial
+		</section>
+	<section data-markdown>
 		## RSA
 		- [Video RSA](https://www.youtube.com/watch?v=wXB-V_Keiu8)
 	</section>
