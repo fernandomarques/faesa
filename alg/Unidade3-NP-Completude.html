@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Complexidade de Algoritmos</title>
+
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+	<link rel="stylesheet" href="../css/misc.css">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>NP-Completude e Redutibilidade</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section data-markdown>
+				## Classe NP
+				- Um algoritmo pertence classe de complexidade NP se e somente se existe um algoritmo de tempo
+				polinomial que recebe um certificado
+				e verifica se a solução está correta
+				- $ P \subseteq NP $
+				- Não sabemos de $ P = NP $ mas a maioria dos pesquisadores acredita que não
+				- É possível perceber que em muitos casos é mais fácil verificar se uma solução está correta do que
+				chegar na solução correta do 0
+			</section>
+			<section data-markdown>
+				## Classe NP
+				- Teóricos de Ciência da computação acreditam que essa analogia também vale, por isso NP também inclui
+				problemas que não estão em NP
+				- Existe uma evidência de que $ P \neq NP $ que é a existência de algoritmos NP-Completos
+			</section>
+			<section data-markdown>
+				## NP-Completude
+				- Uma intrigante propriedade das classes NP-completo é que se algum problema NPC pode ser resolvido em
+				problema polinomial,
+				então _todo_ problema NPC tem solução polinomial
+				- Nenhum algoritmo de tempo polinomial jamais foi descoberto para qualquer problema NP-Completo
+				- HAM-CYCLE é NPC, se conseguirmos resolver em tempo polinomial, resolveríamos todos os problemas
+				NP-Completos!
+			</section>
+			<section data-markdown>
+				## Redutibilidade
+				- Intuitivamente um problema Q pode ser convertido a outro problema Q' se qualquer instância de Q
+				pode ser "facilmente" convertida para Q'
+			</section>
+			<section data-markdown>
+				## Redutibilidade
+				$$  L_1, L_2 \subseteq (0,1)* | L_1 \leq_P L_2, L_2 \in P \implies  L_1 \in P $$
+				- Seja $A_2$ um algoritmo de tempo polinomial e seja F um algoritmo de redução de tempo polinomial
+				que calcula a função redução f
+				- Para uma entrada _x_ o algoritmo usa F para transformar _x_ em _f(x)_ e depois $A_2$ para testar
+				se $ f(x) \in L_2 $. O algoritmo $A_1$ toma a saída de $A_2$ como sua própria resposta
+				- $A_1$ é executado em tempo polinomial, já que tanto F quanto $A_2$ também são
+			</section>
+			<section data-markdown>
+				## NP-Completude 
+				- Reduções de tempo polinomial proporcionam um meio formal de mostrar que um problema é no mínimo
+				tão difícil quanto um outro
+				- Podemos definir o conjunto de linguagens NP-Completas. Uma linguagem $L \subseteq (0,1) $ é NP-Completa se:
+					1. $L \in NP$
+					1. $ L' \leq_p L \,\forall L' \in NP $ 
+				- Se uma linguagem satisfaz a propriedade 2 mas não necessáriamente a 1, dizemos que é NP-Difícil
+			</section>
+			<section data-markdown>
+				## Satisfazibilidade de Circuitos
+				- Precisamos de um primeiro problema para compor o conjunto NP-Completo, usaremos uma prova informal
+				- [Boolean Formula](https://www.youtube.com/watch?v=uAdVzz1hKYY)
+				- [Satisfazibilidade](https://www.youtube.com/watch?v=Mu5HUvIojJA)
+				- Dizemos que um circuito combinacional é __satisfazível__ se tem uma atribuição que satisfaz, ou seja, que
+				torne a saída verdadeira
+				- Um problema de satisfazibilidade de circuitos é _"Dado um circuito combinacional booleano composto 
+				de portas AND, OR E NOT, ele é satisfazível?"_
+			</section>
+			<section data-markdown>
+				## _Lema:_ Satisfazibilidade $\in NP$
+				- Daremos a um algoritmo A de tempo polinomial com duas entradas que pode verificar CIRCUIT_SAT
+				- Uma das entradas é um circuito combinacional booleano C, a outra entrada é um certificado
+				- Para cada porta lógica no circuito ele verifica se o valor fornecido pelo certificado no fio de saída
+				é calculado corretamente em função dos valores nos fios de entrada
+				- Se a saída é 1 o algoritmo retorna 1, já que os valores atribuídos a entrada satisfazem. Caso contrário,
+				A produz 0
+			</section>
+			<section data-markdown>
+				## Satisfazibilidade $\in NP$
+				- Sempre que um circuito satisfazível C é dado como entrada para A, existe um certificado cujo comprimento é polinomial
+				em relação ao tamanho de C e que faz com que A produza um 1. 
+				- Sempre que um circuito insatisfazível é dado como entrada, nenhum certificado pode enganar A e fazê-lo acreditar
+				que o circuito é satisfazível. O algoritmo A é executado em tempo polinomial: com uma boa implementação, um
+				tempo linear é suficiente
+				- Assim, podemos verificar CIRCUIT-SAT em tempo polinomial e CIRCUIT-SAT $ \in NP$
+			</section>
+			<section data-markdown>
+				## Satisfazibilidade $\in NP$
+				- Para mostrar que CIRCUIT-SAT é NP-Completo devemos mostrar que é NP-Difícil
+				- Um programa de computar é armazenado na memória do computador como uma sequência de instruções.
+				- Uma instrução típica codifica uma operação a ser executada, endereços de operandos na memória e um endereço
+				de onde o resultado deve ser armazenado
+				- Uma posição especial chamada de __contador de programa__ indica qual instrução deve ser executada em seguida
+			</section>
+			<section data-markdown>
+				## Satisfazibilidade $\in NP$
+				- O contador é incrementado automaticamente sempre que uma instrução é recuperada, o que faz o computador executar instruções 
+				sequencialmente
+				- No entanto, a execução de uma instrução pode fazer com que um valor seja escrito no contador de programa, o que altera
+				a execução sequencial e permite que o computador execute laços e desvios condicionais
+			</section>
+			<section data-markdown>
+				## Satisfazibilidade $\in NP$
+				- Em qualquer ponto durante a execução de um programa, a memória do computador guarda todo o estado da computação
+				- Denominamos __configuração__ qualquer estado particular da memória do computador
+				- Podemos ver que a execução de uma instrução pode ser vista como o mapeamento de uma configuração para a outra
+				- O hardware do computador que executa esse mapeamento pode ser implementado como um circuito combinacional booleano,
+				que denotamos por M na prova do lema a seguir
+			</section>
+			<section data-markdown>
+				### _Lema:_ Satisfazibilidade $\in$ NP-Difícil
+				- _continua ..._
+			</section>
+			<section data-markdown>
+				# _Lema:_ O problema da satisfazibilidade de circuitos é NP-Completo
+			</section>
+			<section data-markdown>
+				## RSA
+				- [Video RSA](https://www.youtube.com/watch?v=wXB-V_Keiu8)
+			</section>
+		</div>
+	</div>
+
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+	<script src="../js/base.js"></script>
+
+	<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+			slideNumber: 'c/t',
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+			math: {
+				// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				TeX: {
+					Macros: {
+						R: '\\mathbb{R}',
+						set: ['\\left\\{#1 \\; ; \\; #2\\right\\}', 2]
+					}
+				}
+			},
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true },
+				{ src: '../plugin/math/math.js', async: true }
+			]
+		});
+
+	</script>
+
+</body>
+
+</html>
