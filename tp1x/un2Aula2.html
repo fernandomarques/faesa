@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Técnicas de Programação I</title>
+
+	<meta name="description" content="Técnicas de Programação I">
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Estrutura Sequencial</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Avaliação de Um Minuto</h3>
+				<ul>
+					<li>-</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>DevC++</li>
+					<li>Bibliotecas</li>
+					<li>Variáveis int, float</li>
+					<li>Atribuição</li>
+					<li>Comando de saída</li>
+					<li><pre><code class="C">#include &ltstdio.h&gt
+int main(){
+	int a = 0;
+	float x = 1.4;
+	a = 10;
+	printf("Valor de a: %i e valor de x %f",a,f);
+}</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Paradigmas de programação</h3>
+				<ul>
+					<li>Paradigma estruturado</li>
+					<li>Qualquer problema pode ser quebrado em problemas menores</li>
+					<li>Podemos chamar os problemas menores de sub-rotinas ou funções</li>
+					<li>O processamento pode ser realizado pelo uso de três tipos de estruturas de controle</li>
+					<ul>
+					<li>Estrutura de controle sequencial</li>
+					<li>Condicional</li>
+					<li>Iterativa (repetição)</li>
+				</ul>
+				</ul>
+			</section>
+			<section>
+				<h3>Programação Estruturada</h3>
+				<ul>
+					<li><b>Sequencia:</b> permite indicar dois ou mais passos que devem ser executados sequencialmente, na ordem em que estão especificados</li>
+					<li><b>Seleção:</b> permite indicar dois passos que devem ser executados de forma mutuamente exclusiva, dependendo de uma determinada condição</li>
+					<li><b>Repetição:</b> permite indicar um ou mais passos que devem ser executados repetidamente, dependendo de uma condilçao</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Estruturas de Controle</h3>
+				<img src="img/EstruturaControle.jpg" alt="">
+			</section>
+			<section>
+				<h3>Comando de Entrada</h3>
+				<ul>
+					<li>Recebe dados digitados pelo usuário</li>
+					<li class="fragment">São armazenados em variáveis</li>
+					<li class="fragment"><pre><code class="C">scanf("%d",&numero);
+scanf("%f",&preco);
+</code></pre></li>
+					<li class="fragment">Como printf temos que indicar o tipo!</li>
+				</ul>
+			</section>
+			<section>
+				<table>
+					<caption>Operadores e funções</caption>
+					<tr> <th>Operador</th> <th>Exemplo</th> <th>Comentário</th></tr>
+					<tr> <td>=</td> <td>x =y</td> <td>Conteúdo da variável x é atribuído a y</td></tr>
+					<tr> <td>+</td> <td>x+y</td> <td>Soma conteúdo de x e y</td></tr>
+					<tr> <td>-</td> <td>x-y</td> <td>Subtrai o conteúdo de y do conteúdo de x</td></tr>
+					<tr> <td>*</td> <td>x*y</td> <td>Multiplica o conteúdo de x pelo de y</td></tr>
+					<tr> <td>/</td> <td>x/y</td> <td>Obtém o quociente da divisão de x por y (inteiro vs float)</td></tr>
+					<tr> <td>%</td> <td>x % y</td> <td>Obtém o resto da divisão de x por y</td></tr>
+				</table>
+			</section>
+
+			<section>
+				<table>
+					<caption>Funções da biblioteca math.h</caption>
+					<tr>  <th>Exemplo</th> <th>Comentário</th></tr>
+					<tr>  <td>abs(x)</td> <td>Valor absoluto -1 é 1</td></tr>
+					<tr>  <td>ceil(x)</td> <td>Arredonda 3.2 é 4</td></tr>
+					<tr>  <td>floor(x)</td> <td>Arredonda para baixo, 3.2 é 3</td></tr>
+					<tr>  <td>cos(x)</td> <td>Cosseno em radianos</td></tr>
+					<tr>  <td>sin(x)</td> <td>Seno de x em radianos</td></tr>
+					<tr>  <td>tan(x)</td> <td>Tangente de x em radianos</td></tr>
+					<tr>  <td>log(x)</td> <td>Logaritmo natural</td></tr>
+					<tr>  <td>log10(x)</td> <td>Logaritmo na base 10</td></tr>
+					<tr>  <td>pow(x,y)</td> <td>Potência de x elevado a y</td></tr>
+					<tr>  <td>sqrt(x)</td> <td>Raiz quadrada de x</td></tr>
+				</table>
+			</section>
+			<section>
+				<h3> Exercícios </h3>
+				<ol>
+					<li class="">Dada as coordenadas de dois pontos no plano cartesiano, informa a distância entre eles</li>
+					<img src="img/pitagoras.png" alt="">
+					</ol>
+			</section>
+			<section>
+				<h3>Exercícios</h3>
+				<ol start="2">
+						<li class="">Dada uma distância percorrida (em quilômetros),bem como o total de combustível gasto(em
+								litros), informe o consumo médio do veículo em km/l.</li>
+								
+					<li>Dadas as medidas de uma sala em metros, bem com o preço do metro quadrado de carpete, informe o custo total para forrar o piso da sala</li>
+					<li>Faça um programa que leia o peso e altura de uma pessoa e retorna o IMC da mesma</li>
+					<li class="">Preencher a enquete <span class="red">Avaliação de Um Minuto</span></li>
+				</ol>
+			</section>
+
+		</div>
+	</div>
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+
+	<script>
+
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: '../plugin/zoom-js/zoom.js', async: true },
+			{ src: '../plugin/notes/notes.js', async: true }
+		]
+	});
+	Reveal.configure({
+		keyboard: {
+			38: 'next',
+			40: 'prev'
+		}
+	});
+
+	</script>
+
+</body>
+</html>

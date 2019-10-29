@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Técnicas de Programação I</title>
+
+	<meta name="description" content="Técnicas de Programação I">
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Estruturas Repetição</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+		
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>Variáveis</li>
+					<li>Declaração</li>
+					<li>Atribuição</li>
+					<li>Expressão</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>Bibliotecas</li>
+					<li>stdio.h</li>
+					<li>math.h</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>Estruturas condicionais</li>
+					<li>If</li>
+					<li>Else</li>
+					<li>Switch</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Introdução</h3>
+				<ul>
+					<img class="top-right" src="../img/LoopCharlieChaplin.gif" alt="">
+					<li class="fragment">Trechos de código que precisam ser repetidos são chamados de <b>laços de repetição</b></li>
+					<li class="fragment">A <b>estrutura de repetição</b> é importante para resolver problemas computacionais como leitura de muitos dados e manipular elementos de matriz</li>
+					<li class="fragment">Os <b>laços de repetição</b> ou <b>loop</b> fazem uma execução finita em círculos que depois segue o curso normal</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Acumuladores e Contadores</h3>
+				<ul>
+					<li class="fragment">Um acumulador é uma variável que ocorre em ambos os lados de uma atribuição</li>
+					<li class="fragment">Antes de ser usado deve ser iniciado.</li>
+					<li class="fragment">Como acumuladores são muito comum existem operadores aritméticos de atribuição</li>
+					<li class="fragment"><pre><code class="C">main(){
+   int a,b;
+	 a = 2;
+	 a +=2; // a = a + 2
+	 b=0;
+	 b++;  // b = b + 1
+					}</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Estrutura de repetição contada</h3>
+				<ul>
+					<img class="top-right" src="../img/LoopEscherDrawingHands.jpg" alt="">
+					<li class="fragment"><pre><code class="C">
+for(inicia; testa; altera)
+	comando;
+					</code></pre></li>
+					<li class="fragment"><pre><code class="C">
+for(inicia;testa;altera){
+	comando1;
+	...
+	comandon;
+}
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Exercício</h3>
+				<ul>
+					<li class=""><pre><code class="C">
+for(i=0; i < 10; i ++)
+	printf("ola\n"); // repete 10x;
+					</code></pre></li>
+					<li class="">Dado um número inteiro, exiba a sua tabuada</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Estrutura de repetição contada (decrescente)</h3>
+				<ul>
+					<li class="fragment">Também podemos usar um contador que, em vez de aumentar de 1 em 1, diminui de 1 em 1</li>
+					<li class="fragment">Dado um número n, exiba a contagem regressiva de n até 0</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Estruturas de repetição encaixadas</h3>
+				<ul>
+					<li class="fragment">Estruturas de repetição podem ser encaixadas para formar padrões mais complexos de repetição</li>
+					<li class="fragment">Dado um número natural n, desenha um quadrado n x n. Dica: <span class="green">printf("%d ", 223);</span></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Exercícios</h3>
+				<ol>
+					<li class="">Dada as notas dos alunos de uma turma, informar a média da turma.</li>
+					<li class="">Dadas as idades dos pacientes e uma clínica, informa a idade daquele mais idoso.</li>
+					<li class="">Dados um capital, uma taxa de juros mensal e um período em meses, informa o montante ao final de cada mês</li>
+				</ol>
+			</section>
+			<section>
+				<h3>Estrutura de repetição com condição</h3>
+				<ul>
+					<li class="fragment">Serve para executar um ou vários comandos <b>enquanto uma determinada condição for verdadeira</b>	</li>
+					<li class="fragment">A condição é avaliada antes de o comando ser executado</li>
+					<li class="fragment"><pre><code class="C">while(condicao){
+   comando1;
+	 comando2;
+ }</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Estrutura de repetição com condição</h3>
+				<ol>
+					<li class="fragment">Dado um número inteiro qualquer, exiba seus dígitos</li>
+					<li class="fragment">Em um banco, as contas são identificadas por um número de conta com dígito verificados. Esse dígito é calculado pelo seguinte modo: Somar todos os dígitos do número da conta, depois dividis a soma por 10 e tomar o resto. Exemplo 5713 temos: 5+7+1+3 = 16 dividido por 10 o resto é 6</li>
+				</ol>
+			</section>
+			<section>
+				<h3>Repetição com terminação forçada</h3>
+				<ul>
+					<li class="fragment">Quando usamos <b>while(1){...}</b> criamos uma repetição infinita</li>
+					<li class="fragment">Para forçar o término dessa execução podemos usar o comando <b>break</b></li>
+					<li class="fragment">Não é convencional utilizar e deve-se ter cuidado ao usar</li>
+					<li class="fragment">Dada uma sequencia de números positivos informe o total a ser pago. Quando for digitado o valor 0, pare de ler!</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Estrutura de repetição com pós condição</h3>
+				<ul>
+					<li class="fragment">Com pós-condição podemos executar um ou vários comandos. </li>
+					<li class="fragment">É usada quando devemos executar ao menos uma vez</li>
+					<li class="fragment"><pre><code class="C">do{
+   comando1;
+	 comando2;
+ } while(condicao);
+					}</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Consistência de entrada de dados</h3>
+				<ul>
+					<li class="fragment">Precisamos garantir que o usuário entrou com dados consistentes!</li>
+					<li class="fragment">Se formos calcular a raiz quadrada e o valor de entrada for negativo?</li>
+					<li class="fragment">Dado um número real não negativo, informe sua raiz quadrada</li>
+					<li class="fragment">Dado um número inteiro entre 1 e 10, exiba sua tabuada</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Repetição com confirmação do usuário</h3>
+				<ul>
+					<li class="">Ao terminar, perguntamos se o usuário deseja continuar ou não</li>
+					<li class="">getchar()</li>
+					<li class="">toupper() da biblioteca ctype.h</li>
+					<li class="">scanf("%d%*c",&numero);</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Processos Orientados por menus</h3>
+				<ul>
+					<li class="fragment">É quando uma série de opções é apresentada ao usuário</li>
+					<li class="fragment">Simular o funcionamento de um caixa eletrônico, que oferece as s opções. 1-depósito, 2-saque, 3-saldo, 4-sair. Suponha que o saldo inicial seja R$1000,00 e que o saldo não pode ficar negativo.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Exercícios</h3>
+				<ol>
+					<li class="">Dadas as duas notas de um aluno, informe a sua média. Seu programa deve forçar ao usuário a digitar notas na faixa de 0 a 10</li>
+					<li class="">Modifique o exercício anterior de modo que, ao final de cada execução, o usuário tenha a opção de repetir o processo</li>
+				</ol>
+			</section>
+			<section>
+				<h3>Resumo</h3>
+				<div class="small-box fragment">
+					<u>contar++</u> significa aumentar <u>contar</u> em 1.
+				</div>
+				<div class="small-box fragment">
+					<u>contar--</u> significa diminuir <u>contar</u> em 1.
+				</div>
+				<div class="small-box fragment">
+					Loops <b>FOR</b> são uma maneira mais compacta de escrever loops.
+				</div>
+				<div class="small-box fragment">
+					Loops <b>WHILE</b> repetem o código, contanto que a condição seja verdadeira.
+				</div>
+				<div class="small-box fragment">
+					Loops <b>DO-WHILE</b> executam o código pelo menos uma vez.
+				</div>
+				<div class="small-box fragment">
+					Os laços de repetição são conhecidos também por sua tradução em inglês: <i>loops</i>
+				</div>
+			</section>
+			<section>
+				<ul >
+					<li class="">Preencher a <span class="red">enquete de Um Minuto</span></li>
+				</ul>
+			</section>
+
+		</div>
+	</div>
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+
+	<script>
+
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: '../plugin/zoom-js/zoom.js', async: true },
+			{ src: '../plugin/notes/notes.js', async: true }
+		]
+	});
+	Reveal.configure({
+		keyboard: {
+			38: 'next',
+			40: 'prev'
+		}
+	});
+
+	</script>
+
+</body>
+</html>

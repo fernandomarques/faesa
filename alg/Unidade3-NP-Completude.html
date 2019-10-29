@@ -144,11 +144,24 @@
 				que denotamos por M na prova do lema a seguir
 			</section>
 			<section data-markdown>
-				### _Lema:_ Satisfazibilidade $\in$ NP-Difícil
-				- _continua ..._
+				### _Lema:_  Satisfazibilidade $\in$ NP-Difícil
+				- Seja L qualquer linguagem em NP 
+				- Descreveremos um algoritmo de tempo polinomial F que calcula uma função e redução f que mapeia toda cadeia binária x para um circuito
+				C = f(x), tal que $ x \in L $ se e somente se $ C \in $ CIRCUIT-SAT
+				- Como $ L \in NP$ deve existir um algoritmo A que verifica L em tempo polinomial
+				- O algoritmo F usará o algoritmo A de duas entradas
+				para calcular a redução de f
+				- Seja T(n) o tempo de execução no pior caso de A, temos $ T(n) = O(n^k) $e um certificado de tamanho $O(n^k)$
 			</section>
 			<section data-markdown>
-				# _Lema:_ O problema da satisfazibilidade de circuitos é NP-Completo
+				### _Lema:_  Satisfazibilidade $\in$ NP-Difícil
+				- A ideia é representar a computação de A como uma sequência de configurações
+				- Cada combinação consiste em: Programa A, contador de programa e estado da máquina, entrada x, certificado y e área de armazenamento
+				- O Circuito combinacional M, que implementa o hardware que mapeia $ c_i \to  c$ <sub>i+1</sub>
+				- 
+			</section>
+			<section data-markdown>
+				## _Lema:_ O problema da satisfazibilidade de circuitos é NP-Completo
 			</section>
 			<section data-markdown>
 				## RSA

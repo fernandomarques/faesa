@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Técnicas de Programação I</title>
+
+	<meta name="description" content="Técnicas de Programação I">
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Exercícios Entrada e Saída</h3>
+				<img src="img/IOideas.jpg" alt="">
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Avaliação de Um Minuto</h3>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>Variáveis</li>
+					<li>Declaração</li>
+					<li>Atribuição</li>
+					<li>Expressão</li>
+					<li><pre><code class="C">
+int main(){
+	int a, b;
+	a = 10;
+  b = 3;
+	a = a - b;
+	a = a * 2;
+	a = b * 2 + 1;
+	printf("Valor de a: %d ",a);
+}</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>Bibliotecas</li>
+					<li>stdio.h</li>
+					<li>math.h</li>
+					<li><pre><code class="C">#include &ltstdio.h&gt
+#include &ltmath.h&gt
+int main(){
+	...
+}</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<table>
+					<caption>Funções da biblioteca math.h</caption>
+					<tr>  <th>Exemplo</th> <th>Comentário</th></tr>
+					<tr>  <td>ceil(x)</td> <td>Arredonda 3.2 é 4</td></tr>
+					<tr>  <td>cos(x)</td> <td>Cosseno em radianos</td></tr>
+					<tr>  <td>abs(x)</td> <td>Valor absoluto -1 é 1</td></tr>
+					<tr>  <td>floor(x)</td> <td>Arredonda para baixo, 3.2 é 3</td></tr>
+					<tr>  <td>log(x)</td> <td>Logaritmo natural</td></tr>
+					<tr>  <td>log10(x)</td> <td>Logaritmo na base 10</td></tr>
+					<tr>  <td>pow(x,y)</td> <td>Potência de x elevado a y</td></tr>
+					<tr>  <td>sin(x)</td> <td>Seno de x em radianos</td></tr>
+					<tr>  <td>sqrt(x)</td> <td>Raiz quadrada de x</td></tr>
+					<tr>  <td>tan(x)</td> <td>Tangente de x em radianos</td></tr>
+				</table>
+			</section>
+			<section>
+				<h3>Comando de saída</h3>
+				<ul>
+					<li>Printf</li>
+					<li>Primeira parte entre ""</li>
+					<li>Colocar mensagem</li>
+					<li>Depois de "" e virgula, podemos colocar as variáveis a serem impressas</li>
+					<li><pre><code class="C">#include &ltstdio.h&gt
+int main(){
+	printf("Ola\n");
+	printf("Ola %d\n",3);
+	printf("Ola %f\n", 3.3);
+	printf("Ola %c \n",'s');
+	printf("Ola %d %f %c \n",3,3.3,'s');
+}</code></pre></li>
+</section>
+			<section>
+				<h3>Comando de entrada</h3>
+				<ul>
+					<li>scanf</li>
+					<li>Primeira parte entre ""</li>
+					<li>Colocar o tipo da variavel</li>
+					<li>Depois de "" e virgula, podemos colocar as variáveis a serem impressas</li>
+					<li><b>No scanf precisamos do &</b></li>
+					<li><pre><code class="C">#include &ltstdio.h&gt
+int main(){
+	int a;
+	float x;
+	char chr;
+	scanf("%d",&a);
+	scanf("%f", &x);
+	scanf("%c",&chr);
+	scanf("%d %f %c", &a, &x, &chr);
+}</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<ul>
+					<li class="fragment">Pergunte um número real, calcule seu coseno e imprima o resultado na tela</li>
+					<li class="fragment">Pergunte um número real, calcule a raiz quadrada e imprima o resultado na tela</li>
+					<li class="fragment">Pergunte dois números a e b, calcule a<sup>b</sup> e imprima o resultado na tela</li>
+				</ul>
+			</section>
+			<section>
+				<h3> Exercícios </h3>
+				<ol>
+					<li class="">Dada as coordenadas de dois pontos no plano cartesiano, informa a distância entre eles</li>
+					<li class=""><img src="img/pitagoras.png" alt=""></li>
+					<li class="">Dada uma distância percorrida (em quilômetros),bem como o total de combustível gasto(em
+litros), informe o consumo médio do veículo emkm/l.</li>
+</ol>
+			</section>
+			<section>
+				<h3>Exercícios</h3>
+				<ol start="4">
+					<li>Dadas as medidas de uma sala em metros, bem com o preço do metro quadrado de carpete, informe o custo total para forrar o piso da sala</li>
+					<li>Faça um programa que leia o peso e altura de uma pessoa e retorna o IMC da mesma</li>
+					<li class="">Preencher a enquete <span class="red">Avaliação de Um Minuto</span></li>
+				</ol>
+			</section>
+
+		</div>
+	</div>
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+
+	<script>
+
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: '../plugin/zoom-js/zoom.js', async: true },
+			{ src: '../plugin/notes/notes.js', async: true }
+		]
+	});
+	Reveal.configure({
+		keyboard: {
+			38: 'next',
+			40: 'prev'
+		}
+	});
+
+	</script>
+
+</body>
+</html>

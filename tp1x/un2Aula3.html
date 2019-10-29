@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Técnicas de Programação I</title>
+
+	<meta name="description" content="Técnicas de Programação I">
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Exercícios Entrada e Saída</h3>
+				<img src="img/IOideas.jpg" alt="">
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Avaliação de Um Minuto</h3>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>DevC++</li>
+					<li>Bibliotecas</li>
+					<li>Variáveis int, float</li>
+					<li>Atribuição</li>
+					<li>Comando de saída</li>
+					<li>Comando de Entrada</li>
+					<li><pre><code class="C">#include &ltstdio.h&gt
+int main(){
+	int a = 0;
+	float x;
+	scanf("%f", &x);
+	a = 10;
+	printf("Valor de a: %d e valor de x %f",a,f);
+}</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Vamos aprender juntos!</h3>
+				<ul>
+					<li class="fragment">Crie um programa com main</li>
+					<li class="fragment">Escreva uma mensagem na tela!</li>
+					<li class="fragment">Declare e inicialize uma variável inteira!</li>
+					<li class="fragment">Escreva a variável na tela </li>
+					<li class="fragment">Declare e inicialize uma segunda variável</li>
+					<li class="fragment">Some as duas variáveis e salve na primeira</li>
+					<li class="fragment">Escreva a variável na tela</li>
+					<li class="fragment">Agora subtraia!</li>
+					<li class="fragment">Agora Multiplique</li>
+					<li class="fragment">Agora mude o tipo da variável para real</li>
+					<li class="fragment">Divida a primeira pela segunda e escreva na tela</li>
+				</ul>
+			</section>
+			<section>
+				<ul>
+					<li class="fragment">Leia um valor inteiro do usuário, some 2 e imprima na tela</li>
+					<li class="fragment">Leia um valor real do usuário, divida por 3 e imprima na tela</li>
+				</ul>
+			</section>
+			<section>
+				<h3> Exercícios </h3>
+				<ol>
+					<li class="">Dada as coordenadas de dois pontos no plano cartesiano, informa a distância entre eles</li>
+					<li class=""><img src="img/pitagoras.png" alt=""></li>
+					<li class="">Dada uma distância percorrida (em quilômetros),bem como o total de combustível gasto(em
+litros), informe o consumo médio do veículo em km/l.</li>
+</ol>
+			</section>
+			<section>
+				<h3>Exercícios</h3>
+				<ol start="4">
+					<li>Dadas as medidas de uma sala em metros, bem com o preço do metro quadrado de carpete, informe o custo total para forrar o piso da sala</li>
+					<li>Faça um programa que leia o peso e altura de uma pessoa e retorna o IMC da mesma</li>
+					<li class="">Preencher a enquete <span class="red">Avaliação de Um Minuto</span></li>
+				</ol>
+			</section>
+
+		</div>
+	</div>
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+
+	<script>
+
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: '../plugin/zoom-js/zoom.js', async: true },
+			{ src: '../plugin/notes/notes.js', async: true }
+		]
+	});
+	Reveal.configure({
+		keyboard: {
+			38: 'next',
+			40: 'prev'
+		}
+	});
+
+	</script>
+
+</body>
+</html>
