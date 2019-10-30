@@ -121,6 +121,9 @@
 				- Assim, podemos verificar CIRCUIT-SAT em tempo polinomial e CIRCUIT-SAT $ \in NP$
 			</section>
 			<section data-markdown>
+				- [Cook-Levin](https://www.youtube.com/watch?v=W9G_1xG77LE)
+			</section>
+			<section data-markdown>
 				## Satisfazibilidade $\in NP$
 				- Para mostrar que CIRCUIT-SAT é NP-Completo devemos mostrar que é NP-Difícil
 				- Um programa de computar é armazenado na memória do computador como uma sequência de instruções.
@@ -128,6 +131,7 @@
 				de onde o resultado deve ser armazenado
 				- Uma posição especial chamada de __contador de programa__ indica qual instrução deve ser executada em seguida
 			</section>
+			
 			<section data-markdown>
 				## Satisfazibilidade $\in NP$
 				- O contador é incrementado automaticamente sempre que uma instrução é recuperada, o que faz o computador executar instruções 
@@ -149,16 +153,58 @@
 				- Descreveremos um algoritmo de tempo polinomial F que calcula uma função e redução f que mapeia toda cadeia binária x para um circuito
 				C = f(x), tal que $ x \in L $ se e somente se $ C \in $ CIRCUIT-SAT
 				- Como $ L \in NP$ deve existir um algoritmo A que verifica L em tempo polinomial
-				- O algoritmo F usará o algoritmo A de duas entradas
-				para calcular a redução de f
+				- O algoritmo F usará o algoritmo A de duas entradas para calcular a redução de f
 				- Seja T(n) o tempo de execução no pior caso de A, temos $ T(n) = O(n^k) $e um certificado de tamanho $O(n^k)$
+			</section>
+			<section data-markdown="">
+				![Exemplo Cook-Levin](img/Unidade3CookLevin.png)
+
 			</section>
 			<section data-markdown>
 				### _Lema:_  Satisfazibilidade $\in$ NP-Difícil
-				- A ideia é representar a computação de A como uma sequência de configurações
+				- A ideia é representar a computação de A como uma sequência de __configurações__
 				- Cada combinação consiste em: Programa A, contador de programa e estado da máquina, entrada x, certificado y e área de armazenamento
-				- O Circuito combinacional M, que implementa o hardware que mapeia $ c_i \to  c$ <sub>i+1</sub>
-				- 
+				- O Circuito combinacional M, que implementa o hardware que mapeia $ c_i \to  c_i $+1 começando de $c_0$
+				- O algoritmo A grava sua saída 0/1 em um local designado
+				- Se o algoritmo é executado durante T(n) etapas, a saída aparece com um dos bits em $c_{T(n+1)}$
+				- O algoritmo de redução F constrói um único circuito que calcula todas as configurações
+			</section>
+			<section data-markdown>
+				### _Lema:_  Satisfazibilidade $\in$ NP-Difícil
+				- Dada uma entrada _x_ o algoritmo F deve calcular um circuito $ C= f(x) $ que é satisfazível se, e somente se,
+				existe um certificado y tal que $ A(x,y) = 1 $
+				- Quando F recebe x ele constrói um circuito combinacional C' que consiste em T(n) cópias de M
+				- A entrada de C' é uma configuração inicial correspondente a A(x,y) e com saída $c_{T(n)} $
+				- F modifica C' para construir C = f(x), ligando as entradas de C'
+				- As entradas são o contador, a entrada, o estado inicial, restando apenas o certificado y
+				- São ignoradas todas as saídas exceto $c_{T(n)}$ que corresponde a sai de A
+			</section>
+			<section data-markdown>
+				### _Lema:_  Satisfazibilidade $\in$ NP-Difícil
+				- O algoritmo de redução quando recebe uma cadeia x, calcula esse circuito C e o produz como saída 
+				- Esse circuito calcula $ C(y) = A(x,y) $ para qualquer entrada y e o algoritmo de redução ao receber uma entrada x computa
+				o circuito C e o retorna
+				- Ainda falta mostrar duas propriedades:
+					1 - F calcula corretamente uma função de redução f
+					2 - F é executado em tempo polinomial
+			</section>
+			<section data-markdown>
+				## Calcula corretamente
+				- _Suponha_ que exista um certificado y de comprimento $ O(n^k)$ tal que A(x,y) = 1
+				- Se aplicarmos os bits de y a entrada de C, a saída de C é C(y) = A(x,y) = 1 se existe um certificado
+				- $ \implies $ Se existe certificado é satisfazível
+				- Por outro lado, _suponha_ que C seja satisfazível 
+				- Então existe um y para C tal que C(y) = 1, consequentemente A(x,y) = 1 
+				- Assim, F calcula corretamente a função de redução
+			</section>
+			<section data-markdown>
+				## É executado em tempo polinomial
+				- O comprimento da entrada x é n e da entrada y é $O(n^k)$
+				- A tem tamanho constante, independentemente do comprimento de x
+				- O algoritmo é executado em no máximo $O(n^k)$ etapas
+				- M implementa o hardware do computador tem tamanho polinomial que é $ O(n^k)$
+				- C consiste em no máximo $ t = O(n^k)$ cópias de M
+				- Assim, F pode construir C em tempo polinomial
 			</section>
 			<section data-markdown>
 				## _Lema:_ O problema da satisfazibilidade de circuitos é NP-Completo
