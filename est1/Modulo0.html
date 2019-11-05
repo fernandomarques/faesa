@@ -45,6 +45,7 @@
 					<h3>Conceitos Básicos R</h3>					<p>
 						<small>Created by Fernando Marques </small>
 					</p>
+					<img src="./img/logopos.webp" alt="">
 		</section>
 
 	<section data-markdown>
@@ -54,6 +55,13 @@
 		- Pode ser considerado tanto uma linguagem como um software
 		- Como linguagem é um dialeto da linguagem S da AT&T Bell Laboratories
 		- Distribuição gratuita sob o _GNU GPL_
+	</section>
+	<section data-markdown>
+			## RStudio
+			- Tab Autocomplete
+			- Console
+			- Environment
+			- Install Packages 
 	</section>
 	<section data-markdown>
 		## Lendo arquivo
@@ -94,27 +102,65 @@ read.delim2(file, header = TRUE, sep = "\t", quote = "\"",
 	</section>
 	<section data-markdown>
 		## Outras funções comuns
-		- `itens &lt c(5,10,15)`
+		- `names(dataframe)`
+		- `itens &lt- c(5,10,15)`
 		- `itens[c(1,2)]`
 		- Indices começam de 1 !
 	</section>
-	<section data-markdown>
-		## RStudio
-		- Tab Autocomplete
-		- Console
-		- Environment
+	<section>
+		<h3>Funções e lapply</h3>
+		<pre><code class="R">
+temperaturas &lt;- data.frame(celsius = c(28,26,26,24,24,26,32,33))
+
+
+# Converte de Celsius para Kelvin
+celsius_to_kelvin &lt;- function(temp_C) {
+	temp_K &lt;- temp_C + 273.15
+	return(temp_K)
+}
+celsius_to_kelvin(temperaturas$celsius)
+temperaturas["Kelvin"] = celsius_to_kelvin(temperaturas$celsius)
+temperaturas
+lapply(temperaturas,mean)
+		</code></pre>
 	</section>
 	<section data-markdown>
-
+		## Biblioteca dplyr
+		- `library(datasets)`
+		- `data(iris)`
+		- `library(dplyr)`
+		- `filter(iris, Species == "setosa", Petal.Length > 1.7)`
+		- Ou 
+		- `iris[iris$Species == 'setosa',]`
+	</section>
+	<section data-markdown>
+		## Biblioteca dplyr
+		- `select(iris,Sepal.Width, Petal.Length)`
+		- Ou 
+		- `iris[,1:2]`
+		- `iris[,-1]`
+		`iris %>% 
+		filter(Petal.Length > 1.7) %>% 
+		select(Sepal.Width, Species) %>%
+		arrange(Sepal.Width)`
+	</section>
+	<section data-markdown>
+		## Gráficos
+		- `plot(iris$Sepal.Length,iris$Petal.Length)`
+		- `plot(iris)`
+		- `hist(iris$Petal.Width)`
+		- Temos outros como `barplot`, `boxplot` entre outros
+		- [Gráficos em R](https://www.r-graph-gallery.com/all-graphs.html)
 	</section>
 	<section data-markdown>
 		## Links relevantes
-		-[Download de R para windows](https://cran.r-project.org/bin/windows/)
-		-[Introduction do R](https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf)
-		-[R for Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf)
-		-[RStudio](https://www.rstudio.com/)
-		-[Taxonomia de dados em R](http://www.r-tutor.com/r-introduction/basic-data-types)
-		-[Tricks RStudio](https://www.r-bloggers.com/some-useful-tricks-in-rstudio/)
+		- [Download de R para windows](https://cran.r-project.org/bin/windows/)
+		- [Introduction do R](https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf)
+		- [R for Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf)
+		- [RStudio](https://www.rstudio.com/)
+		- [Taxonomia de dados em R](http://www.r-tutor.com/r-introduction/basic-data-types)
+		- [Tricks RStudio](https://www.r-bloggers.com/some-useful-tricks-in-rstudio/)
+		# ![Logo Pós](img/logopos.webp)
 	</section>
 		</div>
 		</div>

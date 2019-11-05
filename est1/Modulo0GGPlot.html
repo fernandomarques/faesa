@@ -23,6 +23,9 @@
 			img {
 				border : 0px !important;
 			}
+			.logo_pos {
+
+			}
 		</style>
 		<!-- Printing and PDF exports -->
 		<script>
@@ -47,6 +50,7 @@
 					<p>
 						<small>Created by Fernando Marques </small>
 					</p>
+					<img src="./img/logopos.webp" alt="">
 		</section>
 
 	<section data-markdown>
@@ -59,9 +63,10 @@
 	<section data-markdown="">
 		## Por que ggplot2?
 		- O output padrão já é melhor do que dos gráficos nativos
+		- Padronização 
 		- Legendas e cores automáticas
 		- Fácil de adicionar legendas
-		- Padronização 
+		- __Padronização__
 		- Mas uma imagem vale mais do que mil palavras!
 	</section>
 	<section>
@@ -71,8 +76,8 @@
 	<section data-markdown="">
 		- `hist(iris$Sepal.Length)`
 		- 
-		- `library(ggplot2)
-		ggplot(iris, aes(x=iris$Sepal.Length)) +
+		- `library(ggplot2)`
+		- `ggplot(iris, aes(x=iris$Sepal.Length)) +
 		geom_histogram(bins = 8)`
 	</section>
 	<section >
@@ -128,7 +133,9 @@ gridExtra::grid.arrange(jt, bx, vi)
 		## Aesthetics
 		- `aes(x= .. , y=.., color=...`
 		- [Parâmetros do aes](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html)
-		- `ggplot(diamonds, aes(x=carat), color="steelblue")`
+		- `ggplot(iris, aes(x = Sepal.Length, y= Sepal.Width, colour = Species)) +
+			geom_point() +
+			scale_color_manual(values=c("green","yellow","blue"))`
 	</section>
 	
 	<section >
@@ -138,37 +145,36 @@ gridExtra::grid.arrange(jt, bx, vi)
 		<li> <a href="https://ggplot2.tidyverse.org/reference/#section-layer-geoms">Tipos de geoms</a></li>
 	</ul>
 		<pre><code class="R">
-ggplot(diamonds) + 
- geom_point(aes(x=carat, y=price, color=cut)) +
- geom_smooth(aes(x=carat, y=price)) 
-ggplot(diamonds, aes(x=carat, y=price)) +
- geom_point(aes(color=cut)) +
- geom_smooth()  
+ggplot(iris) + 
+	geom_point(aes(x=Petal.Length, y=Petal.Width, color=Species)) +
+	geom_smooth(aes(x=Petal.Length, y=Petal.Width)) 
+
+ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) +
+	geom_point(aes(color=Species)) +
+	geom_smooth()  
 		</code></pre>
 	</section>
 	<section >
 		<h3>Rótulos</h3>
 		<pre><code class="R">
-ggplot(diamonds, aes(x=carat, y=price, color=cut)) + 
+ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) + 
 	geom_point() + 
-	labs(title="Scatterplot", x="Carat", y="Price")
+	labs(title="Gráfico Dispersão", x="Altura Pétala", y="Largura Pétala")
+			  
 		</code></pre>
 	</section>
 	<section data-markdown>
 			## Temas
+			- Serve para modificar as configurações do gráfico
 			- '+' theme( ... )
 			- `plot.title=element_text(size=30, face="bold")`
 			- `axis.text.x` e `axis.text.y` 
 			- `axis.title.x` 
-			- '+' `scale_color_discrete(name="")`
-			- `scale_shape_discrete`
-			- `scale_shape_continuous`
-			- `scale_fill_continuous`
+			- `plot.background = element_rect(fill = "green")`
 		</section>
 	<section data-markdown>
 			## Facets
-			- `+ facet_wrap( ~ cut, ncol=3)`
-			
+			- `+ facet_wrap( ~ Species, ncol=3)`
 		</section>
 	<section data-markdown>
 			## Outras Dicas
@@ -176,8 +182,7 @@ ggplot(diamonds, aes(x=carat, y=price, color=cut)) +
 			- `+ coord_cartesian(ylim=c(0, 10000)) # zoom`
 			- `+ ylim(c(0, 10000)) # deleta`
 			- [Temas](https://ggplot2.tidyverse.org/reference/ggtheme.html)
-			- `ggsave("myggplot.png")`
-			
+			- `ggsave("myggplot.png")`	
 		</section>
 
 	<section data-markdown>
@@ -185,6 +190,7 @@ ggplot(diamonds, aes(x=carat, y=price, color=cut)) +
 		- [Galeria de gráficos](https://www.r-graph-gallery.com/)
 		- [Tutorial GGPlot](http://r-statistics.co/ggplot2-Tutorial-With-R.html)
 		- [Tutorial Avançado GGPlot](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html)
+		# ![Logo Pós](img/logopos.webp)
 	</section>
 		</div>
 		</div>
