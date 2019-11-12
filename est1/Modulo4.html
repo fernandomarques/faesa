@@ -60,16 +60,16 @@
 			<section data-markdown>
 				## Bootstrap
 				- __Amostra Bootstrap__ uma amostra feita com reposição dos dados observados
-				- __Reamostragem__ é o processo de criar novas amostras a partir dos dados. Pode ser por bootstrap ou permutação			
+				- __Reamostragem__ é o processo de criar novas amostras a partir dos dados, pode ser por bootstrap ou permutação			
 				- Conceitualmente imagine que o bootstrap replica a amostra original milhares ou milhões de vezes para que tenha
 				uma população hipotética 
 			</section>
 			<section data-markdown>
-				![Imagem do conceito de bootstrap](img/modulo4Boostrap.webp)
 				- Na prática não precisamos replicar as amostras, basta retirar com reposição
 				- Assim, a probabilidade de um elemento ser retirado permanece sempre igual
+				![Imagem do conceito de bootstrap](img/modulo4Boostrap.webp)
 			</section>
-			<section data-markdown>
+			<!-- <section data-markdown>
 				## Algoritmo Bootstrap
 				1. Retire um valor, registre, devolva
 				1. Repita _n_ vezes
@@ -79,21 +79,27 @@
 					1. Calcular o desvio padrão
 					1. Produzir o histograma ou boxplot
 					1. Encontrar o intervalo de confiança
-			</section>
-			<section data-markdown>
+			</section> -->
+			<!-- <section data-markdown>
 				## Bootstrap
 				- R é o número de iterações do bootstrap
 				- É selecionado, de certa forma, arbitráriamente
 				- Quanto mais iterações, mais preciso as estimativas de erro padrão e intervalo
 				de confiança
-			</section>
+			</section> -->
 			<section>
 				<pre><code class="R">
 library(boot)
+inc &lt;- loan_data$annual_inc
 stat_fun &lt;- function(x, idx) median(x[idx])
-boot_obj &lt;- boot(df, R=1000, statistic = stat_fun)
-# Mostrar o código
+boot_obj &lt;- boot(inc, R=1000, statistic = stat_fun)
 				</code></pre>
+				<p>Bootstrap Statistics</p>
+				<table>
+					<tr><th>original</th><th>bias</th><th>std.error</th></tr>
+					<tr><td>60000 </td><td>-293.404</td><td>412.8352</td></tr>
+				</table>
+				<p>Estimativa original, que tem um viés de -293 e erro padrão de $412</p>
 			</section>
 			<section data-markdown>
 				## Bootstrap Multivariado
@@ -101,14 +107,14 @@ boot_obj &lt;- boot(df, R=1000, statistic = stat_fun)
 				como uma unidade
 				- O modelo pode rodar no bootstrap para estimar estabilidade dos parâmetros do modelo
 				- Com classificação e árvores de regressão, rodar várias árvores no bootstrap e tirar a média
-				é mais eficiênte que uma única árvore
+				é mais eficiente que uma única árvore
 			</section>
 			<section data-markdown>
 				## Bootstrap
 				- O processo de reamostragem do bootstrap é simples mas computacionalmente custoso
 				- Foi mais utilizado por pesquisadores que não eram estatísticos
-				- __ O bootstrap não compensa amostras com tamanho pequeno, não cria novos dados
-				nem 'tapa buracos'. Apenas mostra como as amostras se comportam quando retiradas__
+				- O bootstrap __não compensa__ amostras com __tamanho pequeno__, não cria novos dados
+				nem 'tapa buracos'. Apenas mostra como as amostras se comportam quando retiradas
 			</section>
 			<section data-markdown>
 				## Reamostragem vs. Bootstrap 
@@ -118,7 +124,7 @@ boot_obj &lt;- boot(df, R=1000, statistic = stat_fun)
 			</section>
 			<section data-markdown>
 				- O bootstrap é uma poderosa ferramenta para verificar a variabilidade de uma estatística
-				- Pode ser aplicado em diversas circunstâncias
+				<!-- - Pode ser aplicado em diversas circunstâncias -->
 				- Permite estimar estatísticas que não possuem aproximação matemática
 				- Quando aplicado a modelos preditivos, é mais eficiente que um modelo único
 			</section>
@@ -138,12 +144,15 @@ boot_obj &lt;- boot(df, R=1000, statistic = stat_fun)
 					1. Para um intervalo de confianca de x% remover [(100-x)/2]% das reamostras
 					1. Os pontos aparados são os pontos finais
 			</section>
+			<section data-background="img/Modulo4Intervalo.png">
+
+			</section>
 			<section data-markdown>
-				- O Bootstrap é uma ferramenta que pode ser utilizada para gerar intervalos de confiança
-				- Também existem formulas, especialmente distribuição-t
-				- A pergunta que realmente importa é "Qual a probabilidade que o valor real esteja dentro de um intervalor"
-				- A pergunta relacionada a intervalo de confiança é "Dado um procedimento de amostragem e uma população ..."
-				- Em DataScience o IntC é uma ferramenta para ter uma ideia de quão variável a amostra pode ser
+				<!-- - O Bootstrap é uma ferramenta que pode ser utilizada para gerar intervalos de confiança -->
+				<!-- - Também existem formulas, especialmente distribuição-t -->
+				- A pergunta que realmente importa é __"Qual a probabilidade que o valor real esteja dentro de um intervalo"__
+				- A pergunta relacionada a intervalo de confiança é __"Dado um procedimento de amostragem e uma população ..."__
+				<!-- - Em DataScience o IntC é uma ferramenta para ter uma ideia de quão variável a amostra pode ser -->
 			</section>
 			<section data-markdown>
 				- Intervalo de confiança é a forma mais comum de apresentar estimativas
