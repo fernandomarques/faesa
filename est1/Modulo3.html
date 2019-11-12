@@ -47,7 +47,10 @@
 				<h3>Amostragem</h3>
 				<p>
 					<small>Created by Fernando Marques </small>
+					
 				</p>
+				<img src="./img/logopos.webp" alt="">
+
 			</section>
 			<section data-markdown>
 				- Com o _big data_ ainda devemos nos preocupar com amostragem?
@@ -76,112 +79,107 @@
 			</section>
 			<section data-markdown>
 				## Amostra aleatória
-				- É um processo em que cada membro da população sendo amostrada tem a mesma
-				change de ser retirado
-				- A amostragem pode ser feita com reposição. Onde as observações são colocadas
-				de volta na população após serem selecionados
+				- É um processo em que cada membro da população sendo amostrada tem a __mesma
+				chance__ de ser retirado
+				- A amostragem pode ser feita com reposição, as observações são colocadas
+				de volta na população
 				- Já na amostragem sem reposição as observações não estão disponíveis para serem selecionadas no futuro
 			</section>
-			<section data-markdown>
+			<!-- <section data-markdown>
 				## Amostra aleatória
 				- Qualidade dos dados é mais importante do que quantidade para fazer estimativa ou um modelo
 				- Data Science:
 					- Completude, consistência no formato, limpeza, precisão
 				- Estatística:
 					- Representatividade
-			</section>
+			</section> -->
 			<section>
 				<p style="text-align: left; font-weight: bold;">
 				10 milhões de pessoas parece uma amostra bastante grande, não é? Pois bem, tamanho não é documento.<br>
 				</p>
 				<p style="text-align: left;">
-				A revista americana <i>Literary Digest</i> realizou uma grande pesquisa para as eleições presidenciais de 1936. O resultado da pesquisa mostrava uma clara vitória de Alfred Landon sobre um tal Franklin Roosevelt (57% das intenções de voto para Landon contra 43% para Roosevelt).
-				Alguém lembra de algum presidente americano chamado Alfred Landon? Na realidade, Roosevelt venceu a eleição com 62% dos votos, ao passo que Landon obteve 38%.
+				A revista americana <i>Literary Digest</i> realizou uma grande pesquisa para as eleições presidenciais de 1936. O resultado da pesquisa mostrava uma clara vitória de Alfred Landon sobre um tal Franklin Roosevelt (57% a 43%).
+				
 			</p>
 			</section>
 			<section>
 				<p style="text-align: left;">
-						No mesmo ano, um jovem chamado George Gallup utilizou uma amostra bem menor (2 mil a cada 15 dias) e previu que Roosevelt receberia 56% e Landon 44%. Diferentemente da pesquisa da Literay Digest, Gallup utilizou uma amostra representativa do eleitorado americano.
+						George Gallup utilizou uma amostra bem menor (2 mil a cada 15 dias) e previu que Roosevelt receberia 56% e Landon 44%. Diferentemente da pesquisa da Literay Digest, Gallup utilizou uma <b>amostra representativa</b> do eleitorado americano.
 					</p>
 			</section>
 			<section data-markdown>
 				- O Literary Digest entrevistou seus assinantes e outras pessoas de status social alto
-				- Consequentemente houve uma amostra viciada
+				- __Amostra viciada__
 				- A amostra foi selecionada de forma não aleatória da população que deveria ser representada
-				- Dificilmente uma amostra aleatória será uma representação fidedigna da população, o viés ou vício ocorre quando
-				a diferença é significativa e se repete em outras amostras feitas da mesma forma
+				- O viés ou vício ocorre quando	a diferença é significativa e se repete em outras amostras feitas da mesma forma
 			</section>
 			<section data-markdown>
 				## Amostras de auto-seleção
 				- Avaliações em mídias sociais como Google Maps estão propensas a serem viciadas
 				- Pessoas que avaliam não são selecionados de forma aleatória, tomam a iniciativa
-				- Quem toma essa iniciativa pode ter como motivação alguma experiência negativa, ter relacionamento
-				com o estabelecimento ou simplesmente ser uma pessoa diferente das que não fazem avaliações
+				- __Motivação__: alguma experiência negativa ou ter relacionamento com o estabelecimento
 				- Apesar de não ser confiável como indicador do estabelecimento, pode ser eficaz para comparar
 				estabelecimentos similares, já que o vício de auto-seleção pode acontecer nos dois
 			</section>
-			<section data-markdown>
+			<!-- <section data-markdown>
 				## Viés estatístico
 				- Viés estatístico se refere a erros de medidas ou amostragem que são produzidos de forma sistemática
 				- Existe uma diferença entre erros causados pelo acaso e erros causados por viés
 				- Por exemplo, ao atirar em um alvo nem sempre será acertado o centro, mas os erros serão aleatórios
 				e não irão para uma direção em específico
 				- Se a arma tiver com a mira descalibrada, os tiros tenderão para um lugar específico
-			</section>
+			</section> -->
 			<section data-markdown>
 				## Viés estatístico
+				- Viés estatístico se refere a __erros de medidas__ ou amostragem que são produzidos de forma sistemática
 				- O viés pode acontecer de diversas formas e pode ou não ser observado
-				- Quando um resultado sugere que exista um vício costuma ser indício de que algo foi mal interpretado
-				ou alguma variável importante foi deixada de lado
+				- Ocorre quando algo foi mal interpretado ou alguma variável importante foi deixada de lado
 			</section>
 			<section data-markdown>
 				## Seleção aleatória
-				- Para evitar problemas como o do _Literary Digest_ Gallup escolheu um método mais científico para
-				ter uma amostra mais representativa
-				- Existem diversos métodos para atingir representatividade, mas no fundo todos são baseados em seleção aleatória
+				- Para evitar problemas como o do _Literary Digest_, Gallup escolheu um método mais científico para a amostra
 				- Nem sempre é fácil fazer a seleção aleatória, precisamos de uma definição precisa da população
 			
 			</section>
-			<section data-markdown>
+			<!-- <section data-markdown>
 				- Para entrevistar clientes
 					- Quem é o cliente? Quem já fez compras? Quem foi ressarcido? Compras internas? Revendedores?
 				- Definir um método, quantos serão entrevistados? Também deve ser levado em conta quando a entrevista foi feita
 				- Também podemos estratificar e dividir a população em grupos
-			</section>
+			</section> -->
 			<section data-markdown>
 				## Quantidade versus Qualidade
 				- Tempo gasto com amostra aleatória reduz o víés e permite maior atenção a exploração de dados
-				- Dados faltando e outliers podem ser considerados informações importantes, além de muitas vezes 
-				ser caro tentar completar os dados
+				<!-- - Dados faltando e outliers podem ser considerados informações importantes, além de muitas vezes 
+				ser caro tentar completar os dados -->
 				- Então quando precisaremos de __big data__?
-					- Por exemplo o google recebe diversas buscas, sendo as colunas os termos e valores das células 0 ou 1
+					- O google recebe diversas buscas, sendo as colunas os termos e valores das células 0 ou 1
 					- O objetivo é predizer qual será a busca
-					- Google processa mais de um trilhão de buscas por ano!
-					- Reparem que a matriz é esparsa
+					- Mais de um trilhão de busca por ano
+					- Teremos uma __matriz esparsa__
 			</section>
 			<section data-markdown>
-				- Mesmo na era do big data a seleção aleatória continuando sendo importante para cientistas de dados
-				- Viés ou vício ocorre quando medidas ou observações produzem erros sistemáticos por não serem representativos da população
-				- Qualidade dos dados é normalmente mais importante que quantidade, amostras aleatórias podem reduzir viés
-				- [Gender Bias in IA](http://time.com/5520558/artificial-intelligence-racial-gender-bias/)
+				- Mesmo na era do big data a seleção aleatória continuando sendo importante
+				- Viés ocorre quando observações produzem erros sistemáticos por não representarem a população
+				- __Qualidade__ é normalmente mais importante que quantidade, amostras aleatórias podem reduzir viés
+				<!-- - [Gender Bias in IA](http://time.com/5520558/artificial-intelligence-racial-gender-bias/) -->
 			</section>
 			<section data-markdown>
 				## Viés de seleção
 				> Se você não sabe o que está procurando, procure o suficiente que irá encontrar
 
 				- Viés de seleção acontece ao escolher os dados de forma seletiva, conscientemente ou não,
-				leva a uma conclusão enganosa
+				levando a uma conclusão enganosa
 			</section>
 			<section data-markdown>
 				## Viés de seleção
 				- __Viés__ erro sistemático
-				- __Data snooping__ procurar algo de interessante nos dados
-				- __Efeito de pesquisa grande__ viés ou não reprodutibilidade resultante de modelagem repetida de dados ou modelagem de dados com grande número de variáveis ​​preditoras
+				- __Data snooping__ procurar algo interessante nos dados
+				- __Efeito de pesquisa grande__ resultante de modelagem repetida de dados com grande número de variáveis
 			</section>
 			<section data-markdown>
 				## Viés de seleção
-				- Se você tiver uma hipótese e conduzir um experimento para testar, terá uma elevado grau de confiança
-				na conclusão
+				- Hipótese &rarr; Experimento &rarr; Teste = Grau de Confiança
 				- Muitas vezes as pessoas olham para os dados e tentam discernir padrões
 				> Se você torturar os dados, eventualmente eles vão confessar
 			</section>
@@ -201,107 +199,93 @@
 			</section>
 			<section data-markdown>
 				## Regressão para as médias
-				- É um fenômeno envolvendo diversas medições onde valores extremos tendem a ser seguidos por valores mais próximos da média
+				- Valores extremos tendem a ser seguidos por valores mais próximos da média
 				- Dar atenção especial a valores extremos é um exemplo de viés de seleção
-				- Melhor estreante tende não continuar a ser tão bom...
+				- Melhor estreante tende não continuar a ser tão bom
 					- Sorte e Habilidade
-				- Esse efeito foi inicialmente observado por Francis Galton em 1886 onde filhos de homens altos tendem a ser 
+				- Inicialmente observado por Francis Galton em 1886 onde filhos de homens altos tendem a ser 
 				menores que seu pai
 				- Cuidado com __Gambler´s Falacy__
-				- Não confundir com regressão linear!
+				<!-- - Não confundir com regressão linear! -->
 			</section>
-			<section data-markdown>
+			<!-- <section data-markdown>
 				![Exemplo regressão às médias](./img/Modulo3Regression.png)
-			</section>
+			</section> -->
 			<section data-markdown>
 				- Especificar uma hipótese e depois coletar dados de forma aleatória garante contra viés
 				- Todas as outras formas de análise correm o risco de apresentar algum tipo de viés seja na coleta ou na análise
 				- [Exemplo selection bias](http://systemtradersuccess.com/fooled-by-randomness-through-selection-bias/)
 			</section>
 			<section data-markdown>
-				### Distribuição Amostral de uma estatística
+				### Distribuição Amostral
 				- __Estatística de amostra__ métrica calculada para uma amostra
-				- __Distribuição dos dados__ Frequência de distribuição de valores
-				- __Distribuição da amostral__ A frequência de distribuição de várias amostras 
+				<!-- - __Distribuição dos dados__ Frequência de distribuição de valores -->
+				<!-- - __Distribuição da amostral__ A frequência de distribuição de várias amostras  -->
 				- __Teorema do limite central__ A tendência da frequência amostral ter uma formal normal com o aumento das amostras
 				- __Erro padrão__ A variabilidade de uma métrica em várias amostras
 			</section>
 		
 			<section data-markdown>
 				### Distribuição Amostral de uma estatística
-				- Normalmente uma amostra é feita com o intuíto de media alguma coisa ou modelar algo
-				- Como nossa estimativa ou modelo é baseada numa amostra, pode conter erro
-				- Outro valore seria possível com outra amostra
-				- A distribuição de estatísticas como a média tendem a ser mais regulares e no formato de sino 
+				- Normalmente uma amostra é feita com o intuíto de mediar ou modelar algo
+				- Como é baseada numa amostra, pode conter erro
+				- Outra amostra poderia ter outro valor
+				- Distribuições de estatísticas como a média tendem a ser mais regulares e no formato de sino 
 				do que o dado em si
 			</section>
 			<section>
-<pre><code class="R">
-library(ggplot2)
-
-PSDS_PATH &lt;- "path"
-
-loans_income &lt;- read.csv(file.path(PSDS_PATH, 'data', 'loans_income.csv'))[,1]
-# take a simple random sample
-samp_data &lt;- data.frame(income=sample(loans_income, 1000), 
+<pre><code class="R">loans_income &lt;- read.csv('loans_income.csv')
+inc &lt;- loan_data$annual_inc
+samp_data &lt;- data.frame(income=sample(inc, 1000), 
 	type='data_dist')
-# take a sample of means of 5 values
+# média de 5 amostras
 samp_mean_05 &lt;- data.frame(
-	income = tapply(sample(loans_income, 1000*5), 
-	rep(1:1000, rep(5, 1000)), FUN=mean),
-	type = 'mean_of_5')
-# take a sample of means of 20 values
+	income = tapply(sample(inc, 1000*5), 
+	rep(1:1000, rep(5, 1000)), FUN=mean), type = 'mean_of_5')
+# média de 20 amostras
 samp_mean_20 &lt;- data.frame(
-	income = tapply(sample(loans_income, 1000*20), 
-	rep(1:1000, rep(20, 1000)), FUN=mean),
-	type = 'mean_of_20')
-# bind the data.frames and convert type to a factor
+	income = tapply(sample(inc, 1000*20), 
+	rep(1:1000, rep(20, 1000)), FUN=mean), type = 'mean_of_20')
 income &lt;- rbind(samp_data, samp_mean_05, samp_mean_20)
-income$type = factor(income$type, 
-	levels=c('data_dist', 'mean_of_5', 'mean_of_20'),
-	labels=c('Data', 'Mean of 5', 'Mean of 20'))
-</code>
-
-</pre>
+ggplot(income, aes(x=income)) +
+	geom_histogram(bins=40) +
+	facet_grid(type ~ .) +
+	xlim(0,1.5e+05)</code></pre>
+			</section>
+			<section data-background="img/Modulo3TeoremaLimite.png">
 			</section>
 			<section data-markdown>
 				## Teorema Limite central
 				- As médias tiradas de muitas amostras lembram a curva normal, mesmo que a população não seja
 				normalmente distribuída
 				- Permite aproximação de fórmulas como distribuição t
-				- É muito usado na estatística pois é o que está por tráz de testes de hipótese e intervalos de confiança
-				- Cientista de Dados devem conhecer seu papel mas podem usar o bootstrap
+				- Está por tráz de testes de hipótese e intervalos de confiança
+				<!-- - Cientista de Dados devem conhecer seu papel mas podem usar o bootstrap -->
 				- O teorema limite central não é tão central para ciência de dados
 			</section>
 			<section data-markdown>
 				## Erro padrão
-				- É uma métrica que soma a variabilidade na distribuição amostral
+				- Métrica que soma a variabilidade na distribuição amostral
 				- Pode ser calculado usando o desvio padrão dos valores da amostra
-				\begin{aligned}
-				Standard Error = SE = \frac{s}{\sqrt(n)}
-				\end{aligned}
+				- Standard Error = $SE = \frac{s}{\sqrt(n)}$
 			</section>
 			<section data-markdown>
 				## Erro padrão
-				- Quando o tamanho da amostra cresce, o erro padrão também
 				- Para reduzir o erro padrão em um fator de 2 devemos aumentar a amostra em um fator
 				de 4
 				- A validade da fórmula de erro padrão vem do teorema do limite central
+				- Na prática é custoso calcular o erro padrão, por isso, o bootstrap se
+				tornou a forma padrão
+				- Não confunda __erro padrão__ (variabilidade de uma métrica) com __desvio padrão__ (variabilidade de um indivíduo)
 			</section>
-			<section data-markdown>
+			<!-- <section data-markdown>
 				## Erro padrão
 				1. Colete novas amostras da população
 				1. Para cada nova amostra, calcule a métrica (exemplo, média)
 				1. Calcule o desvio padrão das estatísticas do passo anterior, use-o para estimar
 				o desvio padrão 
  
-			</section>
-			<section data-markdown>
-				## Erro padrão
-				- Na prática é custoso calcular o erro padrão dessa forma, por isso, o bootstrap se
-				tornou a forma padrão
-				- Não confunda __erro padrão__ (variabilidade de uma métrica) com __desvio padrão__ (variabilidade de um indivíduo)
-			</section>
+			</section> -->
 			<section data-markdown>
 				- A frequência de distribuição de uma métrica nos mostra como ela se comporta de
 				amostra para amostra
@@ -309,11 +293,9 @@ income$type = factor(income$type,
 				do teorema de limite central
 				- Uma métrica para variabilidade entre amostras é o erro padrão
 			</section>
-			<section data-markdown>
-				## Links relevantes
-				- [Glossário Ingles-PT de estatística](http://glossario.spestatistica.pt/)
-				- [Taxonomia de dados em R](http://www.r-tutor.com/r-introduction/basic-data-types)
-				
+			<section>
+				Na próxima aula Bootstrap e Distribuições <br> <br>
+				<img src="./img/logopos.webp" alt="">
 			</section>
 		</div>
 	</div>
