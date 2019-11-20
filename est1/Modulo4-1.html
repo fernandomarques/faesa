@@ -52,48 +52,44 @@
 			</section>
 			<section data-markdown>
 				## Distribuição normal
-				- A distribuição em forma de sino é icônica em estatística
-				- O fato da distribuição de estatísticas de amostras terem esse formato a transformou
+				- Em forma de sino e icônica em estatística
+				- Estatísticas amostrais terem esse formato a transformou
 				em uma ferramenta para aproximações
 			</section>
 			<section data-markdown>
-				## Distribuição normal
+				<!-- ## Distribuição normal -->
 				![Imagem Distribuição Normal](img/Modulo4NormalDistribution.png) 
 				- 68% dos dados estão a um desvio padrão da média
 			</section>
 			<section data-markdown>
 				## Distribuição normal
-				- __Erro__ a diferença entre os pontos e a predição ou média
-				- __Padronizar__ subtrair da média e dividir pelo desvio padrão
+				<!-- - __Erro__ : diferença entre os pontos e a predição ou média -->
+				- __Padronizar__ subtrair a média e dividir pelo desvio padrão
 				- __Escore-z__ é o número de desvios padrão acima ou abaixo da média da população
 				- __Normal padrão__ distribuição normal com média 0 e desvio 1 
-				- __Gráfico Q-Q__ é um gráfico para visualizar o quão próximo a distribuição amostrada
+				- __Gráfico Q-Q__ usado visualizar o quão próximo a distribuição amostrada
 				está próxima da distribuição padrão
 			</section>
 			<section data-markdown>
 				## Distribuição normal
 				- É um equívoco achar que a distribuição normal tem esse nome pois a maioria
 				dos dados a seguirem, ou seja, ser o normal
-				- Na verdade, a maioria dos dados puros não são normalmente distribuídos
-				- A maioria das estatísticas de distribuição amostral são distribuídas normalmente 
+				- Na verdade, a maioria dos dados puros __não são__ normalmente distribuídos
+				- A maioria das estatísticas amostrais são distribuídas normalmente 
 				- Também é chamada de distribuição gaussiana
 			</section>
 			<section data-markdown>
-				## Distribuição normal padrão e Q-Q
+				## Distribuição normal padrão
 				- A distribuição normal padrão tem as unidades em termo de desvio padrão de distância da média
 				- Para comparar dados com a normal padrão subtraímos a média e dividimos pelo desvio padrão
 				- Converter os dados para escore-z não os tornam normalmente distribuídos,
 				apenas os colocam na mesma escala para comparação
 			</section>
 			<section>
-				<pre><code class="R">
-norm_samp &lt;- rnorm(100)
+				<pre><code class="R">norm_samp &lt;- rnorm(100) # Gera 100 números 'normais'
 qqnorm(norm_samp)
-abline(a=0, b=1, col='grey')
-				</code></pre>
-			</section>
-			<section data-markdown>
-				![Imagem de um qqplot](img/Modulo4QQPlot.png)
+abline(a=0, b=1, col='grey')				</code></pre>
+			<img src="img/Modulo4QQPlot.png" alt="" width="50%">
 			</section>
 			<section data-markdown>
 				- A distribuição normal foi essencial para o desenvolvimento de estatísticas, permitindo aproximação matemática
@@ -106,26 +102,22 @@ abline(a=0, b=1, col='grey')
 				- __Cauda__ porção longa e estreita de uma distribuição de frequência, valores extremos ocorrem com baixa frequência
 				- __Assimetria__ quando uma cauda é maior do que a outra
 			</section>
-			<section data-markdown>
-				## Distribuição de cauda longa
-				- Em alguns casos a distribuição é altamente assimétrica (renda)
-				- Os valores extremos correspondem as caudas
-				- A teoria do Cisne Negro de Nassim Taleb prevê que eventos anômalos são mais
-				prováveis de acontecer do que se fosse previsto pela distribuição normal
-			</section>
-			<section data-markdown>
-				![Cisne Negro](img\Modulo4CisneNegro.jpg)
+			<section>
+				<h3>Distribuição de cauda longa</h3>
+				<ul>
+				 <li> Em alguns casos a distribuição é altamente assimétrica (renda)</li>
+				 <li>Os valores extremos correspondem as caudas</li>
+						<li>A teoria do <b>Cisne Negro</b> de Nassim Taleb prevê que eventos anômalos são mais
+				prováveis de acontecer do que se fosse previsto pela distribuição normal</li>
+			<center><img src="img/Modulo4CisneNegro.jpg" alt=""></center>
+			</ul>
 			</section>
 			<section>
-				<pre><code class="R">
-nflx &lt;-sp400_px[,'NFLX']
+				<pre><code class="R">nflx &lt;-sp400_px[,'NFLX']
 nflx &lt;-diff(log(nflx[fxlf>0]))
 qqnorm(nflx)
-abline(a=0,b=1,col="grey")
-				</code></pre>
-			</section>
-			<section data-markdown>
-				![QQPlot de uma distribuição long-tailed](img/Modulo4QQPlotLongTailed.png)
+abline(a=0,b=1,col="grey")				</code></pre>
+			<img src="img/Modulo4QQPlotLongTailed.png" alt="Exemplo distribuição cauda longa" width="50%">
 			</section>
 			<section data-markdown>
 				- Contrário do outro Q-Q os valores extremos estão mais longe da linha
@@ -137,7 +129,7 @@ abline(a=0,b=1,col="grey")
 			<section data-markdown>
 				## Student's Distribuição-t
 				- É chamada de Student T pois W.S. Gosset submeteu o artigo sob o nome de "Student"
-				- Gosset trabalhava para a Guiness, por isso submissão anônima
+				- Gosset trabalhava para a Guiness, por isso a submissão anônima
 				- Tenta responder a pergunta
 				> Qual é a distribuição amostral da média de uma amostra de uma população grande?
 			</section>
@@ -190,9 +182,9 @@ abline(a=0,b=1,col="grey")
 				estatísticos usam a normal.
 			</section>
 			<section data-markdown>
-				- A distribuição binomial é importante de modelar pois representa eventos como
+				- A distribuição binomial representa eventos como
 				comprar ou não comprar, clicar ou não clicar
-				- Um ensaio binomial é um experimento com dois resultados possíveis um com probabilidade
+				- Um ensaio binomial tem dois resultados possíveis um com probabilidade
 				_p_ e outro 1-_p_
 				- Com um grande valor de _n_ e _p_ não muito próximo de 1 ou 0, a distribuição binomial
 				pode ser aproximada pela distribuição normal
@@ -229,14 +221,14 @@ abline(a=0,b=1,col="grey")
 				- Tempo entre visitas a um site na web
 				- Também é utilizado para modelar o tempo para falhas, ou o tempo para atender um serviço
 				- `rexp(n=100, rate=.2)`
-				- Gera 100 números aleatórios onde a média de eventos por minutos é de 0.2 
+				- Gera 100 números aleatórios onde a média de duração dos eventos é de 5 (1/5 = 0.2)
 			</section>
 			<section data-markdown>
 				- Tanto Poisson quanto exponencial assumem que a taxa de &lambda; é constante durante o período considerado
 				- Sabemos que isso dificilmente acontece &rarr; horários de pico no trânsito
 				- É possível dividir em segmentos homogêneos
 				- Em muitas aplicações a taxa de &lambda; é conhecida, mas para eventos raros isso pode não acontecer
-				- Mas, por exemplo, se uma evento não aconteceu nas últimas 20 horas, podemos concluir que &lambda; não é 1 por hora
+				- Mas, por exemplo, se um evento não aconteceu nas últimas 20 horas, podemos concluir que &lambda; não é 1 por hora
 				- Através de simulação é possível estimar eventos hipotéticos
 				- O teste de qui-quadrado também pode ser usado
 			</section>
@@ -276,9 +268,9 @@ abline(a=0,b=1,col="grey")
 				- Conhecer os métodos de amostragem e as distribuições permite estimar errors 
 				- Bootstrap é um método atrativo para determinar erros nas amostras
 			</section>
-			<section data-markdown>
 					<section>
-							Na próxima aula Experimentos Estatísticos <br> <br>
+						<p>
+							Na próxima aula Experimentos Estatísticos </p><br> <br>
 							<img src="./img/logopos.webp" alt="">
 						</section>
 			</section>
