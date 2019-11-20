@@ -222,6 +222,16 @@ abline(a=0,b=1,col="grey")				</code></pre>
 				- Também é utilizado para modelar o tempo para falhas, ou o tempo para atender um serviço
 				- `rexp(n=100, rate=.2)`
 				- Gera 100 números aleatórios onde a média de duração dos eventos é de 5 (1/5 = 0.2)
+				- `plot(density(rexp(1000)))`				
+			</section>
+			<section>
+				\[
+				f(x)= 
+			\begin{cases}
+				\frac{1}{\mu}e^{-x/\mu},& \text{se } x\geq 0\\
+				0,              & \text{caso contrário}
+			\end{cases}
+			\]
 			</section>
 			<section data-markdown>
 				- Tanto Poisson quanto exponencial assumem que a taxa de &lambda; é constante durante o período considerado
