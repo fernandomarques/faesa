@@ -98,6 +98,88 @@
 			- Poderíamos desenvolver um algoritmo recursivo e memoizá-lo 
 			- Mas estaríamos ignorando uma característica importante do problema
 		</section>
+		<section data-markdown>
+			## Escolha gulosa
+		</section>
+		<section data-markdown>
+			## Escolha gulosa
+			- Se a gente pudesse descobrir uma atividade para acrescentar a solução sem ter de resolver todos os subproblemas?
+			- Não precisaríamos de considerar todas as escolhas da recorrência
+			- Poderíamos escolher uma atividade que deixe o recurso livre o mais rápido possível
+			- Assim, como está ordenado por ordem crescente de término, basta escolher a primeira
+			- Ao fazer a escolha gulosa devemos determinar as atividades que começam após o término de $a_1$
+		</section>
+		<section data-markdown>
+			## Escolha gulosa
+			- A escolha gulosa - na qual sempre escolhe a primeira atividade a terminar - é sempre parte de alguma
+			solução ótima?
+		</section>
+		<section data-markdown>
+			## Teorema
+			- Considere um subproblema qualquer não vazio Sk e seja am uma atividade de Sk com o tempo de término mais cedo
+			- Então am estará incluída em algum subconjunto de tamanho máximo de atividades mutuamente compatíveis de Sk
+		</section>
+		<section data-markdown>
+			## Teorema
+			- Seja Ak um subconjunto de tamanho máximo de atividades mutuamente compatíveis em Sk e seja aj a atividade
+			em Ak que tem o tempo de término mais cedo
+			- Se aj = am, __done__
+			- Se $a_j \neq a_m$ , considere o subconjunto $ A'_k = A_k -a_j \cup a_m $
+			- Que é $A_k$ substituindo $a_j$ por $a_m$
+			- Nesse caso $A'_k$ é disjunto já que $A_k$ também é 
+			- $a_j$ é a primeira atividade a terminar em $A_k e f_m \leq f_j $
+			- Como $ |A'_k| = |A_k| $ então $A'_k$ é um subconjunto de tamanho máximo de $S_k$ e incluir $a_m$
+		</section>
+		<section >
+<pre><code>Recursive-Activity-Selector(s,f,k,n)
+// s e f = inicio e fim, k = indice do subproblema e n tamanho do problema original
+// consideramos que as entradas sao ordenadas 
+   m = k + 1
+   while m &lt;= n e s[m] &lt; f[k] 
+	  m = m + 1
+   if m &lt;= n
+	  return am + Recursive-Activity-Selector(s,f,m,n)
+   else
+      return 0</code></pre>
+		</section>
+		<section >
+<pre><code>Greedy-Activity-selector(s,f)
+  n = s.comprimento
+  A = a1
+  k = 1
+  for m = 2 to n
+	if s[m] >= f[k]
+		 A = A + am
+		 k = m
+  return A
+</code></pre>
+		</section>
+		<section data-markdown>
+			## Estratégia gulosa
+			> Adicionar programação dinâmica melhoraria o algoritmo? 
+		</section>
+		<section data-markdown>
+			## Estratégia Gulosa
+			1. Determinar subestrutura ótima do problema
+			1. Desenvolver solução recursiva
+			1. Provar que, ao fazer a escolha gulosa, restará apenas um subproblema
+			1. Provar que é sempre seguro fazer a escolha gulosa
+			1. Desenvolver um algoritmo recursivo que implemente a estratégia gulosa
+			1. Converter o algoritmo recursivo em iterativo
+		</section>
+		<section data-markdown>
+			## Estratégia Gulosa
+			1. Expressar o problema de otimização como um problema no qual fazemos uma escolha e ficamos com um único
+			subproblema para resolver
+			1. Provar que sempre existe uma solução ótima para o problema original que usa a escolha gulosa, de modo que a escolha gulosa é sempre segura
+			1. Demonstrar subestrutura ótima mostrando que, tendo feito a escolha gulosa, o que resta é um subproblema
+			com a seguinte propriedade: se combinarmos uma solução ótima para o subproblema com a escolha gulosa, chegamos a solução
+			ótima para o problema original
+		</section>
+		<section data-markdown>
+			## Algoritmo de Huffman
+			- [Video](https://www.youtube.com/watch?v=dM6us854Jk0)
+		</section>
 	</div>
 		</div>
 
