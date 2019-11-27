@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Complexidade de Algoritmos</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="../css/misc.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Algoritmos Gulosos</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown>
+			## Algoritmos Gulosos
+			- Algoritmos de Otimização, normalmente, passam por uma sequência de etapas e cada etapa tem um conjunto de decisões
+			- Muitas vezes pode ser exagero utilizar programação dinâmica para determinar as melhores escolhas
+			- Algoritmos mais simples podem ser suficientes
+			- Um __algoritmo guloso__ faz sempre a escolha que parece ser a melhor no momento em questão. _local maxima_
+			- Nem sempre produzem produzem solução ótima, mas as produzem para vários problemas
+		</section>
+		<section data-markdown>
+			## Algoritmos Gulosos
+			- O método guloso é bastante poderoso e funciona bem para um ampla faixa de problemas
+				- Árvore geradora mínima
+				- Dijkstra para caminhos mais curtos de origem única
+				- Códigos de Huffman
+		</section>
+		<section data-markdown>
+			## Seleção de atividades
+			- Programar várias atividades concorrentes que requerem uso exclusivo de um recurso
+			- Selecionar um conjunto de tamanho máximo de atividades mutuamente compatíveis
+			- Cada atividade tem um tempo de início $s_i$ e um tempo de fim $f_i$
+			- Duas atividades são compatíveis se os intervalos $ [s_i,f_i)$ e $[s_j,f_j)$ não se sobrepõem
+			- O fim de uma atividade deve ser menor ou igual ao ínicio da outra e vice-versa
+		</section>
+		<section data-markdown>
+| i | 1 | 2 | 3 | 4 | 5 | 6 | 7  | 8  | 9  | 10 | 11 |
+|---|---|---|---|---|---|---|----|----|----|----|----|
+| s | 1 | 3 | 0 | 5 | 3 | 5 | 6  | 8  | 8  | 2  | 12 |
+| f | 4 | 5 | 6 | 7 | 9 | 9 | 10 | 11 | 12 | 14 | 16 |
+		</section>
+		<section data-markdown>
+			## Seleção de Atividades
+			- O subconjunto $a_2,a_4,a_11$ consiste de atividades compatíveis
+			- Mais o subconjunto $a_1,a_4, a_8, a_11$ é maior
+
+			| i | 1 | 2 | 3 | 4 | 5 | 6 | 7  | 8  | 9  | 10 | 11 |
+			|---|---|---|---|---|---|---|----|----|----|----|----|
+			| s | 1 | 3 | 0 | 5 | 3 | 5 | 6  | 8  | 8  | 2  | 12 |
+			| f | 4 | 5 | 6 | 7 | 9 | 9 | 10 | 11 | 12 | 14 | 16 |
+		</section>
+		<section data-markdown>
+			## Subestrutura ótima
+			- Seja $S_{ij}$ o conjunto de atividades que começam depois da atividade $a_k$ ou terminam antes dela
+			- Suponha que queremos determinar um conjunto máximo de atividades compatíveis com $S_{ij}$
+			- Tal conjunto máximo é $A_{ij}$ incluindo uma atividade $A_k$
+			- Assim, podemos dividir as outras atividades em dois conjuntos, as atividades que terminam antes: $S_{ik}$
+			- E as atividades que comecem depois como $S_{kj}$
+			- Portanto $|A_{ij}| = |Aik| + |Akj| +1  $
+		</section>
+		<section data-markdown>
+			## Subestrutura ótima
+			- Assim, a solução ótima $Aij$ deve incluir também soluções ótimas para $Sik$ e $Skj$
+			- Se a gente denotar o tamanho da solução ótima teremos a recorrência
+			$$ c[i,j] = c[i,j] + c[k,j] + 1 $$
+			- Se não soubermos que uma solução ótima inclui a atividade ak, teremos que examinar todas as atividades em S
+			- Poderíamos desenvolver um algoritmo recursivo e memoizá-lo 
+			- Mas estaríamos ignorando uma característica importante do problema
+		</section>
+	</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
