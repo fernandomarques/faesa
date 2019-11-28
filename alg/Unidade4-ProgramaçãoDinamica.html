@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Complexidade de Algoritmos</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="../css/misc.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Programação Dinâmica</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+		<section data-markdown>
+			## Divisão e Conquista
+			1. _Divisão_ do problema em subproblemas, resolvendo-os recursivamente
+			1. _Conquista_ os subproblemas 
+			1. _Combinação_ as soluções dadas aos subproblemas na solução do problema original
+		</section>
+		<section data-markdown>
+			## Divisão e Conquista
+			- Como deixar mais rápido o problema de multiplicação de inteiros?
+		</section>
+		<section data-markdown>
+			## Divisão e Conquista
+			- $ 28 \times 35 = (2\times10^1 + 8\times10^0)\times (3\times10^1 + 5\times10^0)$
+			- $ = 2\times3\times10^2 + 2\times5\times10^1 + 8\times3\times10^1 + 8\times5\times10^0$
+			- $ = 6\times10^2 + (10+ 24)\times10^1 + 40\times10^0$ 
+			- $ = 600 + 340 + 40 = 980 $
+		</section>
+		<section data-markdown>
+			## Divisão e Conquista
+			- $ a = a_1a_0$ e $ b = b_1b_0 $
+			- $ c = a * b $
+			- $ = (a_1\times10^{n/2} + a_0) \times (b_1\times10^{n/2} + b_0)$
+			- $ = (a_1 \times b_1 \times 10^n) + (a_1 \times b_0 + a_0 \times b_1) \times 10^{n/2} + a_0\times b_0 $
+		</section>
+		<section data-markdown>
+			## Divisão e Conquista
+			- $ a = 123456 $ e $ b = 117933 $
+			- $ c = a * b $
+			- $ = (123\times 10^3 + 456) \times (117\times10^3 + 933)$
+			- $ = (123 \times 117 \times 10^6) + (123 \times 933 + 456 \times 117) \times 10^3 + 456\times 933 $
+		</section>
+		<section data-markdown>
+			## Divisão e Conquista
+			- $ X =  Xl\times 2^{n/2} + Xr $
+			- $ Y =  Yl\times 2^{n/2} + Yr $
+			- $ XY = (Xl\times 2^{n/2} + Xr) (Yl \times 2 ^{n/2} + Yr) $
+			- $ 2^n XlYl + 2^{n/2}(XlYr + XrYl) + XrYr $
+			- $ T(n) = 4T(n/2) + O(n) =  O(n^2)$ 
+			- &#128533;
+		</section>
+		<section data-markdown>
+			## Divisão e Conquista
+			- $ X_lY_r + X_rY_l = (X_l + X_r)(Y_l + Y_r) - X_lY_l- X_rY_r $
+			- $ XY = 2^n X_lY_l + 2^{n/2}[(X_l + X_r)(Y_l + Y_r) - XlYl - X_rY_r] + X_rY_r $
+			- $ XY = (Xl \times 2^{n/2} + Xr) (Yl \times 2^{n/2} + Yr) $
+$  			- $ T(n) = 3T(n/2) + O(n) = O(n^{1.59})$ 
+			- &#128526;
+			- Algoritmo de Karatsuba
+		</section>
+		<section data-markdown>
+			## Programação Dinâmica
+			- [fibonacci](fibonacci.py) - memoização
+			- Como vimos na divisão e conquista subdividimos os problemas e os resolvemos recursivamente para depois combinar
+			- Ao contrário, na programação dinâmica os subproblemas se sobrepõem, ou seja, subproblemas compartilham subproblemas
+			- Dessa forma, algoritmos de divisão e conquista trabalham mais do que o necessário, resolvendo, repetidamente, problemas em comum
+			- Em geral, aplicamos a problemas de __otimização__, onde temos muitas soluções possíveis e desejamos encontrar
+			o valor ótimo (máximo ou mínimo)
+		</section>
+		<section data-markdown>
+			## Programação Dinâmica
+			- O desenvolvimento segue quatro etapas:
+				1. Caracterizar a estrutura de uma solução ótima
+				1. Definir recursivamente o valor de uma solução ótima
+				1. Calcular o valor de uma solução ótima, normalmente de baixo para cima
+				1. Construir uma solução ótima com as informações calculadas
+		</section>
+		<section data-markdown>
+			## Corte de Hastes
+			- Dada uma haste de _n_ polegadas de comprimento e uma tabela de preços $p_i$ para i = 1,2,3...,n, determine
+			a receita máxima $r_n$ que se pode obter cortando a haste e vendendo os pedaços
+			- Preços: { 1, 5, 8, 9, 10, 17, 17, 20, 24, 30}
+			- Quais as soluções para hastes de tamanho: { 5, 7, 10 e 15}
+		</section>
+		<section>
+			<h3>Corte de Hastes</h3>
+			<pre><code>
+cut-rod(p,n)
+	if n ==0:
+		return 0
+	q = -&infin;
+	for i = 1 to n:
+		q = max(q, p[i] + cut-rod(p,n-1))
+	return q</code></pre>
+		</section>
+		<section data-markdown>
+			## Corte de Hastes
+			- O tempo de execução é de T(n) $ = 1 + \sum_{i=0}^{n-1}T(i) $
+			- $ T(n) = O(2^n) $
+		</section>
+	</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
