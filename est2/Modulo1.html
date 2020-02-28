@@ -72,7 +72,6 @@
 			- `ggplot(LungDisease, aes(y=PEFR,x=Exposure)) + geom_point()`
 			- `cor(LungDisease$Exposure, LungDisease$PEFR)`
 			- `model &lt;- lm(PEFR ~ Exposure, data= LungDisease)`
-			- `model &lt;- lm(PEFR ~ Exposure, data= LungDisease)`
 			- Coeficientes e Intercept
 			- `ggplot(data=LungDisease, aes(y=PEFR, x= Exposure)) + geom_point() + geom_abline(slope = model$coefficients[2], intercept = model$coefficients[1])`
 			- ` + geom_smooth` 
