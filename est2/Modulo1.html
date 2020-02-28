@@ -49,6 +49,16 @@
 					</p>
 		</section>
 		<section data-markdown>
+			## O que veremos?
+			- Regressão Linear
+			- Predição e Explicação
+			- Regressão Linear Múltipla
+			- Avaliação do Modelo
+			- Validação Cruzada
+			- Regressão Passo a Passo
+			- Intervalos de Confiança
+		</section>
+		<section data-markdown>
 			- Um dos objetivos em estatística é responder a pergunta de se a variável X está relacionada a Y, qual a relação
 			e se podemos prever Y
 			- A estatística e ciência de dados possuem grandes laços no campo de predição, qual o valor do alvo levando em conta as variáveis preditoras
@@ -331,181 +341,7 @@ round(cbind(house_lm=house_lm$coefficients,
 			- Intervalos de predição quantificam erros de predições individuais
 			- A maioria dos software produz intervalo de confiança e predição
 		</section>
-		<section data-markdown="">
-			## Valores categóricos na Regressão 
-			- A regressão exige que os valores sejam inteiros
-			- O que fazer com as variáveis categóricas?
-				- Exemplo de categoria: motivo de empréstimo
-			- A forma mais comum é utilizar as variáveis dummy
-		</section>
-		<section data-markdown="">
-			## Variáveis dummy
-			- `head(house[,"PropertyType"])`
-			- `levels(house[,"PropertyType"])`
-			- Para usar essas variáveis temos que converter elas para variáveis binárias
-			- `prop_type_dummies &lt;- model.matrix(~PropertyType -1, data=house)`
-			- `head(prop_type_dummies)`
-			- Esse tipo de divisão é chamado de _one hot encoder_ ou codificador quente
-		</section>
-		<section data-markdown="">
-			## Variáveis dummy
-			- Para regressão uma variável com P valores é representada com P-1 colunas já que na regressão tem o termo de interceptação
-			- Com esse termo, tendo P-1, sabemos o valor para P
-			- Por padrão R usa o primeiro fator como interceptação
-			- `lm(AdjSalePrice ~ SqFtTotLiving + SqFtLot + Bathrooms + 
-			Bedrooms +  BldgGrade + PropertyType, data=house)`
-			- Single Family  vale 85000 a menos e Townhouse 150000 a menos se comparados a Multiplex
-			- Existem outras formas de codificação como sum contrasts, polynomial e outras mas as mais usadas são reference e one hot encoder
-		</section>
-		<section data-markdown="">
-			## Fatores com muitos leveis
-			- Algumas variáveis podem gerar um grande número de dummies binários
-			- No caso das casas, existem 82 zip codes
-			- `table(house$ZipCode)`
-			- Seriam 81 novos coeficientes, sendo que só tinhamos 5!
-			- Alguns zip code tem apenas 1 venda, o que é problemático
-			- Mas não podemos desconsiderar essa variável! _location location location_
-			- Os primeiros 03 dígitos indicam regiam submetropolitana, mas 983 tem poucas vendas
-		</section>
-		<section>
-<pre><code class="R">
-library(dplyr)
-zip_groups &lt- house %>%
-mutate(resid = residuals(house_lm)) %>%
-group_by(ZipCode) %>%
-summarize(med_resid = median(resid),
-			cnt = n()) %>%
-# sort the zip codes by the median residual
-arrange(med_resid) %>%
-mutate(cum_cnt = cumsum(cnt),
-		ZipGroup = factor(ntile(cum_cnt, 5)))
-house &lt- house %>%
-left_join(select(zip_groups, ZipCode, ZipGroup), by='ZipCode')
-</code></pre>
-		</section>
-		<section data-markdown="">
-			## Fatores com muitos leveis
-			- O resíduo da média é calculado para cada zipcode e a função ntile separa os códigos em grupos de 5
-			- O conceito de usar resíduos para ajudar no ajuste da regressão é fundamental no processo de modelagem
-		</section>
-		<section data-markdown="">
-			## Categorias ordenadas
-			- Algumas categorias podem ser ordenadas, assim, usar a condição de decodificação perderia informação
-			- Uma nota pode ser boa, média, ruim ...
-			- [Ordered Factors](https://www.dummies.com/programming/r/how-to-work-with-ordered-factors-in-r/)
-		</section>
-		<section data-markdown="">
-			- Fatores podem ser convertidos em números para fazer a regressão
-			- O método mais comum de codificar um fator é usando P-1 variáveis dummy
-			- Um fator com muitos níveis pode ter que ser convertido
-			- Alguns fatores são ordenados e podem ser representados por números
-		</section>
-		<section data-markdown="">
-			> Em data science o uso mais importante de regressão é predizer alguma variável dependente. Ainda assim, podemos
-			conhecer a equação e entender o relacionamento das variáveis preditoras e a previsão 
-		</section>
-		<section data-markdown="">
-			## Preditores correlacionados
-			- Nas regressões múltiplas os preditores costumam ser correlacionados
-			- Se olharmos os coeficientes do step_lm veremos que o coeficiente de quarto é negativo! HOW!?!?!
-			- Adicionar um quarto à casa reduz seu preço?????
-			- Casas grandes tendem a ter mais quartos, e é o tamanho que eleva o preço da casa
-			- Em duas casa de mesmo tamanho, a que tiver mais quartos terá quartos menores
-			- Preditores correlacionados podem dificultar a interpretação do valor de cada coeficiente
-			- As variáveis para quartos, tamanho da casa e número de banheiros estão correlacionadas
-		</section>
-		<section data-markdown="">
-			## Preditores correlacionados
-			- `update(step_lm, . ~ . -SqtToLiving - SqFtFinBasement - Bathrooms)`
-			- A função update pode ser usada para adicionar ou remover variáveis de um modelo
-			- Agora a variável Bedrooms é positiva, mas funciona como um proxy para SqtToLiving
-
-		</section>
-		<section data-markdown="">
-			## Multicolinearidade
-			- Um caso extremo de variáveis correlacionadas é a multicolinearidade , uma condição onde há redundância
-			entre as variáveis preditoras
-			- Multicolinearidade perfeita é quando uma variável preditora pode ser descrita como uma regressão linear das outras
-			- Multicolinearidade pode acontecer quando:
-				- Uma variável é incluída múltiplas vezes por erro
-				- São usadas P dummies
-				- Duas variáveis são quase perfeitamente correlacionadas
-		</section>
-		<section data-markdown="">
-			## Multicolinearidade
-			- Multicolinearidade deve ser tratada em regressões! Removendo as variáveis correlacionadas
-			- Não é um problema em outros tipos de métodos como arvores, clustering ou vizinhos mais próximos
-		</section>
-		<section data-markdown="">
-			## Variável de Confusão ou Confundimento
-			- Com variáveis correlacionadas o problema é adicionar muitas variáveis com relação similar a previsão
-			- No confundimento o problema é a omissão, alguma variável importante não foi adicionada na regressão
-			- Se adicionarmos ZipGroup a regressão agora teremos Bathroom e SqFtLot positivos
-			- O coeficiente do Zip também é alto, podendo adicionar até $340,000
-			- [Explicação sobre Variável de Confusão](https://www.statisticshowto.datasciencecentral.com/experimental-design/confounding-variable/)
-		</section>
-		<section data-markdown="">
-			## Interações e Efeito principal
-			- Existe uma diferença entre efeitos principais ou variáveis independentes e a interação entre os efeitos
-			- Uma suposição implícita quando fazemos regressão é que o preditor e a resposta são independentes de outros preditores
-			- Nem sempre isso acontece...
-		</section>
-		<section data-markdown="">
-			## Interações e Efeito principal
-			- Vimos o efeito do ZipCode nos outros coeficientes
-			- Sabemos que no setor imobiliário localização é tudo. Assim, uma casa grande em uma área nobre não terá o mesmo
-			preço que uma casa na perifería 
-			- Para incluir interação entre variáveis em R usamos o operador *
-			- `lm(AdjSalePrice ~  SqFtTotLiving*ZipGroup + SqFtLot + Bathrooms + Bedrooms +	BldgGrade + PropertyType,  data=house, na.action=na.omit)`
-		</section>
-		<section data-markdown="">
-			## Interações e Efeito principal
-			- São criados relacionamentos entre SqFtTotLiving e Zip Group 
-			- A diferença de aumentar um pé quadrado dos Zips mais baratos para o mais caro é de 2.9!
-			- $118 vs $348
-			- Pode ser difícil decidir quais termos devem ser incluídos no modelo para isso podemos
-				- Conhecimento do negócio e intuição
-				- Stepwise
-				- Usar regressão penalizada [exemplos](http://www.sthda.com/english/articles/37-model-selection-essentials-in-r/153-penalized-regression-essentials-ridge-lasso-elastic-net/)
-				- Usar modelos de árvores
-		</section>
-		<section data-markdown="">
-			- Por causa da correlação entre preditores é importante tomar cuidado com regressões multivariadas
-			- Multicolinearidade pode causar instabilidade na regressão
-			- Um variável de confusão é um preditor importante que foi omitido do modelo e pode levar a relacionamentos errados
-			- Um termo de interação entre duas variáveis é importante quando o relacionamento entre as variáveis é interdependente
-		</section>
-		<section data-markdown="">
-			## Diagnóstico de Regressão 
-			### Outliers, Parte II - _O Retorno_
-			- Outliers são valores que se distanciam das outras observações
-			- Assim como na localização e variabilidade, os outliers também devem ser tratados na regressão
-			- Não existe uma teoria estatística para reparar outliers, existem algumas boas práticas como 1.5 IQR
-			- Os resíduos padronizados são a forma de encontrar outliers na regressão
-			- Resíduo padronizado pode ser interpretado como o números de erros padrão distante da regressão
-		</section>
-		<section >
-<pre><code class="R">
-house_98105 &lt;- house[house$ZipCode == 98105,]
-lm_98105 &lt;- lm(AdjSalePrice ~ SqFtTotLiving + SqFtLot + Bathrooms + 
-	Bedrooms + BldgGrade, data=house_98105)
-sresid &lt;- rstandard(lm_98105)
-idx &lt;- order(sresid, decreasing=FALSE)
-sresid[idx[1]]
-resid(lm_98105)[idx[1]]
-
-house_98105[idx[1], c('AdjSalePrice', 'SqFtTotLiving', 'SqFtLot',
-	'Bathrooms', 'Bedrooms', 'BldgGrade')]
-</code></pre>
-		</section>
-		<section data-markdown="">
-			## Outliers
-			- Houve um erro na estimativa de $757,753!!!
-			- A casa foi vendida por um preço muito menor do que valia
-			- Outros casos para outliers são dados entrados de forma errada e erro de unidades
-			- Para big data outliers podem não ser um problema 
-			- Porém, outliers são centrais na detecção de anomalias como na detecção de fraudes
-		</section>
+	
 	
 			</div>
 		</div>
