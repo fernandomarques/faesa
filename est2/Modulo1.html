@@ -282,7 +282,7 @@ round(cbind(house_lm=house_lm$coefficients,
 		<section data-markdown="">
 			- Regressão linear múltipla modela a relação da variável resposta e multiplos preditores
 			- A métricas mais importantes são RMSE e R²
-			- O erro padrão dos coeficientes pode ser usado para media a confiabilidade
+			- O erro padrão dos coeficientes pode ser usado para medir a confiabilidade
 			- Regressão passo a passo é uma forma de identificar quais variáveis devem ser incluídas
 			- Regressão balanceada permite dar mais ou menos peso as variáveis
 		</section>
@@ -322,7 +322,7 @@ round(cbind(house_lm=house_lm$coefficients,
 			- A incerteza na predição ocorre por
 				1. Incerteza dos preditores relevantes e seus coeficientes
 				1. Erro adicional dos pontos individuais
-			- Mesmo que tendo certeza dos valores a equação de regressão, o valor real de um preditor irá variar
+			- Mesmo que tendo certeza dos valores da equação de regressão, o valor real de um preditor irá variar
 			- Casas com os mesmos preditores podem ter preços diferentes
 		</section>
 		<section data-markdown="">
@@ -332,7 +332,6 @@ round(cbind(house_lm=house_lm$coefficients,
 			1. Tire um resíduo da regressão original e some ao valor previsto, armazene
 			1. Repita de 1 a 3 1000 vezes
 			1. Encontre encontre os percentis 2.25% e 97.5%
-			[Exemplo de Boostrap para Regressão, apontar o que tá errado no site...](https://data-flair.training/blogs/bootstrapping-in-r/)
 		</section>
 		<section data-markdown="">
 			- Extrapolação pode causar erros
