@@ -50,7 +50,7 @@
 		</section>
 		<section data-markdown="">
 			## Valores categóricos na Regressão 
-			- A regressão exige que os valores sejam inteiros
+			- A regressão exige que os valores sejam numéricos
 			- O que fazer com as variáveis categóricas?
 				- Exemplo de categoria: motivo de empréstimo
 			- A forma mais comum é utilizar as variáveis dummy
@@ -79,10 +79,10 @@
 			- Algumas variáveis podem gerar um grande número de dummies binários
 			- No caso das casas, existem 82 zip codes
 			- `table(house$ZipCode)`
-			- Seriam 81 novos coeficientes, sendo que só tinhamos 5!
+			- Seriam 81 novos coeficientes, sendo que só tínhamos 5!
 			- Alguns zip code tem apenas 1 venda, o que é problemático
 			- Mas não podemos desconsiderar essa variável! _location location location_
-			- Os primeiros 03 dígitos indicam regiam submetropolitana, mas 983 tem poucas vendas
+			- Os primeiros 03 dígitos indicam região submetropolitana, mas 983 tem poucas vendas
 		</section>
 		<section>
 <pre><code class="R">
@@ -178,9 +178,9 @@ left_join(select(zip_groups, ZipCode, ZipGroup), by='ZipCode')
 		<section data-markdown="">
 			## Interações e Efeito principal
 			- São criados relacionamentos entre SqFtTotLiving e Zip Group 
-			- A diferença de aumentar um pé quadrado dos Zips mais baratos para o mais caro é de 2.9!
-			- $118 vs $348
-			- Pode ser difícil decidir quais termos devem ser incluídos no modelo para isso podemos
+			- A diferença de aumentar um pé quadrado dos Zips mais baratos para o mais caro é de mais de 3x!
+			- $70 vs $229
+			- Pode ser difícil decidir quais termos devem ser incluídos no modelo, para isso podemos:
 				- Conhecimento do negócio e intuição
 				- Stepwise
 				- Usar regressão penalizada [exemplos](http://www.sthda.com/english/articles/37-model-selection-essentials-in-r/153-penalized-regression-essentials-ridge-lasso-elastic-net/)
@@ -221,14 +221,15 @@ house_98105[idx[1], c('AdjSalePrice', 'SqFtTotLiving', 'SqFtLot',
 			- A casa foi vendida por um preço muito menor do que valia
 			- Outros casos para outliers são dados entrados de forma errada e erro de unidades
 			- Para big data outliers podem não ser um problema 
-			- Porém, outliers são centrais na detecção de anomalias como na detecção de fraudes
+			- Porém, outliers são centrais na detecção de anomalias como fraudes
 		</section>
 		<section data-markdown="">
 			## Valores influentes
-			- Um valor cuja a ausência muda a equação de regressão
+			- Um valor cuja a ausência do registro muda a equação de regressão
 			- Consideramos que o ponto tem uma alta influência na regressão
 			- Esse valor não é necessáriamente um outliers
-			- Além do resíduo padronizado também existe o _hat-value_ e a distância de Cook
+			- Além do resíduo padronizado também existe o _hat-value_ e a distância de Cook, caso sejam maiores que 
+			os valores a baixo, são muito altos
 			\begin{aligned}
 			Valor Hat &lt; 2(P+1)/n 
 			\end{aligned}
@@ -236,7 +237,19 @@ house_98105[idx[1], c('AdjSalePrice', 'SqFtTotLiving', 'SqFtLot',
 			Valor Cook &lt; \frac{4}{n-P-1}
 			\end{aligned}
 		</section>
+		<section>
+			<h2>Valores influentes</h2>
+			<ul>
+			<li> A distância de Cook mede a influência que cada valor tem no modelo</li>
+			\begin{aligned}
+			D_{i} = \frac{\sum_{j = 1}^{n} (\hat Y_j - \hat Y_{j(i)})^2}{pMSE}
+			\end{aligned}
+			<li>p = número de parâmetros</li>
+			<li>MSE = erro quadrático médio (mean squared error)</li>
+		</ul>
+		</section>
 		<section data-markdown="">
+			- Diferentes modelos com e sem o outlier
 			![Grafico Valor Influente](img/Modulo1ValorInfluente.png)
 		</section>
 		<section>
@@ -275,10 +288,7 @@ lm_98105_inf &lt- lm(AdjSalePrice ~ SqFtTotLiving + SqFtLot +
 df &lt- data.frame(lm_98105$coefficients,
 	lm_98105_inf$coefficients)
 names(df) &lt- c('Original', 'Influential Removed')
-ascii((df),
-include.rownames=TRUE, include.colnames=TRUE, header=TRUE,
-digits=rep(0, 3), align=c("l", "r", "r") ,
-caption="Comparison of regression coefficients with the full data and with influential data removed")
+
 </code></pre>
 		</section>
 		<section data-markdown="">
@@ -294,7 +304,7 @@ caption="Comparison of regression coefficients with the full data and with influ
 			- Inferências normais assumem que os resíduos são normalmente distribuídos, tem a mesma variância e são
 			independentes
 			- Isso é particularmente importante quando calculamos o intervalo de confiança para os valores previstos, já que é baseado nos resíduos
-			- Heterodasticidade é a falta de uma variação no resíduo ao longo dos valores preditos
+			- Heterocedasticidade é a falta de uma variação constante no resíduo ao longo dos valores preditos
 			- Indica que erros de predição são diferentes para amplitudes diferentes
 		</section>
 		<section>
@@ -374,6 +384,9 @@ ggplot(df, aes(SqFtTotLiving, PartialResid)) +
 			- A definição técnica de spline é uma série de polinômios contínuos
 			- Os polinômios são conectados a uma série de pontos fixos chamados de nós
 			- Contrário das outras regressões, os coeficientes são de difícil entendimento, sendo melhor ver o gráfico
+		</section>
+		<section data-markdown>
+			![Imagem Overfitting XKCD](https://imgs.xkcd.com/comics/curve_fitting.png)
 		</section>
 		<section data-markdown="">
 			![Exemplo Spline Real](img\Modulo1Spline.jpg)
