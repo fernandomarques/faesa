@@ -53,7 +53,7 @@
 			- Muitas vezes queremos responder há algumas perguntas de forma automática
 				- É span? O usuário vai clicar no anúncio?
 			- A Classificação pode ser binária como visto, ou então categórica
-			- No gmail, um email pode ser primary, social, promotional, forum...
+			- No gmail, um email pode ser primary, social, promotional, fórum...
 			- Muitas vezes queremos mais que uma resposta binária, qual a probabilidade de ser verdadeiro ou falso?
 		</section>
 		<section data-markdown="">
@@ -107,7 +107,7 @@
 			- A &rarr; é usuário da droga
 			- B &rarr; a droga deu positiva
 			- P(B) = 0.99x0.003 + 0.01 x 0.997 = 0.013 
-			- P(B) é probabilidade de positivo se usa e positivo se não usa
+			- P(B) é a probabilidade de positivo se usa e positivo se não usa
 			\begin{aligned}
 			P(A|B) = \frac{P(A)P(B|A)} {P(B)} =  \frac{0.003*0.99} {P(0.013)} = 0.228
 			\end{aligned}
@@ -115,7 +115,7 @@
 		</section>
 		<section data-markdown="">
 			## Naive Bayes
-			- Usa a probabilidade de observar um valor de preditor, dado o resultado para estimar a probabilidade de observar o resultado dado os preditores
+			- O algoritmo Naive Bayes usa a probabilidade de observar valores preditores, dado um resultado, para estimar a probabilidade de observar resultados Y = i, dado um conjunto de valores preditores
 		</section>
 		<section data-markdown="">
 			## Non-naive Bayes
@@ -149,6 +149,9 @@
 		</section>
 		<section >
 <pre><code>
+loan_data &lt;- read.csv('loan_data.csv')
+loan_data$outcome &lt;- ordered(loan_data$outcome, levels=c('paid off', 'default'))
+	
 library(klaR)
 naive_model &lt;- NaiveBayes(outcome ~ purpose_ + home_ + emp_len_, 
                           data = na.omit(loan_data))
@@ -251,7 +254,7 @@ ggplot(data.frame(borrower_score=c(0,1)), aes(borrower_score)) +
 			<h2>Exemplo</h2>
 			<pre><code>
 loan_lda &lt;- lda(outcome ~ borrower_score + payment_inc_ratio,
-	data=loan3000)
+	data=loan_data)
 loan_lda$scaling
 
 pred &lt;- predict(loan_lda)
@@ -261,7 +264,7 @@ head(pred$posterior)
 		<section>
 			<h2>Exemplo</h2>
 			<pre><code>
-lda_df &lt;- cbind(loan3000, prob_default=pred$posterior[,'default'])
+lda_df &lt;- cbind(loan_data, prob_default=pred$posterior[,'default'])
 x &lt;- seq(from=.33, to=.73, length=100)
 y &lt;- seq(from=0, to=20, length=100)
 newdata &lt;- data.frame(borrower_score=x, payment_inc_ratio=y)
@@ -294,7 +297,7 @@ ggplot(data=lda_df, aes(x=borrower_score, y=payment_inc_ratio, color=prob_defaul
 		<section data-markdown="">
 			##	Regressão Logística
 			- A regressão logística funciona utilizando a logística de resposta e o _Logit_
-			- Eles mapeia uma probabilidade de 0-1 para uma escale que seja mais adequada para a regressão linear
+			- Eles mapeiam uma probabilidade de 0-1 para uma escala que seja mais adequada para a regressão linear
 			- Vimos a regressão no formato
 			\begin{aligned}
 			p = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_qx_q 
@@ -302,7 +305,7 @@ ggplot(data=lda_df, aes(x=borrower_score, y=payment_inc_ratio, color=prob_defaul
 		</section>
 		<section data-markdown="">
 			##	Regressão Logística
-			- Mas ajustar a esse modelo não garante que o resultado esteja entre 0 e 1, como toda probabilidade deve estruturado
+			- Mas ajustar a esse modelo não garante que o resultado esteja entre 0 e 1
 			- Por isso usamos a função logística
 			\begin{aligned}
 			p = \frac{1}{1 + e^{-(\beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_qx_q)}}
@@ -318,7 +321,7 @@ ggplot(data=lda_df, aes(x=borrower_score, y=payment_inc_ratio, color=prob_defaul
 			\begin{aligned}
 			p = \frac{Odds}{1+Odds}
 			\end{aligned}
-			- Chance a probabilidade de um evento dividido pela probabilidade de que ele não ocorra
+			- Chance: a probabilidade de um evento dividido pela probabilidade de que ele não ocorra
 			- Se a probabilidade de um cavalo ganhar é de 0.5, a de não ganhar é 1 - 0.5 = 0.5
 			- Então, as chances são de 1
 		</section>
@@ -428,6 +431,7 @@ logistic_model &lt- glm(outcome ~ payment_inc_ratio + purpose_ +
 		</section>
 		<section>
 			<pre><code>
+library(mgcv)
 logistic_gam &lt;- gam(outcome ~ s(payment_inc_ratio) + purpose_ + 
 	home_ + emp_len_ + s(borrower_score),
 	data=loan_data, family='binomial')
@@ -444,6 +448,7 @@ geom_line(aes(x=payment_inc_ratio, y=terms),
 labs(y='Partial Residual') +
 xlim(0, 25) +
 theme_bw()
+# Valores em cima correspondem a 1 e o outro a 0
 			</code>
 			</pre>
 		</section>
@@ -486,6 +491,15 @@ conf_mat[1,1]/sum(conf_mat[1,])
 # specificity
 conf_mat[2,2]/sum(conf_mat[2,])
 </code></pre>
+		</section>
+		<section >
+			<pre><code class="R">			 
+library(caret)
+pred_factor &lt;- ifelse(pred_y == 0, "default","paid off")
+pred_factor &lt;- ordered(pred_factor, levels=c('paid off', 'default'))
+confusionMatrix(pred_factor,loan_data$outcome)
+			</code></pre>
+<p><a href="https://www.rdocumentation.org/packages/caret/versions/3.45/topics/confusionMatrix">Função para Matriz de confusão</a></p>
 		</section>
 		<section data-markdown="">
 			## Problema de classes raras
@@ -551,7 +565,7 @@ ggplot(roc_df, aes(x=specificity, y=recall)) +
 			- O AUC é a área a baixo da curva ROC
 			- Um valor de 1 indica um classificador perfeito
 			- 0.5 indica um classificador ineficáz 
-			- `sum(roc_df recall[-1] * diff(1-roc_df specificity))`
+			- `sum(roc_df\$recall[-1] * diff(1-roc_df\$specificity))`
 		</section>
 		<section data-markdown="">
 			## Lift
