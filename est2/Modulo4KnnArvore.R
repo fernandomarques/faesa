@@ -1,7 +1,4 @@
 
-
-
-
 loan200 <- read.csv("loan200.csv")
 head(loan200)
 
