@@ -102,9 +102,12 @@
 	</section>
 	<section>
 		<pre><code>
+loan3000 &lt;- read.csv('loan3000.csv')
+loan3000$outcome &lt;- ordered(loan3000$outcome, levels=c('paid off', 'default'))
 library(randomForest)
-rf <- randomForest(outcome ~ borrower_score + payment_inc_ratio,
+rf &lt;- randomForest(outcome ~ borrower_score + payment_inc_ratio,
 	data=loan3000)
+
 rf
 		</code></pre>
 	</section>
@@ -119,8 +122,8 @@ theme_bw()
 	</section>
 	<section>
 		<pre><code>
-pred <- predict(rf, prob=TRUE)
-rf_df <- cbind(loan3000, pred = pred)
+pred &lt;- predict(rf, prob=TRUE)
+rf_df &lt;- cbind(loan3000, pred = pred)
 
 ggplot(data=rf_df, aes(x=borrower_score, y=payment_inc_ratio, 
 	shape=pred, color=pred)) +
@@ -146,7 +149,11 @@ theme_bw()
 	</section>
 	<section>
 		<pre><code>
-rf_all <- randomForest(outcome ~ ., data=loan_data, importance=TRUE)
+library(dplyr)
+loan_data &lt;- read.csv('loan_data.csv')
+loan_data &lt;- select(loan_data, -X, -status)
+			
+rf_all &lt;- randomForest(outcome ~ ., data=loan_data, importance=TRUE)
 rf_all
 
 varImpPlot(rf_all, type=1)
@@ -156,11 +163,11 @@ varImpPlot(rf_all, type=1)
 	</section>
 	<section>
 		<pre><code>
-imp1 <- importance(rf_all, type=1)
-imp2 <- importance(rf_all, type=2)
-idx <- order(imp1[,1])
-nms <- factor(row.names(imp1)[idx], levels=row.names(imp1)[idx])
-imp <- data.frame(Predictor = rep(nms, 2),
+imp1 &lt;- importance(rf_all, type=1)
+imp2 &lt;- importance(rf_all, type=2)
+idx &lt;- order(imp1[,1])
+nms &lt;- factor(row.names(imp1)[idx], levels=row.names(imp1)[idx])
+imp &lt;- data.frame(Predictor = rep(nms, 2),
 	Importance = c(imp1[idx, 1], imp2[idx, 1]),
 	Type = rep( c('Accuracy Decrease', 'Gini Decrease'), rep(nrow(imp1), 2)))
 ggplot(imp) + 
@@ -234,10 +241,10 @@ theme_bw()
 			dos pesos			
 	</section>
 	<section><pre><code>
-		
-predictors <- data.matrix(loan3000[, c('borrower_score', 'payment_inc_ratio')])
-label <- as.numeric(loan3000[,'outcome'])-1
-xgb <- xgboost(data=predictors, label=label, objective = "binary:logistic", 
+library(xgboost)
+predictors &lt;- data.matrix(loan3000[, c('borrower_score', 'payment_inc_ratio')])
+label &lt;- as.numeric(loan3000[,'outcome'])-1
+xgb &lt;- xgboost(data=predictors, label=label, objective = "binary:logistic", 
 	params=list(subsample=.63, eta=0.1), nrounds=100)
 
 	</code></pre>
