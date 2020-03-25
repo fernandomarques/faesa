@@ -46,6 +46,18 @@
 					<small>Created by Fernando Marques </small>
 				</p>
 			</section>
+			<section>
+				<h3>Introdução</h3>
+				<ul>
+					<li class="">Uma <b>expressão condicional</b> é uma expressão cujo valor pode ser <i>falso</i> ou <i>verdadeiro</i></li>
+					<li class="">Em C, <span class="red">falso</span> é representado por <span class="red">0</span> e <span class="green">verdadeiro</span> é representado por <span class="green">diferente de 0</span></li>
+					<li class="">Existe também a biblioteca stdbool com os valores <b>true</b> e <b>false</b></li>
+					<li class="">Uma condição simples é uma expressão condicional cujo valor é dado por um operador relacional</li>
+					<li class="">Uma condição composta é uma expressão condicional formata por duas ou mais condições simples ligadas por operadores lógicos</li>
+					<li class=""><pre><code class="C">(a + 1 > 2*b;)
+(2*c == 6)</code></code></pre></li>
+				</ul>
+			</section>
 		
 			<section>
 				  <h3>Lógica em C - Operador Relacional</h3>
@@ -115,11 +127,6 @@ if(condicao){
 			</section>
 			<section>
 				<h3>Problema 1</h3>
-				<img src="img/imc.gif" alt="" width="80%">
-				<p>Leia o peso e altura da pessoa e diga em qual faixa a pessoa se encontra</p>
-			</section>
-			<section>
-				<h3>Problema 2</h3>
 				<p style="text-align:left">	Em  uma  empresa,  paga-se  R$  19,50  por  hora  trabalhada  e  desconta-se  25%  de  imposto  de
 	renda  dos  salários  superiores  a  R$  2.500,00.  Dado  o  número  de  horas  trabalhadas  por  um
 	funcionário dessa empresa, informe o valor do desconto de IR (se houver) e o valor do salário a
@@ -129,6 +136,29 @@ if(condicao){
 	desconto  dele  será  de  R$  780,00.  O  salário  a  ser  pago  para  este  funcionário  será  de  R$
 	2.340,00.</p>
 			</section>
+			<section>
+				<pre><code class="C">
+if(condicao){
+	comando1;
+}
+else if(condicao2){
+	comando2;
+}
+else if(condicao){
+	comando1;
+	comando2;
+}else{
+	comando3;
+	comando4;
+}
+					</code></pre>				
+			</section>
+			<section>
+				<h3>Problema 2</h3>
+				<img src="img/imc.gif" alt="" width="80%">
+				<p>Leia o peso e altura da pessoa e diga em qual faixa a pessoa se encontra</p>
+			</section>
+		
 			<section>
 				<h3>Problema 3</h3>
 				<p style="text-align:left">Em  uma  universidade,  a  aprovação  em  um  disciplina  requer  no  mínimo  75%  de  presença  e  no
