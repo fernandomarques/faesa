@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+	<meta charset="utf-8">
+	<title>Técnicas de Programação I</title>
+
+	<meta name="description" content="Técnicas de Programação I">
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Estruturas Condicionais</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<h3>Avaliação de Um Minuto</h3>
+				<ul>
+					<li>Lembrem de preencher!</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>Variáveis</li>
+					<li>Declaração</li>
+					<li>Atribuição</li>
+					<li>Expressão</li>
+					<li><pre><code class="C">
+int main(){
+	int a, b;
+	a = 10;
+  b = 3;
+	a = a - b;
+	a = a * 2;
+	a = b * 2 + 1;
+	printf("Valor de a: %d ",a);
+}</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>Bibliotecas</li>
+					<li>stdio.h</li>
+					<li>math.h</li>
+					<li><pre><code class="C">#include &ltstdio.h&gt
+#include &ltmath.h&gt
+int main(){
+	...
+}</code></pre></li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Introdução</h3>
+				<ul>
+					<li class="">Uma <b>expressão condicional</b> é uma expressão cujo valor pode ser <i>falso</i> ou <i>verdadeiro</i></li>
+					<li class="">Em C, <span class="red">falso</span> é representado por <span class="red">0</span> e <span class="green">verdadeiro</span> é representado por <span class="green">diferente de 0</span></li>
+					<li class="">Existe também a biblioteca stdbool com os valores <b>true</b> e <b>false</b></li>
+					<li class="">Uma condição simples é uma expressão condicional cujo valor é dado por um operador relacional</li>
+					<li class="">Uma condição composta é uma expressão condicional formata por duas ou mais condições simples ligadas por operadores lógicos</li>
+					<li class=""><pre><code class="C">(a + 1 > 2*b;)
+(2*c == 6)</code></code></pre></li>
+				</ul>
+			</section>
+			<section>
+				  <h3>Lógica em C - Operador Relacional</h3>
+					<table>
+						<tr><th>Operador</th> <th>Operação</th> <th>Exemplo</th>	</tr>
+						<tr><td>></td></td>   <td>Maior</td> <td>1 > 0</td></td>	</tr>
+						<tr><td>>=</td>       <td>Maior ou igual</td> <td>1 >= 1</td></td> 	</tr>
+						<tr><td><</td>        <td>Menor</td>	<td>1 < 2</td</tr>
+						<tr><td><=</td> <td>Menor ou igual</td><td>1 <= 1</td	</tr>
+						<tr><td>==</td> <td>Igual</td>	<td>1 == 1</td</tr>
+						<tr><td>!=</td> <td>Diferente</td>	<td>1 != 0</td</tr>
+					</table>
+			</section>
+			<section>
+				<h4>Operadores relacionais - Exercícios</h4>
+				<h5>X = 1, Y = 2, Z = 3</h5>
+				<ol type="a" style="font-size:90%">
+					<li>X > 1</li>
+					<li>Y >= 2</li>
+					<li>Z == 4</li>
+					<li>(X + Y) != Z</li>
+					<li>X > (Y – Z)</li>
+					<li>(X+1) / 2 == 0</li>
+					<li>(Y*2) < (Z/3)</li>
+					<li>((X+Y) / (Z-Y) <= (X+2))</li>
+					<li>(Y % 2) != 0</li>
+					<li>(Y % 2) == 1</li>
+					<li>(6 % Y) != 0</li>
+					<li>X != Y</li>
+					<li>(X + 1) != ((X+Y+1) / 2)</li>
+				</ol>
+			</section>
+			<section>
+				  <h3>Lógica em C - Operadores Lógicos</h3>
+							<table>
+								<caption>A OU B (A || B)</caption>
+								<tr><th>A</th><th>B</th><th>Resultado</th></th></tr>
+								<tr><td>falso</td><td>falso</td><td class="">falso</td></tr>
+								<tr><td>falso</td><td>verdadeiro</td><td class="">verdadeiro</td></tr>
+								<tr><td>verdadeiro</td><td>falso</td><td class="">verdadeiro</td></tr>
+								<tr><td>verdadeiro</td><td>verdadeiro</td><td class="">verdadeiro</td></tr>
+							</table>
+							<hr>
+							<ul>
+								<li>Se chover <b>ou</b> relampejar eu fico em casa</li>
+								<li>Quando eu fico em casa?</li>
+							</ul>
+			</section>
+			<section>
+				  <h3>Lógica em C - Operadores Lógicos</h3>
+							<table>
+								<caption>A E B (A && B)</caption>
+								<tr><th>A</th><th>B</th><th>Resultado</th></th></tr>
+								<tr><td>falso</td><td>falso</td><td class="">falso</td></tr>
+								<tr><td>falso</td><td>verdadeiro</td><td class="">falso</td></tr>
+								<tr><td>verdadeiro</td><td>falso</td><td class="">falso</td></tr>
+								<tr><td>verdadeiro</td><td>verdadeiro</td><td class="">verdadeiro</td></tr>
+							</table>
+							<hr>
+					<ul>
+						<li>Se chover <b>e</b> relampejar eu fico em casa</li>
+						<li>Quando eu fico em casa?</li>
+					</ul>
+			</section>
+			<section>
+				  <h3>Lógica em C - Operadores Lógicos</h3>
+							<table>
+								<caption>Não A (!A)</caption>
+								<tr><th>A</th><th>Resultado</th></th></tr>
+								<tr><td>falso</td><td class="">verdadeiro</td></tr>
+								<tr><td>verdadeiro</td><td class="">falso</td></tr>
+							</table>
+							<hr>
+							<ul>
+								<li>Se <b>não</b> chover eu fico em casa</li>
+								<li>Quando eu fico em casa?</li>
+							</ul>
+			</section>
+			<section>
+				<h3>Operadores Lógicos</h3>
+				<ul>
+					<li class="">Quando avaliados, tanto os operadores relacionais quantos os operadores lógicos resultam em valor 0 ou 1</li>
+					<li class="">Em uma expressão condicionar os <b>operadores aritméticos</b> são avaliados antes dos <b>operadores relacionais</b> que são avaliados antes dos <b>lógicos</b></li>
+					<li class="">Exemplo verificar se um aluno foi aprovado</li>
+					<li class=""><pre><code class="C"> (media >= 6.0) && (frequencia >= 75);</code></code></code></pre></li>
+					<li class="">O que acontece se trocar o && por || ?</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Operadores lógicos - Exercícios</h3>
+				<h5>X=1, Y=2, Z=3</h5>
+				<ol type="a">
+					<li>(X > 1) && (Y < 2)</li>
+					<li>(Y >= 2) || (2 > 3)</li>
+					<li>(Z == 4) && (X == 1)</li>
+					<li>((X + Y) != Z) || (X == 1)</li>
+					<li>!(X > (Y - Z))</li>
+					<li>!(X != Y)</li>
+					<li>!((X + 1) > 2) || !((X+Y+1) / 2 == 1)</li>
+				</ol>
+			</section>
+		
+			<section>
+				<h3>Estrutura Case</h3>
+				<ul>
+					<li class="">Em alguns problemas existem situações mutuamente exclusivas</li>
+					<li class="">Se uma for executada, as outras não serão</li>
+					<li class=""><pre><code class="C">
+switch(variavel){
+	case valor1: lista de comandos;
+			break;
+	case valor2: lista de comandos;
+			break;
+	default: lista de comandos;
+}
+					</code></pre></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Problema 4</h3>
+				<p style="text-align:left">Escreva um programa que, a partir de um mês fornecido (número inteiro de 1 a 12), apresente o
+	nome dele por extenso ou uma mensagem de mês inválido.</p>
+			</section>
+			<section>
+				<h3>Resumo</h3>
+				<ul>
+					<li>Declarações em um bloco são cercadas por { e }</li>
+					<li>Declarações if executam o código se uma determinada condição for verdadeira</li>
+					<li>Você pode juntar condições com && e ||</li>
+					<li>Em C, falso é representado por 0 e verdadeiro por 1</li>
+					<li>Uma expressão condicional é uma expressão cujo valor pode ser falso ou verdadeiro</li>
+					<li>Declarações switch verificam diversos valores de uma variável de forma eficiente</li>
+				</ul>
+			</section>
+
+		</div>
+	</div>
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+
+	<script>
+
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: '../plugin/zoom-js/zoom.js', async: true },
+			{ src: '../plugin/notes/notes.js', async: true }
+		]
+	});
+	Reveal.configure({
+		keyboard: {
+			38: 'next',
+			40: 'prev'
+		}
+	});
+
+	</script>
+
+</body>
+</html>
