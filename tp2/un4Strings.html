@@ -46,21 +46,21 @@
 			<section>
 				<h3>Strings</h3>
 				  <ul>
-							<li class="fragment">O que é uma string?</li>
-							<li class="fragment">Vetores e Caracteres</li>
-							<li class="fragment">Em C, string não é um tipo</li>
-							<li class="fragment">Temos que utilizar a biblioteca strings.h</li>
-							<li class="fragment">Além de utilizar as funções também vamos ver sua implementação</li>
-							<li class="fragment">String é um conjunto de caracteres armazenados em um vetor</li>
-							<li class="fragment">"String" 'Caracter'</li>
+							<li class=" ">O que é uma string?</li>
+							<li class=" ">Vetores e Caracteres</li>
+							<li class=" ">Em C, string não é um tipo</li>
+							<li class=" ">Temos que utilizar a biblioteca strings.h</li>
+							<li class=" ">Além de utilizar as funções também vamos ver sua implementação</li>
+							<li class=" ">String é um conjunto de caracteres armazenados em um vetor</li>
+							<li class=" ">"String" 'Caracter'</li>
 					</ul>
 			</section>
 			<section>
 				<h3>Strings</h3>
 				  <ul>
-							<li class="fragment">String não é um tipo básico em C, assim, não conseguimos usar diretamento operadores</li>
-							<li class="fragment">A declaração de de string é uma simples declaração de vetor</li>
-							<li class="fragment"><pre><code>
+							<li class=" ">String não é um tipo básico em C, assim, não conseguimos usar diretamento operadores</li>
+							<li class=" ">A declaração de de string é uma simples declaração de vetor</li>
+							<li class=" "><pre><code>
 int main(){
 	char nome[30];
 	nome[0] = 'Z';
@@ -71,13 +71,13 @@ int main(){
 }
 
 								</code></pre></li>
-							<li class="fragment">Precisamos usar um delimitador de fim na nossa string</li>
+							<li class=" ">Precisamos usar um delimitador de fim na nossa string</li>
 					</ul>
 			</section>
 			<section>
 				<h3>String - Carga Automática</h3>
 				  <ul>
-							<li class="fragment"><pre><code>
+							<li class=" "><pre><code>
 int main(){
 	char nome[20] = "Aula";
 	char nome[20] = {'A','u','l','a'};
@@ -85,27 +85,27 @@ int main(){
 	char *nome = "Aula"
 }
 							</code></pre></li>
-							<li class="fragment">Quando é feita a carga automática, o delimitador é adicionado automáticamente</li>
+							<li class=" ">Quando é feita a carga automática, o delimitador é adicionado automáticamente</li>
 					</ul>
 			</section>
 			<section>
 				<h3>Leitura e Escrita de Strings</h3>
 				  <ul>
-							<li class="fragment">O primeiro parâmetro da função printf já é uma string</li>
-							<li class="fragment">Também podemos passar uma string nos parametros seguintes, basta usar %s</li>
-							<li class="fragment">A função printf só imprime valores até o \0</li>
-							<li class="fragment">Também podemos usar a função puts para imprimir uma string</li>
-							<li class="fragment">Para ler também usamos %s no scanf. Mas não é necessário o &</li>
-							<li class="fragment">Scanf só lê uma palavra, parando quando encontra espaçõ, tab ou enter</li>
-							<li class="fragment">Já a função gets pega todos os caracteres</li>
+							<li class=" ">O primeiro parâmetro da função printf já é uma string</li>
+							<li class=" ">Também podemos passar uma string nos parametros seguintes, basta usar %s</li>
+							<li class=" ">A função printf só imprime valores até o \0</li>
+							<li class=" ">Também podemos usar a função puts para imprimir uma string</li>
+							<li class=" ">Para ler também usamos %s no scanf. Mas não é necessário o &</li>
+							<li class=" ">Scanf só lê uma palavra, parando quando encontra espaçõ, tab ou enter</li>
+							<li class=" ">Já a função gets pega todos os caracteres</li>
 					</ul>
 			</section>
 			<section>
 				<h3>Strlen e passagem de string para função</h3>
 				  <ul>
-							<li class="fragment">Assim como vimos vetores, a passagem de string também é por referência</li>
-							<li class="fragment">A função strlen é utilizada para saber o tamanho de uma string</li>
-							<li class="fragment"><pre><code>
+							<li class=" ">Assim como vimos vetores, a passagem de string também é por referência</li>
+							<li class=" ">A função strlen é utilizada para saber o tamanho de uma string</li>
+							<li class=" "><pre><code>
 int strlen(char *s){
 	int i = 0;
 	while(s[i] != '\0')
@@ -113,13 +113,13 @@ int strlen(char *s){
 	return i;
 }
 							</code></pre></li>
-							<li class="fragment">Existe algum erro nessa função?</li>
+							<li class=" ">Existe algum erro nessa função?</li>
 					</ul>
 			</section>
 			<section>
 				<h3>Tabela ASCII</h3>
 				  <ul>
-							<li class="fragment"><pre><code>
+							<li class=" "><pre><code>
 #include <stdio.h>
 
 int main(void)
@@ -134,7 +134,7 @@ int main(void)
     return 0;
 }
 							</code></pre></li>
-							<li class="fragment"><a href="https://pt.wikipedia.org/wiki/ASCII">Tabela ASCII</a></li>
+							<li class=" "><a href="https://pt.wikipedia.org/wiki/ASCII">Tabela ASCII</a></li>
 					</ul>
 			</section>
 			<section>
@@ -146,7 +146,6 @@ int main(void)
 						<li>Faça uma função que transforme todas as letras de uma string em minusculo</li>
 						<li>Faça uma função que receba duas strings s e t e verifique se t está contido em s</li>
 						<li></li>
-					<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
 				</ol>
 			</section>
       </div>
