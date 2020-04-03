@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt">
 
 <head>
 	<meta charset="utf-8">
@@ -47,56 +47,18 @@
 				</p>
 			</section>
 			<section>
-				<h3>Avaliação de Um Minuto</h3>
-				<ul>
-					<li>Lembrem de preencher!</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Revisão</h3>
-				<ul>
-					<li>Variáveis</li>
-					<li>Declaração</li>
-					<li>Atribuição</li>
-					<li>Expressão</li>
-					<li><pre><code class="C">
-int main(){
-	int a, b;
-	a = 10;
-  b = 3;
-	a = a - b;
-	a = a * 2;
-	a = b * 2 + 1;
-	printf("Valor de a: %d ",a);
-}</code></pre></li>
-				</ul>
-			</section>
-			<section>
-				<h3>Revisão</h3>
-				<ul>
-					<li>Bibliotecas</li>
-					<li>stdio.h</li>
-					<li>math.h</li>
-					<li><pre><code class="C">#include &ltstdio.h&gt
-#include &ltmath.h&gt
-int main(){
-	...
-}</code></pre></li>
-				</ul>
-			</section>
-
-			<section>
 				<h3>Introdução</h3>
 				<ul>
-					<li class="fragment">Uma <b>expressão condicional</b> é uma expressão cujo valor pode ser <i>falso</i> ou <i>verdadeiro</i></li>
-					<li class="fragment">Em C, <span class="red">falso</span> é representado por <span class="red">0</span> e <span class="green">verdadeiro</span> é representado por <span class="green">diferente de 0</span></li>
-					<li class="fragment">Existe também a biblioteca stdbool com os valores <b>true</b> e <b>false</b></li>
-					<li class="fragment">Uma condição simples é uma expressão condicional cujo valor é dado por um operador relacional</li>
-					<li class="fragment">Uma condição composta é uma expressão condicional formata por duas ou mais condições simples ligadas por operadores lógicos</li>
-					<li class="fragment"><pre><code class="C">(a + 1 > 2*b;)
+					<li class="">Uma <b>expressão condicional</b> é uma expressão cujo valor pode ser <i>falso</i> ou <i>verdadeiro</i></li>
+					<li class="">Em C, <span class="red">falso</span> é representado por <span class="red">0</span> e <span class="green">verdadeiro</span> é representado por <span class="green">diferente de 0</span></li>
+					<li class="">Existe também a biblioteca stdbool com os valores <b>true</b> e <b>false</b></li>
+					<li class="">Uma condição simples é uma expressão condicional cujo valor é dado por um operador relacional</li>
+					<li class="">Uma condição composta é uma expressão condicional formata por duas ou mais condições simples ligadas por operadores lógicos</li>
+					<li class=""><pre><code class="C">(a + 1 > 2*b;)
 (2*c == 6)</code></code></pre></li>
 				</ul>
 			</section>
+		
 			<section>
 				  <h3>Lógica em C - Operador Relacional</h3>
 					<table>
@@ -128,81 +90,13 @@ int main(){
 					<li>(X + 1) != ((X+Y+1) / 2)</li>
 				</ol>
 			</section>
-			<section>
-				  <h3>Lógica em C - Operadores Lógicos</h3>
-							<table>
-								<caption>A OU B (A || B)</caption>
-								<tr><th>A</th><th>B</th><th>Resultado</th></th></tr>
-								<tr><td>falso</td><td>falso</td><td class="fragment">falso</td></tr>
-								<tr><td>falso</td><td>verdadeiro</td><td class="fragment">verdadeiro</td></tr>
-								<tr><td>verdadeiro</td><td>falso</td><td class="fragment">verdadeiro</td></tr>
-								<tr><td>verdadeiro</td><td>verdadeiro</td><td class="fragment">verdadeiro</td></tr>
-							</table>
-							<hr>
-							<ul>
-								<li>Se chover <b>ou</b> relampejar eu fico em casa</li>
-								<li>Quando eu fico em casa?</li>
-							</ul>
-			</section>
-			<section>
-				  <h3>Lógica em C - Operadores Lógicos</h3>
-							<table>
-								<caption>A E B (A && B)</caption>
-								<tr><th>A</th><th>B</th><th>Resultado</th></th></tr>
-								<tr><td>falso</td><td>falso</td><td class="fragment">falso</td></tr>
-								<tr><td>falso</td><td>verdadeiro</td><td class="fragment">falso</td></tr>
-								<tr><td>verdadeiro</td><td>falso</td><td class="fragment">falso</td></tr>
-								<tr><td>verdadeiro</td><td>verdadeiro</td><td class="fragment">verdadeiro</td></tr>
-							</table>
-							<hr>
-					<ul>
-						<li>Se chover <b>e</b> relampejar eu fico em casa</li>
-						<li>Quando eu fico em casa?</li>
-					</ul>
-			</section>
-			<section>
-				  <h3>Lógica em C - Operadores Lógicos</h3>
-							<table>
-								<caption>Não A (!A)</caption>
-								<tr><th>A</th><th>Resultado</th></th></tr>
-								<tr><td>falso</td><td class="fragment">verdadeiro</td></tr>
-								<tr><td>verdadeiro</td><td class="fragment">falso</td></tr>
-							</table>
-							<hr>
-							<ul>
-								<li>Se <b>não</b> chover eu fico em casa</li>
-								<li>Quando eu fico em casa?</li>
-							</ul>
-			</section>
-			<section>
-				<h3>Operadores Lógicos</h3>
-				<ul>
-					<li class="fragment">Quando avaliados, tanto os operadores relacionais quantos os operadores lógicos resultam em valor 0 ou 1</li>
-					<li class="fragment">Em uma expressão condicionar os <b>operadores aritméticos</b> são avaliados antes dos <b>operadores relacionais</b> que são avaliados antes dos <b>lógicos</b></li>
-					<li class="fragment">Exemplo verificar se um aluno foi aprovado</li>
-					<li class="fragment"><pre><code class="C"> (media >= 6.0) && (frequencia >= 75);</code></code></code></pre></li>
-					<li class="fragment">O que acontece se trocar o && por || ?</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Operadores lógicos - Exercícios</h3>
-				<h5>X=1, Y=2, Z=3</h5>
-				<ol type="a">
-					<li>(X > 1) && (Y < 2)</li>
-					<li>(Y >= 2) || (2 > 3)</li>
-					<li>(Z == 4) && (X == 1)</li>
-					<li>((X + Y) != Z) || (X == 1)</li>
-					<li>!(X > (Y - Z))</li>
-					<li>!(X != Y)</li>
-					<li>!((X + 1) > 2) || !((X+Y+1) / 2 == 1)</li>
-				</ol>
-			</section>
+		
 			<section>
 				<h3>Estrutura Condicional em C</h3>
 				<ul>
-					<li class="fragment">Estrutura condicional simples</li>
-					<li class="fragment">O comando só será executado se a condição for verdadeira</li>
-					<li class="fragment"><pre><code class="C">
+					<li class="">Estrutura condicional simples</li>
+					<li class="">O comando só será executado se a condição for verdadeira</li>
+					<li class=""><pre><code class="C">
 if(condicao)
 	comando;
 if(condicao){
@@ -215,8 +109,8 @@ if(condicao){
 			<section>
 				<h3>Estrutura condicional Composta</h3>
 				<ul>
-					<li class="fragment">Se a condição for verdadeira será executado o comando 1, se for falso, será executado o comando 2</li>
-					<li class="fragment"><pre><code class="C">
+					<li class="">Se a condição for verdadeira será executado o comando 1, se for falso, será executado o comando 2</li>
+					<li class=""><pre><code class="C">
 if(condicao)
 	comando1;
 else
@@ -233,11 +127,6 @@ if(condicao){
 			</section>
 			<section>
 				<h3>Problema 1</h3>
-				<img src="img/imc.gif" alt="" width="80%">
-				<p>Leia o peso e altura da pessoa e diga em qual faixa a pessoa se encontra</p>
-			</section>
-			<section>
-				<h3>Problema 2</h3>
 				<p style="text-align:left">	Em  uma  empresa,  paga-se  R$  19,50  por  hora  trabalhada  e  desconta-se  25%  de  imposto  de
 	renda  dos  salários  superiores  a  R$  2.500,00.  Dado  o  número  de  horas  trabalhadas  por  um
 	funcionário dessa empresa, informe o valor do desconto de IR (se houver) e o valor do salário a
@@ -248,49 +137,36 @@ if(condicao){
 	2.340,00.</p>
 			</section>
 			<section>
+				<pre><code class="C">
+if(condicao){
+	comando1;
+}
+else if(condicao2){
+	comando2;
+}
+else if(condicao){
+	comando1;
+	comando2;
+}else{
+	comando3;
+	comando4;
+}
+					</code></pre>				
+			</section>
+			<section>
+				<h3>Problema 2</h3>
+				<img src="img/imc.gif" alt="" width="80%">
+				<p>Leia o peso e altura da pessoa e diga em qual faixa a pessoa se encontra</p>
+			</section>
+		
+			<section>
 				<h3>Problema 3</h3>
 				<p style="text-align:left">Em  uma  universidade,  a  aprovação  em  um  disciplina  requer  no  mínimo  75%  de  presença  e  no
 	mínimo média 6.0. Se o aluno estourar em faltas, ele é reprovado diretamente; caso contrário, se
 	ele  não  alcançar  a  média  mínima,  ele  fica  para  recuperação.  Dada  a  média  de  um  aluno,  bem
 	como o número de aulas da disciplina e o número de faltas do aluno, informe a sua situação.</p>
 			</section>
-			<section>
-				<h3>Estrutura Case</h3>
-				<ul>
-					<li class="fragment">Em alguns problemas existem situações mutuamente exclusivas</li>
-					<li class="fragment">Se uma for executada, as outras não serão</li>
-					<li class="fragment"><pre><code class="C">
-switch(variavel){
-	case valor1: lista de comandos;
-			break;
-	case valor2: lista de comandos;
-			break;
-	default: lista de comandos;
-}
-					</code></pre></li>
-				</ul>
-			</section>
-			<section>
-				<h3>Problema 4</h3>
-				<p style="text-align:left">Escreva um programa que, a partir de um mês fornecido (número inteiro de 1 a 12), apresente o
-	nome dele por extenso ou uma mensagem de mês inválido.</p>
-			</section>
-			<section>
-				<h3>Resumo</h3>
-				<ul>
-					<li>Declarações em um bloco são cercadas por { e }</li>
-					<li>Declarações if executam o código se uma determinada condição for verdadeira</li>
-					<li>Você pode juntar condições com && e ||</li>
-					<li>Em C, falso é representado por 0 e verdadeiro por 1</li>
-					<li>Uma expressão condicional é uma expressão cujo valor pode ser falso ou verdadeiro</li>
-					<li>Declarações switch verificam diversos valores de uma variável de forma eficiente</li>
-				</ul>
-			</section>
-			<section>
-				<ol >
-					<li class="">Preencher a <span class="red">enquete de Um Minuto</span></li>
-				</ol>
-			</section>
+		
 
 		</div>
 	</div>

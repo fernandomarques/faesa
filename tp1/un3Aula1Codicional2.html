@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt">
 
 <head>
 	<meta charset="utf-8">
@@ -88,12 +88,12 @@ int main(){
 			<section>
 				<h3>Introdução</h3>
 				<ul>
-					<li class="fragment">Uma <b>expressão condicional</b> é uma expressão cujo valor pode ser <i>falso</i> ou <i>verdadeiro</i></li>
-					<li class="fragment">Em C, <span class="red">falso</span> é representado por <span class="red">0</span> e <span class="green">verdadeiro</span> é representado por <span class="green">diferente de 0</span></li>
-					<li class="fragment">Existe também a biblioteca stdbool com os valores <b>true</b> e <b>false</b></li>
-					<li class="fragment">Uma condição simples é uma expressão condicional cujo valor é dado por um operador relacional</li>
-					<li class="fragment">Uma condição composta é uma expressão condicional formata por duas ou mais condições simples ligadas por operadores lógicos</li>
-					<li class="fragment"><pre><code class="C">(a + 1 > 2*b;)
+					<li class="">Uma <b>expressão condicional</b> é uma expressão cujo valor pode ser <i>falso</i> ou <i>verdadeiro</i></li>
+					<li class="">Em C, <span class="red">falso</span> é representado por <span class="red">0</span> e <span class="green">verdadeiro</span> é representado por <span class="green">diferente de 0</span></li>
+					<li class="">Existe também a biblioteca stdbool com os valores <b>true</b> e <b>false</b></li>
+					<li class="">Uma condição simples é uma expressão condicional cujo valor é dado por um operador relacional</li>
+					<li class="">Uma condição composta é uma expressão condicional formata por duas ou mais condições simples ligadas por operadores lógicos</li>
+					<li class=""><pre><code class="C">(a + 1 > 2*b;)
 (2*c == 6)</code></code></pre></li>
 				</ul>
 			</section>
@@ -133,10 +133,10 @@ int main(){
 							<table>
 								<caption>A OU B (A || B)</caption>
 								<tr><th>A</th><th>B</th><th>Resultado</th></th></tr>
-								<tr><td>falso</td><td>falso</td><td class="fragment">falso</td></tr>
-								<tr><td>falso</td><td>verdadeiro</td><td class="fragment">verdadeiro</td></tr>
-								<tr><td>verdadeiro</td><td>falso</td><td class="fragment">verdadeiro</td></tr>
-								<tr><td>verdadeiro</td><td>verdadeiro</td><td class="fragment">verdadeiro</td></tr>
+								<tr><td>falso</td><td>falso</td><td class="">falso</td></tr>
+								<tr><td>falso</td><td>verdadeiro</td><td class="">verdadeiro</td></tr>
+								<tr><td>verdadeiro</td><td>falso</td><td class="">verdadeiro</td></tr>
+								<tr><td>verdadeiro</td><td>verdadeiro</td><td class="">verdadeiro</td></tr>
 							</table>
 							<hr>
 							<ul>
@@ -149,10 +149,10 @@ int main(){
 							<table>
 								<caption>A E B (A && B)</caption>
 								<tr><th>A</th><th>B</th><th>Resultado</th></th></tr>
-								<tr><td>falso</td><td>falso</td><td class="fragment">falso</td></tr>
-								<tr><td>falso</td><td>verdadeiro</td><td class="fragment">falso</td></tr>
-								<tr><td>verdadeiro</td><td>falso</td><td class="fragment">falso</td></tr>
-								<tr><td>verdadeiro</td><td>verdadeiro</td><td class="fragment">verdadeiro</td></tr>
+								<tr><td>falso</td><td>falso</td><td class="">falso</td></tr>
+								<tr><td>falso</td><td>verdadeiro</td><td class="">falso</td></tr>
+								<tr><td>verdadeiro</td><td>falso</td><td class="">falso</td></tr>
+								<tr><td>verdadeiro</td><td>verdadeiro</td><td class="">verdadeiro</td></tr>
 							</table>
 							<hr>
 					<ul>
@@ -165,8 +165,8 @@ int main(){
 							<table>
 								<caption>Não A (!A)</caption>
 								<tr><th>A</th><th>Resultado</th></th></tr>
-								<tr><td>falso</td><td class="fragment">verdadeiro</td></tr>
-								<tr><td>verdadeiro</td><td class="fragment">falso</td></tr>
+								<tr><td>falso</td><td class="">verdadeiro</td></tr>
+								<tr><td>verdadeiro</td><td class="">falso</td></tr>
 							</table>
 							<hr>
 							<ul>
@@ -177,11 +177,11 @@ int main(){
 			<section>
 				<h3>Operadores Lógicos</h3>
 				<ul>
-					<li class="fragment">Quando avaliados, tanto os operadores relacionais quantos os operadores lógicos resultam em valor 0 ou 1</li>
-					<li class="fragment">Em uma expressão condicionar os <b>operadores aritméticos</b> são avaliados antes dos <b>operadores relacionais</b> que são avaliados antes dos <b>lógicos</b></li>
-					<li class="fragment">Exemplo verificar se um aluno foi aprovado</li>
-					<li class="fragment"><pre><code class="C"> (media >= 6.0) && (frequencia >= 75);</code></code></code></pre></li>
-					<li class="fragment">O que acontece se trocar o && por || ?</li>
+					<li class="">Quando avaliados, tanto os operadores relacionais quantos os operadores lógicos resultam em valor 0 ou 1</li>
+					<li class="">Em uma expressão condicionar os <b>operadores aritméticos</b> são avaliados antes dos <b>operadores relacionais</b> que são avaliados antes dos <b>lógicos</b></li>
+					<li class="">Exemplo verificar se um aluno foi aprovado</li>
+					<li class=""><pre><code class="C"> (media >= 6.0) && (frequencia >= 75);</code></code></code></pre></li>
+					<li class="">O que acontece se trocar o && por || ?</li>
 				</ul>
 			</section>
 			<section>
@@ -197,69 +197,13 @@ int main(){
 					<li>!((X + 1) > 2) || !((X+Y+1) / 2 == 1)</li>
 				</ol>
 			</section>
-			<section>
-				<h3>Estrutura Condicional em C</h3>
-				<ul>
-					<li class="fragment">Estrutura condicional simples</li>
-					<li class="fragment">O comando só será executado se a condição for verdadeira</li>
-					<li class="fragment"><pre><code class="C">
-if(condicao)
-	comando;
-if(condicao){
-	comando1;
-	comando2;
-	comando2;
- }</code></pre></li>
-				</ul>
-			</section>
-			<section>
-				<h3>Estrutura condicional Composta</h3>
-				<ul>
-					<li class="fragment">Se a condição for verdadeira será executado o comando 1, se for falso, será executado o comando 2</li>
-					<li class="fragment"><pre><code class="C">
-if(condicao)
-	comando1;
-else
-	comando2;
-if(condicao){
-	comando1;
-	comando2;
-}else{
-	comando3;
-	comando4;
-}
-					</code></pre></li>
-				</ul>
-			</section>
-			<section>
-				<h3>Problema 1</h3>
-				<img src="img/imc.gif" alt="" width="80%">
-				<p>Leia o peso e altura da pessoa e diga em qual faixa a pessoa se encontra</p>
-			</section>
-			<section>
-				<h3>Problema 2</h3>
-				<p style="text-align:left">	Em  uma  empresa,  paga-se  R$  19,50  por  hora  trabalhada  e  desconta-se  25%  de  imposto  de
-	renda  dos  salários  superiores  a  R$  2.500,00.  Dado  o  número  de  horas  trabalhadas  por  um
-	funcionário dessa empresa, informe o valor do desconto de IR (se houver) e o valor do salário a
-	ser pago ao funcionário.</p>
-				<p style="text-align:left"><b>Exemplo:</b>  um  funcionário  trabalhando  40  horas  por  semana  totaliza  no  fim  de  um  mês  160
-	horas  trabalhadas.  Então  seria  160  horas  *  19,50  valor  da  hora  =  R$  3.120,00.  Logo  o
-	desconto  dele  será  de  R$  780,00.  O  salário  a  ser  pago  para  este  funcionário  será  de  R$
-	2.340,00.</p>
-			</section>
-			<section>
-				<h3>Problema 3</h3>
-				<p style="text-align:left">Em  uma  universidade,  a  aprovação  em  um  disciplina  requer  no  mínimo  75%  de  presença  e  no
-	mínimo média 6.0. Se o aluno estourar em faltas, ele é reprovado diretamente; caso contrário, se
-	ele  não  alcançar  a  média  mínima,  ele  fica  para  recuperação.  Dada  a  média  de  um  aluno,  bem
-	como o número de aulas da disciplina e o número de faltas do aluno, informe a sua situação.</p>
-			</section>
+		
 			<section>
 				<h3>Estrutura Case</h3>
 				<ul>
-					<li class="fragment">Em alguns problemas existem situações mutuamente exclusivas</li>
-					<li class="fragment">Se uma for executada, as outras não serão</li>
-					<li class="fragment"><pre><code class="C">
+					<li class="">Em alguns problemas existem situações mutuamente exclusivas</li>
+					<li class="">Se uma for executada, as outras não serão</li>
+					<li class=""><pre><code class="C">
 switch(variavel){
 	case valor1: lista de comandos;
 			break;
@@ -285,11 +229,6 @@ switch(variavel){
 					<li>Uma expressão condicional é uma expressão cujo valor pode ser falso ou verdadeiro</li>
 					<li>Declarações switch verificam diversos valores de uma variável de forma eficiente</li>
 				</ul>
-			</section>
-			<section>
-				<ol >
-					<li class="">Preencher a <span class="red">enquete de Um Minuto</span></li>
-				</ol>
 			</section>
 
 		</div>
