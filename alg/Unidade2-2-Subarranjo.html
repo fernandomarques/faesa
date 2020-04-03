@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Complexidade de Algoritmos</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="../css/misc.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Problema do Subarranjo máximo</h3>					<p>
+						<small>Created by Fernando Marques </small>
+					</p>
+		</section>
+	<section data-markdown>
+		## Problema do Subarranjo máximo
+		- Suponha que lhe tenha sido oferecida a oportunidade de investir na _Volatile Chemical Corporation_ 
+		- Assim os produtos produzidos, as ações da empresa também é bastante volátil
+		- Você só pode comprar uma única unidade de ação e então vender em data posterior
+		- Você poderá saber o preço da ação no futuro, o objetivo é maximizar o lucro
+		- Você poderia achar que basta achar o menor e maior preço, mas será?
+	</section>
+	<section>
+		<img src="img/Modulo2TabelaSubarranjo.png" alt="" width="200%">
+		<img src="img/Modulo2GraficoSubarranjo.png" alt="">
+	</section>
+	<section>
+		<img src="img/Modulo2TabelaSubarranjo2.png" alt="" width="200%">
+		<img src="img/Modulo2GraficoSubarranjo2.png" alt="">
+	</section>
+	<section data-markdown>
+		## Solução em Força Bruta
+		- Como solucionar?
+	</section>
+	<section data-markdown>
+		## Transformação
+		- Vamos considerar uma entrada ligeiramente diferente
+		- Queremos identificar a sequencia de dias a qual a mudança líquida do primeiro ao último dia é máxima
+		- Em vez de examinar os preços diários, vamos examinar a alteração diária
+		- Dessa forma queremos identificar o subarranjo máximo
+	</section>
+	<section>
+		<img src="img/Modulo2TabelaSubarranjo.png" alt="" width="">
+		<p>Como seria o algoritmo de força bruta?</p>
+	</section>
+	<section data-markdown>
+		## Subarranjo máximo recursivo
+		- Se dividirmos o arranjo em dois, cada subarranjo pode ser encontrado em:
+			- Inteiramente no subarranjo A[low..mid]
+			- Inteiramente no subarranjo A[mid+1.. high]
+			- Cruzando o onto médio de modo que $low \le i \le mid \le j \le high $
+	</section>
+	<section><pre><code>
+	def find_max_crossing_subarray(A, low, mid, high) : 
+		max_left, max_right = mid, mid+1
+		left_sum = A[mid]
+		sum = 0
+		for i in range(mid,low-1,-1):
+			sum = sum + A[i]
+			if sum > left_sum:
+				left_sum = sum
+				max_left = i
+		right_sum = A[mid+1]
+		sum = 0
+		for i in range(mid+1,high+1):
+			sum = sum + A[i]
+			if sum > right_sum:
+				right_sum = sum
+				max_right = i
+		return (max_left, max_right, left_sum+right_sum)
+	</code></pre></section>
+	<section><pre><code>
+	def find_max_subarray(A,low=0,high=None):
+		if high is None:
+			high = len(A)-1
+		if high == low:
+			return (low,high,A[low])
+		mid = (low+high)//2
+		left_low,left_high,left_sum    = find_max_subarray(A,low,mid)
+		right_low,right_high,right_sum = find_max_subarray(A,mid+1,high)
+		cross_low, cross_high,cross_sum = find_max_crossing_subarray(A,low,mid,high)
+		if left_sum >= right_sum and left_sum >= cross_sum:
+			return left_low, left_high, left_sum
+		elif right_sum > cross_sum:
+			return right_low, right_high, right_sum
+		else:
+			return cross_low, cross_high, cross_sum
+	</code></pre></section>
+	<section data-markdown>
+		## Análise do algoritmo
+		- Quando n=1 o algoritmo leva &Theta;(1)
+		- Se diferentes, as primeiras linhas levam &Theta;(1) e os subproblemas T(n/2)
+		- Já o find_max_crossing_subarray leva &Theta;(n)
+		- $ T(n) = \Theta(1) + 2T(n/2) + \Theta(n) + \Theta(1) $
+		- $ = 2T(n/2) + \Theta(n) $
+		- $ T(n) = \Theta(n\,lg\,n) $
+		- O algoritmo de divisão e conquista produz um resultado que é assintóticamente mais rápido
+		que a força bruta
+	</section>
+	<section data-markdown>
+		## Exercícios
+		- O que find_max_subarray retorna se todos os elementos de A são negativos?
+		- E se positivos?
+	</section>
+	</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
