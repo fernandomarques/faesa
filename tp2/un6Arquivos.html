@@ -55,41 +55,41 @@
 			<section>
 				<h3>Arquivos</h3>
 				<ul>
-					<li class="fragment">Onde ficam armazenadas as variáveis que declaramos?</li>
-					<li class="fragment">Ao fechar o programa, todos dados são perdidos</li>
-					<li class="fragment">Também lemos sempre do terminal</li>
-					<li class="fragment">Em C, arquivos são uma sequência de bytes</li>
-					<li class="fragment">Podemos considerar arquivos como input (entrada) ou output (saída)</li>
+					<li class="">Onde ficam armazenadas as variáveis que declaramos?</li>
+					<li class="">Ao fechar o programa, todos dados são perdidos</li>
+					<li class="">Também lemos sempre do terminal</li>
+					<li class="">Em C, arquivos são uma sequência de bytes</li>
+					<li class="">Podemos considerar arquivos como input (entrada) ou output (saída)</li>
 				</ul>
 			</section>
 			<section>
 				<h3>Periféricos e Stream</h3>
 				<ul>
-					<li class="fragment">Dados de entrada podem ser fornecidos por periféricos como: teclado, mouse, leitor de barra e etc</li>
-					<li class="fragment">Dados de saída podem ser enviados para usuário por monitor, arquivo, impressora e etc.</li>
-					<li class="fragment">Todas as entradas e saídas em C são tratadas como streams</li>
-					<li class="fragment">Ou seja, um conjunto de bytes sem estrutura</li>
-					<li class="fragment">Podemos dizer que é device-independent, pois a representação é a mesma para qualquer dispositivo</li>
+					<li class="">Dados de entrada podem ser fornecidos por periféricos como: teclado, mouse, leitor de barra e etc</li>
+					<li class="">Dados de saída podem ser enviados para usuário por monitor, arquivo, impressora e etc.</li>
+					<li class="">Todas as entradas e saídas em C são tratadas como streams</li>
+					<li class="">Ou seja, um conjunto de bytes sem estrutura</li>
+					<li class="">Podemos dizer que é device-independent, pois a representação é a mesma para qualquer dispositivo</li>
 				</ul>
 			</section>
 			<section>
 				<h3>Processamento básico</h3>
 				<ul>
-					<li class="fragment">O primeiro passo para trabalhar com arquivo é 'abrir o arquivo'</li>
-					<li class="fragment">Depois de abrir o arquivo podemos realizar as operações</li>
-					<li class="fragment">Ler, Escrever e posicionar ao longo do arquivo</li>
-					<li class="fragment">Depois de completar as operações no arquivo, devemos fechar-lo</li>
+					<li class="">O primeiro passo para trabalhar com arquivo é 'abrir o arquivo'</li>
+					<li class="">Depois de abrir o arquivo podemos realizar as operações</li>
+					<li class="">Ler, Escrever e posicionar ao longo do arquivo</li>
+					<li class="">Depois de completar as operações no arquivo, devemos fechar-lo</li>
 				</ul>
 			</section>
 			<section>
 				<h3>Abertura de arquivos</h3>
 				<ul>
-					<li class="fragment">Antes de abrir o arquivo temos que declarar a varíavel que vai salvar a referência a ele</li>
-					<li class="fragment">FILE *fp;</li>
-					<li class="fragment">Para abrir o arquivo chamamos a função fopen que recebe dois parametros</li>
-					<li class="fragment">1: Nome do arquivo. Exemplo test.txt</li>
-					<li class="fragment">2: Modo de abertura do arquivo</li>
-					<li class="fragment">Para colocar o nome do arquivo com '\' temos que usar dois '\\'</li>
+					<li class="">Antes de abrir o arquivo temos que declarar a variável que vai salvar a referência a ele</li>
+					<li class="">FILE *fp;</li>
+					<li class="">Para abrir o arquivo chamamos a função fopen que recebe dois parâmetros</li>
+					<li class="">1: Nome do arquivo. Exemplo test.txt</li>
+					<li class="">2: Modo de abertura do arquivo</li>
+					<li class="">Para colocar o nome do arquivo com '\' temos que usar dois '\\'</li>
 					<pre><code>int main(){
    FILE* fp = fopen("test.txt","r");
 					}</code></pre>
@@ -98,35 +98,35 @@
 			<section>
 				<h3>Tipos de abertura de arquivos</h3>
 				<ul>
-					<li class="fragment">O segundo parâmetro de abertura de arquivo é o tipo de abertura</li>
-					<li class="fragment">"r": read. Abre o arquivo para leitura</li>
-					<li class="fragment">"w": write. Abre o arquivo para escrita, se já existe um arquivo com esse nome, o antigo é apagado.</li>
-					<li class="fragment">"a": append. Abre o arquivo para acrescentar, não apagando o arquivo já existente</li>
-					<li class="fragment">Podemos adicionar um + ex "r+" para permitir fazer leitura e escrita</li>
-					<li class="fragment">A função fopen retorna NULL se por algum motivo o arquivo não for aberto</li>
+					<li class="">O segundo parâmetro de abertura de arquivo é o tipo de abertura</li>
+					<li class="">"r": read. Abre o arquivo para leitura</li>
+					<li class="">"w": write. Abre o arquivo para escrita, se já existe um arquivo com esse nome, o antigo é apagado.</li>
+					<li class="">"a": append. Abre o arquivo para acrescentar, não apagando o arquivo já existente</li>
+					<li class="">Podemos adicionar um + ex "r+" para permitir fazer leitura e escrita</li>
+					<li class="">A função fopen retorna NULL se por algum motivo o arquivo não for aberto</li>
 				</ul>
 			</section>
 			<section>
 				<h3>Fechando um arquivo</h3>
 				<ul>
-					<li class="fragment">Antes de fechar o arquivo, é salvo toda a informação que ainda estiver em buffer</li>
-					<li class="fragment">Para fechar o arquivo devemos chamar fclose(fp)</li>
-					<li class="fragment">Apesar de o arquivo ser fechado quando o programa termina, é sempre uma boa prática fechar o arquivo</li>
-					<li class="fragment">Existe uma função que força gravar tudo que estiver em buffer fflush(fp)</li>
-					<li class="fragment">Também podemos usar a fflush para limpar o terminal: fflush(stdin)</li>
-					<li class="fragment">Para fechar todos os arquivos abertos podemos chamar fcloseall();</li>
+					<li class="">Antes de fechar o arquivo, é salvo toda a informação que ainda estiver em buffer</li>
+					<li class="">Para fechar o arquivo devemos chamar fclose(fp)</li>
+					<li class="">Apesar de o arquivo ser fechado quando o programa termina, é sempre uma boa prática fechar o arquivo</li>
+					<li class="">Existe uma função que força gravar tudo que estiver em buffer fflush(fp)</li>
+					<li class="">Também podemos usar a fflush para limpar o terminal: fflush(stdin)</li>
+					<li class="">Para fechar todos os arquivos abertos podemos chamar fcloseall();</li>
 				</ul>
 			</section>
 			<section>
 				<h3>Lendo um arquivo e escrevendo na tela</h3>
 				<ul>
-					<li class="fragment"><pre><code>#include &ltstdio.h&gt
+					<li class=""><pre><code>#include &ltstdio.h&gt
 int main(int argc, char *argv[]){
 	FILE *fp;
 	int ch;
 	// Testar se foi recebido um nome de arquivo
 	if (argc !=2){
-		printf("Número inválido de parametros");
+		printf("Número inválido de parâmetros");
 		exit(1);
 	}
 	fp = fopen(argv[1],"r");
@@ -142,11 +142,10 @@ int main(int argc, char *argv[]){
 			</section>
 			<section>
 				<ul>
-					<li>Faça um código que leia varios caracteres e os converta para maiúsculo antes de imprimir</li>
+					<li>Faça um código que leia vários caracteres e os converta para maiúsculo antes de imprimir</li>
 					<li>Faça um código que escreva o seu nome em um arquivo! <i>Mude o fopen e use fputc(fp,ch)</i></li>
 					<li>Mude o parâmetro de 'w' para 'a'. Veja a diferença</li>
 					<li>Faça um código que leia varias notas (de 0 a 5) e calcule a média entre elas</li>
-					<li class="nobullet"><a href="https://docs.google.com/forms/d/e/1FAIpQLSevRgPbvealQ_HqXOwn6Q4XthxoORLosRuUzBJxhwCK4_GVqA/viewform">Avaliação de Um Minuto</a></li>
 				</ul>
 			</section>
 			</div>
