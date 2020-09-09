@@ -46,54 +46,54 @@
 			<section>
 				<h3>Funções e Modularização</h3>
 				  <ul>
-							<li class="fragment">Funções e Procedimentos</li>
-							<li class="fragment">Cabeçalho e corpo de função</li>
-							<li class="fragment">Parâmetros</li>
-							<li class="fragment">Passagem de parâmetros</li>
-							<li class="fragment">Valor de retorno</li>
-							<li class="fragment">Void</li>
-							<li class="fragment">Protótipo de funções</li>
-							<li class="fragment">Variaveis locais</li>
+							<li class="">Funções e Procedimentos</li>
+							<li class="">Cabeçalho e corpo de função</li>
+							<li class="">Parâmetros</li>
+							<li class="">Passagem de parâmetros</li>
+							<li class="">Valor de retorno</li>
+							<li class="">Void</li>
+							<li class="">Protótipo de funções</li>
+							<li class="">Variáveis locais</li>
 					</ul>
 			</section>
 			<section>
 				  <h3>Funções e Procedimentos</h3>
 					<ul>
-						<li class="fragment">Apesar de ainda não termos visto funções, já usamos algumas!</li>
-						<li class="fragment">printf, scanf, sin, cos e pow. </li>
-						<li class="fragment">E ainda por cima criamos uma função!</li>
-						<li class="fragment"><pre><code class="C">int main(){}</code></pre></li>
-						<li class="fragment">Função x Procedimento</li>
+						<li class="">Apesar de ainda não termos visto funções, já usamos algumas!</li>
+						<li class="">printf, scanf, sin, cos e pow. </li>
+						<li class="">E ainda por cima criamos uma função!</li>
+						<li class=""><pre><code class="C">int main(){}</code></pre></li>
+						<li class="">Função x Procedimento</li>
 					</ul>
 			</section>
 			<section>
 				  <h3>Modularização</h3>
 					<ul>
-						<li class="fragment">Lembram do nosso código de imprimir matriz?</li>
-						<li class="fragment">No exercício de somar as matrizes, tive que imprimir 03 matrizes</li>
-						<li class="fragment">Para impressão umas umas 06 linhas eram usadas</li>
-						<li class="fragment">Talvez criar e chamar a função "imprimirMatriz(MatA,tamanho);"</li>
+						<li class="">Lembram dos códigos de imprimir matriz?</li>
+						<li class="">Se tiver que imprimir 03 matrizes</li>
+						<li class="">Para impressão umas umas 06 linhas eram usadas</li>
+						<li class="">Talvez criar e chamar a função "imprimirMatriz(MatA,tamanho);"</li>
 					</ul>
 			</section>
 			<section>
 				  <h3>Características de uma função</h3>
 					<ul>
-						<li class="fragment">Cada função tem nome único</li>
-						<li class="fragment">Uma função pode ser invocada por outras funções</li>
-						<li class="fragment">Deve realizar uma única tarefa bem definida</li>
-						<li class="fragment">Deve ser o mais genérico possível para ser reutilizada</li>
-						<li class="fragment">Recebe parâmetros que alteram seu comportamento</li>
-						<li class="fragment">Podem retornar valor como resultado dos trabalho</li>
+						<li class="">Cada função tem nome único</li>
+						<li class="">Uma função pode ser invocada por outras funções</li>
+						<li class="">Deve realizar uma única tarefa bem definida</li>
+						<li class="">Deve ser o mais genérico possível para ser reutilizada</li>
+						<li class="">Recebe parâmetros que alteram seu comportamento</li>
+						<li class="">Podem retornar valor como resultado dos trabalho</li>
 					</ul>
 			</section>
 			<section>
 				  <h3>Como funciona a função</h3>
 					<ul>
-						<li class="fragment">O código só é executado se a função for chamada</li>
-						<li class="fragment">Sempre que é executado, o resto do código fica <i>suspenso</i></li>
-						<li class="fragment">O programa que invoca usa <bold>argumetos</bold> que são recebidos pela função</li>
-						<li class="fragment">Depois de terminar a função pode devolver um valor</li>
-						<li class="fragment"><pre><code class="C">
+						<li class="">O código só é executado se a função for chamada</li>
+						<li class="">Sempre que é executado, o resto do código fica <i>suspenso</i></li>
+						<li class="">O programa que invoca usa <bold>argumetos</bold> que são recebidos pela função</li>
+						<li class="">Depois de terminar a função pode devolver um valor</li>
+						<li class=""><pre><code class="C">
 void imprimeX(){
 	printf("X\n");
 }
@@ -108,19 +108,19 @@ int main(){
 			<section>
 				  <h3>Cabeçalho e Corpo de uma função</h3>
 					<ul>
-						<li class="fragment">O corpo de uma função é constituído por códigos em C</li>
-						<li class="fragment">O corpo da função é seguido por chaves imediatamente após o cabeçalho</li>
-						<li class="fragment">Não há limite ao número de linhas dentro de uma função</li>
+						<li class="">O corpo de uma função é constituído por códigos em C</li>
+						<li class="">O corpo da função é seguido por chaves imediatamente após o cabeçalho</li>
+						<li class="">Não há limite ao número de linhas dentro de uma função</li>
 					</ul>
 			</section>
 			<section>
 				  <h3>Passagem de parâmetros</h3>
 					<ul>
-						<li class="fragment">Os parâmetros são separados por vírgula</li>
-						<li class="fragment">É necessário os parâmetros tenham seu tipo</li>
-						<li class="fragment">A passagem de parametro deve ser feita entre os parênteses, separado por virgula</li>
-						<li class="fragment">Também podemos usar uma expressão como argumento de função</li>
-						<li class="fragment"><pre><code class="C">printX(int quantos){
+						<li class="">Os parâmetros são separados por vírgula</li>
+						<li class="">É necessário os parâmetros tenham seu tipo</li>
+						<li class="">A passagem de parâmetro deve ser feita entre os parênteses, separado por virgula</li>
+						<li class="">Também podemos usar uma expressão como argumento de função</li>
+						<li class=""><pre><code class="C">printX(int quantos){
 	int i;
 	for(i=0;i < quantos;i++)
 		printf("X\n");
@@ -136,11 +136,11 @@ int main(){
 			<section>
 				  <h3>Valor de retorno</h3>
 					<ul>
-						<li class="fragment">Instruções que façam algum cálculo retornam um valor</li>
-						<li class="fragment">Vimos a função sin,cos e pow que retornam valores</li>
-						<li class="fragment">Quando a instrução <b>return</b> é executada, a função termina e volta ao programa que a invocou</li>
-						<li class="fragment">O return na main, faz com que ela termine</li>
-						<li class="fragment"><pre><code class="C">float areaRetangulo(float base,float altura){
+						<li class="">Instruções que façam algum cálculo retornam um valor</li>
+						<li class="">Vimos a função sin,cos e pow que retornam valores</li>
+						<li class="">Quando a instrução <b>return</b> é executada, a função termina e volta ao programa que a invocou</li>
+						<li class="">O return na main, faz com que ela termine</li>
+						<li class=""><pre><code class="C">float areaRetangulo(float base,float altura){
 	float area;
 	area = base * altura;
 	return area;
@@ -151,27 +151,27 @@ int main(){
 			<section>
 				  <h3>O tipo void</h3>
 					<ul>
-						<li class="fragment">void em inglês significa vazio</li>
-						<li class="fragment">Essa palavra reservada serve para dizer que a função não devolve qualquer tipo</li>
-						<li class="fragment">Uma função que retorna void pode ser chamada de procedimento</li>
+						<li class="">void em inglês significa vazio</li>
+						<li class="">Essa palavra reservada serve para dizer que a função não devolve qualquer tipo</li>
+						<li class="">Uma função que retorna void pode ser chamada de procedimento</li>
 					</ul>
 			</section>
 			<section>
 				  <h3>Protótipos de funções</h3>
 					<ul>
-						<li class="fragment">As funções podem ser colocadas em qualquer parte do código</li>
-						<li class="fragment">Mas, se for colocada depois da função que a chama, teremos erro</li>
-						<li class="fragment">Para evitar isso, podemos <i>declarar</i>a função colocando apenas o seu cabeçalho seguido de ;</li>
-						<li class="fragment">Depois, onde for mais conveniente, definimos a função, novamente com o cabeçalho mas agora com as chaves</li>
-						<li class="fragment">Essa declaração é chamada de protótipo, é uma boa prática declarar todas as funções no início do código</li>
+						<li class="">As funções podem ser colocadas em qualquer parte do código</li>
+						<li class="">Mas, se for colocada depois da função que a chama, teremos erro</li>
+						<li class="">Para evitar isso, podemos <i>declarar</i>a função colocando apenas o seu cabeçalho seguido de ;</li>
+						<li class="">Depois, onde for mais conveniente, definimos a função, novamente com o cabeçalho mas agora com as chaves</li>
+						<li class="">Essa declaração é chamada de protótipo, é uma boa prática declarar todas as funções no início do código</li>
 					</ul>
 			</section>
 			<section>
 				  <h3>Variáveis locais</h3>
 					<ul>
-						<li class="fragment">Também podemos declarar variáveis dentro de funções</li>
-						<li class="fragment">Depois que uma função termina, todas suas variaveis são destruídas</li>
-						<li class="fragment"><font color="red">Evitem o uso de variaveis globais</font>, aquelas que não ficam dentro de nenhuma função (nem mesmo a main)</li>
+						<li class="">Também podemos declarar variáveis dentro de funções</li>
+						<li class="">Depois que uma função termina, todas suas variáveis são destruídas</li>
+						<li class=""><font color="red">Evitem o uso de variáveis globais</font>, aquelas que não ficam dentro de nenhuma função (nem mesmo a main)</li>
 					</ul>
 			</section>
 			<section>
@@ -193,11 +193,10 @@ int main(){
 			<section>
 				  <h3>Exercícios</h3>
 					<ol>
-						  <li>Faça uma função 'testar'que receba um número inteiro n, e imprima 'Teste de Função' n vezes</li>
+						  <li>Faça uma função 'testar' que receba um número inteiro n, e imprima 'Teste de Função' n vezes</li>
 						  <li>Faça uma função 'somar' que receba dois números reais e retorne a soma</li>
 						  <li>Refaça a função anterior com subtração, divisão e multiplicação</li>
 						  <li>Faça uma função 'fatorial' que receba um inteiro e calcule seu fatorial</li>
-	  				  <li class="">Enquete de Um Minuto</a></li>
 					</ol>
 			</section>
       </div>
