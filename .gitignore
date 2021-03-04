@@ -10,3 +10,4 @@ tmp/**
 node_modules/
 .sass-cache
 .vscode
+lab/src/__pycache__/hanoi.cpython-38.pyc
