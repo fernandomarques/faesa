@@ -4,6 +4,7 @@ Pilha_C = []
 A = "A"
 B = "B"
 C = "C"
+
 def desenhar():
     tamanho = max(len(Pilha_A), len(Pilha_B), len(Pilha_C))
     pilhas = [Pilha_A,Pilha_B,Pilha_C]
@@ -39,6 +40,7 @@ def ganhou():
     jogo()
 
 def jogo():
+    print("Use as funcoes mover(de,para) e desenhar()")
     Pilha_A.clear()
     Pilha_B.clear()
     Pilha_C.clear()
