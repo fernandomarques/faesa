@@ -40,51 +40,37 @@
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>
-				<h3>Java</h3>
-				<img src="./img/java.svg" width="50%" style="border:0px" alt="">
+				<h3>Python</h3>
+				<img src="../img/python-logo.png" width="50%" style="border:0px" alt="">
 				<p>
 					<small>Created by Fernando Marques </small>
 				</p>
 			</section>
 			<section>
-				<h3>Código básico</h3>
-				<ul>
-					<li class="fragment">
-						<pre><code class="JAVA">
-public class Main{
-	public static void main(String[] args){
-
-	}
-}
-								</code></pre>
-					</li>
-					<li class="fragment"><i>Lembre: Se a classe é 'Main', o arquivo deve se chamar <b>Main.java</b>!</i></li>
-				</ul>
-			</section>
-			<section>
 				<h3>Imprimindo no terminal</h3>
 				<ul>
 					<li class="fragment">
-						<pre><code class="JAVA">
+						<pre><code class="java"><s>
 public class Main{
 	public static void main(String[] args){
 		System.out.println("Ola Mundo!");
 	}
-}								</code></pre>
+}								</s></code></pre>
+					</li>
+					<li class="fragment">
+						<pre><code class="python">
+print("Olá Mundo")
+							</code></pre>
 					</li>
 				</ul>
 			</section>
 			<section>
 				<h3 class="">Comentários</h3>
-						<pre><code class="JAVA">
-public class Main{
-	public static void main(String[] args){
-		System.out.println("Ola Mundo!");
-		// Primeiro comentário
-		/* segundo
-		comentário */
-	}
-}
+						<pre><code class="python">
+# Primeiro comentário
+''' segundo
+comentário
+'''
 	</code></pre>
 					<blockquote>
 						&ldquo;Bons programadores escrevem bons códigos, os melhores escrevem bons comentários.&rdquo;
@@ -93,17 +79,14 @@ public class Main{
 			<section>
 				<h3 class="">Declarando variável e atribuindo valor</h3>
 					<img src="../img/VARIAVELnotation.png" style="border:0px" alt="">
-						<pre><code class="java">
-public class Main{
-	public static void main(String[] args){
-		int i = 10;
-		i = 4;
-	}
-}	
-								</code></pre>
+						<pre><code class="python">
+a = 10
+type(a)
+a = 4
+				</code></pre>
 			</section>
 			<section>
-				<h3>Tipos de variáveis</h3>
+				<h3>Tipos de variáveis (nem todas em python)</h3>
 				<ul>
 					<li class="fragment">boolean</li>
 					<li class="fragment">byte</li>
@@ -116,12 +99,16 @@ public class Main{
 					<li class="fragment">String</li>
 				</ul>
 			</section>
-			<section>				<pre><code class="Java">
-public class Main{
-	public static void main(String[] args){
-		System.out.println(Integer.MAX_VALUE);
-	}
-}	
+			<section>				<pre><code class="python">
+import sys 
+
+max_int = sys.maxint 
+min_int = sys.maxint-1
+long_int = sys.maxint+1
+	
+print("maxint :"+str(max_int)+" - "+str(type(max_int))) 
+print("maxint - 1 :"+str(max_int)+" - "+str(type(min_int))) 
+print("maxint + 1 :"+str(max_int)+" - "+str(type(long_int))) 
 													</code></pre>
 </section>
 			<section>
@@ -134,7 +121,7 @@ public class Main{
 					</tr>
 					<tr>
 						<td>=</td>
-						<td>x =y</td>
+						<td>x = y</td>
 						<td>Conteúdo da variável x é atribuído a y</td>
 					</tr>
 					<tr>
@@ -156,6 +143,11 @@ public class Main{
 						<td>/</td>
 						<td>x/y</td>
 						<td>Obtém o quociente da divisão de x por y (inteiro vs float)</td>
+					</tr>
+					<tr>
+						<td>//</td>
+						<td>x//y</td>
+						<td>Divisão inteira do valor</td>
 					</tr>
 					<tr>
 						<td>%</td>
@@ -198,22 +190,22 @@ public class Main{
 						<td> x = x % y</td>
 					</tr>
 					<tr>
-						<td>++</td>
+						<td>++ (outras linguagens)</td>
 						<td>x++</td>
 						<td> x = x + 1</td>
 					</tr>
 					<tr>
-						<td>++</td>
+						<td>++ (outras linguagens)</td>
 						<td>x = y++</td>
 						<td>y = x e depois x = x+1</td>
 					</tr>
 					<tr>
-						<td>++</td>
+						<td>++ (outras linguagens)</td>
 						<td>x = ++y</td>
 						<td>x = x=1 e depois y = x </td>
 					</tr>
 					<tr>
-						<td>--</td>
+						<td>-- (outras linguagens)</td>
 						<td>x--</td>
 						<td> x = x -1</td>
 					</tr>
@@ -240,7 +232,7 @@ public class Main{
 					</tr>
 					<tr>
 						<td>
-							<=</td> <td> x <= y</td> <td>x é menor ou igual a y
+							&lt;=</td> <td> x &lt;= y</td> <td>x é menor ou igual a y
 						</td>
 					</tr>
 					<tr>
@@ -250,7 +242,7 @@ public class Main{
 					</tr>
 					<tr>
 						<td>
-							<</td> <td> x < y</td> <td>x é menor que y
+							&lt;</td> <td> x &lt; y</td> <td>x é menor que y
 						</td>
 					</tr>
 					<tr>
