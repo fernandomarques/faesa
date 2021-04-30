@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt">
+	
+	<head>
+		<meta charset="utf-8">
+
+		<title>Estatística para Data Science II</title>
+
+		<meta name="author" content="Fernando Antonio Marques Filho">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/misc.css">
+		<link rel="stylesheet" href="../css/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+
+		<style>
+			@font-face {	
+			font-family: 'Varela';
+			src:  url('./capa_pos/VarelaRound-Regular.ttf') format('truetype'),
+			}
+
+			img {
+				border : 0px !important;
+			}
+			h2, h3 {
+				font-family: Arial !important;
+				color: #17365d !important;
+				font-weight: bold !important;
+				text-transform: capitalize !important;
+			}
+			p, li{
+				font-family: Arial !important;
+				color: #1f497d !important;
+				font-weight: bold !important;
+			}
+			.logo {
+				position: absolute;
+				left: 0px;
+				height: 100%;
+			}
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<img class="logo" src="capa_pos/logo_vertical.png">
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background-image="capa_pos/capa_topico_1.png">
+				</section>
+				<section data-markdown>
+					## O que veremos?
+					- Regressão Linear
+					- Regressão Múltipla
+					- Avaliação do Modelo e Validação Cruzada
+					- Valores Categóricos
+					- Preditores Correlacionados
+					- Regressão Polinomial e Spline
+				</section>
+				<section data-markdown>
+					- Um dos objetivos na estatística é responder a pergunta de a variável X está relacionada a Y, qual a relação e se podemos prever Y
+					- Também é muito importante a detecção de anomalias (Outliers)
+					- A regressão linear simples modela a relação de X com Y.
+					- Correlação indica a forma de relacionamento, regressão quantifica a natureza do relacionamento
+				</section>
+				<section >
+<pre><code class="R">
+library(ggplot2)
+
+LungDisease <- read.csv('E:\\Desktop\\Estatistica II\\LungDisease.csv')
+
+ggplot(LungDisease, aes(y=PEFR,x=Exposure)) + geom_point()
+
+cor(LungDisease$Exposure,LungDisease$PEFR)
+
+model <- lm(PEFR ~ Exposure, data= LungDisease)
+ggplot(data=LungDisease, aes(y=PEFR, x= Exposure)) + 
+	geom_point() + geom_abline(slope = model$coefficients[2],intercept=model$coefficients[1]) +
+	geom_smooth()
+	
+</code></pre>
+				</section>
+				<section data-markdown="">
+					## Regressão linear simples
+					- Então a regressão linear tem a fórmula
+					\begin{aligned}
+					Y = b_0 + b_1X
+					\end{aligned}
+					ou
+					\begin{aligned}
+					PEFR = b0 + b_1Exposure
+					\end{aligned}
+					- b0 pode ser interpretado como o valor para nenhuma exposição
+					- b1 seria para cada ano, em quanto cai o valor de PEFR
+				</section>
+				<section data-markdown>
+					## Valores Ajustados e Resíduos
+					- Como visto, os dados não cabem todos na linha a linha de regressão seria algo como
+					\begin{aligned}
+					Y = b_0 + b_1X + e_i
+					\end{aligned}
+					- Valores ajustados, também conhecido como valores previstos podem ser denotados por 
+					\begin{aligned}
+					\hat{Y} = \hat{b}_0 + \hat{b}_1X
+					\end{aligned}
+					- o ^ indica que os coeficientes são estimativas
+					- O resíduo é calculado por 
+					\begin{aligned}
+					\hat{e}_i = Y_i - \hat{Y}_i
+					\end{aligned}
+				</section>
+				<section data-markdown="">
+					## Quadrados mínimos
+					- Quão bom é o modelo para o nosso dado?
+					- Quando a relação é clara, conseguimos ver a linha formada
+					- Na prática, a linha de regressão é a linha que miniminiza a soma dos quadrados dos resíduos (RSS - residual sum of squares)
+					\begin{aligned}
+					RSS = \sum{ (Y_i - \hat{Y}_i)^2}
+					\end{aligned}
+					- É computacionalmente eficiente
+					- Não é robusto
+				</section>
+				<section data-markdown="">
+					## Regressão Linear Múltipla
+					- Quando temos multiplos preditores, a equação pode ser estendida para acomodar todos eles
+					\begin{aligned}
+					Y = b_0 + b_1X_1 + b_2X_2 + ... + b_pX_p + e
+					\end{aligned}
+					- Ao invés de uma linha temos um modelo linear, a relação entre cada coeficiente e sua variável é linear
+					- Todos os outros conceitos como quadrado mínimo, valores ajustados e resíduo também são considerados
+				</section>
+			<section > <pre><code>house <- read.csv('E:\\Desktop\\Estatistica II\\house_sales.csv')
+
+head(house[, c("AdjSalePrice", "SqFtTotLiving", "SqFtLot", "Bathrooms", 
+	"Bedrooms", "BldgGrade")])
+ 
+house_lm <- lm(AdjSalePrice ~ SqFtTotLiving + 
+	SqFtLot + Bathrooms +   Bedrooms + BldgGrade,  
+	data=house, na.action=na.omit)
+ # na.omit ignora registros faltando
+house_lm # cada finished square aumenta em $229
+			</code></pre>
+			</section>
+			<section data-markdown="">
+				## Avaliando o modelo
+				- Do ponto de vista do data science a métrica de performance mais importante é o desvio padrão empírico ou 
+				raiz quadrada do erro quadrático médio do inglês _root mean squared error_ ou RMSE
+				\begin{aligned}
+				RMSE = \sqrt{\frac{\sum{(y_i - \hat{y}_i)^2}}{n}}
+				\end{aligned}
+			</section>
+			<section data-markdown="">
+				## Avaliando o modelo
+				- Também temos o RSE (residual standard error) com p preditores
+				\begin{aligned}
+				RSE = \sqrt{\frac{\sum{(y_i - \hat{y}_i)^2}}{n-p-1}}
+				\end{aligned}
+				- A única diferença é que o RSE leva em conta os graus de liberdade, para dados grandes a diferença entre os dois é pequena
+				- `summary(house_lm)`
+			</section>
+			<section data-markdown="">
+				## Avaliando o modelo
+				- Outra métrica usada é o coeficiente de determinação ou R-squarred R²
+				- Ela retorna valores entre 0 e 1 e mede a proporção de variação dos dados que são levados em conta no modelo
+				\begin{aligned}
+				R^2 = 1- \frac{\sum{(y_i - \hat{y}_i)^2}}{\sum{(y_i-\bar{y}_i)^2}}
+				\end{aligned}
+				- Mostra o quão bem o modelo é ajustado aos dados
+				- Outras estatísticas são t-statistic e valor-p, O valor p quanto menor melhor, já o t quanto maior melhor
+			</section>
+			<section >
+				<h2>Validação Cruzada</h2>
+				<ul>
+					<li>Treinamento in-sample, separar base de treino e base de teste. Normalmente 15-20% para teste</li>
+				</ul>
+				<pre><code>indice_teste <- sample(nrow(LungDisease),nrow(LungDisease)*0.2)
+teste <- LungDisease[indice_teste,]
+treino <- LungDisease[-indice_teste,]
+				</code></pre>
+			</section>
+			
+			<section data-markdown>
+				## Extrapolação
+				![Xkcd Extrapolação](https://imgs.xkcd.com/comics/extrapolating.png)
+				- _Disponível em: https://xkcd.com/605/_
+			</section>
+			<section data-markdown="">
+				## Valores categóricos na Regressão 
+				- A regressão exige que os valores sejam numéricos
+				- O que fazer com as variáveis categóricas?
+					- Exemplo de categoria: motivo de empréstimo
+				- A forma mais comum é utilizar as variáveis dummy
+			</section>
+			<section data-markdown="">
+				## Variáveis dummy
+				- `head(house[,"PropertyType"])`
+				- `levels(house[,"PropertyType"])`
+				- Para usar essas variáveis temos que converter elas para variáveis binárias
+				- `prop_type_dummies &lt;- model.matrix(~PropertyType -1, data=house)`
+				- `head(prop_type_dummies)`
+				- Esse tipo de divisão é chamado de _one hot encoder_ ou codificador quente
+			</section><section data-markdown="">
+				## Valores categóricos na Regressão 
+				- A regressão exige que os valores sejam numéricos
+				- O que fazer com as variáveis categóricas?
+					- Exemplo de categoria: motivo de empréstimo
+				- A forma mais comum é utilizar as variáveis dummy
+			</section>
+			<section data-markdown="">
+				## Variáveis dummy
+				- `head(house[,"PropertyType"])`
+				- `levels(house[,"PropertyType"])`
+				- Para usar essas variáveis temos que converter elas para variáveis binárias
+				- `prop_type_dummies &lt;- model.matrix(~PropertyType -1, data=house)`
+				- `head(prop_type_dummies)`
+				- Esse tipo de divisão é chamado de _one hot encoder_ ou codificador quente
+			</section>
+			<section data-markdown="">
+				## Fatores com muitos leveis
+				- Algumas variáveis podem gerar um grande número de dummies binários
+				- No caso das casas, existem 82 zip codes
+				- `table(house$ZipCode)`
+				- Seriam 81 novos coeficientes, sendo que só tínhamos 5!
+				- Alguns zip code tem apenas 1 venda, o que é problemático
+				- Mas não podemos desconsiderar essa variável! _location location location_
+				- Os primeiros 03 dígitos indicam região submetropolitana, mas 983 tem poucas vendas
+			</section>
+			<section data-markdown="">
+				## Fatores com muitos leveis
+				- O resíduo da média é calculado para cada zipcode e a função ntile separa os códigos em grupos de 5
+				- O conceito de usar resíduos para ajudar no ajuste da regressão é fundamental no processo de modelagem
+			</section>
+			<section data-markdown="">
+				## Categorias ordenadas
+				- Algumas categorias podem ser ordenadas, assim, usar a condição de decodificação perderia informação
+				- Uma nota pode ser boa, média, ruim ...
+				- [Ordered Factors](https://www.dummies.com/programming/r/how-to-work-with-ordered-factors-in-r/)
+			</section>
+			<section data-markdown>
+				## Ajustes em Regressão
+				- _Regressão Ponderada_: Observações com precisão diferente, importância diferente a grupos, dar mais importância a dados recentes. Parâmetro weight
+				- _Interações_: Nem sempre os preditores são independentes, a forma como o preço varia pode depender do cep
+			</section> 
+			<section>
+				<h2>Exemplo Interação</h2>
+				<pre><code>library(dplyr)
+table(house$ZipCode)
+zip_groups <- house %>%
+	mutate(resid = residuals(house_lm)) %>%
+	group_by(ZipCode) %>%
+	summarize(med_resid = median(resid),
+			cnt = n()) %>%
+	# sort the zip codes by the median residual
+	arrange(med_resid) %>%
+	mutate(cum_cnt = cumsum(cnt),
+			ZipGroup = factor(ntile(cum_cnt, 5)))
+house <- house %>%
+	left_join(select(zip_groups, ZipCode, ZipGroup), by='ZipCode')
+house_iter <- lm(AdjSalePrice ~ SqFtTotLiving*ZipGroup + SqFtLot +
+	Bathrooms + Bedrooms + BldgGrade + PropertyType, data=house, na.action=na.omit)
+				</code></pre>
+			</section>
+
+			<section data-markdown="">
+				## Preditores correlacionados
+				- Os preditores costumam ser correlacionados
+				- Se olharmos os coeficientes do veremos que o coeficiente de quarto é negativo! HOW!?!?!
+				- Adicionar um quarto à casa reduz seu preço?????
+				- Casas grandes tendem a ter mais quartos, e é o tamanho que eleva o preço da casa
+				- Em duas casa de mesmo tamanho, a que tiver mais quartos terá quartos menores
+				- Preditores correlacionados podem dificultar a interpretação do valor de cada coeficiente
+				- As variáveis para quartos, tamanho da casa e número de banheiros estão correlacionadas
+			</section>
+			<section data-markdown="">
+				## Multicolinearidade
+				- Um caso extremo de variáveis correlacionadas é a multicolinearidade , uma condição onde há redundância
+				entre as variáveis preditoras
+				- Multicolinearidade perfeita é quando uma variável preditora pode ser descrita como uma regressão linear das outras
+				- Multicolinearidade pode acontecer quando:
+					- Uma variável é incluída múltiplas vezes por erro
+					- São usadas P dummies
+					- Duas variáveis são quase perfeitamente correlacionadas
+			</section>
+			<section data-markdown="">
+				## Multicolinearidade
+				- Multicolinearidade deve ser tratada em regressões! Removendo as variáveis correlacionadas
+				- Não é um problema em outros tipos de métodos como arvores, clustering ou vizinhos mais próximos
+			</section>
+			<section data-markdown="">
+				## Variável de Confusão ou Confundimento
+				- Com variáveis correlacionadas o problema é adicionar muitas variáveis com relação similar a previsão
+				- No confundimento o problema é a omissão, alguma variável importante não foi adicionada na regressão
+				- Se adicionarmos ZipGroup a regressão agora teremos Bathroom e SqFtLot positivos
+				- O coeficiente do Zip também é alto, podendo adicionar até $340,000
+				- [Explicação sobre Variável de Confusão](https://www.statisticshowto.datasciencecentral.com/experimental-design/confounding-variable/)
+			</section>
+			<section data-markdown="">
+				## Polinomial
+				\begin{aligned}
+				Y = b_0 + b_1X +b_2X^2 + e
+				\end{aligned}
+				- `lm(AdjSalePrice ~ poly(SqFtTotLiving, 2) + SqFtLot +	BldgGrade + Bathrooms +  Bedrooms, 	data=house_98105) `
+			</section>
+			<section>
+		<pre><code>
+house_98105 <- house[house$ZipCode == 98105,]
+lm_poly &lt;- lm(AdjSalePrice ~  poly(SqFtTotLiving, 2) + SqFtLot + 
+	BldgGrade +  Bathrooms +  Bedrooms,
+	data=house_98105)
+terms &lt;- predict(lm_poly, type='terms')
+partial_resid &lt;- resid(lm_poly) + terms
+
+df &lt;- data.frame(SqFtTotLiving = house_98105[, 'SqFtTotLiving'],
+				Terms = terms[, 1],
+				PartialResid = partial_resid[, 1])
+ggplot(df, aes(SqFtTotLiving, PartialResid)) +
+	geom_point(shape=1) + scale_shape(solid = FALSE) +
+	geom_smooth(linetype=2) + 
+	geom_line(aes(SqFtTotLiving, Terms))+
+	theme_bw()
+		</code></pre>
+			</section>
+			<section data-markdown="">
+				## Spline?
+				- As regressões polinomiais só conseguem atingir uma certa quantidade de curvatura
+				- Simplesmente aumentar a ordem do polinômio não é a melhor forma
+				- Spline permite interpolar entre dois valores fixos
+				- A definição técnica de spline é uma série de polinômios contínuos
+				- Os polinômios são conectados a uma série de pontos fixos chamados de nós
+				- Contrário das outras regressões, os coeficientes são de difícil entendimento, sendo melhor ver o gráfico
+			</section>
+			<section data-markdown="">
+				![Exemplo Spline Real](img\Modulo1Spline.jpg)
+			</section>
+
+			<section data-markdown>
+				![Imagem Overfitting XKCD](https://imgs.xkcd.com/comics/curve_fitting.png)
+			</section>
+			<section data-markdown="">
+				## Modelo Aditivo Generalizado
+				- Do Ingles _Generalized Additive Models_
+				- Suponha que você suspeite que a relação entre a resposta de uma variável preditora é não linear
+				- Polinômios podem não ser flexíveis o suficiente e splines requerem que você especifique os nós
+				- GAM é uma técnica para automaticamente ajustar um spline a regressão
+				- A biblioteca mgcv permite fazer isso usando o s
+			</section>
+			<section>
+	<pre><code>
+library(mgcv)
+lm_gam &lt;- gam(AdjSalePrice ~ s(SqFtTotLiving) + SqFtLot +  Bathrooms +  Bedrooms + BldgGrade, 
+				data=house_98105)
+terms &lt;- predict.gam(lm_gam, type='terms')
+partial_resid &lt;- resid(lm_gam) + terms
+
+df &lt;- data.frame(SqFtTotLiving = house_98105[, 'SqFtTotLiving'],
+	Terms = terms[, 5], PartialResid = partial_resid[, 5])
+ggplot(df, aes(SqFtTotLiving, PartialResid)) +
+	geom_point(shape=1) + scale_shape(solid = FALSE) +
+	geom_smooth(linetype=2) + 
+	geom_line(aes(SqFtTotLiving, Terms))  +
+	theme_bw()
+	</code></pre>
+			</section>
+			</div>
+
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
