@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatística para Data Science II</title>
+    <meta name="author" content="Fernando Antonio Marques Filho">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/misc.css">
+    <link rel="stylesheet" href="../css/theme/white.css" id="theme">
+    <link rel="stylesheet" href="../lib/css/zenburn.css">
+    
+    <link rel="stylesheet" href="./capa_pos/template_pos.css">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <body>
+        <img class="logo" src="capa_pos/logo_vertical.png">
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background-image="capa_pos/capa_topico_2.png">
+				</section>
+                <section data-markdown>
+                ## O que veremos?
+                - O que é um classificador?
+                - Teorema de Bayes e Naive Bayes
+                - Regressão Logística
+                - Acurácia
+                - Problema da Classe Rara
+                - Matriz de Confusão e Métricas 
+				</section>
+                <section data-markdown="">
+                    ## Classificação
+                    - Muitas vezes queremos responder há algumas perguntas de forma automática
+                        - É span? O usuário vai clicar no anúncio?
+                    - A Classificação pode ou então categórica
+                    - No gmail, um email pode ser primary, social, promotional, fórum...
+                    - Porém, muitas vezes queremos mais que uma resposta binária, qual a probabilidade de ser verdadeiro ou falso?
+                </section>
+                <section data-markdown="">
+                    ## Classificação
+                    - Ao invés de retornar um valor binário, a maioria dos algoritmos retornam uma pontuação
+                    - É escolhido um limite, se o valor estiver acima do limite, é considerado dentro da categoria
+                </section>
+                <section data-markdown="">
+                    ## Probabilidade Condicional
+                    - Probabilidade de observar um evento B dado que um outro evento A já aconteceu
+                    \begin{aligned}
+                    P(B|A)
+                    \end{aligned}
+                    - Quem comprou A também comprou B
+                    - P(A,B) é a probabilidade de A e B acontecerem
+                    \begin{aligned}
+                    P(B|A) = \frac{P(A,B)} {P(A)}
+                    \end{aligned}
+                    - Então, a probabilidade de comprar B já que comprou A é
+                    a probabilidade dos dois acontecerem dividido pela probabilidade de A
+                </section>
+                <section data-markdown="">
+                    ## Probabilidade Condicional
+                    - Foi passado um teste para os alunos
+                    - 60% passou nos dois testes (P(A,B))
+                    - Como o primeiro teste foi mais fácil, 80% passou nele (P(A))
+                    - Qual porcentagem que passou no primeiro também passou segundo teste?
+                    \begin{aligned}
+                    P(B|A) = \frac{P(A,B)} {P(A)} = \frac{0.6}{0.8} = 0.75
+                    \end{aligned}
+                    - Se A e B fossem independentes, P(B|A) seria próximo de P(B)
+                    - Por que não são independentes nesse caso?
+                </section>
+                <section data-markdown="">
+                    ## Teorema de Bayes
+                    \begin{aligned}
+                    P(A|B) = \frac{P(A)P(B|A)} {P(B)} 
+                    \end{aligned}
+                    - A probabilidade de algo que depende de B, depende das probabilidades básicas de A e B
+                    - A probabilidade de detectar um usuário de drogas (P(A)) é alto, mas não necessáriamente significa que a chance de ser usuário de drogas é alto já que o teste deu positivo P(A|B)
+                </section>
+                <section data-markdown="">
+                    ## Teorema de Bayes
+                    - Testes de drogas com acurácia boa podem gerar mais falsos positivos que verdadeiros positivos
+                    - Um teste de droga identifica um usuário com 99% de chance P(B|A). Ou seja, se é usuário, 99% chance de positivo
+                    - E tem 99% de chance de dar negativo com não usuários. Ou seja
+                    - Mas apenas 0.3% da população usa a droga P(A)
+                    \begin{aligned}
+                    P(A|B) = \frac{P(A)P(B|A)} {P(B)} =  \frac{0.003*0.99} {P(0.013)}
+                    \end{aligned}
+                </section>
+                <section data-markdown="">
+                    ## Teorema de Bayes
+                    - A &rarr; é usuário da droga
+                    - B &rarr; a droga deu positiva
+                    - P(B) = Verdadeiro positivo x usuarios + falso positivo x não usuários
+                    - P(B) = 0.99x0.003 + 0.01 x 0.997 = 0.013 
+                    - P(B) é a probabilidade de positivo se usa e positivo se não usa
+                    \begin{aligned}
+                    P(A|B) = \frac{P(A)P(B|A)} {P(B)} =  \frac{0.003*0.99} {P(0.013)} = 0.228
+                    \end{aligned}
+                    - A probabilidade de ser usuário é de _apenas_ 22.8%!
+                </section>
+                <section data-markdown>
+                    ## Teorema de Bayes
+                    > O importante aqui é perceber que, quando a população observada é muito menor, uma acurácia de 99%
+                    pode não se mostrar suficiente
+                    - [Falácia do Promotor](https://pt.wikipedia.org/wiki/Fal%C3%A1cia_do_promotor)
+                </section>
+                <section data-markdown="">
+                    ## Naive Bayes
+                    - O algoritmo Naive Bayes usa a probabilidade de observar valores preditores, dado um resultado, para estimar a probabilidade de observar resultados Y = i, dado um conjunto de valores preditores
+                </section>
+                <section data-markdown="">
+                    ## Non-naive Bayes
+                    - Para comparar, imagine esse classificador não ingênuo
+                        1. Encontre todos os registros com o mesmo perfil de preditores (iguais)
+                        1. Determine a qual classe eles pertencem e qual classe é mais provável
+                        1. Atribua a classe ao novo registro
+                    - Só funciona se encontrar perfis iguais
+                    - Vai ser difícil encontrar registros com os mesmo valores se tivermos alguns preditores
+                    - Uma casa, reformada ano passado, com 3 quartos e dois banheiros, de frente para o mar...
+                </section>
+                <section data-markdown="">
+                    ## Naive Bayes
+                    - Não olhamos apenas para registros iguais ao que será previsto
+                        1. Para uma resposta binária Y = i, estimar a probabilidade de cada preditor P(X|Y=i), feita usando proporção na <base href="">
+                        1. Multiplica as probabilidades e multiplicar a proporção de valores Y = i
+                        1. Repita 1 e 2 para todas as classes
+                        1. Estimar a probabilidade de i, pegando o valor do passo 2 e dividido pela soma dos valores para todas as classes
+                        1. Usar a classe com maior probabilidade
+                </section>
+                <section data-markdown="">
+                    ## Naive Bayes
+                    \begin{aligned}
+                    P(X_1,X_2,...,X_p) = P(Y=0)(P(X_1|Y=0)P(X_2|Y=0)
+                    \end{aligned}
+                    \begin{aligned}
+                    ...P(X_p|Y=0)) + P(Y=1)...
+                    \end{aligned}
+                    - É considerado ingênuo pois estamos considerando que as variáveis preditoras são independentes
+                </section>
+                <section >
+        <pre><code class="R">
+loan_data &lt;- read.csv('loan_data.csv')
+loan_data$outcome &lt;- ordered(loan_data$outcome, levels=c('paid off', 'default'))
+    
+library(klaR)
+naive_model &lt;- NaiveBayes(outcome ~ purpose_ + home_ + emp_len_, 
+                            data = na.omit(loan_data))
+naive_model$table
+        
+        </code></pre>
+        <p>Os resultados são as probabilidades P(Xj|Y=i)</p>
+        <p>Observem que precisamos indicar que a variável categórica é ordenada, o target (objetivo) costuma ser 1</p>
+                </section>
+        <section >
+        <pre><code class="R">
+new_loan &lt;- loan_data[147, c('purpose_', 'home_', 'emp_len_')]
+row.names(new_loan) &lt;- NULL
+new_loan
+
+predict(naive_model, new_loan)
+
+        </code></pre>
+        <p>Também mostra a probabilidade</p>
+        <p>Esse classificador conhecidamente gera estimativas enviesadas, mas quando o objetivo
+            é ordenar os registros pela probabilidade de Y=1 ele gera bons resultados
+        </p>
+                </section>
+      
+                <section data-markdown="">
+                    ## Preditores numéricos
+                    - Pela definição do classificado bayesiano ele só aceita preditores categóricos
+                    - Existem duas soluções para aplicar esse classificador com preditores numéricos
+                        1. Agrupar valores numéricos em preditores categóricos, como fizemos com ZipCode
+                        1. Usar um modelo de probabilidade, como a distribuição normal, para estimar P(Xj|Y=i)
+                </section>
+                <section data-markdown="">
+                    - Naive Bayes funciona bem com preditores categóricos
+                    - Responde a pergunta "Dentre as categorias de resultado, quais categorias de preditores são mais prováveis"
+                    - A informação é invertida para estimar a probabilidade de uma categoria resultado, dado os valores do preditor
+                    - Um exemplo muito comum para `Naive Bayes` é sugestão de produtos ou filmes
+                </section>
+                <section data-markdown="">
+                    ##	Regressão Logística
+                    - É análoga a múltiplas regressões lineares, mas o resultado é binário
+                    - É um procedimento estruturado, não sendo centrado em dados como KNN e Naive Bayes
+                    - É muito rápido e por isso sua popularidade
+                    - `Logit` é a função que mapeia a probabilidade de pertencer a uma classe com alcance de 	&plusmn;&infin;
+                    - Costuma dar bons resultados
+                </section>
+                <section data-markdown="">
+                    ##	Regressão Logística
+                    - A regressão logística funciona utilizando a logística de resposta e o _Logit_
+                    - Eles mapeiam uma probabilidade de 0-1 para uma escala que seja mais adequada para a regressão linear
+                    - Vimos a regressão no formato
+                    \begin{aligned}
+                    p = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_qx_q 
+                    \end{aligned}
+                </section>
+                <section data-markdown="">
+                    ##	Regressão Logística
+                    - Mas ajustar a esse modelo não garante que o resultado esteja entre 0 e 1
+                    - Por isso usamos a função logística
+                    \begin{aligned}
+                    p = \frac{1}{1 + e^{-(\beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_qx_q)}}
+                    \end{aligned}
+                    - Essa transformação garante que p esteja entre 0 e 1
+                    - O resultado é Chance e não probabilidade
+                </section>
+                <section data-markdown="">
+                    ![Função Logística](img/Modulo3FuncaoLogistica.png)
+                    - Exemplo da função logit
+                </section>
+                <section>
+                    <pre><code class="R">
+library(mgcv)
+logistic_gam &lt;- gam(outcome ~ s(payment_inc_ratio) + purpose_ + 
+    home_ + emp_len_ + s(borrower_score),
+    data=loan_data, family='binomial')
+terms &lt;- predict(logistic_gam, type='terms')
+partial_resid &lt;- resid(logistic_gam) + terms
+df &lt;- data.frame(payment_inc_ratio = loan_data[, 'payment_inc_ratio'],
+                terms = terms[, 's(payment_inc_ratio)'],
+                partial_resid = partial_resid[, 's(payment_inc_ratio)'])
+
+ggplot(df, aes(x=payment_inc_ratio, y=partial_resid, solid = FALSE)) +
+geom_point(shape=46, alpha=.4) +
+geom_line(aes(x=payment_inc_ratio, y=terms), 
+    color='red', alpha=.5, size=1.5) +
+    labs(y='Partial Residual') +
+    xlim(0, 25) +
+    theme_bw()
+# Valores em cima correspondem a 1 e o outro a 0
+                    </code>
+                    </pre>
+                </section>
+                <section data-markdown="">
+                    - Logística é parecida com Linear, mas o resultado é binário
+                    - Algumas transformações são necessárias
+                    - É popular por ser rápido e gerar um modelo que pode ser pontuado a novos dados sem recalcular
+                </section>
+                <section data-markdown>
+                    ## Outros modelos
+                    - Existem diversos outros algoritmos que fazem classificação
+                    - Árvores, Florestas Aleatórias e Boosting (veremos esses)
+                    - KNN, não tem resultado tão bom mas é interessante e pode ser usado
+                    como feature (tipo o que fizemos no zipcode)
+                    - Kmeans
+                    - Redes Neurais e etc
+                </section>
+                <section data-markdown="">
+                    ## Avaliando modelos de Classificação
+                    - Uma forma simples é contar a proporção de predições corretas
+                    <br>
+                    \begin{aligned}
+                    acurácia = \frac{\sum{Verdadeiro Positivo} + \sum{Verdadeiro Negativo}}{Tamanho Amostra}
+                    \end{aligned}
+                </section>
+                <section data-markdown="">
+                    ## Matriz de Confusão 
+                    ![Matriz de Confusão](./img/Modulo3MatrizConfusão.png)
+                </section>
+                <section data-markdown="">
+                    ## Problema de classes raras
+                    - Muitas vezes existe um desequilíbrio com uma classe sendo mais prevalente que outras
+                    - A classe rara costuma ser a classe de interesse, geralmente o 1
+                    - Classificar errôneamente um 1 como 0, costuma ser pior que um 0 como 1
+                    - Se uma fraude for identificada errôneamente, é feita uma análise manual para verificar
+                    - Se o evento raro ocorre com 0.1% de chance, um modelo que sempre responde 0 tem precisão de 99.9%,
+                    __isso é bom!?__
+                </section>
+                <section data-markdown="">
+                    ## Precision, Recall e Specificity
+                    \begin{aligned}
+                    precision = \frac{\sum{Verdadeiro Positivo}}{\sum{Verdadeiro Positivo} + \sum{Falso Positivo}}
+                    \end{aligned}
+                    <br>
+                    - Mede a acurácia de predizer um resultado positivo
+                    <br>
+                    \begin{aligned}
+                    recall = \frac{\sum{Verdadeiro Positivo}}{\sum{Verdadeiro Positivo} + \sum{Falso Negativo}}
+                    \end{aligned}
+                    <br>
+                    - Recall ou sensitividade (usado, também, em biomedicina) mostra a força do modelo de medir corretamente os resultados
+                    positivos
+                </section>
+                <section data-markdown="">
+                    ## Precision, Recall e Specificity
+                    \begin{aligned}
+                    specificity = \frac{\sum{Verdadeiro Negativo}}{\sum{Verdadeiro Negativo} + \sum{Falso Positivo}}
+                    \end{aligned}
+                    - Probabilidade do modelo de predizer um resultado negativo
+                </section>
+
+            </div>
+        </div>
+    </body>
+    <script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script src="../js/base.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+</head>
+<body>
+    
+</body>
+</html>
