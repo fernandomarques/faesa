@@ -20,33 +20,9 @@
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="../lib/css/zenburn.css">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-
-		<style>
-			@font-face {	
-			font-family: 'Varela';
-			src:  url('./capa_pos/VarelaRound-Regular.ttf') format('truetype'),
-			}
-
-			img {
-				border : 0px !important;
-			}
-			h2, h3 {
-				font-family: Arial !important;
-				color: #17365d !important;
-				font-weight: bold !important;
-				text-transform: capitalize !important;
-			}
-			p, li{
-				font-family: Arial !important;
-				color: #1f497d !important;
-				font-weight: bold !important;
-			}
-			.logo {
-				position: absolute;
-				left: 0px;
-				height: 100%;
-			}
-		</style>
+		
+		<link rel="stylesheet" href="./capa_pos/template_pos.css">
+		
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -209,15 +185,7 @@ treino <- LungDisease[-indice_teste,]
 					- Exemplo de categoria: motivo de empréstimo
 				- A forma mais comum é utilizar as variáveis dummy
 			</section>
-			<section data-markdown="">
-				## Variáveis dummy
-				- `head(house[,"PropertyType"])`
-				- `levels(house[,"PropertyType"])`
-				- Para usar essas variáveis temos que converter elas para variáveis binárias
-				- `prop_type_dummies &lt;- model.matrix(~PropertyType -1, data=house)`
-				- `head(prop_type_dummies)`
-				- Esse tipo de divisão é chamado de _one hot encoder_ ou codificador quente
-			</section><section data-markdown="">
+		<section data-markdown="">
 				## Valores categóricos na Regressão 
 				- A regressão exige que os valores sejam numéricos
 				- O que fazer com as variáveis categóricas?
@@ -365,12 +333,12 @@ ggplot(df, aes(SqFtTotLiving, PartialResid)) +
 			<section>
 	<pre><code>
 library(mgcv)
-lm_gam &lt;- gam(AdjSalePrice ~ s(SqFtTotLiving) + SqFtLot +  Bathrooms +  Bedrooms + BldgGrade, 
+lm_gam <- gam(AdjSalePrice ~ s(SqFtTotLiving) + SqFtLot +  Bathrooms +  Bedrooms + BldgGrade, 
 				data=house_98105)
-terms &lt;- predict.gam(lm_gam, type='terms')
-partial_resid &lt;- resid(lm_gam) + terms
+terms <- predict.gam(lm_gam, type='terms')
+partial_resid <- resid(lm_gam) + terms
 
-df &lt;- data.frame(SqFtTotLiving = house_98105[, 'SqFtTotLiving'],
+df <- data.frame(SqFtTotLiving = house_98105[, 'SqFtTotLiving'],
 	Terms = terms[, 5], PartialResid = partial_resid[, 5])
 ggplot(df, aes(SqFtTotLiving, PartialResid)) +
 	geom_point(shape=1) + scale_shape(solid = FALSE) +

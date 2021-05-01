@@ -1,0 +1,23 @@
+@font-face {	
+    font-family: 'Varela';
+    src:  url('./capa_pos/VarelaRound-Regular.ttf') format('truetype'),
+    }
+    img {
+        border : 0px !important;
+    }
+    h2, h3 {
+        font-family: Arial !important;
+        color: #17365d !important;
+        font-weight: bold !important;
+        text-transform: capitalize !important;
+    }
+    p, li{
+        font-family: Arial !important;
+        color: #1f497d !important;
+        font-weight: bold !important;
+    }
+    .logo {
+        position: absolute;
+        left: 0px;
+        height: 100%;
+    }
