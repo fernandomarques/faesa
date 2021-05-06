@@ -56,11 +56,11 @@
 							for verdadeira</b> </li>
 					<li class="fragment">A condição é avaliada antes de o comando ser executado</li>
 					<li class="fragment">
-						<pre><code class="JAVA">
-while(condicao){
-	comando1;
-	comando2;
-}</code></pre>
+						<pre><code class="python">
+while condicao:
+	comando1
+	comando2
+</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -79,12 +79,11 @@ while(condicao){
 					<li class="fragment">Como acumuladores são muito comum existem operadores aritméticos de atribuição
 					</li>
 					<li class="fragment">
-						<pre><code class="Java">
-	int a,b;
-	a = 2;
-	a +=2; // a = a + 2
-	b=0;
-	b++;  // b = b + 1
+						<pre><code class="Python">
+	a = 2
+	a +=2 # a = a + 2
+	b=0
+	b++  # b = b + 1 # NAO FUNCIONA EM PYTHON
 							</code></pre>
 					</li>
 				</ul>
@@ -92,8 +91,8 @@ while(condicao){
 			<section data-markdown>
 				## Contadores
 				- Sempre são do tipo __inteiro__!
-				- Devem ser __inicializados__ antes de usar `int cont = 0`
-				- A operação mais comum é `cont++`
+				- Devem ser __inicializados__ antes de usar `cont = 0`
+				- A operação mais comum é `cont++` ou `cont+=1`
 				- Normalmente são colocados dentro do loop
 			</section>
 			<section data-markdown>
@@ -116,7 +115,7 @@ while(condicao){
 			<section>
 				<h3>Repetição com terminação forçada</h3>
 				<ul>
-					<li class="fragment">Quando usamos <b>while(true){...}</b> criamos uma repetição infinita</li>
+					<li class="fragment">Quando usamos <b>while true: ...</b> criamos uma repetição infinita</li>
 					<li class="fragment">Para forçar o término dessa execução podemos usar o comando <b>break</b></li>
 					<li class="fragment">Não é convencional utilizar e deve-se ter cuidado ao usar</li>
 					<li class="fragment">Dada uma sequencia de números positivos informe o total a ser pago. Quando for
@@ -129,12 +128,19 @@ while(condicao){
 					<li class="fragment">Com pós-condição podemos executar um ou vários comandos. </li>
 					<li class="fragment">É usada quando devemos executar ao menos uma vez</li>
 					<li class="fragment">
-						<pre><code class="Java">
+						<pre><code class="Java">// Java
 do{
 	comando1;
 	comando2;
-} while(condicao);
-							}</code></pre>
+} while(condicao);</code></pre>
+					</li>
+					<li class="fragment">
+						<pre><code class="Python"># Python
+while True:
+	comando1
+	comando2
+	if condicao:
+		break</code></pre>
 					</li>
 				</ul>
 			</section>
