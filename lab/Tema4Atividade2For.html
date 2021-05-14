@@ -61,7 +61,7 @@
 			</section>
 		
 			<section>
-				<h3>Exemplo For</h3>
+				<h3>Exemplo For (java)</h3>
 				<pre><code class="JAVA">
 {
 	int i;
@@ -76,6 +76,15 @@
 				<img style="border:0px" src="../img/FluxogramaFOR.svg" alt="">
 			</section>
 			<section>
+				<pre><code class="python">
+help(range)
+print(list(range(10)))
+print(list(range(10,0,-1)))
+for i in range(10):
+	print i
+				</code></pre>
+			</section>
+			<section>
 				<h3>Exercício</h3>
 				<ol>
 					<li class="fragment">Façam um código que conte de 1 até 6 imprimindo na tela</li>
@@ -84,30 +93,21 @@
 			</section>
 			<section>
 				<h3>Laços for aninhados</h3>
-				<pre><code class="JAVA">
-{
-	int i,j;
-	for(i=0; i < 10 ; i ++){
-		for(j = 9; j >= 0 ; j--)
-		System.out.println(i + " " +j);
-	}
-}
-											</code></pre>
+				<pre><code class="python">
+for i in range(10):
+	for j in range(9,0,-1):
+		print(i,j)
+</code></pre>
 			</section>
 			<section>
 				<h3>Exemplo Cronometro</h3>
-				<pre><code class="JAVA">
-int i,j;
-for(i=59; i >= 0 ; i--){
-	for(j = 59; j >= 0 ; j--){
-	System.out.printf("\r%02d:%02d" ,i, j);
-		try {
-			Thread.sleep(100);    
-		} catch (Exception e) {
-			//TODO: handle exception
-		}
-	}
-}
+				<pre><code class="python">
+from os import sleep
+for i in range(59,-1,-1):
+	for j in range(59,-1,-1):
+		print(f'{i:02d}:{j:02d}')
+		sleep(1)
+
 																</code></pre>
 			</section>
 			<section>
