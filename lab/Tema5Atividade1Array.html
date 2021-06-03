@@ -42,7 +42,7 @@
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>
-				<h3>Array ou Vetores</h3>
+				<h3>Array, Vetores ou Listas</h3>
 				<img src="../img/Vetores.png" alt="">
 				<p>
 					<small>Created by Fernando Marques </small>
@@ -78,9 +78,8 @@
 				<li class="fragment">Para dizer que uma variável é um vetor devemos colocar o sufixo [n], onde n é seu
 					tamanho</li>
 				<li class="fragment">
-					<pre><code class="JAVA">
-int[] valores = new int[3];
-float[] precos = new float[3];					</code></pre>
+					<pre><code class="python">valores = [1,2,3]
+precos = [13.2,45.3,199]</code></pre>
 				</li>
 			</ul>
 		</section>
@@ -89,7 +88,7 @@ float[] precos = new float[3];					</code></pre>
 			<img src="../img/VetorLength.gif" alt="">
 			<ul>
 				<li class="fragment">Depois de declarar o vetor, podemos acessar seus elementos</li>
-				<li class="fragment">Para atribuir o valor 10 ao 21º elemento: notas[20]= 10;</li>
+				<li class="fragment">Para atribuir o valor 10 ao 21º elemento: notas[20]= 10</li>
 				<li class="fragment"><b>O índice do primeiro elemento é o 0</b></li>
 				<li class="fragment">
 					<font color="red">Se tentar acessar um índice maior que o tamanho do vetor teremos um erro!</font>
@@ -98,31 +97,35 @@ float[] precos = new float[3];					</code></pre>
 		</section>
 		<section>
 			<h3>Inicializar vetor</h3>
-			<pre><code class="JAVA">
-{
-int notas[] = { 1,2,3};
-// ou
-int notas[] = new int[] { 1,2,3};
-}
+			<pre><code class="python">
+notas = []
+# ou
+notas = list()
 			  </code></pre>
 		</section>
 		<section>
-			<h3>Acessando elementos do vetor com for</h3>
+			<h3>Acessando elementos do vetor com for (JAVA)</h3>
 			<pre><code class="JAVA">
 {
 	int i;
 	int v[] = new int[10];
 	for(i=0; i &lt; v.length; i++){
-		v[i];
 		System.out.println(i);
 	}
 }
 			</code></pre>
 		</section>
+		<section>
+			<h3>Acessando elementos do vetor com for (python)</h3>
+			<pre><code class="python">
+for nota in notas:
+	print(nota)
+			</code></pre>
+		</section>
 		<section data-markdown>
 			## Vamos resolver 
 			1. Criar um vetor de tamanho 10
-			1. Ler valores e armazenar no vetores
+			1. Ler valores e armazenar no vetores (função append)
 			1. Imprimir os elementos do vetor
 			1. Encontrar o maior elemento do vetor
 		</section>
@@ -131,7 +134,7 @@ int notas[] = new int[] { 1,2,3};
 			1. Crie um vetor de tamanho 10
 			1. Preencha o vetor com valores aleatórios
 			1. Calcule a média e a soma do vetor
-			1. Encontre o maior e menor valor do vetor
+			1. Encontre o maior e menor valor do vetor (sem usar min e max!)
 		</section>
 	</div>
 	</div>
