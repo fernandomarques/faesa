@@ -50,12 +50,12 @@ Acima de 4664,68 | 27,5% | R$ 869,36
 9. Vamos fazer um sistema de ingressos de Cinema. Pergunte a idade até que a pessoa digite 0 para sair. Se a pessoa tiver menos que 10 anos ou mais que 60 informe "Meia Entrada" se não, informe "Inteira". Ao terminar imprima: "Total de x ingressos vendidos, sendo y meia entrada" 
 
 
-10.Vamos fazer um menu de caixa eletrônico, executando em loop até que o usuário peça para sair. Suponha que o saldo inicial seja R$1000. O usuário deverá digitar qual item do menu para prossegir.
-Imprima: """
-1 - Ver saldo
-2 - Sacar dinheiro
-3 - Depositar dinheiro
-4 - Sair
+10. Vamos fazer um menu de caixa eletrônico, executando em loop até que o usuário peça para sair. Suponha que o saldo inicial seja R$1000. O usuário deverá digitar qual item do menu para prossegir.
+Imprima: """  
+1 - Ver saldo  
+2 - Sacar dinheiro  
+3 - Depositar dinheiro  
+4 - Sair  
 """
  * Caso o usuário digite 1 imprima o saldo atual
  * Caso o usuário digite 2 pergunte quanto dinheiro ele deseja sacar e remova do saldo (atenção, o usuário não pode sacar mais do que possui!)
