@@ -19,7 +19,7 @@
 3. No turtle, desenhe a bandeira do Brasil
  
 ## Estrutura Condicional (if)
-2. Faça um código para ler um número e imprimi-lo caso seja múltiplo de 5
+1. Faça um código para ler um número e imprimi-lo caso seja múltiplo de 5
 3. Faça um programa que leia dois números e imprima o maior deles
 4. Faça um código que leia dois números inteiros, efetue a adição e caso o resultado seja maior ou igual a 10 imprima "Soma maior ou igual a 10"
 5. Faça um código que leia dois números inteiros, efetue a adição e caso o resultado seja maior que 20 imprima o valor somado a 8
