@@ -62,6 +62,7 @@ Imprima: """
  * Caso o usuário digite 3 pergunte quanto dinheiro ele deseja depositar e adicione o valor ao saldo
  * Caso o usuário digite 4 encerre o programa
  * Caso o usuário digite outro valor no menu apresente a mensagem "Opção Inválida" e imprima o menu novamente. 
+ * Tente fazer a primeira vez usando if e a segunda usando match case (python 3.10)
 ## Estrutura de Repetição Contada (for)
 
 
