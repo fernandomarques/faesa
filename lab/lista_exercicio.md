@@ -71,7 +71,7 @@ Imprima: """
 5. Faça um código que imprima todos os números primos de 2 até 100
 6. Faça um código que leia um número e imprima a tabuada do número de 1 a 9
 7. Faça um código, usando dois loops for, que imprima o triangulo abaixo:   
-9 8 7 6 5 4 3 2 1 
+9 8 7 6 5 4 3 2 1   
 8 7 6 5 4 3 2 1   
 7 6 5 4 3 2 1  
 6 5 4 3 2 1   
