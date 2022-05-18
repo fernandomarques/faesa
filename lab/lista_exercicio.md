@@ -64,6 +64,25 @@ Imprima: """
  * Caso o usuário digite outro valor no menu apresente a mensagem "Opção Inválida" e imprima o menu novamente. 
  * Tente fazer a primeira vez usando if e a segunda usando match case (python 3.10)
 ## Estrutura de Repetição Contada (for)
+1. Faça um código que conte de 0 até 10 imprimindo na tele
+2. Faça um código que conte de 10 até 1 imprimindo na tela
+3. Faça um código que conte de -10 até 10 imprimindo na tela
+4. Faça um código que imprima todos os números pares até 100
+5. Faça um código que imprima todos os números primos de 2 até 100
+6. Faça um código que leia um número e imprima a tabuada do número de 1 a 9
+7. Faça um código, usando dois loops for, que imprima o triangulo abaixo:
+9 8 7 6 5 4 3 2 1 
+8 7 6 5 4 3 2 1   
+7 6 5 4 3 2 1  
+6 5 4 3 2 1   
+5 4 3 2 1   
+4 3 2 1   
+3 2 1   
+2 1   
+1   
+8. Faça um programa que faça um cronometro imprimindo minutos e segundos. Dica: procure pela função sleep da biblioteca os
+9. Faça um programa que leia um valor inteiro N calcule a soma da série: S = 1/1 + 1/2 + 1/3 + 1/4 + ... + 1/N 
+10. A fórmula de Leibniz pode ser utilizada para calcular um valor aproximado de Pi. Faça um código que leia um valor N e calcule o valor de Pi seguindo a série: Pi = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ...). Dica: para inverter o sinal você pode usar (-1) elevado a N
 
 
 *Bônus*:
