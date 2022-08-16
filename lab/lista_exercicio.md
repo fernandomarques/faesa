@@ -2,7 +2,7 @@
 
 
 ## Estrutura Sequencial
-1. Faça um código que pergunte o nome do usuário e imprima "Olá {fulano}, eu me chamo..." 
+1. Faça um código que pergunte o nome do usuário e imprima "Olá {fulano}, eu me chamo Python!" 
 1. Imprima na tela o valor de 21 / 6, observe o valor da variável resposta
 1. Imprima na tela o valor de 24 / 6, observe o valor da variável resposta 
 1. Faça um programa que leia dois números inteiros e imprima os dois números
