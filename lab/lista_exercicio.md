@@ -93,4 +93,4 @@ Imprima: """
 
 ## Desafios dos alunos
 1. Para formarmos um triângulo utilizamos a seguinte regra: um dos lados deve ser maior que o valor absoluto da diferença dos outros dois lados e menor que a soma dos outros dois lados. Tendo essa regra em mente, implemente um programa que leia três valores, valide o triângulo e classifique-o em Isósceles, Equilátero ou Escaleno. (Felipe Leoncio, Ciência da Computação 2022.1)
-2. Faça um programa no turtle que utilize as setas ou as teclas w,a,s e d para desenhar. (João Henrique Leal, Ciência da Computação 2022.1)
+2. Faça um programa no turtle que utilize as setas ou as teclas w,a,s e d para desenhar. (Anônimo, Ciência da Computação, 2022.1)
