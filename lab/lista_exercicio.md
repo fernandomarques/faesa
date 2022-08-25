@@ -2,7 +2,7 @@
 
 
 ## Estrutura Sequencial
-1. Faça um código que pergunte o nome do usuário e imprima "Olá {fulano}, eu me chamo..." 
+1. Faça um código que pergunte o nome do usuário e imprima "Olá {fulano}, eu me chamo Python!" 
 1. Imprima na tela o valor de 21 / 6, observe o valor da variável resposta
 1. Imprima na tela o valor de 24 / 6, observe o valor da variável resposta 
 1. Faça um programa que leia dois números inteiros e imprima os dois números
@@ -90,3 +90,7 @@ Imprima: """
 
 
 ## Listas 
+
+## Desafios dos alunos
+1. Para formarmos um triângulo utilizamos a seguinte regra: um dos lados deve ser maior que o valor absoluto da diferença dos outros dois lados e menor que a soma dos outros dois lados. Tendo essa regra em mente, implemente um programa que leia três valores, valide o triângulo e classifique-o em Isósceles, Equilátero ou Escaleno. (Felipe Leoncio, Ciência da Computação 2022.1)
+2. Faça um programa no turtle que utilize as setas ou as teclas w,a,s e d para desenhar. (Anônimo, Ciência da Computação, 2022.1)
