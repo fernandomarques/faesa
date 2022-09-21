@@ -5,9 +5,7 @@ img.top-right {
     left:90%;
 
 }
-.nobullet {
-    list-style-type: none;
-}
+
 .img-small{
 	clear: both;
 	width: 20%;
@@ -15,6 +13,28 @@ img.top-right {
 img {
     border:0px !important;
 }
+
+.img-left-side{
+  clear:both;
+  width: 20%;
+  float: left;
+  position: absolute;
+  left:-20%;
+}
+
+.img-right-side{
+  clear:both;
+  width: 20%;
+  float: right;
+  position: absolute;
+  right:-20%;
+}
+
+
+.nobullet {
+    list-style-type: none;
+}
+
 
 .left {
   left:-8.33%;
