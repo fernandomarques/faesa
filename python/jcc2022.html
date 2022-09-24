@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Jornada Científica 2022 - Ecossistema Python</title>
+
+	<meta name="description" content="Jornada Científica 2022">
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+	<link rel="stylesheet" href="../css/misc.css">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<div id="qrcode">Link para essa app &#8595;</div>
+				<h3>JCC 2022 - Ecossistema Python </h3>
+				<img src="./img/python.png" alt="">
+				
+				<img src="./img/faesa.png" width="50%" alt="">
+				<p>	<small>Created by Fernando Marques </small>	</p>
+			</section>
+			<section>
+				<h3>O que veremos?</h3>
+				<p>Vamos fazer um vôo sobre várias partes do python</p>
+				<ul>
+					<li>História</li>
+					<li>Características da Linguagem</li>
+					<li>Implementações</li>
+					<li>Frameworks e Bibliotecas</li>
+					<li>Podcasts e Sites</li>
+				</ul>
+				<p></p>
+				<!-- <img src="img/python-plane.png" alt="" class="fragment"> -->
+			</section>
+			<section>
+				<section>
+					<h3>História e Gestão</h3>
+					<img src="./img/guido.jpg" alt="" class="img-right-side">
+					<ul>
+						<li>A implementação começou em 1989 por <i>Guido Van Rossum</i> na Holanda</li>
+						<li>Python 2.0 foi lançado em 2000</li>
+						<li>Python 3.0 lançado em 2008 e o suporte ao famoso python 2.7 acabou em 2020.</li>
+						<li>O devenvolvimento acontece por meio de PEPs submetidas pela comunidade e Guido tinha poder de veto</li>
+						<li>Guido era um <a href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">Benevolent Dictador for Life</a> mas anunciou sua saída em 2018</li>
+						<li>PEP 13 rege a governança do Python</li>
+						<li>Atualmente o conselho é composto por cinco pessoas</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Python e Monty Python</h3>
+					<img src="img/monty_python.gif" alt="" style="position:absolute; right:-20% !important;float:right; width:50%;">
+					<blockquote style="left:-30%;">Quando começou a implementar Python, Guido van Rossum também estava lendo os roteiros publicados de “Monty Python's Flying Circus”, uma série de comédia da BBC dos anos 1970. Van Rossum achou que precisava de um nome que fosse curto, único e um pouco misterioso, então decidiu chamar a linguagem de Python.
+					</blockquote>
+				</section>
+			</section>
+			<section>
+				<section data-markdown="">
+					## Características da Linguagem
+					- Tipagem
+					- Switch
+					- Orientação a Objetos
+					- Walrus Operator
+					- Decorators
+					- Generators
+					- Virtual Environments
+					- GIL
+				</section>
+				<section>
+					<h3>Tipagem</h3>
+					<ul>
+						<li>A tipagem é dinâmica, o que isso significa?</li>
+						<li>Alocação de memória</li>
+						<pre><code class="python">a = 10
+print(type(a))
+a = "10"
+print(type(a))
+b = "10"
+print(hex(id(a),hex(id(b))))						</code></pre>
+					</ul>
+				</section>
+				<section>
+					<h3>Switch</h3>
+					<ul>
+						<li>Em python é match/case e foi implementado na versão 3.10</li>
+						<li>Alocação de memória</li>
+						<pre><code class="python">var = 10
+match var:
+    case 10: 
+	    print("Foi!")
+	case 42 | "42":
+	    print("Não foi")
+	case _:
+	    print("Outro")						</code></pre>
+						<li><a href="https://towardsdatascience.com/the-match-case-in-python-3-10-is-not-that-simple-f65b350bb025">Mais exemplos de Match Case</a></li>
+					</ul>
+				</section>				
+				<section data-markdown="">
+					### Orientação a Objetos
+					- Python é Orientado a Objetos?
+					- Escopos e public/private
+					- Herança Múltipla! 
+				</section>
+				<section>
+					<img src="./img/walrus.gif" alt="" class="" style="width: 30%; float:right">
+					<h3>Walrus Operator</h3>
+					<ul>
+						<li>Python 3.8 PEP-572</li>
+						<li>Assignment expression operator</li>
+						<li>Em Python o operador = não retorna valores</li>
+						<pre><code class="python">>>> walrus = False
+>>> walrus
+False
+>>> (walrus := True)
+True
+>>> walrus
+True</code></pre>
+					</ul>
+				</section>
+				<section>
+					<h3>Decorators</h3>
+					<ul>
+						<li>Em python funções são objetos de primeira classe e podem ser passados como parâmetro</li>
+						<li>Decorators funcionam como wrappers</li>
+						<li>A biblioteca functools tem o decorator @cache</li>
+						<pre><code class="python">def my_decorator(func):
+	def wrapper():
+		print("Vou começar a função!")
+		func()
+		print("Terminei a função!")
+return wrapper
+
+@my_decorator
+def f():
+	print("função")
+# ou 
+f = my_decorator(f)</code></pre>
+					</ul>
+				</section>
+				<section>
+					<img src="./img/generator.png" alt="" class="img-right-side">
+					<h3>Generators</h3>
+					<ul>
+						<li>Permite criar funções que funcionem como um <i>iterator</i></li>
+						<li>Muito útil para fazer coisas como barra de progressão</li>
+						<li>Ou, por exemplo, pegar cada valor de fibonacci sem rodar a função para cada valor</li>
+						<pre><code class="python">
+def numeros(n):
+	for i in range(n):
+		yield i
+print(sum(numeros(15)))
+print(max(numeros(15)))
+x = numeros(5)
+print(next(x))
+print(next(x))
+						</code></pre>
+						<li><a href="https://wiki.python.org/moin/Generators">Mais informações</a></li>
+					</ul>
+				</section>
+				
+				<section>
+					<img src="./img/virtualenv.png" width="30%" alt="" class="img-right-side">
+					<h3>Virtual Environments</h3>
+					<ul>
+						<li><span style="font-family: unicode;">venv</span> permite a criação de um ambiente Virtual</li>
+						<li>c:\>c:\Python35\python -m venv c:\path\to\myenv</li>
+					</ul>
+					<blockquote cite="Python.org"> A virtual environment is a Python environment such that the Python interpreter, libraries and scripts installed into it are isolated from those installed in other virtual environments, and (by default) any libraries installed in a “system” Python, i.e., one which is installed as part of your operating system.</blockquote>
+				</section>
+				<section>
+					<h3>Virtual Environments</h3>
+					<img src="./img/virtualenv.png" width="60%" alt="" >
+				</section>
+				<section>
+					<img src="./img/lock.svg" alt="" class="img-right-side">
+					<h3>GIL - Global Interpreter Lock</h3>
+					<ul>
+						<li>Qual problema ele resolve? - Mutex</li>
+						<li>Lembram das referencias?</li>
+						<li>Quando python foi criado não era comum ter computadores com muitos processadores</li>
+						<li>CPU-bound vs I/O-bound</li>
+						<li>GIL impacta apenas CPU bound  </li>
+						<li> <i>“I’d welcome a set of patches into Py3k only if the performance for a single-threaded program (and for a multi-threaded but I/O-bound program) does not decrease”</i> - Guido</li>
+						<li><b>Soluções</b> Multi-processing, IronPython, Jython, PyPy</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<div class="column-right">
+					<img src="img/pypy.jpg" alt="" class="column-child">
+					<img src="img/jython.png" alt="" class="column-child">
+					<img src="img/ironpython.jpg" alt="" class="column-child">
+					<img src="img/pyscript.svg" alt="" class="column-child">
+					<img src="img/pyodide.png" alt="" class="column-child">
+				</div>	
+				<h3>Implementações</h3>
+				<ul>
+					<li><b>CPython</b>, é a implementação padrão escrita em C convertendo código em bytecode que é interpretado</li>
+					<li><b>Cython</b>, é um superconjunto do Python  com sintaxe C</li>
+					<li><b>PyPy</b>, é implementado em Python. Usa JIT e por isso é mais rápido que CPython</li>
+					<li><b>Jython</b>, é implementado em Java e pode rodar na JVM. Permite integração com Java</li>
+					<li><b>IronPython</b>, é implementado em C# e tem integração com .NET e bibliotecas</li>
+					<li><b>PyScript e Pyodide</b> são implementações de Python em WebAssembly</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h3>Frameworks e bibliotecas</h3>
+					<div class="gallery">
+						<img src="img/altair.png" alt="" class="gallery-child">
+						<img src="img/beanie.webp" alt="" class="gallery-child">
+						<img src="img/black.png" alt="" class="gallery-child">
+						<img src="img/bokeh.png" alt="" class="gallery-child">
+						<img src="img/dearpygui.png" alt="" class="gallery-child">
+						<img src="img/django.png" alt="" class="gallery-child">
+						<img src="img/flask.png" alt="" class="gallery-child">
+						<img src="img/jupyter.png" alt="" class="gallery-child">
+						<img src="img/kivy.jpg" alt="" class="gallery-child">
+						<img src="img/matplotlib.svg" alt="" class="gallery-child">
+						<img src="img/numpy.png" alt="" class="gallery-child">
+						<img src="img/opencv.png" alt="" class="gallery-child">
+						<img src="img/pandas.png" alt="" class="gallery-child">
+						<img src="img/plotly.png" alt="" class="gallery-child">
+						<img src="img/pyramid.jpg" alt="" class="gallery-child">
+						<img src="img/pydantic.png" alt="" class="gallery-child">
+						<img src="img/PyQt.jpg" alt="" class="gallery-child">
+						<img src="img/pytorch.png" alt="" class="gallery-child">
+						<img src="img/scikitlearn.png" alt="" class="gallery-child">
+						<img src="img/seaborn.jpg" alt="" class="gallery-child">
+						<img src="img/selenium.png" alt="" class="gallery-child">
+						<img src="img/spacey.jpg" alt="" class="gallery-child">
+						<img src="img/sqlalchemy.jpg" alt="" class="gallery-child">
+						<img src="img/sqlmodel.svg" alt="" class="gallery-child">
+						<img src="img/tkinter.jpg" alt="" class="gallery-child">
+					</div>
+				</section>
+				<section>
+					<div class="column-right">
+						<img src="img/black.png" alt="" class="column-child">
+						<img src="img/pydantic.png" alt="" class="column-child">
+					</div>	
+					<h3>Validação de Dados</h3>
+					<blockquote style="left: -15%;width:115%"><b>Black</b> is the uncompromising Python code formatter. By using it, you agree to cede control over minutiae of hand-formatting. In return, Black gives you speed, determinism, and freedom from pycodestyle nagging about formatting. You will save time and mental energy for more important matters.</blockquote>
+					<blockquote style="left: -15%;width:115%"><b>pydantic</b> Data validation and settings management using Python type annotations.
+						pydantic enforces type hints at runtime, and provides user friendly errors when data is invalid.</blockquote>
+				</section>
+				<section>
+					<div class="column-right">
+						<img src="img/kivy.jpg" alt="" class="column-child">
+						<img src="img/tkinter.jpg" alt="" class="column-child">
+						<img src="img/PyQt.jpg" alt="" class="column-child">
+						<img src="img/dearpygui.png" alt="" class="column-child">
+					</div>	
+					<h3>Interface com Usuário</h3>
+					<ul>
+						<li><b>Kiwi</b>: Linguagem própria para definir as interfaces</li>
+						<li><b>Tkinter</b>: é baseado no Gnome do Linux</li>
+						<li><b>PyQt/PySide</b>: é baseado na biblioteca Qt do KDE. <i>QtDesigner</i></li>
+						<li><b>dearpygui</b> e <b>pysimplegui</b></li>
+						<li><b>gooey</b>: Transforma qualquer aplicação CLI em GUI</li>
+					</ul>
+				</section>
+				<section>
+					<div class="column-right">
+						<img src="img/django.png" alt="" class="column-child">
+						<img src="img/flask.png" alt="" class="column-child">
+						<img src="img/pyramid.jpg" alt="" class="column-child">
+						<img src="img/pyscript.svg" alt="" class="column-child">
+						<img src="img/pyodide.png" alt="" class="column-child">
+					</div>
+					<h3>Web</h3>
+					<ul>
+						<li><b>Django</b> framework robusto para criação de páginas web. Procurem <a href="https://www.obeythetestinggoat.com/book/part1.harry.html">The Basics of TDD and Django</a> <i>é free! </i>&#128526; </li>
+						<li><b>Flask</b> é um framework mais leve e com menos funcionalidades, ótimo para APIs &#128525; </li>
+						<li><b>Pyramid</b> é um framework leve com objetivo de ser escalável, nunca usei &#128528;</li>
+						<li><b>Pyscript e Pyodide</b> permite utilizar código Py no front end &#128562;</li>
+					</ul>
+				</section>
+				<section>
+					<div class="column-right">
+						<img src="img/pandas.png" alt="" class="column-child">
+						<img src="img/jupyter.png" alt="" class="column-child">
+						<img src="img/numpy.png" alt="" class="column-child">
+					</div>
+
+					<h3>Análise de Dados</h3>
+					<ul>
+						<li><b>Pandas</b>: é uma biblioteca para análise e manipulação de dados, lê excel com <i>uma facilidade</i>.</li>
+						<li><b>jupyter notebook</b> é uma plataform web interativa que permite <i>live code</i>, separa o código em fragmentos e mostra os outputs.</li>
+						<li><b>numpy</b> bibliteca matemática implementada em C, oferece diversas operações como matriciais, transformação de fourier, rotinas de álgebra linear e outros. Permite usar IA com Python de forma eficiente.</li>
+					</ul>
+				</section>
+				<section>
+					<div class="column-right">
+						<img src="img/sqlalchemy.jpg" alt="" class="column-child">
+						<img src="img/sqlmodel.svg" alt="" class="column-child">
+						<img src="img/beanie.webp" alt="" class="column-child">
+					</div>
+
+					<h3>Banco de dados</h3>
+					<ul>
+						<li><b>SQLAlchemy</b> é uma biblioteca que implementa uma ORM e é a coisa mais linda do mundo. Nunca mais usei sql &#128517;</li>
+						<li><b>SQLModel</b>, outra biblioteca para interagir com bancos de dados SQL usando código python</li>
+						<li><b>Beanie</b> oferece um <i>object-document mapper</i> para trabalhar com MongoDB</li>
+					</ul>
+				</section>
+				<section>
+					<div class="column-right">
+						<img src="img/matplotlib.svg" alt="" class="column-child">
+						<img src="img/plotly.png" alt="" class="column-child">
+						<img src="img/seaborn.jpg" alt="" class="column-child">
+						<img src="img/altair.png" alt="" class="column-child">
+						<img src="img/bokeh.png" alt="" class="column-child">
+					</div>
+					<h3>Gráficos</h3>
+					<ul>
+						<li><b>matplotlib</b> biblioteca <i>mãe</i> para criação de gráficos simples. Muitas bibliotecas de gráficos usam ela.</li>
+						<li><b>plotly</b> permite a criação de gráfico interativos, ao passar o mouse detalha os dados.</li>
+						<li><b>seaborn</b> outra biblioteca para gráficos, apesar de plotly ser mais bonita tenho usado mais essa.</li>
+						<li><b>altair</b> biblioteca declarativa em python</li>
+						<li><b>bokeh</b> mais uma biblioteca simples, flexivel e interativa</li>
+					</ul>
+				</section>
+				<section>
+					<div class="column-right">
+						<img src="img/spacey.jpg" alt="" class="column-child">
+						<img src="img/pytorch.png" alt="" class="column-child">
+						<img src="img/scikitlearn.png" alt="" class="column-child">
+						<img src="img/opencv.png" alt="" class="column-child">
+					</div>
+					<h3>IA, NPL e Visão Computacional</h3>
+					<ul>
+						<li><b>spaCy</b> uma biblioteca de software de código aberto para processamento avançado de linguagem natural</li>
+						<li><b>Pytorch</b> framework para aprendizagem de máquina que consegue fazer uso da plataforma CUDA</li>
+						<li><b>scikit-learn</b> biblioteca de aprendizagem de máquina com diversas funcionalidades muito utilizadas, é uma das <i>core</i>.</li>
+						<li><b>Opencv</b> biblioteca para o desenvolvimento de soluções de visão computacional</li>
+						<li>E muitos outros ...</li>
+					</ul>
+				</section>
+				<section>
+					<div class="column-right">
+						<img src="img/selenium.png" alt="" class="column-child">
+					</div>
+					<h3>Scrapping e Automação</h3>
+					<ul>
+						<li><b>requests</b> permite fazer solicitações HTTP</li>
+						<li><b>smtplib</b> utilizada para enviar emails usando o protocolo SMTP</li>
+						<li><b>BeautifulSoup</b> biblioteca para ler arquivos html e xml</li>
+						<li><b>Selenium</b> permite a automação de navegador web</li>
+						<li><b>pyautogui</b> permite a automação de mouse e teclado. <span style="text-decoration:line-through;">Bacana para farmar joguinhos de celular</span></li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<h3>Podcasts e Sites</h3>
+				<ul>
+					<li><a href="">Talk python to me</a> podcast sobre Python</li>
+					<li><a href="">Data Skeptic</a></li>
+					<li><a href="">The local Maximum</a></li>
+					<li><a href="">Pyimgsearch</a> site com tutorias de visão computacional</li>
+					<li><b>API das bibliotecas!</b></li>
+				</ul>
+			</section>
+		</div>
+	</div>	
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+	<script src="../js/qrcode.min.js"></script>
+	<script type="text/javascript">
+		new QRCode(document.getElementById("qrcode"),"https://fernandomarques.github.io/faesa/lab/#/")
+	</script>
+	<script>
+
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		mouseWheel: true,
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: '../plugin/zoom-js/zoom.js', async: true },
+			{ src: '../plugin/notes/notes.js', async: true }
+		]
+	});
+	Reveal.configure({
+		keyboard: {
+			38: 'next',
+			40: 'prev'
+		}
+	});
+
+	</script>
+
+</body>
+</html>
