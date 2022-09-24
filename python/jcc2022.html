@@ -15,7 +15,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 	<link rel="stylesheet" href="../css/reveal.css">
-	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+	<link rel="stylesheet" href="../css/theme/moon.css" id="theme">
 	<link rel="stylesheet" href="../css/misc.css">
 
 	<!-- Code syntax highlighting -->
@@ -33,6 +33,34 @@
 	<!--[if lt IE 9]>
 	<script src="lib/js/html5shiv.js"></script>
 	<![endif]-->
+	<style>
+		#aviao {
+			top: 0%;
+			position: absolute;
+			animation: linear infinite;
+			animation-name: run;
+			animation-duration: 8s;
+		}
+		@keyframes run {
+			0% {
+				left: -20%;
+			}
+			48% {
+				-webkit-transform: rotateY(0deg); 
+			}
+			50% { 
+				left: calc(120% - 100px);
+				-webkit-transform: rotateY(180deg); 
+			}
+			98% {
+				-webkit-transform: rotateY(180deg); 
+			}
+			100% {
+				left: -20%;    
+				-webkit-transform: rotateY(0deg);
+			}
+			}
+	</style>
 </head>
 
 <body>
@@ -40,14 +68,17 @@
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>
-				<div id="qrcode">Link para essa app &#8595;</div>
+				<div id="qrcode" class="qrcode">Link para essa app &#8595;</div>
 				<h3>JCC 2022 - Ecossistema Python </h3>
 				<img src="./img/python.png" alt="">
 				
-				<img src="./img/faesa.png" width="50%" alt="">
-				<p>	<i>Created by Fernando Marques </i>	</p>
+				<img src="./img/faesa.jpg" width="50%" alt="">
+				<p style="font-family: unicode;">	<i>Created by Fernando Marques </i>	</p>
 			</section>
 			<section>
+				<div id="aviao">
+					<img src="img/python-plane.png" alt="" class="" style="background-color: transparent !important;">
+				</div>
 				<h3>O que veremos?</h3>
 				<p>Vamos fazer um vôo sobre várias partes do python</p>
 				<ul>
@@ -58,7 +89,12 @@
 					<li>Podcasts e Sites</li>
 				</ul>
 				<p></p>
-				<!-- <img src="img/python-plane.png" alt="" class="fragment"> -->
+			</section>
+			<section>
+				<img src="https://imgs.xkcd.com/comics/python.png" alt="" class="">
+			</section>
+			<section>
+				<img src="https://imgs.xkcd.com/comics/twitter_bot.png" alt="" >
 			</section>
 			<section>
 				<section>
@@ -84,58 +120,23 @@
 			<section>
 				<section data-markdown="">
 					## Características da Linguagem
+					- Walrus Operator
 					- Tipagem
 					- Switch
 					- Orientação a Objetos
-					- Walrus Operator
 					- Decorators
 					- Generators
 					- Virtual Environments
 					- GIL
 				</section>
 				<section>
-					<h3>Tipagem</h3>
-					<ul>
-						<li>A tipagem é dinâmica, o que isso significa?</li>
-						<li>Alocação de memória</li>
-						<pre><code class="python">a = 10
-print(type(a))
-a = "10"
-print(type(a))
-b = "10"
-print(hex(id(a),hex(id(b))))						</code></pre>
-					</ul>
-				</section>
-				<section>
-					<h3>Switch</h3>
-					<ul>
-						<li>Em python é match/case e foi implementado na versão 3.10</li>
-						<li>Alocação de memória</li>
-						<pre><code class="python">var = 10
-match var:
-    case 10: 
-	    print("Foi!")
-	case 42 | "42":
-	    print("Não foi")
-	case _:
-	    print("Outro")						</code></pre>
-						<li><a href="https://towardsdatascience.com/the-match-case-in-python-3-10-is-not-that-simple-f65b350bb025">Mais exemplos de Match Case</a></li>
-					</ul>
-				</section>				
-				<section data-markdown="">
-					### Orientação a Objetos
-					- Python é Orientado a Objetos?
-					- Escopos e public/private
-					- Herança Múltipla! 
-				</section>
-				<section>
-					<img src="./img/walrus.gif" alt="" class="" style="width: 30%; float:right">
+					<img src="./img/walrus.gif" alt="" class="" style="width: 30%; float:right; right:-20%; position:absolute;">
 					<h3>Walrus Operator</h3>
 					<ul>
 						<li>Python 3.8 PEP-572</li>
 						<li>Assignment expression operator</li>
 						<li>Em Python o operador = não retorna valores</li>
-						<pre><code class="python">>>> walrus = False
+						<pre><code class="python code-big">>>> walrus = False
 >>> walrus
 False
 >>> (walrus := True)
@@ -145,12 +146,54 @@ True</code></pre>
 					</ul>
 				</section>
 				<section>
+					<h3>Tipagem</h3>
+					<ul>
+						<li>A tipagem é dinâmica, o que isso significa?</li>
+						<li>Alocação de memória</li>
+						<pre><code class="python code-big">>>> a = 10
+>>> print(type(a))
+&lt;class 'int'&gt;
+>>> a = "10"
+>>> type(a)
+&lt;class 'str'&gt;
+>>> b = "10"
+>>> print(hex(id(a),hex(id(b))))
+0x235dbb0a530 0x235dbb0a530</code></pre>
+					</ul>
+				</section>
+				<section>
+					<h3>Switch</h3>
+					<ul>
+						<li>Em python é match/case e foi implementado na versão 3.10</li>
+						<li>Alocação de memória</li>
+						<pre><code class="python code-big">var = 10
+match var:
+    case 10: 
+	    print("Foi!")
+	case 42 | "42":
+	    print("Não foi")
+	case _:
+	    print("Outro")</code></pre>
+						<li>Possue várias funcionalidades que o switch clássico não permite</li>
+						<li><a href="https://towardsdatascience.com/the-match-case-in-python-3-10-is-not-that-simple-f65b350bb025">Mais exemplos de Match Case</a></li>
+					</ul>
+				</section>				
+				<section data-markdown="">
+					### Orientação a Objetos
+					- Python é Orientado a Objetos?
+					- Escopos e public/private
+					- Herança Múltipla! 
+				</section>
+			
+				<section>
+					<img src="./img/decorator.gif" alt="" class="" style="width: 30%; float:right; right:-25%; position:absolute;">
+
 					<h3>Decorators</h3>
 					<ul>
-						<li>Em python funções são objetos de primeira classe e podem ser passados como parâmetro</li>
+						<li>Funções são objetos de primeira classe e podem ser passados como parâmetro</li>
 						<li>Decorators funcionam como wrappers</li>
 						<li>A biblioteca functools tem o decorator @cache</li>
-						<pre><code class="python">def my_decorator(func):
+						<pre><code class="python code">def my_decorator(func):
 	def wrapper():
 		print("Vou começar a função!")
 		func()
@@ -171,16 +214,14 @@ f = my_decorator(f)</code></pre>
 						<li>Permite criar funções que funcionem como um <i>iterator</i></li>
 						<li>Muito útil para fazer coisas como barra de progressão</li>
 						<li>Ou, por exemplo, pegar cada valor de fibonacci sem rodar a função para cada valor</li>
-						<pre><code class="python">
-def numeros(n):
+						<pre><code class="python">def numeros(n):
 	for i in range(n):
 		yield i
 print(sum(numeros(15)))
 print(max(numeros(15)))
 x = numeros(5)
 print(next(x))
-print(next(x))
-						</code></pre>
+print(next(x))</code></pre>
 						<li><a href="https://wiki.python.org/moin/Generators">Mais informações</a></li>
 					</ul>
 				</section>
@@ -199,7 +240,7 @@ print(next(x))
 					<img src="./img/virtualenv.png" width="60%" alt="" >
 				</section>
 				<section>
-					<img src="./img/lock.svg" alt="" class="img-right-side">
+					<img src="./img/lock.gif" alt="" class="img-right-side" style="width:30%;">
 					<h3>GIL - Global Interpreter Lock</h3>
 					<ul>
 						<li>Qual problema ele resolve? - Mutex</li>
@@ -388,13 +429,22 @@ print(next(x))
 					<li><b>API das bibliotecas!</b></li>
 				</ul>
 			</section>
+			<section>
+				<h1 style="font-family: monospace;">The End</h1>
+				<div id="qrcode2" class="qrcode">Link para essa app &#8595;</div>
+				<p>Agradeço pela presença!</p>
+				<div id="forms" class="qrcode" style="left:100%;">Link para formulário presença &#8595;</div>
+				<!-- TODO link para essa app e link para formulário -->
+			</section>
 		</div>
 	</div>	
 	<script src="../lib/js/head.min.js"></script>
 	<script src="../js/reveal.js"></script>
 	<script src="../js/qrcode.min.js"></script>
 	<script type="text/javascript">
-		new QRCode(document.getElementById("qrcode"),"https://fernandomarques.github.io/faesa/lab/#/")
+		new QRCode(document.getElementById("qrcode"),"https://fernandomarques.github.io/faesa/python/jcc2022.html")
+		new QRCode(document.getElementById("qrcode2"),"https://fernandomarques.github.io/faesa/python/jcc2022.html")
+		new QRCode(document.getElementById("forms"),"https://fernandomarques.github.io/faesa/python/jcc2022.html")
 	</script>
 	<script>
 
@@ -421,8 +471,8 @@ print(next(x))
 	});
 	Reveal.configure({
 		keyboard: {
-			38: 'next',
-			40: 'prev'
+			// 38: 'next',
+			// 40: 'prev'
 		}
 	});
 

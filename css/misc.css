@@ -12,6 +12,7 @@ img.top-right {
 }
 img {
     border:0px !important;
+    background-color: transparent;
 }
 
 .img-left-side{
@@ -115,7 +116,7 @@ div.small-box {
    line-height: 120% !important;
 }
 
-#qrcode {
+.qrcode {
   position: absolute !important;
   left: -20%;
   bottom: -20%;
