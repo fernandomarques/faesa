@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Laboratório de Programação 1</title>
+
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+	<style>
+		img {
+			border: 0px !important;
+		}
+	</style>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Literais e Variáveis </h3>
+				<img src="../img/python-logo.png" alt="">
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<p>
+					Uma outra curiosidade sobre a linguagem Python é que ela é uma das linguagens de programação mais
+					populares em todo o mundo, e é amplamente utilizada em empresas como Google, Facebook, Instagram,
+					Spotify, Netflix e Dropbox.<br>
+					O Python também é a linguagem preferida de muitos cientistas de dados e pesquisadores, devido à sua
+					facilidade de uso, simplicidade e grande variedade de bibliotecas para análise de dados, machine
+					learning e inteligência artificial. De fato, o Python é frequentemente utilizado em áreas como
+					análise de dados, ciência de dados e aprendizado de máquina.
+				</p>
+
+			</section>
+
+			<section data-markdown>
+				## Roteiro da Aula
+				- Revisão (15 minutos)
+				- Introdução
+				- Conteúdo (15 minutos, literais e variaveis)
+				- Exercícios (10 minutos)
+				- Conteúdo (20 minutos, tipos e operadores)
+				- Exercícios (25 minutos)
+				- Conclusão (10 minutos)
+			</section>
+			<section data-markdown="">
+				## Conteúdo da aula de hoje
+				1. Literais em Python
+				1. Variáveis em Python
+				1. Tipos de Dados em Python
+				1. Operadores em Python
+			</section>
+			<section data-markdown>
+				## Habilidades Desenvolvidas
+				- Identificar e criar literais em Python, incluindo literais numéricos, literais de strings e literais
+				booleanos.
+				- Declarar e inicializar variáveis em Python e seguir as regras de nomeação de variáveis em Python.
+				- Entender os tipos de dados básicos em Python, incluindo inteiros, floats, strings, booleanos, listas,
+				tuplas e dicionários.
+				- Converter diferentes tipos de dados em Python, incluindo conversão explícita e implícita.
+				- Utilizar operadores aritméticos, operadores de comparação, operadores lógicos e operadores de
+				atribuição em Python.
+				- Aplicar os conceitos aprendidos em exemplos práticos
+
+
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>Bibliotecas e Funções</li>
+					<li>Função print e erros</li>
+				</ul>
+			</section>
+			<section data-markdown="">
+				## Literais
+				- Números e Bases numéricas
+				- String
+				- Boolean		
+			</section>
+			<section>
+				<h3>Formação de Identificadores</h3>
+				<ul>
+					<li class="">Identificadores são nomes de variáveis, programas, constantes,
+	rotinas, unidades  etc.</li>
+					<li class="">Devem seguir as regras:</li>
+					<ol>
+					<li class="">Os  caracteres  permitidos  são:  números,  letras  maiúsculas,  letras  minúsculas  e  o
+		caractere sublinhado (_).</li>
+					<li class="">O primeiro caractere deve ser sempre uma letra ou o caractere sublinhado.</li>
+					<li class="">Não são permitidos espaços em branco e caracteres especiais (@, $, +, -, %, !).</li>
+					<li class="">Não  podemos  usar  as  palavras  reservadas  nos  identificadores,  ou  seja,  palavras
+		que pertençam à linguagem de programação.</li>
+				</ol>
+				</ul>
+			</section>
+			<section>
+				<h3>Exemplos de Identificadores</h3>
+				<table>
+					<tr>
+						<td>5b</td><td>nota</td><td>e 12</td>
+					</tr>
+					<tr>
+						<td>NOTA</td><td>X5</td><td>nota(2)</td>
+					</tr>
+					<tr>
+						<td>Nota1</td><td>A32</td><td>x-y</td>
+					</tr>
+					<tr>
+						<td>MATRICULA</td>
+						<td>nota_1</td>
+						<td>if</td>
+					</tr>
+				</table>
+			</section>
+			
+			<section>
+				<h3>Conceito de Variável</h3>
+				<ul>
+					<li class="">Um  algoritmo  e,  posteriormente,  um  programa,  recebem  dados  que  precisam  ser
+	armazenados no computador para serem utilizados no processamento.</li>
+					<li class="">Todos os  computadores  trabalham com
+	sistema numérico binário 0011</li>
+					<li class="">Cada  dígito  binário  ocupa  uma  porção de  memória  chamada  bit,  e 8 bits é denominado byte</li>
+					<li class="">Cada byte é identificado e acessado por
+	meio de um endereço.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Conceito de Variável</h3>
+				<img src="img/variavelRAM.jpg" alt="">
+				<ul>
+					<li class="">Uma  variável  é  associada  a  uma  posição  da  memória  RAM</li>
+					<li class="">Toda  variável  possui  um  nome  (um  identificador).</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Como Criar e atribuir valor a variável</h3>
+				<pre><code>
+meu_nome = "Fernando"
+print(meu_nome)
+				</code></pre>
+			</section>
+
+			<section>
+				<h3>Como Criar e atribuir valor a variável</h3>
+				<pre><code style="font-size: larger;">a = 10
+print(a)
+b = a
+a = 15
+print(a,b)	</code></pre>
+			</section>
+
+			<section data-background="./img/computer_exercise.png">
+				<span style="background-color: rgba(0, 0, 000, 0.7); color:silver;">
+					Faça um programa em python que armazene as informações básicas de uma pessoa, como nome, idade e residência. Depois imprima essas informações
+				</span>
+			</section>
+			<section>
+				<h3>Tipos de Dados - Numéricos</h3>
+				<ul>
+					<li class="">Se dividem entre reais e inteiros</li>
+					<li class="">Os números inteiros podem ser positivos ou negativos e não possuem parte fracionária</li>
+					<li class="">Os números reais podem ser positivos ou negativos e possuem parte fracionária</li>
+					<li class="">Os números reais seguem a notação da
+língua inglesa, ou seja, a parte decimal é separada
+da parte inteira por um ponto, e não por uma vírgula.</li>
+					<li><s>Números complexos? complex</s></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Tipos de Dados - Lógicos</h3>
+				<ul>
+					<li class="">Também são chamados de booleanos</li>
+					<li class="">Possuem valores <b>Verdadeiro</b> ou <b>Falso</b></li>
+				</ul>
+			</section>
+			<section>
+				<h3>Tipos de Dados - Caracteres</h3>
+				<ul>
+					<li class="">São  dados  formados  por  um  único  caractere  ou  por  uma  cadeia  de  caracteres.  Esses
+	caracteres  podem  ser  letras  maiúsculas,  as  letras  minúsculas,  os  números  (não  podem  ser
+	usados para cálculos) e os caracteres especiais (&, #, @, ?, +).</li>
+					<li class=""><b>Na maioria das lingugens</b> Um  caractere  é  representado  entre  aspas
+	simples e um conjunto de caracteres é representado entre
+	aspas duplas.</li>
+					<li>Em python string pode ser '', "" ou '''  '''</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Tipos de Dados - Sequencias</h3>
+				<ul>
+					<li class="">Os tipos list, tuple e string são tipos sequenciais</li>
+					<li class="">Eles armazenam mais de uma informação em só uma variável.</li>
+					<li>Veremos mais sobre esses tipos ainda nessa disciplina</li>
+					<li>Existem ainda outros tipos, como object e dict! </li>
+				</ul>
+			</section>
+			<section>
+				<h3>Tipos de Dados - Mutáveis e Imutáveis</h3>
+				<ul>
+					<li class="">Strings e tuplas são <b>imutáveis</b></li>
+					<li class="">Listas, dicionários e sets são <b>mutáveis</b></li>
+					<li>Mutável muda o valor da variável</li>
+					<li>Imutável muda o objeto</li>
+				</ul>
+			</section>	
+			<section>
+				<h3>Conversão de Tipos</h3>
+				<ul>
+					<li>Conversão Implícita</li>
+					<li>Conversão Explícita</li>
+					<ul>
+						<li>int()</li>
+						<li>float()</li>
+						<li>str()</li>
+					</ul>
+					<li>Nem toda conversão é possível</li>
+					<li>A conversão de dados pode levar à perda de informação ou erros de precisão</li>
+				</ul>
+			</section>		
+			<section>
+				<table>
+					<caption>Operadores aritméticos</caption>
+					<tr>
+						<th>Operador</th>
+						<th>Exemplo</th>
+						<th>Comentário</th>
+					</tr>
+					<tr>
+						<td>=</td>
+						<td>x = y</td>
+						<td>Conteúdo da variável x é atribuído a y</td>
+					</tr>
+					<tr>
+						<td>+</td>
+						<td>x+y</td>
+						<td>Soma conteúdo de x e y</td>
+					</tr>
+					<tr>
+						<td>-</td>
+						<td>x-y</td>
+						<td>Subtrai o conteúdo de y do conteúdo de x</td>
+					</tr>
+					<tr>
+						<td>*</td>
+						<td>x*y</td>
+						<td>Multiplica o conteúdo de x pelo de y</td>
+					</tr>
+					<tr>
+						<td>/</td>
+						<td>x/y</td>
+						<td>Obtém o quociente da divisão de x por y (inteiro vs float)</td>
+					</tr>
+					<tr>
+						<td>//</td>
+						<td>x//y</td>
+						<td>Divisão inteira do valor</td>
+					</tr>
+					<tr>
+						<td>%</td>
+						<td>x % y</td>
+						<td>Obtém o resto da divisão de x por y</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<table>
+					<caption>Operadores aritméticos</caption>
+					<tr>
+						<th>Operador</th>
+						<th>Exemplo</th>
+						<th>Equivalente</th>
+					</tr>
+					<tr>
+						<td>+=</td>
+						<td>x += y</td>
+						<td> x = x + y</td>
+					</tr>
+					<tr>
+						<td>-=</td>
+						<td>x -= y</td>
+						<td> x = x - y</td>
+					</tr>
+					<tr>
+						<td colspan="3">Também funciona para outros operadores como % / e *</td>
+					</tr>
+					<tr>
+						<td>**</td>
+						<td>2 ** 3</td>
+						<td>2³</td>
+					</tr>
+					<tr>
+						<td>++ (outras linguagens)</td>
+						<td>x++</td>
+						<td> x = x + 1</td>
+					</tr>
+					<tr>
+						<td>++ (outras linguagens)</td>
+						<td>x = y++</td>
+						<td>y = x e depois x = x+1</td>
+					</tr>
+					<tr>
+						<td>++ (outras linguagens)</td>
+						<td>x = ++y</td>
+						<td>x = x=1 e depois y = x </td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<table>
+					<caption>Operadores relacionais ou comparativos</caption>
+					<tr>
+						<th>Operador</th>
+						<th>Exemplo</th>
+						<th>Comentário</th>
+					</tr>
+					<tr>
+						<td>==</td>
+						<td> x == y</td>
+						<td>x é igual a y</td>
+					</tr>
+					<tr>
+						<td>!=</td>
+						<td> x != y</td>
+						<td>x é diferente de y</td>
+					</tr>
+					<tr>
+						<td>
+							&lt;=</td> <td> x &lt;= y</td> <td>x é menor ou igual a y
+						</td>
+					</tr>
+					<tr>
+						<td>>=</td>
+						<td>x >= y</td>
+						<td>x é maior ou igual a y</td>
+					</tr>
+					<tr>
+						<td>
+							&lt;</td> <td> x &lt; y</td> <td>x é menor que y
+						</td>
+					</tr>
+					<tr>
+						<td>></td>
+						<td> x > y</td>
+						<td>x é maior que y</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<img src="./img/precedencia.gif" alt="">
+			</section>
+			<section>
+				<h3>Exercícios</h3>
+				<ul>
+					<li>Brinque com a conversão de tipos</li>
+					<li>Faça um programa que calcule a área e o perímetro de um retângulo</li>
+					<li>Cálculo de IMC</li>
+				</ul>
+			</section>
+			<section data-markdown>
+				## Dúvidas?
+			</section>
+		</div>
+	</div>
+
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+	<script src="../js/base.js"></script>
+
+	<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+			slideNumber: 'c/t',
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+			math: {
+				// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				TeX: {
+					Macros: {
+						R: '\\mathbb{R}',
+						set: ['\\left\\{#1 \\; ; \\; #2\\right\\}', 2]
+					}
+				}
+			},
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true },
+				{ src: '../plugin/math/math.js', async: true }
+			]
+		});
+
+	</script>
+
+</body>
+
+</html>
