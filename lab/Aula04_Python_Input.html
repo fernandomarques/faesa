@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Laboratório de Programação 1</title>
+
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+	<style>
+		img {
+			border: 0px !important;
+		}
+	</style>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Input</h3>
+				<img src="../img/python-logo.png" alt="">
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<p>
+					"O que diferencia um viking de um dragão é o medo. E se conseguirmos domar esse medo, aí sim, podemos conquistar qualquer coisa." - Stoico, pai de Soluço, em "Como Treinar Seu Dragão".				</p>
+
+			</section>
+
+			<section data-markdown>
+				## Roteiro da Aula
+				- Revisão (30 minutos)
+				- Introdução (5 minutos)
+				- Conteúdo (25 minutos, Input e tratamento de erro)
+				- Exercícios (25 minutos)
+			</section>
+			<section data-markdown>
+				## Habilidades Desenvolvidas
+				- Compreender a função input em Python e como ela é utilizada para receber dados do usuário.
+				- Aplicar a função input para receber entradas do usuário e armazená-las em variáveis.
+				- Analisar e avaliar diferentes cenários que envolvem a entrada de dados.
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>Bibliotecas e Funções</li>
+					<li>Função print e erros</li>
+					<li> Variáveis, tipos e identificadores</li>
+					<li>Kahoot!</li>
+				</ul>
+			</section>
+			<section>
+				<img src="./img/Input_Output.gif" width="100%" alt="">
+			</section>
+			<section data-markdown="">
+				## Introdução
+				- O que é entrada de dados? 
+					- Fornecer uma informação _em tempo de execução_ ao programa
+				- Por que precisamos de entrada de dados? 
+					- Tornar os programas mais úteis e acessíveis aos usuários, aumentando sua eficácia e usabilidade
+				- Como Python faz?
+					- input
+					- Quais seriam outras formas de entrada? 
+			</section>
+
+			<section style= "">
+				<img src="./img/java.svg" alt="" class="img-left-side">
+				<h3>Exemplo Entrada de dados - OOOOPS</h3>
+<pre><code class="java">import java.util.*;
+public class Exemplo{
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Informe seu nome");
+		String nome = scan.next()
+		System.out.print(nome);
+	}
+}
+</code></pre>
+			</section>
+			<section>
+				<img src="../img/omgcat.gif" width = "100%" alt="">
+			</section>
+			<section>
+				<h3>Exemplo Entrada de dados</h3>
+<pre><code class="python">nome = input("Informe seu nome")
+print("Olá ", nome)
+</code></pre>
+			</section>
+			<section>
+				<h3>Lendo Valores Numéricos</h3>
+				<pre><code class="python">idade = input("Qual a sua idade?")
+print(idade)
+print(type(idade)) # input sempre acha que é str
+
+idade = int(idade) # converte para inteiro
+print(idade)
+print(type(idade))
+
+ano = int(input("Que ano você nasceu?"))
+idade = 2023 - ano
+print(idade)
+</code></pre>
+			</section>
+			<section data-markdown>
+				## O que é a função input?
+				- Como a função input é usada?
+				- Como a função input lida com diferentes tipos de dados?
+					- Todos os dados são considerados **string** ou **str**
+					- Se quiser converter precisamos usar a função apropriada
+			</section>
+			<section data-markdown>
+				## Erros
+				- O tipo do dado é o esperado?
+				- O valor está dentro da faixa esperada? (veremos em while)
+				- Não veremos mas existe try-except
+			</section>
+			<section>
+				<h3>Exercícios</h3>
+				<h4>Dessa vez use o input! </h4>
+				<ul>
+					<li>Faça um programa que calcule a área e o perímetro de um retângulo</li>
+					<li>Cálculo de IMC</li>
+					<li>[Bônus] Como fazer se eu tiver que digitar uma senha? </li>
+				</ul>
+			</section>
+			<section data-markdown>
+				## Dúvidas?
+			</section>
+		</div>
+	</div>
+
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+	<script src="../js/base.js"></script>
+
+	<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+			slideNumber: 'c/t',
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+			math: {
+				// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				TeX: {
+					Macros: {
+						R: '\\mathbb{R}',
+						set: ['\\left\\{#1 \\; ; \\; #2\\right\\}', 2]
+					}
+				}
+			},
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true },
+				{ src: '../plugin/math/math.js', async: true }
+			]
+		});
+
+	</script>
+
+</body>
+
+</html>
