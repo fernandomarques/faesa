@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Laboratório de Programação 1</title>
+
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+	<style>
+		img {
+			border: 0px !important;
+		}
+	</style>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h3>Condicional e Repetição</h3>
+				<img src="../img/LoopEscherDrawingHands.jpg" alt="">
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<p>
+					"Não se preocupe se você não sabe tudo sobre programação agora. Assim como o código, o aprendizado também é incremental. Cada pequena lição é um passo em direção à grande realização. Mantenha-se motivado, mantenha-se curioso e mantenha-se progredindo."				</p>
+
+			</section>
+
+			<section data-markdown>
+				## Roteiro da Aula
+				- Revisão (15 minutos)
+				- Questão problema (20 minutos)
+				- Estrutura de Repetição `while` (20 minutos)
+				- Exercício prático (15 minutos)
+				- Estrutura de repetição `for` (10 minutos)
+				- Revisão (10 minutos)
+			</section>
+			<section data-markdown>
+				## Habilidades Desenvolvidas
+				- Entender o conceito de loop e sua aplicação em diferentes cenários;
+				- Saber implementar loops utilizando a estrutura "while" e "for" em Python;
+				- Compreender o funcionamento do comando "break" e "continue" dentro de um loop;
+				- Ser capaz de identificar e corrigir erros comuns em loops;
+				- Desenvolver soluções criativas para problemas utilizando loops em Python.
+				
+			</section>
+			<section>
+				<h3>Revisão</h3>
+				<ul>
+					<li>Expressões e condicionais</li>
+					<li>Identação</li>
+					<li>if, elif, else</li>
+					<li>Solução do problema Thor</li>
+				</ul>
+			</section>
+			<section>
+				<img src="../img/LoopCharlieChaplin.gif" alt="" class="img-right-side">
+				<p>Escreva um programa em Python que solicita ao usuário um número inteiro positivo N e, em seguida, imprime todos os números pares menores ou iguais a N.</p>
+				<p>	<b>Pergunta</b>: Qual é a expressão condicional utilizada no programa para verificar se um número é par?</p>
+				<ol type="A">
+					<li>n % 2 == 0</li>
+					<li>n % 2 != 0</li>
+					<li>n % 2 > 0</li>
+					<li>n % 2 &lt; 0</li>
+					<li>n % 2 == 1</li>
+				</ol>
+			</section>
+			<section data-markdown="">
+				## While
+				- Sintaxe básica
+				- Estrutura `while .. else`
+				- Comandos de controle `break` e `continue`
+				- Loop infinito
+				- Tratamento de dados
+					- Intervalo dos dados
+					- Tipo de dado
+				- Montagem de um menu
+			</section>
+			<section data-markdown="">
+				## Erros comuns em loop
+				1. Esquecer de inicializar a variável de controle.
+				1. Esquecer de incrementar/decrementar a variável de controle.
+				1. Esquecer de definir a condição de término do loop.
+				1. Modificar a variável de controle dentro do loop. 
+				1. Não lidar com entradas inválidas.
+				1. Não definir a sequência correta para o loop.
+				1. Não usar a estrutura correta de loop para o problema em questão.
+			</section>
+			<section>
+				<h3>Exercícios</h3>
+				<ul>
+					<li>Lembra do programa do programa de IMC? Modifique para só aceitar valores dentro de um valor específico</li>
+					<li>Faça um sistema de banco com menu que permita depósito, saque e ver extrato </li>
+				</ul>
+			</section>
+			<section data-markdown="">
+				## For
+				- Sintaxe básica
+				- Diferença entre `for` e `while`
+				- Função `range()`
+				- Como fazer `else`
+				- Aninhamento de loop for
+					- Contador
+			</section>
+			<section data-markdown>
+				## Dúvidas?
+			</section>
+		</div>
+	</div>
+
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+	<script src="../js/base.js"></script>
+
+	<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+			slideNumber: 'c/t',
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+			math: {
+				// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				TeX: {
+					Macros: {
+						R: '\\mathbb{R}',
+						set: ['\\left\\{#1 \\; ; \\; #2\\right\\}', 2]
+					}
+				}
+			},
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true },
+				{ src: '../plugin/math/math.js', async: true }
+			]
+		});
+
+	</script>
+
+</body>
+
+</html>
