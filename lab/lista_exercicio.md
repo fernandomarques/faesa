@@ -68,7 +68,7 @@ Imprima: """
 2. Faça um código que conte de 10 até 1 imprimindo na tela
 3. Faça um código que conte de -10 até 10 imprimindo na tela
 4. Faça um código que imprima todos os números pares até 100
-5. Faça um código que imprima todos os números primos de 2 até 100
+5. Faça um código que pergunte a nota do usuário 5 vezes e depois imprima a soma das notas e a média das notas
 6. Faça um código que leia um número e imprima a tabuada do número de 1 a 9
 7. Faça um código, usando dois loops for, que imprima o triangulo abaixo, dica: procure pelo parametro end do print    
 9 8 7 6 5 4 3 2 1   
@@ -81,12 +81,10 @@ Imprima: """
 2 1   
 1   
 8. Faça um programa que faça um cronometro imprimindo minutos e segundos. Dica: procure pela função sleep da biblioteca os
-9. Faça um programa que leia um valor inteiro N calcule a soma da série: S = 1/1 + 1/2 + 1/3 + 1/4 + ... + 1/N 
-10. A fórmula de Leibniz pode ser utilizada para calcular um valor aproximado de Pi. Faça um código que leia um valor N e calcule o valor de Pi seguindo a série: Pi = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ...). Dica: para inverter o sinal você pode usar (-1) elevado a N
+9. Faça um código que imprima todos os números primos de 2 até 100
+10. Faça um programa que leia um valor inteiro N calcule a soma da série: S = 1/1 + 1/2 + 1/3 + 1/4 + ... + 1/N 
+11. A fórmula de Leibniz pode ser utilizada para calcular um valor aproximado de Pi. Faça um código que leia um valor N e calcule o valor de Pi seguindo a série: Pi = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ...). Dica: para inverter o sinal você pode usar (-1) elevado a N
 
-
-*Bônus*:
-1. Faça o exemplo no (https://groklearning.com/csedweek/hoc-snowflake-blockly/)[link]
 
 
 ## Listas 
