@@ -88,6 +88,13 @@ Imprima: """
 
 
 ## Listas 
+1. Faça um programa que leia cinco notas, armazene em uma lista e depois calcule e imprima: soma das notas, média das notas e quantidade de elementos na lista
+1. Leia palavras até que o usuário digite '0', salve em uma lista, imprima a lista colocando todas as palavras em letras maíuscula
+1. Leia 10 números e apenas coloque na lista os números que forem pares. Imprima a lista
+1. Leia várias palavras e as armazene em uma lista. Imprima qual palavra aparece mais vezes e quantas vezes ela apareceu. 
+1. Dado um vetor numpy [5,2,9,1,7] imprima o maior e o menor valor do vetor
+1. Leia 5 números e os armazene em uma lista numpy. Calcule e imprima a soma, média e quantidade na lista. 
+1. Dados os vetores numpy: vetor1 = [1,2,3,4] e vetor2 = [5,6,7,8] imprima um novo vetor que seja equivalente a soma dos dois vetores anteriores. 
 
 ## Desafios dos alunos
 1. Para formarmos um triângulo utilizamos a seguinte regra: um dos lados deve ser maior que o valor absoluto da diferença dos outros dois lados e menor que a soma dos outros dois lados. Tendo essa regra em mente, implemente um programa que leia três valores, valide o triângulo e classifique-o em Isósceles, Equilátero ou Escaleno. (Felipe Leoncio, Ciência da Computação 2022.1)
