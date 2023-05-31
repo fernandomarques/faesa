@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Laboratório de Programação 1</title>
+
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+	<style>
+		img {
+			border: 0px !important;
+		}
+	</style>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+				<section>
+				<h3>Array, Vetor ou Listas</h3>
+				<img src="../img/Vetores.png" alt="">
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section>
+				<section data-markdown>
+					## Roteiro da Aula
+					- Revisão (10 minutos)
+					- Introdução  (5 minutos)
+					- Criação de Listas (10 minutos)
+					- Acesso e Modificação de Elementos (15 minutos)
+					- Operações com Listas (15 minutos)
+					- Arrays NumPy (15 minutos)
+					- Exercícios Práticos (15 minutos)
+					- Conclusão (5 minutos)
+				</section>
+				<section data-markdown>
+					## Habilidades Desenvolvidas
+					- Compreensão do conceito de listas e arrays
+					- Criação e manipulação de listas
+					- Acesso e indexação de elementos
+					- Uso de métodos de listas
+					- Introdução aos arrays NumPy
+					- Resolução de problemas
+				</section>
+				<section data-markdown="">
+					## Revisão
+					- If, elif, else
+					- while, for, range, continue e break
+					- contador e acumulador
+				</section>
+				
+			</section>
+			<section>
+				<h2>Introdução</h2>
+				<ul>
+					<li>Conceito: Coleção de elementos</li>
+					<li>Como iriamos armazenar todas as notas de todos os alunos?</li>
+				</ul>
+				<img src="../img/VetorArrayTrain.jpg" alt="">
+			</section>
+			<section>
+				<h3>Criação de Listas</h3>
+				<ul>
+					<li>Como criar listas</li>
+					<li>Exemplos de diferentes tipos, homogeneo vs. heterogeneo</li>
+					<li><b>BÔNUS</b> List Comprehension</li>
+				</ul>
+				<pre><code>minha_lista = []
+minha_lista = list()</code></pre>
+			</section>
+			<section>
+				<h2>Acesso e Modificação de Elementos</h2>
+				<ul>
+					<li>Acessar elementos individuais: índices</li>
+					<li>Como modificar elementos em uma lista</li>
+					<li>Indexação </li>
+				</ul>
+				<pre><code>notas = [ 10, 9.5, 8]
+print(notas[1])
+notas[2] = 9
+print(notas)	</code></pre>
+			</section>
+			<section >
+				<h2>Operações com Lista</h2>
+				<table>
+					<tr><th>Função</th> <th>Descrição</th></tr>
+					<tr><td>append, extend, insert</td><td>Adiciona um ou mais elementos a lista (ver diferenças)</td></tr>
+					<tr><td>remove, pop, clear</td><td>Remove um ou mais elementos da lista</td></tr>
+					<tr><td>index</td><td>Procura um elemento na lista (erro se não encontrar)</td></tr>
+					<tr><td>count</td><td>Conta elementos em uma lista</td></tr>
+					<tr><td>sort, reverse</td><td>Ordena / Arruma a lista</td></tr>
+					<tr><td>copy</td><td>Copia a lista (é importante?)</td></tr>
+				</table>
+			</section>
+			<section>
+				<h2>Arrays Numpy</h2>
+				<img src="../python/img/numpy.png" alt="" class="img-right-side">
+				<p>NumPy é uma biblioteca de Python para manipulação eficiente de arrays multidimensionais e funções matemáticas.</p>
+				<pre><code>import numpy as np
+
+vetor1 = np.array([1, 2, 3, 4, 5])
+vetor2 = np.arange(0, 10, 2)
+vetor3 = np.zeros(5)  # Vetor de 5 elementos preenchidos com zeros
+vetor4 = np.ones(3)  # Vetor de 3 elementos preenchidos com uns
+vetor5 = np.random.rand(4)  # Vetor de 4 elementos com valores aleatórios entre 0 e 1
+vetor6 = np.random.randint(0,20, size=10)  # Vetor de 4 elementos com valores aleatórios entre 0 e 1				</code></pre>
+			</section>
+			<section>
+				<h2>Arrays Numpy</h2>
+				<ol>
+					<li><strong>numpy.array:</strong> Cria um array multidimensional com elementos homogêneos.</li>
+					<li><strong>numpy.shape:</strong> Retorna as dimensões do array.</li>
+					<li><strong>numpy.reshape:</strong> Altera a forma do array sem alterar seus dados, permitindo reorganizar os elementos.</li>
+					<li><strong>numpy.mean:</strong> Calcula a média dos elementos do array ao longo do eixo especificado.</li>
+					<li><strong>numpy.max:</strong> Encontra o valor máximo no array ao longo do eixo especificado.</li>
+					</ol>
+					<p>Além disso também é possível fazer operação de multiplicação, soma e etc. de forma nativa</p>
+			</section>
+			<section>
+				<h3>Exercícios</h3>
+				<ul>
+					<li>Faça um programa que leia cinco notas, armazene em uma lista e depois calcule e imprima: soma das notas, média das notas e quantidade de elementos na lista</li>
+					<li>Leia palavras até que o usuário digite '0', salve em uma lista, imprima a lista colocando todas as palavras em letras maíuscula</li>
+					<li>Dado um vetor numpy [5,2,9,1,7] imprima o maior e o menor valor do vetor</li>
+					<li>Leia 5 números e os armazene em uma lista numpy. Calcule e imprima a soma, média e quantidade na lista.</li>
+				</ul>
+			</section>
+	
+			<section data-markdown>
+				## Conclusão 
+				- Listas vs Arrays
+				- Listas, cópia, append e etc. 
+				- Vantagens do Numpy
+			</section>
+		</div>
+	</div>
+
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+	<script src="../js/base.js"></script>
+
+	<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+			slideNumber: 'c/t',
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+			math: {
+				// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				TeX: {
+					Macros: {
+						R: '\\mathbb{R}',
+						set: ['\\left\\{#1 \\; ; \\; #2\\right\\}', 2]
+					}
+				}
+			},
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true },
+				{ src: '../plugin/math/math.js', async: true }
+			]
+		});
+
+	</script>
+
+</body>
+
+</html>
