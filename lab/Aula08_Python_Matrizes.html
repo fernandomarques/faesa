@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Laboratório de Programação 1</title>
+
+	<meta name="author" content="Fernando Antonio Marques Filho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../css/reveal.css">
+	<link rel="stylesheet" href="../css/misc.css">
+	<link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/css/zenburn.css">
+	<style>
+		img {
+			border: 0px !important;
+		}
+	</style>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+				<section>
+				<h3>Matriz, dicionário  e muito mais</h3>
+				<p>
+					<small>Created by Fernando Marques </small>
+				</p>
+			</section>
+			<section data-markdown="">
+				## Outros tipos de dados
+				- Dicionários
+				- Tuplas
+				- Matrizes 
+				- DataFrame, Grafos, Árvores, Dados Geoespaciais...
+			</section>
+			<section data-markdown="">
+				## Dicionários em Python
+
+				- Um dicionário é uma estrutura de dados poderosa em Python.
+				- Permite armazenar pares chave-valor.
+				- As chaves são únicas e imutáveis.
+				- Os valores podem ser de qualquer tipo.
+				
+			</section>
+			<section>
+				<h3>Exemplo de Dicionário</h3>
+<pre><code>### Criando um dicionário de filmes
+filmes = {
+	"Ação": ["Vingadores", "Missão Impossível"],
+	"Comédia": ["Se Beber, Não Case!", "Ace Ventura"],
+	"Drama": ["O Poderoso Chefão", "Cidade de Deus"]
+}
+
+# Acessando valores do dicionário
+print(filmes["Ação"])  # Saída: ["Vingadores", "Missão Impossível"]
+print(filmes.get("Comédia"))  # Saída: ["Se Beber, Não Case!", "Ace Ventura"]
+</code></pre>	
+			</section>
+			<section data-markdown="">
+				## Tuplas em Python
+
+				As tuplas são uma estrutura de dados em Python semelhantes às listas, mas com uma diferença fundamental: elas são imutáveis. Isso significa que uma vez criada, uma tupla não pode ser alterada.
+				
+				- As tuplas são definidas utilizando parênteses ().
+				- Podem conter elementos de diferentes tipos de dados.
+				- Os elementos são acessados pelo índice, assim como em listas.
+				- Tuplas podem ser concatenadas e fatiadas.				
+			</section>
+			<section data-markdown="">
+				## Diferença entre Tuplas e Listas
+				Tuplas:
+				- Imutáveis
+				- Utilizam parênteses ()
+				- Mais eficientes em espaço e tempo
+				- Podem ser usadas como chaves de dicionários	
+				Listas:
+				- Mutáveis
+				- Utilizam colchetes []
+				- Permitem operações de alteração
+				- Mais flexíveis para manipulação de dados
+				
+				A escolha depende do contexto e das necessidades do programa.
+				
+			</section>
+			<section data-markdown="">
+				## Vantagens das Tuplas
+				1. Imutabilidade: A imutabilidade das tuplas garante que os dados não sejam alterados acidentalmente.
+				2. Desempenho: As tuplas são mais eficientes em termos de espaço e tempo de execução do que as listas.
+				3. Integridade dos Dados: Como as tuplas são imutáveis, elas garantem a integridade dos dados, evitando alterações indesejadas.
+				4. Utilização como Chaves de Dicionários: Tuplas podem ser usadas como chaves de dicionários, pois são imutáveis e garantem a unicidade dos dados.
+				5. Iteração Eficiente: É mais eficiente percorrer elementos em tuplas do que em listas, especialmente para grandes conjuntos de dados.
+			</section>
+			<section >
+<pre><code># Definindo uma tupla
+frutas = ('maçã', 'banana', 'laranja', 'uva')
+
+# Acessando elementos da tupla
+print(frutas[0])  # Saída: maçã
+print(frutas[2])  # Saída: laranja
+
+# Tentativa de modificação (gera erro)
+frutas[1] = 'morango'
+
+# Iterando sobre uma tupla
+for fruta in frutas:
+	print(fruta)
+
+# Verificando se um elemento está na tupla
+if 'uva' in frutas:
+	print("A uva está na lista de frutas.")
+
+# Obtendo o tamanho da tupla
+print(len(frutas))  # Saída: 4</code></pre>
+			</section>
+			<section data-markdown="">
+				## Matriz com Numpy
+
+				- A biblioteca NumPy oferece suporte para trabalhar com matrizes multidimensionais.
+				- Uma matriz em NumPy é uma tabela de elementos, todos do mesmo tipo, indexados por um tuplo de inteiros não negativos.
+				
+			</section>
+			<section>
+				<pre><code>
+# Exemplo de criação de uma matriz:
+
+import numpy as np
+
+# Criando uma matriz 2x3
+matriz = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Imprimindo a matriz
+print(matriz)
+				</code></pre>
+			</section>
+			<section data-markdown="">
+				## Operações com Matrizes
+
+				- NumPy permite realizar diversas operações com matrizes.
+				- É possível realizar operações aritméticas, transposição, multiplicação de matrizes, entre outras.
+			</section>
+		<section>
+<pre><code>import numpy as np
+
+# Criando matrizes
+matriz1 = np.array([[1, 2], [3, 4]])
+matriz2 = np.array([[5, 6], [7, 8]])
+
+# Operações aritméticas
+soma = matriz1 + matriz2
+subtracao = matriz1 - matriz2
+multiplicacao = matriz1 * matriz2
+divisao = matriz1 / matriz2
+
+# Imprimindo resultados
+print("Soma:")
+print(soma)
+print("Subtração:")
+print(subtracao)
+print("Multiplicação:")
+print(multiplicacao)
+print("Divisão:")
+print(divisao)
+			</code></pre>
+		</section>
+		<section data-markdown="">
+			## Kahoot? 
+		</section>
+		</div>
+	</div>
+
+	<script src="../lib/js/head.min.js"></script>
+	<script src="../js/reveal.js"></script>
+	<script src="../js/base.js"></script>
+
+	<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+			slideNumber: 'c/t',
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+			math: {
+				// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				TeX: {
+					Macros: {
+						R: '\\mathbb{R}',
+						set: ['\\left\\{#1 \\; ; \\; #2\\right\\}', 2]
+					}
+				}
+			},
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: '../plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: '../plugin/zoom-js/zoom.js', async: true },
+				{ src: '../plugin/notes/notes.js', async: true },
+				{ src: '../plugin/math/math.js', async: true }
+			]
+		});
+
+	</script>
+
+</body>
+
+</html>
