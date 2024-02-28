@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatística para Data Science II</title>
+    <meta name="author" content="Fernando Antonio Marques Filho">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/misc.css">
+    <link rel="stylesheet" href="../css/theme/white.css" id="theme">
+    <link rel="stylesheet" href="../lib/css/zenburn.css">
+    
+    <link rel="stylesheet" href="./capa_pos/template_pos.css">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <body>
+        <img class="logo" src="capa_pos/logo_vertical.png">
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background-image="capa_pos/capa_topico_3.png">
+				</section>
+                <section data-markdown>
+                    ## O que veremos?
+                    - Árvores de Decisão
+                        - Particionamento
+                        - Parando crescimento e poda
+                        - Caixa preta
+                    - Ensemble
+                        - Bagging 
+                            - Random Forest
+                            - Variáveis de importância
+                        - Boosting
+                            - Adaboots, XGBoost, LightBoost e CadBoost
+                            - Overfitting
+    
+                </section>
+                <section data-markdown="">
+                    ## Modelos de Árvores
+                    - Modelos de árvores, em conjunto com florestas aleatórias e boosting, formam as ferramentas mais poderosas
+                    usadas para regressão e predição
+                    - Um modelo de árvore é um conjunto de regras "se, se não" que são fácilmente entendidos e implementados
+                </section>
+                <section >
+                    <img src="img/Modulo4DecisionTree.jpg" alt="Árvore de Decisão" >
+                </section>
+                <section>
+                    <pre><code>
+library(ggplot2)
+
+loan_data &lt;- read.csv("E:\\Desktop\\Estatistica II\\loan_data.csv")
+loan_data$outcome &lt;- ordered(loan_data$outcome, levels=c('paid off', 'default'))
+
+library(rpart)
+loan_tree &lt;- rpart(outcome ~ borrower_score + payment_inc_ratio,
+                    data=loan_data, 
+                    control = rpart.control(cp=.005))
+plot(loan_tree, uniform=TRUE, margin=.05)
+text(loan_tree, cex=.75)
+# Ou então um gráfico mais bonito
+library(rattle)
+fancyRpartPlot(loan_tree, cex = 0.8)
+                    </code></pre>
+                </section>
+                <section >
+                    <h3> Particionamento Recursivo</h3>
+                    <ul>
+                        <li>Para particionar os dados o algoritmo usa valores de preditores que façam o melhor possível para separar os dados de forma homogenia </li>
+                        <li>Suponha que tenhamos uma variável de resposta Y e um conjunto P de preditores Xj</li>
+                    </ul>
+                    <ol>
+                        <li>Para cada preditor Xj</li>
+                        <ol>
+                                <li>Para cada valor sj de Xj</li>
+                                <ol type="A">
+                                    <li>Divida os registros maiores e menores</li>
+                                    <li> Meça a homogeneidade de cada partição</li>
+                                    </ol>
+                                <li> Selecione sj que teve maior homogeneidade entre partição</li>
+                        </ol>
+                    </ol>
+                        
+                        </section>
+             
+                        <section>
+                            <pre><code>r_tree &lt;- data.frame(x1 = c(0.575, 0.375, 0.375, 0.375, 0.475),
+    x2 = c(0.575, 0.375, 0.575, 0.575, 0.475),
+    y1 = c(0,         0, 10.42, 4.426, 4.426),
+    y2 = c(25,       25, 10.42, 4.426, 10.42),
+    rule_number = factor(c(1, 2, 3, 4, 5)))
+r_tree &lt;- as.data.frame(r_tree)
+
+labs &lt;- data.frame(x=c(.575 + (1-.575)/2, 
+        .375/2, 
+        (.375 + .575)/2,
+        (.375 + .575)/2, 
+        (.475 + .575)/2, 
+        (.375 + .475)/2
+        ),
+    y=c(12.5, 
+        12.5,
+        10.42 + (25-10.42)/2,
+        4.426/2, 
+        4.426 + (10.42-4.426)/2,
+        4.426 + (10.42-4.426)/2
+    ),
+    decision = factor(c('paid off', 'default',
+        'default', 'paid off', 'paid off',
+        'default')))
+
+
+
+ggplot(data=loan3000, aes(x=borrower_score, y=payment_inc_ratio)) +
+geom_point( aes(color=outcome, shape=outcome), alpha=.5) +
+scale_color_manual(values=c('blue', 'red')) +
+scale_shape_manual(values = c(1, 46)) +
+# scale_shape_discrete(solid=FALSE) +
+geom_segment(data=r_tree, aes(x=x1, y=y1, xend=x2, yend=y2, linetype=rule_number), size=1.5, alpha=.7) +
+guides(colour = guide_legend(override.aes = list(size=1.5)),
+linetype = guide_legend(keywidth=3, override.aes = list(size=1))) +
+scale_x_continuous(expand=c(0,0)) + 
+scale_y_continuous(expand=c(0,0), limits=c(0, 25)) + 
+geom_label(data=labs, aes(x=x, y=y, label=decision)) +
+theme_bw()
+                            </code></pre>
+                        </section>
+        
+                <section data-markdown="">
+                    ## Parando o crescimento
+                    - Se a árvore crescer muito, ela para de identificar grandes regras e começa
+                    a identificar para pequenas regras
+                    - Uma árvore completamente crescida acertará 100% nos dados em que foi treinada
+                    - Precisamos determinar quando a árvore deve parar de crescer
+                        - Não deixar dividir se a subpartição resultante for muito pequeno ou se a folha terminal for muito pequena.
+                        - Não dividir se a nova partição não reduzir significativamente a impureza `cp`
+                </section>
+                <section data-markdown="">
+                    ## Parando o crescimento
+                    - `minbucket` e `minsplit` são arbitrários e podem ser úteis para análise exploratória, mas não existem valores
+                    ótimos
+                    - Se `cp` for muito pequeno, a árvore vai ter overfit
+                    - Se for muito grande, a árvore será muito pequena e terá baixo poder de predição
+                    - O padrão é 0.01, o que pode ser muito alto para data sets muito grandes
+                    - A melhor forma de estimar um bom valor para cp é usando validação cruzada
+                    - o `rpart` tem o argumento `cptable` a tabela de valores de cp e o erro cruzado associado (xerr)
+                </section>
+                <section data-markdown="">
+                    ## Poda
+                    - Uma outra forma é deixar a árvore crescer e depois ir podando
+                    - A poda remove terminais e pequenos ramos da árvore
+                    - Uma forma de saber até onde podar é usar o erro da validação cruzada como referência
+                </section>
+                <section data-markdown="">
+                    ## Como usar as árvores
+                    - Um dos problemas em modelos preditivos é que muitas vezes é visto como 'caixa preta'
+                    - As árvores possuem duas vantagens
+                        1. Fornecem uma ferramenta visual para explorar os dados, identificar quais variáveis são importantes e
+                        detectar relações não lineares
+                        1. Fornecem um conjunto de regras que não especialistas entendem
+                    - Mas, na predição um conjunto de árvores costuma ser mais potente que uma só árvore
+                    - Só que ao usar as técnicas de boosting e random forest, perdemos as duas vantagens...
+                </section>
+                <section data-markdown="">
+                    - Árvores de decisão fornecem um conjunto de regras para classificar ou predizer
+                    - As regras são geradas pelo particionamento dos dados
+                    - Cada partição referência um valor de uma variável preditora
+                    - A cada estágio o algoritmo escolhe a divisão que minimiza a impuridade
+                </section>
+                <section data-markdown="">
+                    > Em 1906 o estatístico Sir Francis Galton visitava uma feira na Inglaterra.
+                    Os participantes deveriam adivinhar o peso de um touro adornado que estava em exposição.
+                    Foram 800 tentativas e, apesar dos valores individuais variarem muito, tanto a média
+                    quanto a mediana ficaram a 1% do peso real do animal.			
+        
+                </section>
+            <section data-markdown="">
+                ## Ensemble
+                - Ensemble, formar uma predição com base em vários modelos
+                - A versão simples funciona da seguinte forma
+                    1. Crie um modelo preditivo e registre as predições para os dados
+                    1. Repita para vários modelos nos mesmo dados
+                    1. Para cada registro predito calcule a média (ou média pondera, ou maioria dos votos)
+                - Para árvores existem duas variações mais comuns:
+                    - Bagging, que em árvore é random forest
+                    - Boosting
+            </section>
+            <section data-markdown="">
+                ## Bagging
+                - Vem de "bootstrap aggregating" foi introduzido em 1994, suponha que tenhamos uma resposta Y com P preditores
+                X = X1, X2, ... , Xp com N registros
+                - Ao invés de criar vários modelos do mesmo dado, cada modelo é ajustado a uma reamostra de bootstrap
+            </section>
+            <section data-markdown="">
+                ## Floresta Aleatória
+                - `Random Forest` é um trademark!
+                - Aplica o bagging a árvores com uma extensão:
+                    - Além de fazer amostragem dos dados, também faz amostragem das variáveis preditoras
+                - Em árvores tradicionais o algoritmo cria subpartições minimizando a impureza com critérios como Gini Impurity
+                - Na floresta aleatória a cada estágio o algoritmo escolha variáveis de um subset aleatório de variáveis
+                - Comparado ao algoritmo da árvore é adiciona um passo para o bagging e bootstrap das variáveis
+            </section>
+            <section data-markdown="">
+                ## Floresta Aleatória
+                - Mas então quantas variáveis devemos ter para cada passo? Uma regra é usar &radic;P onde P é o número de preditores
+                - O pacote `randomForest` implementa florestas aleatórias
+                - Por padrão são treinadas 500 árvores
+                - A estimativa _out-of-bag_ (OOB) estima a taxa de erro para os modelos treinados, usando dados que não foram usados no treinados
+                - A taxa de erro caí rápidamente até estabilizar
+            </section>
+            <section>
+                <pre><code class="R">
+loan3000 &lt;- read.csv('loan3000.csv')
+loan3000$outcome &lt;- ordered(loan3000$outcome, levels=c('paid off', 'default'))
+library(randomForest)
+rf &lt;- randomForest(outcome ~ borrower_score + payment_inc_ratio,
+    data=loan3000)    
+rf
+error_df = data.frame(error_rate = rf$err.rate[,'OOB'],
+num_trees = 1:rf$ntree)
+ggplot(error_df, aes(x=num_trees, y=error_rate)) +
+    geom_line()  +
+    theme_bw()
+                </code></pre>
+            </section>
+           
+            <section data-markdown="">
+                ## Random Forest
+                - O método funciona como uma caixa preta
+                - Apesar de produzir predições mais precisas que árvores, as regras intuítivas das árvores são perdidas
+            </section>
+            <section data-markdown="">
+                ## Variáveis de Importância
+                - O poder da floresta aleatória aparece quando criamos um modelo com muitos preditores
+                - Ela tem a habilidade de determinar quais preditores são mais importantes e encontrar relações complexas
+        
+            </section>
+            <section>
+                <pre><code>
+library(dplyr)
+loan_data &lt;- read.csv('loan_data.csv')
+loan_data &lt;- select(loan_data, -X, -status)
+            
+rf_all &lt;- randomForest(outcome ~ ., data=loan_data, importance=TRUE)
+rf_all
+
+varImpPlot(rf_all, type=1)
+# ps demora...
+        
+                </code></pre>
+            </section>
+            <section>
+                <pre><code>
+imp1 &lt;- importance(rf_all, type=1)
+imp2 &lt;- importance(rf_all, type=2)
+idx &lt;- order(imp1[,1])
+nms &lt;- factor(row.names(imp1)[idx], levels=row.names(imp1)[idx])
+imp &lt;- data.frame(Predictor = rep(nms, 2),
+    Importance = c(imp1[idx, 1], imp2[idx, 1]),
+    Type = rep( c('Accuracy Decrease', 'Gini Decrease'), rep(nrow(imp1), 2)))
+ggplot(imp) + 
+geom_point(aes(y=Predictor, x=Importance), size=2, stat="identity") + 
+facet_wrap(~Type, ncol=1, scales="free_x") + 
+theme(
+    panel.grid.major.x = element_blank() ,
+    panel.grid.major.y = element_line(linetype=3, color="darkgray") ) +
+theme_bw()
+                </code></pre>
+            </section>
+            <section data-markdown="">
+                ![Output da RandomForest](img/Modulo5OutputArvore.png)
+            </section>
+            <section data-markdown="">
+                ![Output da RandomForest](img/Modulo5Importancia.png)
+            </section>
+            <section data-markdown="">
+                ## Variáveis de Importância
+                - Existem duas formas de medir a importância das variáveis
+                    1. A diminuição da acurácia do modelo quando as variáveis são permutadas
+                    1. Pela diminuição do valor do Gini Impurity Score
+                - Por padrão o modelo calcula Gini como subproduto do algoritmo, enquanto a acurácia requer computação extra
+                - Em casos onde a complexidade computacional é muito alta, o Gini pode ser suficiente 
+                - Gini mostra quais variáveis estão sendo sendo mais usadas para fazer o particionamento
+            </section>
+            <section data-markdown="">
+                ## Hiperparâmetros
+                - Assim como muitos algoritmos de aprendizagem de máquina a floresta aleatória pode ser vista como uma caixa preta
+                - Os Hiperparâmetros são especialmente importantes para evitar overfitting
+                - Os dois Hiperparâmetros mais importantes são:
+                    - `nodesize`, menor número possível para as folhas. O padrão é 1 para classificação e 5 para regressão
+                    - `maxnodes`, máximo de nós em uma árvore de decisão, não tem limite por padrão e é limitado por nodesize
+            </section>
+            <section data-markdown="">
+                - Modelos "ensemble" melhoram a acurácia combinando o resultado de vários modelos
+                - Bagging é um tipo particular de ensemble que usa bootstrap para ajustar vários modelos
+                - Random forest é um tipo especial de bagging que alem de amostras dos dados também faz amostras dos preditores
+                - Um resultado importante da floresta aleatória é a importância dos preditores
+                - A floresta aleatória possui Hiperparâmetros que podem ser usados com avaliação cruzada para evitar overfitting
+                - Existem bibliotecas que encontram os melhores parâmetros, mas cuidado
+            </section>
+            <section data-markdown="">
+                ## Boosting
+                - Boosting é uma técnica para criar modelos ensemble e também é usado primariamente em árvores de decisão
+                - Comparado ao bagging é mais poderoso, mas requer maior cuidado
+                - Boosting encaixa uma série de modelos, com cada modelo sucessivo para minimizar o erro do modelo anterior
+                - Existem muitos algoritmos como Adaboot, gradient boosting, XGBoost, CadBoost, LightBoost...
+            </section>
+            <section data-markdown="">
+                ## XGBoost
+                - O software mais utilizado de domínio público é o XGBoost, uma implementação do gradient estocástico
+                - Uma implementação eficiênte está disponível no pacote xgboost
+                - Os parâmetros da função podem e devem ser ajustados, sendo os mais importantes:
+                    - `subsample` que controla a fração da observação que deve ser amostrada
+                    - `eta` um fator de encolhimento aplicado ao $\alpha_m$, esse fator previne overfitting diminuindo a mudança
+                    dos pesos			
+            </section>
+            <section><pre><code>
+library(xgboost)
+predictors &lt;- data.matrix(loan3000[, c('borrower_score', 'payment_inc_ratio')])
+label &lt;- as.numeric(loan3000[,'outcome'])-1
+xgb &lt;- xgboost(data=predictors, label=label, objective = "binary:logistic", 
+    params=list(subsample=.63, eta=0.1), nrounds=100)
+
+            </code></pre>
+            <p>XGBoost não aceita a sintaxe de fórmula, por isso, temos que converter os preditores em data.matrix e a 
+                resposta em variáveis 0/1
+            </p>
+        </section>
+         <section data-markdown="">
+                ## Evitando overfitting
+                - O uso às cegas do xgboost pode acarretar em modelos instáveis como resultado do overfit
+                - Com overfit a acurácia do modelo para dados não treinados será ruim
+                - As predições serão altamente variáveis
+            </section>
+            <section>
+                <pre><code>
+set.seed(42)
+predictors &lt;- data.matrix(loan_data[,-which(names(loan_data) %in% 'outcome')])
+label &lt;- as.numeric(loan_data$outcome)-1
+test_idx &lt;- sample(nrow(loan_data), 10000)
+
+xgb_default &lt;- xgboost(data=predictors[-test_idx,], label=label[-test_idx], 
+                        objective = "binary:logistic", nrounds=250, verbose=0)
+pred_default &lt;- predict(xgb_default, predictors[test_idx,])
+error_default &lt;- abs(label[test_idx] - pred_default) > 0.5
+xgb_default$evaluation_log[250,]
+mean(error_default)
+                </code></pre>
+                <p>Apesar de taxa de erro de 13% no modelo treinado, a taxa de erro no teste é 36%!</p>
+            </section>
+            <section data-markdown="">
+                ## Evitando Overfitting
+                - Além dos parâmetros também podemos alterar a função de custo de forma a penalizar a complexidade do modelo
+                - Existem dois parametros para isso alpha e lambda que correspondem as distâncias manhattan e euclidiana
+            </section>
+            <section>
+                <pre><code>
+xgb_penalty &lt;- xgboost(data=predictors[-test_idx,], 
+    label=label[-test_idx], 
+    params=list(eta=.1, subsample=.63, lambda=1000),
+    objective = "binary:logistic", nrounds=250, verbose=0)
+pred_penalty &lt;- predict(xgb_penalty, predictors[test_idx,])
+error_penalty &lt;- abs(label[test_idx] - pred_penalty) > 0.5
+xgb_penalty$evaluation_log[250,]
+mean(error_penalty)
+                </code></pre>
+            </section>
+            <section>
+                <pre><code>
+#Penalty vs Default
+error_default &lt;- rep(0, 250)
+error_penalty &lt;- rep(0, 250)
+for(i in 1:250)
+{
+    pred_default &lt;- predict(xgb_default, predictors[test_idx,], ntreelimit = i)
+    error_default[i] &lt;- mean(abs(label[test_idx] - pred_default) > 0.5)
+    pred_penalty &lt;- predict(xgb_penalty, predictors[test_idx,], ntreelimit = i)
+    error_penalty[i] &lt;- mean(abs(label[test_idx] - pred_penalty) > 0.5)
+}
+
+errors &lt;- rbind(xgb_default$evaluation_log,
+    xgb_penalty$evaluation_log,
+    data.frame(iter=1:250, train_error=error_default),
+    data.frame(iter=1:250, train_error=error_penalty))
+errors$type &lt;- rep(c('default train', 'penalty train', 
+    'default test', 'penalty test'), rep(250, 4))
+
+ggplot(errors, aes(x=iter, y=train_error, group=type)) +
+    geom_line(aes(linetype=type, color=type), size=1) +
+    scale_linetype_manual(values=c('solid', 'dashed', 'dotted', 'longdash')) +
+    theme_bw() +
+    theme(legend.key.width = unit(1.5,"cm")) +
+    labs(x="Iterations", y="Error") +
+    guides(colour = guide_legend(override.aes = list(size=1)))
+        </code></pre>
+            </section>
+           
+            <section data-markdown="">
+                ## Hiperparâmetros XGBoost
+                - `eta` fator de encolhimento de 0 a 1 para &alpha;. Padrão é 0.3, para dados pequenos é sugerido 0.1
+                - `nrounds` número de rodadas de boosting, se eta for pequeno ele deve ser grande pois a aprendizagem será mais lenta
+                - `max_depth` maior profundidade da árvore (padrão 6) contrário de random forest, xgboot tem árvores shallow
+                - `subsample colsample_bytree` - fração dos registros para serem amostrados sem reposição
+                - `lambda e alpha` parâmetros de regularização
+            </section>
+            <section data-markdown="">
+                - Boosting é uma classe de modelos arranjados (ensemble) que ajusta uma sequência de modelos dando peso maior
+                a registro com erros
+                - Também pode sofrer de overfitting, por isso os parâmetros
+                - Árvores se preocupam com variáveis categóricas ou normalização
+                - Validação cruzada é muito importante para XGBoost devido a grande variedade de Hiperparâmetros
+                - [CadBoost vs. LightBoost vs. XGBoost](https://towardsdatascience.com/catboost-vs-light-gbm-vs-xgboost-5f93620723db)
+            </section>
+            </div>
+        </div>
+    </body>
+    <script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+				// Optional reveal.js plugins
+				dependencies: [
+          { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+</head>
+<body>
+    
+</body>
+</html>
