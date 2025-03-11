@@ -24,18 +24,18 @@
 
     <h2>Horários das Aulas</h2>
     
-    <p>Última atualização: 10/03/2025 14:33:44</p>
+    <p>Última atualização: 11/03/2025 15:42:12</p>
 
     <!-- Campo de busca -->
     <input type="text" id="busca" onkeyup="filtrarTabela()" placeholder="Buscar por professor, disciplina...">
 
     <!-- Checkboxes para dias da semana -->
     <div class="checkboxes">
-        <label><input type="checkbox" value="Segunda" onchange="filtrarTabela()"> Segunda</label>
-        <label><input type="checkbox" value="Terça" onchange="filtrarTabela()"> Terça</label>
-        <label><input type="checkbox" value="Quarta" onchange="filtrarTabela()"> Quarta</label>
-        <label><input type="checkbox" value="Quinta" onchange="filtrarTabela()"> Quinta</label>
-        <label><input type="checkbox" value="Sexta" onchange="filtrarTabela()"> Sexta</label>
+        <label><input type="checkbox" id="seg" value="Segunda" onchange="filtrarTabela()"> Segunda</label>
+        <label><input type="checkbox" id="ter" value="Terça" onchange="filtrarTabela()"> Terça</label>
+        <label><input type="checkbox" id="qua" value="Quarta" onchange="filtrarTabela()"> Quarta</label>
+        <label><input type="checkbox" id="qui" value="Quinta" onchange="filtrarTabela()"> Quinta</label>
+        <label><input type="checkbox" id="sex" value="Sexta" onchange="filtrarTabela()"> Sexta</label>
     </div>
 
     <!-- Tabela com dados -->
@@ -409,7 +409,7 @@
                     <td>CI-1010-251-3HC1</td>
                     <td>Terça</td>
                     <td>18:45:00 - 19:30:00</td>
-                    <td>112</td>
+                    <td>113</td>
                 </tr>
             
                 <tr>
@@ -445,6 +445,15 @@
                     <td>CI-1010-251-1HC1A</td>
                     <td>Quarta</td>
                     <td>07:00:00 - 09:35:00</td>
+                    <td>NATEC03</td>
+                </tr>
+            
+                <tr>
+                    <td>RENATA CRISTINA</td>
+                    <td>LABORATÓRIO DE PROGRAMAÇÃO I</td>
+                    <td>CI-1010-251-1HC2A</td>
+                    <td>Quarta</td>
+                    <td>09:35:00 - 12:00:00</td>
                     <td>NATEC03</td>
                 </tr>
             
@@ -706,7 +715,7 @@
                     <td>CI-1006-251-1SC1</td>
                     <td>Quinta</td>
                     <td>18:45:00 - 20:15:00</td>
-                    <td>612</td>
+                    <td>112</td>
                 </tr>
             
                 <tr>
@@ -1102,7 +1111,7 @@
                     <td>CI-1014-251-4DC2</td>
                     <td>Segunda</td>
                     <td>18:45:00 - 20:15:00</td>
-                    <td>114</td>
+                    <td>614</td>
                 </tr>
             
                 <tr>
@@ -1232,6 +1241,36 @@
                 tbody.appendChild(linha);
             });
         }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("busca");
+        const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+        // Recupera os valores do Local Storage ao carregar a página
+        if (localStorage.getItem("searchValue")) {
+            searchInput.value = localStorage.getItem("searchValue");
+        }
+
+        checkboxes.forEach((checkbox) => {
+            const savedValue = localStorage.getItem(checkbox.id);
+            if (savedValue === "true") {
+                checkbox.checked = true;
+            }
+        });
+        filtrarTabela();
+        
+        // Salva a busca ao digitar
+        searchInput.addEventListener("input", function () {
+            localStorage.setItem("searchValue", searchInput.value);
+        });
+
+        // Salva o estado dos checkboxes
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener("change", function () {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+        });
+    });
     </script>
 
 </body>
