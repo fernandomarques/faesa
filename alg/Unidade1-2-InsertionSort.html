@@ -66,6 +66,8 @@
 			- É um algoritmo eficiente para ordenar uma pequena quantidade de números
 			- Se começarmos com as cartas do baralho viradas para baixo, vamos pegando as cartas e as inserindo de
 			forma ordenada
+			- Quanto tempo você espera que leve para ordenar um baralho de 52 cartas usando esse método? e mil? Um milhão?
+			- Vamos transformar intuição em matemática
 		</section>
 		<section >
 			<pre><code class="code-big">
@@ -118,7 +120,7 @@ insertion_sort(val)
 			- Paramos a indução quando o laço termina
 		</section>
 		<section data-markdown="">
-			## Invariantes Insort 
+			## Invariantes Insertion Sort 
 			- __Inicialização__
 			- Temos que mostrar que o invariante é válido antes da primeira iteração do laço, quando j=2
 			- Assim, o sub-arranjo A[1.. j-1] consiste apenas de A[1]
@@ -126,7 +128,7 @@ insertion_sort(val)
 			- Temos então que o invariante é válido para a primeira parte 
 		</section>
 		<section data-markdown="">
-			## Invariantes Insort 
+			## Invariantes Insertion Sort 
 			- __Manutenção__
 			- Temos que mostrar agora que o invariante é mantido a cada iteração do loop
 			- Informalmente, o laço for funciona deslocando A[j-1], A[j-2] ... e assim por diante, uma posição para a direita
@@ -136,7 +138,7 @@ insertion_sort(val)
 			- _Um tratamento mais formal poderia ser feito considerando o invariante do segundo loop_
 		</section>
 		<section data-markdown="">
-			## Invariantes Insort 
+			## Invariantes Insertion Sort 
 			- __Término__
 			- Agora examinamos o que ocorre quando o laço termina
 			- A condição de parada é j > A.comprimento = n 
@@ -156,6 +158,12 @@ insertion_sort(val)
 			Enuncie o problema formalmente e escreva o pseudocódigo para somar os inteiros
 		</section>
 		<section data-markdown="">
+			## Análise do Insertion Sort
+			- Sabemos que o algoritmo é: Melhor caso: O(n), Pior caso: O(n^2) e caso médio: O(n^2) 
+			- Mas como chegamos a essas conclusões?
+			- Para responder a essa pergunta, precisamos de uma maneira de medir o tempo gasto por
+		</section>
+		<section data-markdown="">
 			## Análise de Algoritmos
 			- Analisar um algoritmo significa prever os recursos de que o algoritmo necessita
 			- Ocasionalmente recursos como banda, memória ou hardware são a preocupação, porém mais frequentemente é o tempo
@@ -173,15 +181,15 @@ insertion_sort(val)
 			teoria das probabilidades, algebra e termos mais significativos em uma fórmula
 		</section>
 		<section data-markdown="">
-			## Análise Insort
-			- O tempo gasto pelo algoritmo insort depende da entrada: ordenar mil números demora mais que ordenar três
-			- Além disso, o insort pode demorar tempos diferentes para ordenar sequências de mesmo tamanho!
+			## Análise Insertion Sort
+			- O tempo gasto pelo algoritmo Insertion Sort depende da entrada: ordenar mil números demora mais que ordenar três
+			- Além disso, o Insertion Sort pode demorar tempos diferentes para ordenar sequências de mesmo tamanho!
 			- Em geral, o tempo gasto por um algoritmo cresce com o tamanho da entrada, assim, é tradicional descrever
 			o tempo de execução de um programa em função de sua entrada
-			- A melhor noção para __tamanho da entrada__ depende do problema, no insort temos a quantidade de elementos a serem ordenados
+			- A melhor noção para __tamanho da entrada__ depende do problema, no Insertion Sort temos a quantidade de elementos a serem ordenados
 		</section>
 		<section data-markdown="">
-			## Análise Insort
+			## Análise Insertion Sort
 			- Outra forma pode ser número total de bits
 			- Podemos ter também que descrever o tamanho da entrada como dois inteiros ao invés de um como, por exemplo,
 			 se a entrada for número de nós e vértices de um grafo
@@ -191,7 +199,14 @@ insertion_sort(val)
 			- Uma quantidade de tempo constante é exigida para executar cada linha do nosso processo
 		</section>
 		<section data-markdown="">
-			## Análise Insort
+			## Análise Insertion Sort
+			- O tempo de execução do algoritmo é a soma dos tempos de execução para cada instrução
+			- Porque não contamos em segundos?
+			- O tempo gasto por um algoritmo depende do hardware, do sistema operacional, da linguagem de programação e do compilador
+			- O número de passos é uma medida mais objetiva do tempo gasto por um algoritmo
+		</section>
+		<section data-markdown="">
+			## Análise Insertion Sort
 			- Uma linha pode demorar uma quantidade de tempo diferente de outra linha, mas consideraremos que cada i-ésima
 			execução da mesma linha levará _ci_, onde _ci_ é uma constante
 			- A nossa expressão para o tempo de execução evoluirá de uma fórmula confusa até uma notação mais simples
@@ -204,14 +219,14 @@ insertion_sort(val)
 				<tr><td>| chave = A[j]   </td><td>C<sub>2</sub></td><td>n-1</td></tr>
 				<tr><td>| i = j - 1	     </td><td>C<sub>3</sub></td><td>n-1</td></tr>
 				<tr><td>| while i > 0 e A[i] > chave</td><td>C<sub>4</sub></td><td>&sum;<sub>j=2</sub>(t<sub>j)</sub></td></tr>
-				<tr><td>|| A[i+j] = A[i]  </td><td>C<sub>5</sub></td><td>&sum;<sub>j=2</sub>(t<sub>j-1)</sub></td></tr>
+				<tr><td>|| A[i+1] = A[i]  </td><td>C<sub>5</sub></td><td>&sum;<sub>j=2</sub>(t<sub>j-1)</sub></td></tr>
 				<tr><td>|| i = i - 1      </td><td>C<sub>6</sub></td><td>&sum;<sub>j=2</sub>(t<sub>j-1)</sub></td></tr>
 				<tr><td>| A[i+1] = chave  </td><td>C<sub>7</sub></td><td>n-1</td></tr>
 			</table>
 			<p>O tempo de execução do algoritmo é a soma dos tempos de execução para cada instrução</p>
 		</section>
 		<section data-markdown="">
-			## Análise Insort
+			## Análise Insertion Sort
 			- Para obter o tempo de execução T(n) somamos os produtos das colunas custo e vezes
 			\begin{aligned}
 			T(n) = c_1n + c_2(n-1) + c_3(n-1) + c_4\sum{t_j} + c_5\sum{t_j-1} 
@@ -221,7 +236,7 @@ insertion_sort(val)
 			\end{aligned}
 		</section>
 		<section data-markdown="">
-			## Análise Insort
+			## Análise Insertion Sort
 			- Mesmo para entradas de tamanho igual o tempo de execução do algoritmo pode mudar
 			- O melhor caso ocorre quando o vetor está ordenado, então para j = 2,3,...,n A[i] &le; chave
 			- Portanto tj= 1, então o tempo de execução será
@@ -229,11 +244,11 @@ insertion_sort(val)
 			T(n) = c_1n + c_2(n-1) + c_3(n-1) + c_4(n-1) + c_7(n-1)
 			\end{aligned}
 			\begin{aligned}
-			  = (c_1 + c_2 + c_3 + c_4 + c_7)n - (c_2 + c_3 + c_3 + c_7)
+			  = (c_1 + c_2 + c_3 + c_4 + c_7)n - (c_2 + c_3 + c_4 + c_7)
 			\end{aligned}
 		</section>
 		<section data-markdown="">
-			## Análise Insort
+			## Análise Insertion Sort
 			- Podemos expressar esse tempo de execução como an+b para constantes a e b que dependem de ci, assim, ela é uma __função linear__
 			- Se tivermos o pior caso, ordem inversa, devemos comparar cada elemento A[j] com cada elemento do sub-arranjo
 			- Então tj = j
@@ -242,7 +257,7 @@ insertion_sort(val)
 			$$ \sum_{j=2}^n j -1  = \frac{n(n+1)}{2}  $$
 		</section>
 		<section data-markdown="">
-			## Análise Insort
+			## Análise Insertion Sort
 			\begin{aligned}
 			T(n) = c_1n + c_2(n-1) + c_3(n-1) + c_4(\frac{n(n-1)}{2}-1) +
 			\end{aligned}
@@ -251,7 +266,7 @@ insertion_sort(val)
 			\end{aligned}
 		</section>
 		<section data-markdown="">
-			## Análise Insort
+			## Análise Insertion Sort
 			\begin{aligned}
 			T(n) = (\frac{c_4}{2} + \frac{c_5}{2}+\frac{c_6}{2})n^2 +
 			\end{aligned}
@@ -286,7 +301,7 @@ insertion_sort(val)
 	<section data-markdown="">
 		## Ordem de crescimento
 		- Restando apenas o fator $n^2$
-		- Então afirmamos que o insort tem um tempo de ordenação no pior caso de $ \Theta(n^2)$
+		- Então afirmamos que o Insertion Sort tem um tempo de ordenação no pior caso de $ \Theta(n^2)$
 		- Consideramos um algoritmo mais eficiente que outro se seu tempo de execução do pior caso apresentar uma ordem de 
 		crescimento mais baixa
 		- Para entradas suficientemente grandes um algoritmo $\Theta(n^2)$ será executado mais rapidamente no pior caso que
@@ -296,6 +311,12 @@ insertion_sort(val)
 		## Exercícios
 		1. Expresse a função $n^3/1000 - 100n^2 - 100n + 3$ em notação &Theta;
 		1. Qual o tempo de execução no melhor caso, caso médio e pior caso para a busca linear na notação &Theta;
+	</section>
+	<section data-markdown="">
+		## Vimos hoje
+		- n² não é o fim do mundo, mas é pior que n lg n
+		- Como provar que um algoritmo é correto usando invariantes de laço
+		- Como analisar o tempo de execução de um algoritmo
 	</section>
 	</div>
 		</div>
