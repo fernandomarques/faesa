@@ -44,23 +44,48 @@
 		<section data-markdown>
 			## Objetivos
 			- Comportamento assintótico de funções; A notação O, ômega e theta; 
+			> Como pensar crescimento sem fazer conta toda vez?
 		</section>
 		<section data-markdown>
-			- Vimos que seria possível calcular exatamente quanto tempo um algoritmo levaria para ser executado
-			- Porém, quando vamos comparar, é suficiente saber que o seu &Theta;(n), já que para números grandes os 
-			"por menores" são irrelevantes
-			- A ordem de crescimento do tempo de execução é conhecida como eficiência assintótica
+			- Vimos como calcular exatamente quanto tempo um algoritmo levaria para ser executado
+			- Mas é suficiente saber o seu &Theta;(n)
+			- Conhecida como __eficiência assintótica__
 			- Veremos algumas notações e faremos uma revisão de algumas funções comuns
 		</section>
 		<section data-markdown>
 			## Notação Assintótica
-			- Usaremos a notação assintótica primariamente para definir o tempo de execução do algoritmo
 			- Vimos que no pior caso o insertionSort é $ \Theta(n^2) $
 			- Na realidade a notação assintótica é aplicada em funções
 			- Caracterizamos o tempo no pior caso como $an^2 + bn + c$ para constantes a,b e c
 			- Ao afirmar que o tempo de execução é de $ \Theta(n^2)$ estamos abstraindo alguns detalhes da função
-			- Como a notação assintótica se aplica a funções $ \Theta(n^2)$ era a função $an^2 + bn + c$ que, por acaso,
-			caracteriza o tempo de execução no pior caso
+		</section>
+			<section data-markdown="">
+			## Notação O
+			- Quando temos apenas um limite assintótico superior, usamos a notação O
+			- Para uma função g(n) denotamos por O(g(n)) o conjunto de funções
+			$$ O(g(n)) = [ f(n): \exists \: c, n_0 | $$
+			$$ 0 \le f(n) \le cg(n) \, \forall n \ge n_0 ] $$
+		</section>
+		<section data-markdown>
+			## Notação O
+			- Usamos essa notação para indicar que uma função f(n) é membro do conjunto
+			O(g(n))
+			- Podemos até mesmo dizer que qualquer função linear an + b está em O(n²)
+		</section>
+		<section data-markdown>
+			## Notação O
+			- Na literatura algumas vezes a notação O é usado para limites assintóticos
+			justos, que definimos por &Theta;
+			- Quando afirmamos que "o tempo de execução é de O(n²)" o que estamos dizendo é que
+			- Existe uma função f(n) que O(n²) tal que, para qualquer valor de n, não importando qual a entrada
+			, o tempo de execução para essa entrada tem um limite superior determinado pelo valor f(n) 
+		</section>
+		<section data-markdown>
+			## Notação &Omega;
+			- Da mesma forma que O fornece um limite assintótico superior, a notação Omega 
+			fornece um limite assintótico inferior
+			$$ \Omega(g(n)) = [ f(n): \exists \: c, n_0 | $$
+			$$ 0 \le cg(n) \le f(n) \, \forall n \ge n_0 ] $$
 		</section>
 		<section data-markdown>
 			## Notação &Theta;
@@ -84,11 +109,19 @@
 			<img src="img/Modulo1Theta.png" alt="Exemplo de notação theta" width="100%">
 		</section>
 		<section data-markdown>
+			## Relação entre Notações
+			- Observe que $ f(n) = \Theta(g(n)) \implies f(n) = O(g(n)) $
+			- Já que a notação &Theta; é uma noção mais forte que O
+			- Podemos falar também $ \Theta(g(n)) \subseteq O(g(n)) $
+			- Assim qualquer função quadrática está em &Theta;(n²) também mostra que está em O(n²)
+		</section>
+		<section data-markdown>
 			## Notação &Theta;
 			- Vimos a notação &Theta; de forma informal dizendo que bastava descartar os termos de ordem mais baixa
 			e ignorar o coeficiente do termo de ordem maior
 			- Vamos mostrar que $\frac{1}{2} n^2 - 3n = \Theta(g(n^2))$
 		</section>
+		
 		<section>
 			$$ c_1, c_2, n_0 $$ tal que
 			$$c_1n^2 \le \frac{1}{2}n^2 -3n \le c_2n^2 $$ Dividindo por $n^2$
@@ -115,40 +148,7 @@
 				com frequência para indicar uma constante ou função constante em relação a uma variável
 			</p>
 		</section>
-		<section data-markdown="">
-			## Notação O
-			- A notação &Theta; limita assintoticamente uma função acima e abaixo
-			- Quando temos apenas um limite assintótico superior, usamos a notação O
-			- Para uma função g(n) denotamos por O(g(n)) o conjunto de funções
-			$$ O(g(n) = [ f(n): \exists \: c, n_0 | $$
-			$$ 0 \le f(n) \le cg(n) \, \forall n \ge n_0 ] $$
-		</section>
-		<section data-markdown>
-			## Notação O
-			- Usamos essa notação para indicar que uma função f(n) é membro do conjunto
-			O(g(n))
-			- Observe que $ f(n) = \Theta(g(n)) \implies f(n) = O(g(n)) $
-			- Já que a notação &Theta; é uma noção mais forte que O
-			- Podemos falar também $ \Theta(g(n)) \subseteq O(g(n)) $
-			- Assim qualquer função quadrática está em &Theta;(n²) também mostra que está em O(n²)
-			- Podemos até mesmo dizer que qualquer função linear an + b está em O(n²)
-		</section>
-		<section data-markdown>
-			## Notação O
-			- Na literatura algumas vezes a notação O é usado para limites assintóticos
-			justos, que definimos por &Theta;
-			- Quando afirmamos que "o tempo de execução é de O(n²)" o que estamos dizendo é que
-			- Existe uma função f(n) que O(n²) tal que, para qualquer valor de n, não importando qual a entrada
-			, o tempo de execução para essa entrada tem um limite superior determinado pelo valor f(n) 
-			- Também dizemos que o tempo de execução do pior caso é O(n²)
-		</section>
-		<section data-markdown>
-			## Notação &Omega;
-			- Da mesma forma que O fornece um limite assintótico superior, a notação Omega 
-			fornece um limite assintótico inferior
-			$$ \Omega(g(n) = [ f(n): \exists \: c, n_0 | $$
-			$$ 0 \le cg(n) \le f(n) \, \forall n \ge n_0 ] $$
-		</section>
+	
 		<section data-markdown>
 			## Teorema
 			- Para quaisquer duas funções f(n) e g(n), temos $ f(n) = \Theta(g(n))  \Leftrightarrow f(n) = O(g(n)) e
