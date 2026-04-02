@@ -41,6 +41,18 @@
 						<small>Created by Fernando Marques </small>
 					</p>
 		</section>
+		<section>
+			<p>Quanto tempo leva esse algoritmo?</p>
+			<pre><code>def misterio(n):
+	if n <= 1:
+		return 1
+	return misterio(n//2) + misterio(n//2) + n
+			</code></pre>
+		<ul><li>Linear?
+		</li>
+	<li>Quadrático?</li>
+<li>Não sei?</li></ul>
+		</section>
 		<section data-markdown >
 			## Divisão e Conquista
 			- Muitos algoritmos úteis são __recursivos__, chamando a si mesmo para resolver um problema
@@ -50,17 +62,11 @@
 				1. _Conquista_ os subproblemas 
 				1. _Combinação_ as soluções dadas aos subproblemas na solução do problema original
 		</section>
-		<section data-markdown>
-			## Ordenação por intercalação
-			- __Divisão__ divide a sequência de n elementos que deve ser ordenada em duas subsequências de n/2 elementos cada
-			- __Conquista__ Ordena as duas subsequências recursivamente, utilizando a ordenação por intercalação
-			- __Combinação__ Intercala as duas subsequências para produzir a resposta ordenada
-		</section>
-		<section>
+				<section>
 			<pre><code>
 def merge(left, right):
 	if not len(left) or not len(right):
-	return left or right
+		return left or right
 	result = []
 	i, j = 0, 0
 	while (len(result) &lt; len(left) + len(right)):
@@ -87,11 +93,50 @@ def mergesort(list):
 	return merge(left, right)
 			</code></pre>
 		</section>
+		<section data-markdown="">
+			## Divisão e Conquista
+			- Dividir custa?
+			- Resolver custa?
+			- Combinar custa?
+			- O tempo total é a soma desses custos
+		</section>
+		<section data-markdown>
+			## Ordenação por intercalação
+			- __Divisão__ divide a sequência de n elementos que deve ser ordenada em duas subsequências de n/2 elementos cada
+			- __Conquista__ Ordena as duas subsequências recursivamente, utilizando a ordenação por intercalação
+			- __Combinação__ Intercala as duas subsequências para produzir a resposta ordenada
+		</section>
+		<section data-markdown="">
+			- Quantas chamadas recursivas são feitas?
+			- Qual o tamanho das chamadas recursivas?
+			- Qual o custo fora da recursão?
+		</section>
+		<section data-markdown="">
+			- Quantas chamadas recursivas são feitas? 2
+			- Qual o tamanho das chamadas recursivas? n/2
+			- Qual o custo fora da recursão? - Θ(n)
+			- O tempo total é $$T(n) = 2T(n/2) + Θ(n) $$
+		</section>
+		<section>
+			Qual é mais rápido?
+			<ol>
+				<li>T(n) = 2T(n/2) + n</li>
+				<li>T(n) = T(n-1) + 1</li>
+				<li>T(n) = 2T(n-1) + 1</li>
+			</ol>
+		</section>
+
 		<section data-markdown>
 			## Divisão e Conquista
 			- Quando os problemas são suficientemente grandes para serem resolvidos recursivamente, trate-se de um caso recursivo
 			- Logo que o subproblema se torna pequeno e não recorremos a recursão, dizemos que a recursão se esgotou
 			- As vezes os subproblemas menores não são exatamente iguais ao problema original
+		</section>
+		<section data-markdown="">
+			- Recorrência é uma forma de descrever o custo de algoritmos recursivos
+			- T(n) = custo do problema de tamanho n
+			- Divisão e conquista -> Recorrência
+			- Recorrência -> Solução (veremos as técnicas para isso)
 		</section>
 		<section data-markdown>
 			## Relações de Recorrência
@@ -115,7 +160,7 @@ def mergesort(list):
 				1. __método de substituição__ arriscamos um palpite para um limite e então usamos indução matemática para provar o palpite
 				1. __método da árvore de recursão__ converte a recorrência em uma árvore cujos nós representam os custos envolvidos em vários
 				níveis de recursão 
-				1. __método mestre__ dá limite a recorrências da forma $T(n) = aT(n/b) + f(n) $
+				1. __método mestre__ dá limite a recorrências da forma $T(n) = aT(n/b) + f(n) $ usando uma fórmula pronta.
 	</section>
 	<section data-markdown>
 		## Relações de recorrência
@@ -132,9 +177,15 @@ def mergesort(list):
 		a ordem de crescimento não é alterada
 		- Muitas vezes omitiremos pisos, tetos e condições de contorno e mais tarde determinaremos se eles tem importância ou não
 	</section>
+	<section data-markdown="">
+		## Nem toda relação de recorrência é igual
+		- T(n) = T(n-1) + 1 → linear  
+		- T(n) = 2T(n/2) + n → n log n  
+		- T(n) = 2T(n-1) + 1 → exponencial
+	</section>
 	<section data-markdown>
 		## Exercício
-		- Faça algoritmos recursivos para:
+		- Faça algoritmos recursivos, escreva a relação de recorrência e tente estimar o crescimento:
 			- Calcule a soma de um vetor
 			- Fibonacci. T(1) = 1, T(2) = 1, T(3) = 2, T(4) = 3, T(5) = 5 ...
 			- Torre de Hanoi. 3 colunas com pilhas de discos, mova de A para C sem colocar disco maior a cima de um menor
