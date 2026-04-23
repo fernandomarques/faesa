@@ -50,6 +50,12 @@
 			- _mostrar a árvore_
 		</section>
 		<section data-markdown="">
+			- Se o custo diminui por nível &LeftTeeArrow; raiz domina
+			- Se cresce por nível &LeftTeeArrow; folhas dominam
+			- Se o custo é o mesmo por nível &LeftTeeArrow; todos os níveis contribuem igualmente
+			- O custo total é o custo por nível multiplicado pelo número de níveis
+		</section>
+		<section data-markdown="">
 			- Para facilitar supomos que n é potência exata de 4
 			- Como os problemas diminuem por um fator de 4, a que distância da raiz estão as folhas ?
 			- O tamanho do subproblema para i = $ n/4^i $ 
@@ -106,6 +112,14 @@
 			<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 			<h1>Método Mestre</h1>
 		</section>
+		<section data-markdown="">
+			## Padrão Geral
+			T(n) = aT(n/b) + f(n)
+			- Quantos subproblemas são criados? a
+			- Qual o tamanho de cada subproblema? n/b
+			- Qual o custo fora da recursão? f(n)
+
+		</section>
 		<section data-markdown>
 			## Método Mestre
 			- Fornece uma 'receita' para resolver recorrências da forma $T(n) = aT(n/b) + f(n) $
@@ -123,6 +137,13 @@
 			$af(n/b) \le cf(n) $
 			- Os três casos não abrangem todas as possibilidades! Existem lacunas entre as regras 1 e 2 e as regras 2 e 3
 		</section>
+		<section data-markdown="">
+			## Resumo
+			- Árvore &leftarrow; entender comportamento de algoritmos recursivos
+			- Substituição &leftarrow; provar limites superiores e inferiores
+			- Mestre &leftarrow; resolver recorrências de forma rápida
+
+		</section>
 		<section data-markdown>
 			## Exercícios
 			- $ T(n) = 9T(n/3) + n$
@@ -139,7 +160,9 @@
 			- $ T(n) = 2T(n/4) + \sqrt n$
 			- $ T(n) = 2T(n/4) + n $
 			- $ T(n) = 2T(n/4) + n^2 $
+			- $ T(n) = T(2n/3) + 1$ (como ficaria esse pelo método mestre?)
 		</section>
+
 	</div>
 		</div>
 
