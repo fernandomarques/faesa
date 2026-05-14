@@ -41,6 +41,9 @@
 						<small>Created by Fernando Marques </small>
 					</p>
 		</section>
+		<section data-markdown="">
+Se eu der a você uma solução para o Sudoku, você consegue verificar se está certa rapidamente? E encontrar a solução do zero?
+			</section>
 		<section data-markdown>
 			## NP-Completos
 			- Quase todos algoritmos que estudamos até agora são de tempo polinomialmente complexos
@@ -79,6 +82,12 @@
 			- NPC, ou NP-Completo, é um problema que está em NP e é tão difícil quanto qualquer problema em NP
 			- Se __existe um__ problema NPC que possa ser resolvido em tempo polinomial, então, __TODOS__ problemas NP
 			tem um algoritmo em tempo polinomial
+	</section>
+	<section data-markdown="">
+		![Infografico P, NP, NPC](img/infografico_p_np.png)
+	</section>
+	<section data-markdown="">
+		![Infografico P, NP, NPC](img/infografico_outras_classes.png)
 	</section>
 	<section data-markdown>
 		![XKCD Caixeiro Viajante](https://imgs.xkcd.com/comics/travelling_salesman_problem.png)
@@ -143,11 +152,21 @@
 		- Como o problema da redução se baseia no fato de ter um problema conhecidamente NPC, para provar um
 		problema diferente precisamos de um "primeiro" problema NPC
 	</section>
-	<section data-markdown>
-		## O primeiro problema
-		> Temos um circuito combinacional booleano composto por portas AND, OR e NOT, e desejamos saber se existe um conjunto
-		de entradas booleanas para esse circuito que faça sua saída ser 1.
-	</section>
+		<section data-markdown="">
+	- Imagine uma caixa mágica com vários botões de entrada (cada um pode ser ligado = 1 ou desligado = 0) e uma única lâmpada de saída.
+	- A caixa é composta por portas lógicas AND, OR e NOT, que processam os sinais de entrada para determinar se a lâmpada acende (1) ou não (0).
+	- O problema de satisfazibilidade de circuitos é: "Existe alguma combinação de botões de entrada que faça a lâmpada acender?"
+			</section>
+			<section data-markdown="">
+				## Por que isso é difícil?
+				- Se você tem n entradas, existem 2ⁿ combinações possíveis. Com 10 botões são 1.024 combinações. Com 100 botões são mais combinações do que átomos no universo observável.
+				- Força bruta não é viável. E ninguém até hoje encontrou um atalho geral.
+			</section>
+			<section data-markdown>
+				## Por que ele é o primeiro problema NP-Completo?
+				- Cook (1971) provou algo surpreendente:qualquer problema NP pode ser traduzido em um Circuit SAT
+				- Ou seja, se você pode resolver o Circuit SAT, pode resolver qualquer problema NP. Isso faz do Circuit SAT o primeiro problema NP-Completo.
+			</section>
 	<section data-markdown>
 		## Tempo Polinomial
 		- Problemas polinomiais são considerados tratáveis mais por questões filosóficas do que matemáticas
@@ -222,7 +241,12 @@
 			- Seria possível identificar que isso é verdade usando um algoritmo $O(n^2)$
 			- Assim, uma uma prova de que um ciclo hamiltoniano existe em um grafo pode ser verificada em tempo polinomial
 		</section>
-	
+				<section data-markdown="">
+				![diagrama venn](img/diagrama_venn_np.png)
+				- P: Conseguimos resolver rápido
+				- NP: Conseguimos verificar rápido
+				- NP-Completo: Se conseguirmos resolver um, conseguimos resolver todos
+			</section>
 	</div>
 		</div>
 
