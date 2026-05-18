@@ -46,28 +46,26 @@
 			</section>
 			<section data-markdown>
 				## Classe NP
-				- Um algoritmo pertence classe de complexidade NP se e somente se existe um algoritmo de tempo
-				polinomial que recebe um certificado
-				e verifica se a solução está correta
-				- $ P \subseteq NP $
-				- Não sabemos de $ P = NP $ mas a maioria dos pesquisadores acredita que não
-				- É possível perceber que em muitos casos é mais fácil verificar se uma solução está correta do que
-				chegar na solução correta do 0
+				**O que é NP?** _(Non-deterministic Polynomial time)_
+				- Um problema está em NP se, **dada uma solução candidata**, conseguimos **verificar** se ela está correta em tempo polinomial
+				- Exemplo: dado um sudoku preenchido, é fácil conferir se está correto, mas encontrar a solução do zero é difícil
+				- Todo problema resolvível em tempo polinomial também pode ser verificado em tempo polinomial: $ P \subseteq NP $
+				- A grande questão em aberto: $ P = NP $? A maioria dos pesquisadores acredita que **não**
 			</section>
 			<section data-markdown>
-				## Classe NP
-				- Teóricos de Ciência da computação acreditam que essa analogia também vale, por isso NP também inclui
-				problemas que não estão em NP
-				- Existe uma evidência de que $ P \neq NP $ que é a existência de algoritmos NP-Completos
+				## Classe NP: Intuição
+				- Pense assim: é mais fácil **conferir** uma resposta do que **encontrá-la** do zero
+				- Exemplo: fatorar um número grande é difícil, mas verificar se dois fatores estão corretos é trivial
+				- NP inclui tanto os problemas de P quanto problemas para os quais ainda não conhecemos solução polinomial
+				- A **existência** de problemas NP-Completos é a principal evidência de que $ P \neq NP $
 			</section>
 			<section data-markdown>
 				## NP-Completude
-				- Uma intrigante propriedade das classes NP-completo é que se algum problema NPC pode ser resolvido em
-				problema polinomial,
-				então _todo_ problema NPC tem solução polinomial
-				- Nenhum algoritmo de tempo polinomial jamais foi descoberto para qualquer problema NP-Completo
-				- HAM-CYCLE é NPC, se conseguirmos resolver em tempo polinomial, resolveríamos todos os problemas
-				NP-Completos!
+				- Problemas NP-Completos (NPC) são os **mais difíceis dentro de NP**
+				- Propriedade chave: se **qualquer** problema NPC puder ser resolvido em tempo polinomial, então **todos** os problemas NPC também poderão
+				- Até hoje, **nenhum** algoritmo polinomial foi descoberto para qualquer problema NPC
+				- Exemplo: HAM-CYCLE (encontrar um ciclo hamiltoniano em um grafo) é NPC
+					- Resolver HAM-CYCLE em tempo polinomial equivaleria a resolver **todos** os problemas NPC!
 			</section>
 			<section data-markdown>
 				## Redutibilidade
@@ -75,145 +73,317 @@
 				pode ser "facilmente" convertida para Q'
 			</section>
 			<section data-markdown>
-				## Redutibilidade
-				$$  L_1, L_2 \subseteq (0,1)* | L_1 \leq_P L_2, L_2 \in P \implies  L_1 \in P $$
-				- Seja $A_2$ um algoritmo de tempo polinomial e seja F um algoritmo de redução de tempo polinomial
-				que calcula a função redução f
-				- Para uma entrada _x_ o algoritmo usa F para transformar _x_ em _f(x)_ e depois $A_2$ para testar
-				se $ f(x) \in L_2 $. O algoritmo $A_1$ toma a saída de $A_2$ como sua própria resposta
-				- $A_1$ é executado em tempo polinomial, já que tanto F quanto $A_2$ também são
+			## Redutibilidade
+			- Imagine que você já sabe resolver o problema B eficientemente
+			- Se você consegue **transformar** qualquer instância do problema A em uma instância de B
+			(mantendo a mesma resposta), então você também sabe resolver A
+			- Essa transformação é chamada de **redução**
+			- A ideia central: se A se reduz a B, então B é **pelo menos tão difícil** quanto A
+			</section>
+
+			<section data-markdown>
+			## Redutibilidade na prática
+			- Instância de A → [Transformação] → Instância de B → [Resolver B] → Resposta
+			- A transformação precisa ser **eficiente** (tempo polinomial)
+			- A resposta de B deve ser a **mesma** que a resposta de A
+			- Se B está em P e a transformação é polinomial, então A também está em P
 			</section>
 			<section data-markdown>
-				## NP-Completude 
-				- Reduções de tempo polinomial proporcionam um meio formal de mostrar que um problema é no mínimo
-				tão difícil quanto um outro
-				- Podemos definir o conjunto de linguagens NP-Completas. Uma linguagem $L \subseteq (0,1) $ é NP-Completa se:
-					1. $L \in NP$
-					1. $ L' \leq_p L \,\forall L' \in NP $ 
-				- Se uma linguagem satisfaz a propriedade 2 mas não necessáriamente a 1, dizemos que é NP-Difícil
+			## Redução na prática: um exemplo concreto
+
+			- Vamos ver uma redução real entre dois problemas NP-Completos
+			- O objetivo não é memorizar, é **sentir** como uma redução funciona
+			- Dois problemas que vamos conhecer:
+				1. **3-SAT**: satisfazer uma fórmula booleana
+				2. **Coloração de Grafos**: colorir um grafo sem conflitos
+			- Vamos mostrar que **3-SAT se reduz a Coloração de Grafos**
+			- Ou seja: se você sabe colorir grafos, você sabe resolver 3-SAT
 			</section>
+
 			<section data-markdown>
-				## Satisfazibilidade de Circuitos
-				- Precisamos de um primeiro problema para compor o conjunto NP-Completo, usaremos uma prova informal
-				- [Boolean Formula](https://www.youtube.com/watch?v=uAdVzz1hKYY)
-				- [Satisfazibilidade](https://www.youtube.com/watch?v=Mu5HUvIojJA)
-				- Dizemos que um circuito combinacional é __satisfazível__ se tem uma atribuição que satisfaz, ou seja, que
-				torne a saída verdadeira
-				- Um problema de satisfazibilidade de circuitos é _"Dado um circuito combinacional booleano composto 
-				de portas AND, OR E NOT, ele é satisfazível?"_
-				- Pode ser utilizado para simplificar circuitos impressos
+			## Problema 1: 3-SAT
+
+			- Você tem variáveis booleanas: $x_1, x_2, x_3 ...$
+			- Cada variável pode ser **verdadeira** ou **falsa**
+			- Uma **cláusula** é um grupo de 3 variáveis ligadas por OR:
+			- Exemplo: $(x_1 \lor \neg x_2 \lor x_3)$
+			- Uma fórmula 3-SAT é um conjunto de cláusulas ligadas por AND:
+			- Exemplo: $(x_1 \lor \neg x_2 \lor x_3)$ AND $(\neg x_1 \lor x_2 \lor x_3)$
+			- **Existe uma atribuição de verdadeiro/falso que satisfaz todas as cláusulas?**
 			</section>
+
 			<section data-markdown>
-				## _Lema:_ Satisfazibilidade $\in NP$
-				- Daremos a um algoritmo A de tempo polinomial com duas entradas que pode verificar CIRCUIT_SAT
-				- Uma das entradas é um circuito combinacional booleano C, a outra entrada é um certificado
-				- Para cada porta lógica no circuito ele verifica se o valor fornecido pelo certificado no fio de saída
-				é calculado corretamente em função dos valores nos fios de entrada
-				- Se a saída é 1 o algoritmo retorna 1, já que os valores atribuídos a entrada satisfazem. Caso contrário,
-				A produz 0
+			## 3-SAT: exemplo concreto
+
+			Fórmula: $(x_1 \lor \neg x_2 \lor x_3)$ AND $(\neg x_1 \lor x_2 \lor x_3)$
+
+			| $x_1$ | $x_2$ | $x_3$ | Cláusula 1 | Cláusula 2 | Resultado |
+			|-------|-------|-------|-----------|-----------|-----------|
+			| V | V | F | V | V | ✓ **satisfaz** |
+			| F | F | F | V | F | ✗ |
+			| F | F | V | V | V | ✓ **satisfaz** |
+
+			- Com 3 variáveis temos $2^3 = 8$ combinações possíveis
+			- Com 100 variáveis: $2^{100}$, força bruta é inviável
+			- Ninguém sabe resolver 3-SAT eficientemente no caso geral
 			</section>
+
 			<section data-markdown>
-				## Satisfazibilidade $\in NP$
-				- Sempre que um circuito satisfazível C é dado como entrada para A, existe um certificado cujo comprimento é polinomial
-				em relação ao tamanho de C e que faz com que A produza um 1. 
-				- Sempre que um circuito insatisfazível é dado como entrada, nenhum certificado pode enganar A e fazê-lo acreditar
-				que o circuito é satisfazível. O algoritmo A é executado em tempo polinomial: com uma boa implementação, um
-				tempo linear é suficiente
-				- Assim, podemos verificar CIRCUIT-SAT em tempo polinomial e CIRCUIT-SAT $ \in NP$
-			</section>
-			<section data-markdown>
-				- [Cook-Levin](https://www.youtube.com/watch?v=W9G_1xG77LE)
-			</section>
-			<section data-markdown>
-				## Satisfazibilidade $\in NP$
-				- Para mostrar que CIRCUIT-SAT é NP-Completo devemos mostrar que é NP-Difícil
-				- Um programa de computar é armazenado na memória do computador como uma sequência de instruções.
-				- Uma instrução típica codifica uma operação a ser executada, endereços de operandos na memória e um endereço
-				de onde o resultado deve ser armazenado
-				- Uma posição especial chamada de __contador de programa__ indica qual instrução deve ser executada em seguida
-			</section>
-			
-			<section data-markdown>
-				## Satisfazibilidade $\in NP$
-				- O contador é incrementado automaticamente sempre que uma instrução é recuperada, o que faz o computador executar instruções 
-				sequencialmente
-				- No entanto, a execução de uma instrução pode fazer com que um valor seja escrito no contador de programa, o que altera
-				a execução sequencial e permite que o computador execute laços e desvios condicionais
-			</section>
-			<section data-markdown>
-				## Satisfazibilidade $\in NP$
-				- Em qualquer ponto durante a execução de um programa, a memória do computador guarda todo o estado da computação
-				- Denominamos __configuração__ qualquer estado particular da memória do computador
-				- Podemos ver que a execução de uma instrução pode ser vista como o mapeamento de uma configuração para a outra
-				- O hardware do computador que executa esse mapeamento pode ser implementado como um circuito combinacional booleano,
-				que denotamos por M na prova do lema a seguir
-			</section>
-			<section data-markdown>
-				### _Lema:_  Satisfazibilidade $\in$ NP-Difícil
-				- Seja L qualquer linguagem em NP 
-				- Descreveremos um algoritmo de tempo polinomial F que calcula uma função e redução f que mapeia toda cadeia binária x para um circuito
-				C = f(x), tal que $ x \in L $ se e somente se $ C \in $ CIRCUIT-SAT
-				- Como $ L \in NP$ deve existir um algoritmo A que verifica L em tempo polinomial
-				- O algoritmo F usará o algoritmo A de duas entradas para calcular a redução de f
-				- Seja T(n) o tempo de execução no pior caso de A, temos $ T(n) = O(n^k) $e um certificado de tamanho $O(n^k)$
-			</section>
-			<section data-markdown="">
-				![Exemplo Cook-Levin](img/Unidade3CookLevin.png)
+			## Problema 2: Coloração de Grafos
+
+			- Dado um grafo, queremos colorir cada vértice de forma que:
+				- **Dois vértices vizinhos nunca tenham a mesma cor**
+			- **Conseguimos colorir o grafo usando no máximo 3 cores?**
+			- Aplicações reais:
+				- Alocação de registradores em compiladores
+				- Escalonamento de tarefas com conflitos
+				- Frequências de antenas de rádio
 
 			</section>
+
 			<section data-markdown>
-				### _Lema:_  Satisfazibilidade $\in$ NP-Difícil
-				- A ideia é representar a computação de A como uma sequência de __configurações__
-				- Cada combinação consiste em: Programa A, contador de programa e estado da máquina, entrada x, certificado y e área de armazenamento
-				- O Circuito combinacional M, que implementa o hardware que mapeia $ c_i \to  c_i $+1 começando de $c_0$
-				- O algoritmo A grava sua saída 0/1 em um local designado
-				- Se o algoritmo é executado durante T(n) etapas, a saída aparece com um dos bits em $c_{T(n+1)}$
-				- O algoritmo de redução F constrói um único circuito que calcula todas as configurações
+			## Coloração de Grafos: exemplo
+- A-B são vizinhos → cores diferentes
+- A-C são vizinhos → cores diferentes  
+- B-C são vizinhos → cores diferentes
+- Solução: A=🔴, B=🔵, C=🟢 ✓
+- Nesse grafo precisamos de exatamente 3 cores
+- Para grafos grandes e complexos, encontrar a coloração mínima é NP-Completo
+</section>
+
+<section data-markdown>
+## 3-SAT → Coloração de Grafos
+
+A ideia central:
+
+> Dado qualquer fórmula 3-SAT, vamos construir um grafo tal que:
+> **o grafo é 3-colorível ⟺ a fórmula é satisfazível**
+
+- Se conseguirmos essa transformação em tempo polinomial, temos uma redução válida
+- Não precisamos resolver 3-SAT diretamente, **traduzimos** o problema
+- Quem sabe colorir grafos, passa a saber resolver 3-SAT
+
+</section>
+
+<section data-markdown>
+## Construindo o grafo: passo 1: nó base
+Primeiro criamos três nós especiais conectados entre si:
+- Verdadeiro, Base, Falso
+- Como os três são vizinhos, cada um recebe uma cor diferente
+- Chamamos as cores de: 🔴 Verdadeiro, 🔵 Falso, 🟢 Base
+- Esses nós vão **forçar** o significado das cores no restante do grafo
+</section>
+<section >
+<h2> Construindo o grafo passo 2: variáveis</h2>
+Para cada variável $x_i$ criamos dois nós: $x_i$ e $\neg x_i$ 
+<pre style="text-align:center" >
+ x₁ ——— ¬x₁
+ \     /
+ \  /
+ Base
+</pre>
+<ul>
+	<li>$x_i$ e $\neg x_i$ são vizinhos entre si → cores diferentes</li>
+	<li>Ambos são vizinhos de Base → nenhum pode ser 🟢</li>
+	<li>Resultado: um deles será 🔴 (Verdadeiro) e o outro 🔵 (Falso)</li>
+	<li>Isso simula o comportamento de uma variável booleana!</li>
+</ul>
+</section>
+<section data-markdown>
+## Passo 3: cláusulas
+
+Para cada cláusula $(a \lor b \lor c)$ construímos um pequeno subgrafo que:
+
+- Recebe os nós das três variáveis da cláusula
+- É conectado ao nó **Verdadeiro** por meio de um _gadget_
+- É construído de forma que só é 3-colorível se **pelo menos um** dos três for 🔴
+
+Mas a intuição é:
+
+> O subgrafo "trava" se todos os três forem Falso.  
+> Se pelo menos um for Verdadeiro, a coloração existe.
+
+</section>
+<section data-markdown="">
+	![Redução 3sat para 3color](img/3sat_to_3color.png)
+
+</section>
+<section data-markdown>
+## Por que é uma redução válida?
+
+- A transformação (fórmula → grafo) é feita em **tempo polinomial**
+  - Para n variáveis e m cláusulas: O(n + m) nós e arestas
+- A resposta é **preservada**:
+  - Fórmula satisfazível → grafo 3-colorível ✓
+  - Fórmula insatisfazível → grafo não é 3-colorível ✓
+- Portanto: **3-SAT ≤ₚ Coloração de Grafos**
+- Coloração de Grafos é pelo menos tão difícil quanto 3-SAT
+- Como 3-SAT é NPC → **Coloração de Grafos também é NPC**
+
+</section>
+<section data-markdown>
+## O que aprendemos com isso?
+
+- Não precisamos provar do zero que Coloração de Grafos é difícil
+- Basta mostrar que um problema **já conhecido como difícil** se reduz a ele
+- É assim que a lista de problemas NPC cresce:
+  - Circuit SAT → 3-SAT → Coloração de Grafos → Ciclo Hamiltoniano → ...
+- Cada nova redução **herda** a dificuldade do problema anterior
+
+> Provar que um problema é NPC é mostrar que ele carrega o peso de todos os outros
+</section>
+
+</section>
+			<section data-markdown>
+			## NP-Completude
+			- Um problema é **NP-Completo** se:
+				1. Sua solução pode ser **verificada** em tempo polinomial (está em NP)
+				2. **Todo** problema em NP pode ser reduzido a ele em tempo polinomial
+			- Intuitivamente: é um dos problemas "mais difíceis" dentro de NP
+			- Se um problema satisfaz só a condição 2, chamamos de **NP-Difícil**
+				- Pode ser ainda mais difícil que NP — nem verificar a solução é fácil
 			</section>
 			<section data-markdown>
-				### _Lema:_  Satisfazibilidade $\in$ NP-Difícil
-				- Dada uma entrada _x_ o algoritmo F deve calcular um circuito $ C= f(x) $ que é satisfazível se, e somente se,
-				existe um certificado y tal que $ A(x,y) = 1 $
-				- Quando F recebe x ele constrói um circuito combinacional C' que consiste em T(n) cópias de M
-				- A entrada de C' é uma configuração inicial correspondente a A(x,y) e com saída $c_{T(n)} $
-				- F modifica C' para construir C = f(x), ligando as entradas de C'
-				- As entradas são o contador, a entrada, o estado inicial, restando apenas o certificado y
-				- São ignoradas todas as saídas exceto $c_{T(n)}$ que corresponde a sai de A
+			## Circuit SAT, o primeiro problema NPC
+			- Temos um circuito com portas `AND`, `OR` e `NOT`
+			- A pergunta é simples: **existe alguma combinação de entradas que faz a saída ser 1?**
+			- Se sim, dizemos que o circuito é **satisfazível**
+			- Esse problema é a base de toda a teoria NP-Completa
+			- Aplicação prática: simplificação de circuitos eletrônicos
+			[Boolean Formula](https://www.youtube.com/watch?v=uAdVzz1hKYY) |
+			[Satisfazibilidade](https://www.youtube.com/watch?v=Mu5HUvIojJA)
+			</section>
+
+			<section data-markdown>
+			## Por que Circuit SAT está em NP?
+			- Lembre: um problema está em NP se conseguimos **verificar** uma solução em tempo polinomial
+			- Para o Circuit SAT o certificado é simples: a **atribuição de valores às entradas**
+			- Dado esse certificado, verificar é fácil:
+				1. Aplicar os valores às entradas
+				2. Propagar porta por porta
+				3. Checar se a saída é 1
+			- Isso é feito em tempo **linear** no tamanho do circuito ✓
+			</section>
+
+			<section data-markdown>
+			## Por que Circuit SAT é NP-Difícil?
+
+			A intuição de Cook e Levin (1971):
+
+			> **Qualquer computação pode ser simulada por um circuito booleano**
+
+			- Todo algoritmo de verificação é, no fundo, executado em hardware
+			- Hardware é feito de portas lógicas
+			- Portanto: qualquer problema em NP pode ser "traduzido" em um Circuit SAT
+			- Circuit SAT consegue expressar **qualquer coisa que um computador consegue verificar**
+
+			[Intuição da prova — Cook-Levin](https://www.youtube.com/watch?v=W9G_1xG77LE)
+			</section>
+
+			<section data-markdown>
+			## A ideia central da prova
+
+			- Dado qualquer problema L em NP, existe um algoritmo A que **verifica** suas soluções em tempo polinomial
+			- A execução desse algoritmo pode ser representada como uma sequência de **estados da memória**
+			- Cada passo de A é um mapeamento de um estado para o próximo, e isso é exatamente o que um **circuito booleano** faz
+			- A prova constrói um circuito C tal que:
+
+			> **C é satisfazível ⟺ existe um certificado que A aceita**
+
+			</section>
+
+			<section data-markdown>
+			## O que isso implica?
+
+			- Circuit SAT está em NP ✓
+			- Todo problema em NP se reduz a Circuit SAT ✓
+			- Portanto: **Circuit SAT é NP-Completo**
+
+			Se alguém encontrar um algoritmo polinomial para Circuit SAT:
+			- Todos os problemas NP-Completos teriam solução polinomial
+			- RSA e a maioria da criptografia moderna **quebraria**
+			- P = NP e 50 anos de conjecturas estariam errados
+
+			> Circuit SAT é o problema mais genérico que existe dentro de NP
 			</section>
 			<section data-markdown>
-				### _Lema:_  Satisfazibilidade $\in$ NP-Difícil
-				- O algoritmo de redução quando recebe uma cadeia x, calcula esse circuito C e o produz como saída 
-				- Esse circuito calcula $ C(y) = A(x,y) $ para qualquer entrada y e o algoritmo de redução ao receber uma entrada x computa
-				o circuito C e o retorna
-				- Ainda falta mostrar duas propriedades:
-					1 - F calcula corretamente uma função de redução f
-					2 - F é executado em tempo polinomial
-			</section>
-			<section data-markdown>
-				## Calcula corretamente
-				- _Suponha_ que exista um certificado y de comprimento $ O(n^k)$ tal que A(x,y) = 1
-				- Se aplicarmos os bits de y a entrada de C, a saída de C é C(y) = A(x,y) = 1 se existe um certificado
-				- $ \implies $ Se existe certificado é satisfazível
-				- Por outro lado, _suponha_ que C seja satisfazível 
-				- Então existe um y para C tal que C(y) = 1, consequentemente A(x,y) = 1 
-				- Assim, F calcula corretamente a função de redução
-			</section>
-			<section data-markdown>
-				## É executado em tempo polinomial
-				- O comprimento da entrada x é n e da entrada y é $O(n^k)$
-				- A tem tamanho constante, independentemente do comprimento de x
-				- O algoritmo é executado em no máximo $O(n^k)$ etapas
-				- M implementa o hardware do computador tem tamanho polinomial que é $ O(n^k)$
-				- C consiste em no máximo $ t = O(n^k)$ cópias de M
-				- Assim, F pode construir C em tempo polinomial
-			</section>
-			<section data-markdown>
-				## _Lema:_ O problema da satisfazibilidade de circuitos é NP-Completo
-			</section>
-			<section data-markdown>
-				## RSA
-				- [Video RSA](https://www.youtube.com/watch?v=wXB-V_Keiu8)
-			</section>
+				## E se P = NP?
+				- Passamos a aula inteira mostrando que alguns problemas são **difíceis de resolver** mas **fáceis de verificar**
+				- Essa assimetria é a base de grande parte da tecnologia moderna
+				- Se alguém provar que P = NP, essa assimetria **desaparece**
+				- A pergunta não é acadêmica: as consequências seriam imediatas e profundas
+				</section>
+				<section data-markdown>
+				## RSA e criptografia
+				- O RSA protege praticamente toda comunicação segura na internet
+				- Sua segurança depende de um fato simples:
+				- **Verificar** se dois números multiplicados dão N é fácil → está em P
+				- **Fatorar** N para encontrar esses números é difícil → acredita-se estar fora de P
+				- Se P = NP, fatoração se torna eficiente
+				- Senhas, transações bancárias, comunicações militares, **tudo quebraria**
+
+				[Como funciona o RSA](https://www.youtube.com/watch?v=wXB-V_Keiu8)
+				</section>
+
+				<section data-markdown>
+				## Logística e otimização
+
+				- O caixeiro-viajante pergunta: **qual a rota mais curta passando por todas as cidades?**
+				- Hoje só conseguimos resolver exatamente para instâncias pequenas
+				- Empresas como Amazon, FedEx e companhias aéreas usam **aproximações**
+				- Se P = NP, rotas perfeitas seriam computáveis em tempo real
+				- O mesmo vale para: escalonamento de fábricas, alocação de recursos, grade curricular...
+				- Otimização combinatória seria **revolucionada**
+				</section>
+
+				<section data-markdown>
+				## IA e planejamento
+
+				- Muitos problemas centrais de IA são NP-Completos na sua forma geral:
+					- Planejamento de ações (um robô chegar do ponto A ao B evitando obstáculos)
+					- Aprendizado com restrições lógicas
+					- Verificação de modelos em sistemas críticos
+				- Hoje usamos heurísticas: soluções boas, mas não garantidamente ótimas
+				- Se P = NP, agentes inteligentes poderiam **planejar de forma ótima** em tempo real
+				- A IA que conhecemos seria fundamentalmente diferente
+				</section>
+
+				<section data-markdown>
+				## Mas P = NP também traria algo surpreendente
+
+				- Provas matemáticas podem ser **verificadas** mecanicamente em tempo polinomial
+				- Se P = NP, **encontrar** provas também seria polinomial
+				- Isso significa que um computador poderia provar qualquer teorema verificável
+				- Matemática, física, biologia computacional, avanços que levam décadas poderiam ser **automatizados**
+				- É por isso que alguns pesquisadores dizem que P = NP seria a maior descoberta da história da ciência
+				</section>
+
+				<section data-markdown>
+				## O que sabemos até aqui
+
+				- **P**: problemas que conseguimos *resolver* rápido
+				- **NP**: problemas que conseguimos *verificar* rápido
+				- **NPC**: os mais difíceis dentro de NP: resolver um resolve todos
+				- **Circuit SAT**: o primeiro NPC: toda computação verificável vira um circuito
+				A pergunta que fica:
+
+				> Desde 1971 ninguém provou que P ≠ NP.  
+				> E ninguém resolveu um problema NPC em tempo polinomial.  
+				> **O que isso sugere?**
+				</section>
+
+				<section data-markdown>
+				## P = NP ?
+
+				![Diagrama P NP NPC](img/diagrama_venn_np.png)
+
+				- Se P = NP → as três regiões colapsam em uma só
+				- Se P ≠ NP → a fronteira entre verificar e resolver é real e permanente
+				- A maioria dos pesquisadores **acredita** que P ≠ NP
+				- Mas acreditar não é provar: e essa prova vale **1 milhão de dólares** (Clay Institute)
+
+				> *"O fato de não termos encontrado nenhum algoritmo eficiente não significa que ele não existe."*
+				</section>
 		</div>
 	</div>
 
