@@ -49,7 +49,19 @@
 		</section>
 		<section data-markdown>
 			## Divisão e Conquista
-			- Como deixar mais rápido o problema de multiplicação de inteiros?
+			- Qual o custo do algoritmo ingênuo de multiplicação de inteiros?
+		</section>
+		<section data-markdown="">
+	Multiplicar 23 × 47 na escola leva alguns segundos.  
+	Mas e números de **1024 bits**, como os usados no RSA?
+
+	- Um número de 1024 bits tem cerca de **300 dígitos decimais**
+	- O algoritmo ingênuo faz $n^2$ operações. Para $n=300$: **90.000 operações**
+	- Para $n=2048$ bits (padrão atual): **quase 400.000 operações por multiplicação**
+	- E o RSA faz **centenas de multiplicações dessas** a cada handshake HTTPS
+
+	> A multiplicação ingênua é o gargalo.  
+	> Será que dá para fazer menos operações?
 		</section>
 		<section data-markdown>
 			## Divisão e Conquista
@@ -86,19 +98,111 @@
 			- $ X_lY_r + X_rY_l = (X_l + X_r)(Y_l + Y_r) - X_lY_l- X_rY_r $
 			- $ XY = 2^n X_lY_l + 2^{n/2}[(X_l + X_r)(Y_l + Y_r) - XlYl - X_rY_r] + X_rY_r $
 			- $ XY = (Xl \times 2^{n/2} + Xr) (Yl \times 2^{n/2} + Yr) $
-$  			- $ T(n) = 3T(n/2) + O(n) = O(n^{1.59})$ 
+  			- $ T(n) = 3T(n/2) + O(n) = O(n^{1.59})$ 
 			- &#128526;
 			- Algoritmo de Karatsuba
+			- Saímos de 4 multiplicações para 3 multiplicações e somas e substrações
+		</section>
+
+		<section data-markdown>
+## Corte de Hastes
+
+Você é dono de uma serralheria. Compra barras de aço de tamanho fixo
+e pode cortá-las em pedaços para vender. Cada tamanho tem um preço de mercado diferente.
+
+**Como cortar para maximizar o lucro?**
+
+| Tamanho  | 1 | 2 | 3 | 4 | 5  | 6  | 7  | 8  | 9  | 10 |
+|----------------|---|---|---|---|----|----|----|----|----|-----|
+| Preço (R$)     | 1 | 5 | 8 | 9 | 10 | 17 | 17 | 20 | 24 | 30 |
+
+Uma barra de **4 polegadas** inteira vale R$9.  
+Cortada em **2+2** vale R$10. Vale a pena cortar!
+
+> Nem sempre vender inteiro é o melhor negócio.
+</section>
+
+<section data-markdown>
+## Quantas possibilidades?
+
+Para uma haste de tamanho $n$ existem $2^{n-1}$ formas de cortar
+
+| Haste | Possibilidades | Melhor corte | Receita |
+|-------|---------------|--------------|---------|
+| n=5   | 16            | 2+3          | R$13    |
+| n=7   | 64            | 1+6 ou 6+1   | R$18    |
+| n=10  | 512           | 10 (inteira) | R$30    |
+| n=15  | 16.384        | ?            | ?       |
+
+Para **n=30**: mais de **500 milhões** de combinações.  
+Precisamos de um algoritmo inteligente.
+</section>
+		<section data-markdown>
+			## Corte de Hastes
+			- Dada uma haste de _n_ polegadas de comprimento e uma tabela de preços $p_i$ para i = 1,2,3...,n, determine
+			a receita máxima $r_n$ que se pode obter cortando a haste e vendendo os pedaços
+			- Preços: ${ 1, 5, 8, 9, 10, 17, 17, 20, 24, 30}$
+			- Quais as soluções para hastes de tamanho: { 5, 7, 10 e 15}
 		</section>
 		<section data-markdown>
-			## Programação Dinâmica
-			- [fibonacci](fibonacci.py) - memoização
-			- Como vimos na divisão e conquista subdividimos os problemas e os resolvemos recursivamente para depois combinar
-			- Ao contrário, na programação dinâmica os subproblemas se sobrepõem, ou seja, subproblemas compartilham subproblemas
-			- Dessa forma, algoritmos de divisão e conquista trabalham mais do que o necessário, resolvendo, repetidamente, problemas em comum
-			- Em geral, aplicamos a problemas de __otimização__, onde temos muitas soluções possíveis e desejamos encontrar
-			o valor ótimo (máximo ou mínimo)
+A ideia central: **fixar o primeiro corte e resolver o resto otimamente.** Para uma haste de tamanho $n$, tentamos cada possível primeiro pedaço:
+n = 4
+- ├── corte 1  →  preço[1] + melhor(3)
+- ├── corte 2  →  preço[2] + melhor(2)
+- ├── corte 3  →  preço[3] + melhor(1)
+- └── corte 4  →  preço[4] + melhor(0)
+
+- Fixamos o primeiro, ele **não será cortado mais**
+- O restante é resolvido **recursivamente** 
+- Escolhemos a opção de **maior receita total**
+
+> "Qual o melhor primeiro corte?" e o resto cuida de si mesmo.
+</section>
+		<section>
+			<h3>Corte de Hastes</h3>
+			<pre><code>
+cut_rod(p,n)
+	if n ==0:
+		return 0
+	q = -&infin;
+	for i = 1 to n:
+		q = max(q, p[i] + cut_rod(p,n-i))
+	return q</code></pre>
 		</section>
+		<section data-markdown>
+			## Corte de Hastes
+			- O tempo de execução é de T(n) $ = 1 + \sum_{i=0}^{n-1}T(i) $
+			- $ T(n) = O(2^n) $
+			- Como melhorar isso? 
+		</section>
+		<section data-markdown>
+Considere calcular `cut-rod(p, 4)` — a árvore de chamadas explode:
+cut-rod(4)
+- ├── cut-rod(3)
+- │   ├── cut-rod(2)
+- │   │   ├── cut-rod(1)
+- │   │   └── cut-rod(0)
+- │   ├── cut-rod(1)   ← repetido!
+- │   └── cut-rod(0)   ← repetido!
+- ├── cut-rod(2)       ← repetido!
+- │   ├── cut-rod(1)   ← repetido!
+- │   └── cut-rod(0)   ← repetido!
+- ├── cut-rod(1)       ← repetido!
+- └── cut-rod(0)       ← repetido!
+		</section>
+		<section data-markdown>
+## Programação Dinâmica
+
+| Divisão e Conquista | Programação Dinâmica |
+|---|---|
+| Subproblemas **independentes** | Subproblemas **se sobrepõem** |
+| Resolve cada um do zero | **Lembra** o que já resolveu |
+| Combina as soluções | Constrói de baixo para cima |
+
+- Aplicada a problemas de **otimização**: encontrar o valor máximo ou mínimo dentre muitas soluções possíveis
+- Exemplo clássico: [Fibonacci com memoização](fibonacci.py)
+
+</section>
 		<section data-markdown>
 			## Programação Dinâmica
 			- O desenvolvimento segue quatro etapas:
@@ -107,29 +211,113 @@ $  			- $ T(n) = 3T(n/2) + O(n) = O(n^{1.59})$
 				1. Calcular o valor de uma solução ótima, normalmente de baixo para cima
 				1. Construir uma solução ótima com as informações calculadas
 		</section>
-		<section data-markdown>
-			## Corte de Hastes
-			- Dada uma haste de _n_ polegadas de comprimento e uma tabela de preços $p_i$ para i = 1,2,3...,n, determine
-			a receita máxima $r_n$ que se pode obter cortando a haste e vendendo os pedaços
-			- Preços: { 1, 5, 8, 9, 10, 17, 17, 20, 24, 30}
-			- Quais as soluções para hastes de tamanho: { 5, 7, 10 e 15}
+
+		<section>	
+		<h3>As 4 etapas da PD aplicadas ao Corte de Hastes</h3>
+		1. <b>Estrutura da solução ótima:</b> 
+A receita máxima $r_n$ para uma haste de tamanho $ n $ é: 
+
+$ r_n = \max_{1 \leq i \leq n} (p_i + r_{n-i}) $
+
+Cortamos um pedaço de tamanho $i$ e resolvemos otimamente o restante.  
+<blockquote ><b>Subestrutura ótima:</b> a solução do todo contém soluções ótimas das partes.</blockquote >
 		</section>
 		<section>
-			<h3>Corte de Hastes</h3>
-			<pre><code>
-cut-rod(p,n)
-	if n ==0:
-		return 0
-	q = -&infin;
-	for i = 1 to n:
-		q = max(q, p[i] + cut-rod(p,n-1))
-	return q</code></pre>
+<h3>2. Definição recursiva do valor ótimo</h3>
+$$r_0 = 0$$
+$$r_n = \max_{1 \leq i \leq n}(p_i + r_{n-i})$$
+<h3>3. Calcular de baixo para cima</h3>
+
+Preenchemos `r[0], r[1], ..., r[n]` em ordem. Cada `r[j]` só depende  
+de valores menores, já calculados.
 		</section>
-		<section data-markdown>
-			## Corte de Hastes
-			- O tempo de execução é de T(n) $ = 1 + \sum_{i=0}^{n-1}T(i) $
-			- $ T(n) = O(2^n) $
-		</section>
+		<section>
+
+<h3>4. Construir a solução</h3>
+
+Guardamos também `s[j]` = tamanho do primeiro corte ótimo para haste `j`.  
+Para reconstruir: imprimimos `s[n]`, depois `s[n - s[n]]`, e assim por diante.
+</section>
+<section data-markdown>
+	## Solução 1: Memoização (top-down)
+
+Mesma lógica recursiva, mas **guardamos** cada resultado calculado:
+
+```python
+def cut_rod_memo(p, n, memo={}):
+    if n in memo:
+        return memo[n]       # já calculei, só retorno
+    if n == 0:
+        return 0
+    q = float('-inf')
+    for i in range(1, n + 1):
+        q = max(q, p[i] + cut_rod_memo(p, n - i, memo))
+    memo[n] = q              # guardo antes de retornar
+    return q
+```
+</section>
+
+<section data-markdown>
+
+- Cada subproblema é resolvido **exatamente uma vez**
+- Tempo: $O(n^2)$, dois loops aninhados implícitos
+- Espaço: $O(n)$ para a tabela memo
+
+> Trocar $O(2^n)$ por $O(n^2)$ apenas guardando resultados.
+</section>
+<section data-markdown>
+	## Solução 2: Bottom-up (iterativa)
+
+Em vez de descer recursivamente, **subimos** do menor subproblema:
+
+```python
+def cut_rod_bottom_up(p, n):
+    r = [0] * (n + 1)        # r[i] = receita máxima para haste de tamanho i
+    for j in range(1, n + 1):
+        q = float('-inf')
+        for i in range(1, j + 1):
+            q = max(q, p[i] + r[j - i])   # usa resultados já calculados
+        r[j] = q
+    return r[n]
+```
+</section>
+<section data-markdown>
+	
+Executando para `p = [0,1,5,8,9,10,17,17,20,24,30]`:
+
+| j | r[j] | Melhor corte |
+|---|------|-------------|
+| 1 | 1    | 1           |
+| 2 | 5    | 2           |
+| 3 | 8    | 3           |
+| 4 | 10   | 2+2         |
+| 5 | 13   | 2+3         |
+| 10| 30   | 10          |
+</section>
+<section data-markdown>
+**O problema:**  
+$2^{n-1}$ combinações possíveis: força bruta não escala.
+
+**A estratégia:**  
+Fixar o primeiro corte e resolver o resto recursivamente.
+
+**O problema da recursão ingênua:**  
+Os mesmos subproblemas são resolvidos repetidamente $O(2^n)$.
+
+**Solução = Programação Dinâmica:**
+</section>
+<section data-markdown>
+
+| Abordagem | Ideia | Custo |
+|---|---|---|
+| Recursão ingênua | Resolve tudo do zero | $O(2^n)$ |
+| Memoização | Guarda o que já calculou | $O(n^2)$ |
+| Bottom-up | Constrói de baixo para cima | $O(n^2)$ |
+
+> Subproblemas se repetem? **Lembre-se deles.**  
+> Essa é a essência da Programação Dinâmica.
+</section>
+
 	</div>
 		</div>
 
@@ -172,6 +360,9 @@ cut-rod(p,n)
 			});
 
 		</script>
+		<script>
+  Reveal.initialize({ plugins: [RevealMath.KaTeX] });
+</script>
 
 	</body>
 </html>
