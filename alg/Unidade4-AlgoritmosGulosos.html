@@ -37,144 +37,139 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h3>Algoritmos Gulosos</h3>					<p>
-						<small>Created by Fernando Marques </small>
+					<h3>Algoritmos Gulosos</h3>					
+					<img src="img/garfield.png" alt="" height="400px" style="float: center;">
+					<p>
+					<small>Created by Fernando Marques </small>
 					</p>
 		</section>
-		<section data-markdown>
-			## Algoritmos Gulosos
-			- Algoritmos de Otimização, normalmente, passam por uma sequência de etapas e cada etapa tem um conjunto de decisões
-			- Muitas vezes pode ser exagero utilizar programação dinâmica para determinar as melhores escolhas
-			- Algoritmos mais simples podem ser suficientes
-			- Um __algoritmo guloso__ faz sempre a escolha que parece ser a melhor no momento em questão. _local maxima_
-			- Nem sempre produzem produzem solução ótima, mas as produzem para vários problemas
-		</section>
-		<section data-markdown>
-			## Algoritmos Gulosos
-			- O método guloso é bastante poderoso e funciona bem para um ampla faixa de problemas
-				- Árvore geradora mínima
-				- Dijkstra para caminhos mais curtos de origem única
-				- Códigos de Huffman
-		</section>
-		<section data-markdown>
-			## Seleção de atividades
-			- Programar várias atividades concorrentes que requerem uso exclusivo de um recurso
-			- Selecionar um conjunto de tamanho máximo de atividades mutuamente compatíveis
-			- Cada atividade tem um tempo de início $s_i$ e um tempo de fim $f_i$
-			- Duas atividades são compatíveis se os intervalos $ [s_i,f_i)$ e $[s_j,f_j)$ não se sobrepõem
-			- O fim de uma atividade deve ser menor ou igual ao ínicio da outra e vice-versa
-		</section>
-		<section data-markdown>
-| i | 1 | 2 | 3 | 4 | 5 | 6 | 7  | 8  | 9  | 10 | 11 |
-|---|---|---|---|---|---|---|----|----|----|----|----|
-| s | 1 | 3 | 0 | 5 | 3 | 5 | 6  | 8  | 8  | 2  | 12 |
-| f | 4 | 5 | 6 | 7 | 9 | 9 | 10 | 11 | 12 | 14 | 16 |
-		</section>
-		<section data-markdown>
-			## Seleção de Atividades
-			- O subconjunto $a_2,a_4,a_11$ consiste de atividades compatíveis
-			- Mais o subconjunto $a_1,a_4, a_8, a_11$ é maior
+		<section data-markdown="">
+## A ideia
 
-			| i | 1 | 2 | 3 | 4 | 5 | 6 | 7  | 8  | 9  | 10 | 11 |
-			|---|---|---|---|---|---|---|----|----|----|----|----|
-			| s | 1 | 3 | 0 | 5 | 3 | 5 | 6  | 8  | 8  | 2  | 12 |
-			| f | 4 | 5 | 6 | 7 | 9 | 9 | 10 | 11 | 12 | 14 | 16 |
+Na Programação Dinâmica exploramos **todas** as combinações (de forma inteligente).  
+E se, em vez disso, fizéssemos apenas **a melhor escolha do momento**?
+
+Um algoritmo guloso **nunca olha para trás**:  
+a cada passo, toma a decisão que parece melhor *agora* e segue em frente.
+
+> Como alguém que come o maior pedaço do bolo 🍰 primeiro, sem pensar nos próximos.
 		</section>
-		<section data-markdown>
-			## Subestrutura ótima
-			- Seja $S_{ij}$ o conjunto de atividades que começam depois da atividade $a_k$ ou terminam antes dela
-			- Suponha que queremos determinar um conjunto máximo de atividades compatíveis com $S_{ij}$
-			- Tal conjunto máximo é $A_{ij}$ incluindo uma atividade $A_k$
-			- Assim, podemos dividir as outras atividades em dois conjuntos, as atividades que terminam antes: $S_{ik}$
-			- E as atividades que comecem depois como $S_{kj}$
-			- Portanto $|A_{ij}| = |Aik| + |Akj| +1  $
+		<section data-markdown="">
+## Funciona sempre?
+
+**Problema do troco**: dar troco de R$0,30 com moedas de 25, 10 e 1 centavo. Com **menor número de moedas.**
+
+Guloso: pega a maior moeda possível → 25 + 1 + 1 + 1 + 1 + 1 = **6 moedas**  
+Ótimo: 10 + 10 + 10 = **3 moedas**
+
+O guloso **falhou**, não levou ao ótimo global.
+
+Mas com moedas de 25, 10, 5 e 1 centavo:  
+Guloso: 25 + 5 = **2 moedas**, funciona!
 		</section>
-		<section data-markdown>
-			## Subestrutura ótima
-			- Assim, a solução ótima $Aij$ deve incluir também soluções ótimas para $Sik$ e $Skj$
-			- Se a gente denotar o tamanho da solução ótima teremos a recorrência
-			$$ c[i,j] = c[i,j] + c[k,j] + 1 $$
-			- Se não soubermos que uma solução ótima inclui a atividade ak, teremos que examinar todas as atividades em S
-			- Poderíamos desenvolver um algoritmo recursivo e memoizá-lo 
-			- Mas estaríamos ignorando uma característica importante do problema
+		<section data-markdown="">
+			> O guloso funciona quando a estrutura do problema garante  
+> que a **melhor escolha local é sempre parte da melhor solução global**.
+
 		</section>
-		<section data-markdown>
-			## Escolha gulosa
+		<section data-markdown="">
+## Exemplo real: Seleção de Atividades
+
+Você é o gerente de uma sala de reuniões. Vários times querem usá-la,
+cada um com horário de início e fim. A sala só recebe **uma reunião por vez**.
+
+**Como encaixar o maior número de reuniões possível?**
+
+| Reunião | A | B | C | D | E | F |
+|---------|---|---|---|---|---|---|
+| Início  | 1 | 3 | 0 | 5 | 8 | 2 |
+| Fim     | 4 | 5 | 6 | 7 | 11 | 14 |
 		</section>
-		<section data-markdown>
-			## Escolha gulosa
-			- Se a gente pudesse descobrir uma atividade para acrescentar a solução sem ter de resolver todos os subproblemas?
-			- Não precisaríamos de considerar todas as escolhas da recorrência
-			- Poderíamos escolher uma atividade que deixe o recurso livre o mais rápido possível
-			- Assim, como está ordenado por ordem crescente de término, basta escolher a primeira
-			- Ao fazer a escolha gulosa devemos determinar as atividades que começam após o término de $a_1$
+		<section data-markdown="">
+## Que estratégia usar?
+
+Poderíamos tentar várias abordagens gulosas:
+
+| Estratégia | Critério | Funciona? |
+|---|---|---|
+| Mais curta primeiro | Menor duração | Nem sempre |
+| Começa mais cedo | Menor início | Nem sempre |
+| Termina mais cedo | **Menor fim** | **Sempre!** |
+
+Ao escolher a reunião que **libera a sala o mais rápido possível**,  maximizamos o tempo disponível para as próximas.
+
+> Cada escolha gulosa **nunca atrapalha** as escolhas futuras.
 		</section>
-		<section data-markdown>
-			## Escolha gulosa
-			- A escolha gulosa - na qual sempre escolhe a primeira atividade a terminar - é sempre parte de alguma
-			solução ótima?
+		<section data-markdown="">
+## Seleção de Atividades
+
+Atividades ordenadas por tempo de fim:
+
+| Reunião | A | B | C | D | E | F |
+|---------|---|---|---|---|---|---|
+| Início  | 1 | 3 | 0 | 5 | 8 | 2 |
+| Fim     | 4 | 5 | 6 | 7 | 11 | 14 |
+
+1. Escolho **A** (fim=4) → sala livre às 4h
+2. Pulo B (início 3 < 4) e C (início 0 < 4)
+3. Escolho **D** (início 5 ≥ 4, fim=7) → sala livre às 7h
+4. Escolho **E** (início 8 ≥ 7, fim=11) → sala livre às 11h
+5. Pulo F (início 2 < 11)
+
+Resultado: **{A, D, E} = 3 reuniões**, o máximo possível.
 		</section>
-		<section data-markdown>
-			## Teorema
-			- Considere um subproblema qualquer não vazio Sk e seja am uma atividade de Sk com o tempo de término mais cedo
-			- Então am estará incluída em algum subconjunto de tamanho máximo de atividades mutuamente compatíveis de Sk
+		<section data-markdown="">
+## O algoritmo
+
+```python
+def selecionar_atividades(inicio, fim):
+    # atividades já ordenadas por tempo de fim
+    selecionadas = [0]           # primeira atividade sempre entra
+    ultima = 0                   # índice da última selecionada
+
+    for i in range(1, len(inicio)):
+        if inicio[i] >= fim[ultima]:    # compatível?
+            selecionadas.append(i)
+            ultima = i
+
+    return selecionadas
+```
+
+- Ordena por fim: $O(n \log n)$
+- Percorre uma vez: $O(n)$
+- Total: $O(n \log n)$
+- E se fosse força bruta? $O(2^n)$	
 		</section>
-		<section data-markdown>
-			## Teorema
-			- Seja Ak um subconjunto de tamanho máximo de atividades mutuamente compatíveis em Sk e seja aj a atividade
-			em Ak que tem o tempo de término mais cedo
-			- Se aj = am, __done__
-			- Se $a_j \neq a_m$ , considere o subconjunto $ A'_k = A_k -a_j \cup a_m $
-			- Que é $A_k$ substituindo $a_j$ por $a_m$
-			- Nesse caso $A'_k$ é disjunto já que $A_k$ também é 
-			- $a_j$ é a primeira atividade a terminar em $A_k e f_m \leq f_j $
-			- Como $ |A'_k| = |A_k| $ então $A'_k$ é um subconjunto de tamanho máximo de $S_k$ e incluir $a_m$
+		<section data-markdown="">
+## Quando confiar no guloso?
+
+Um algoritmo guloso funciona quando o problema tem duas propriedades:
+
+1. **Escolha gulosa é segura**  
+A melhor decisão local faz parte de alguma solução ótima global.  *Na seleção de atividades: a que termina primeiro sempre está em alguma solução ótima.*
+
+1. **Subestrutura ótima**  
+Depois da escolha gulosa, o subproblema restante tem a mesma estrutura.  *Depois de escolher uma reunião, o resto é o mesmo problema com menos opções.*
 		</section>
-		<section >
-<pre><code>Recursive-Activity-Selector(s,f,k,n)
-// s e f = inicio e fim, k = indice do subproblema e n tamanho do problema original
-// consideramos que as entradas sao ordenadas 
-   m = k + 1
-   while m &lt;= n e s[m] &lt; f[k] 
-	  m = m + 1
-   if m &lt;= n
-	  return am + Recursive-Activity-Selector(s,f,m,n)
-   else
-      return 0</code></pre>
+		<section data-markdown="">
+			## Algoritmos gulosos
+			- Dijkstra para caminhos mais curtos de origem única
+			- Huffman (compressão de dados)
+			- Árvore geradora mínima: 
+				- Kruskal 
+				- Prim
 		</section>
-		<section >
-<pre><code>Greedy-Activity-selector(s,f)
-  n = s.comprimento
-  A = a1
-  k = 1
-  for m = 2 to n
-	if s[m] >= f[k]
-		 A = A + am
-		 k = m
-  return A
-</code></pre>
-		</section>
-		<section data-markdown>
-			## Estratégia gulosa
-			> Adicionar programação dinâmica melhoraria o algoritmo? 
-		</section>
-		<section data-markdown>
-			## Estratégia Gulosa
-			1. Determinar subestrutura ótima do problema
-			1. Desenvolver solução recursiva
-			1. Provar que, ao fazer a escolha gulosa, restará apenas um subproblema
-			1. Provar que é sempre seguro fazer a escolha gulosa
-			1. Desenvolver um algoritmo recursivo que implemente a estratégia gulosa
-			1. Converter o algoritmo recursivo em iterativo
-		</section>
-		<section data-markdown>
-			## Estratégia Gulosa
-			1. Expressar o problema de otimização como um problema no qual fazemos uma escolha e ficamos com um único
-			subproblema para resolver
-			1. Provar que sempre existe uma solução ótima para o problema original que usa a escolha gulosa, de modo que a escolha gulosa é sempre segura
-			1. Demonstrar subestrutura ótima mostrando que, tendo feito a escolha gulosa, o que resta é um subproblema
-			com a seguinte propriedade: se combinarmos uma solução ótima para o subproblema com a escolha gulosa, chegamos a solução
-			ótima para o problema original
+		<section data-markdown="">
+
+| | D&C | PD | Guloso |
+|---|---|---|---|
+| Subproblemas | Independentes | Se sobrepõem | Nem explora |
+| Decisões | Todas as divisões | Todas as combinações | Só a melhor local |
+| Garantia de ótimo | Depende | Sempre | Só se provar |
+| Velocidade | Varia | Boa | Ótima |
+
+> Guloso é o mais rápido. Mas **só funciona quando funciona**.  
+> Na dúvida, use PD. Se der para provar, use guloso.
 		</section>
 		<section data-markdown>
 			## Algoritmo de Huffman
