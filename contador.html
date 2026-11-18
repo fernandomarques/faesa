@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏖️ Contagem para as Férias!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --led: #ff3b3b;
+    --led-off: rgba(255, 59, 59, 0.07);
+    --led-glow: rgba(255, 60, 60, 0.85);
+    --sand: #f6d79b;
+    --sand-dark: #e8bd6f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { min-height: 100%; }
+
+  body {
+    font-family: 'Fredoka', 'Segoe UI', system-ui, sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    background: linear-gradient(180deg, #3aa8ff 0%, #7fd0ff 35%, #ffd6a5 58%, #ffb38a 66%);
+    background-attachment: fixed;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* ===================== CENÁRIO ===================== */
+  .scene {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* --- Sol --- */
+  .sun {
+    position: absolute;
+    top: 6vh;
+    right: 9vw;
+    width: clamp(90px, 13vw, 160px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fffbe0, #ffe14d 45%, #ffb300 100%);
+    box-shadow: 0 0 60px 20px rgba(255, 220, 80, 0.7), 0 0 140px 60px rgba(255, 190, 60, 0.35);
+    animation: pulse 3s ease-in-out infinite;
+    display: grid;
+    place-items: center;
+    font-size: clamp(40px, 6vw, 72px);
+  }
+  .sun::before {
+    content: "";
+    position: absolute;
+    inset: -70%;
+    border-radius: 50%;
+    background: repeating-conic-gradient(rgba(255, 230, 120, 0.55) 0 8deg, transparent 8deg 20deg);
+    -webkit-mask: radial-gradient(circle, #000 30%, transparent 70%);
+            mask: radial-gradient(circle, #000 30%, transparent 70%);
+    animation: spin 25s linear infinite;
+    z-index: -1;
+  }
+  .sun span { animation: wink 6s ease-in-out infinite; display: inline-block; }
+
+  @keyframes pulse { 50% { transform: scale(1.07); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes wink { 0%, 90%, 100% { transform: rotate(0); } 94% { transform: rotate(-15deg) scale(1.1); } 97% { transform: rotate(10deg); } }
+
+  /* --- Nuvens --- */
+  .cloud {
+    position: absolute;
+    width: var(--w, 160px);
+    height: calc(var(--w, 160px) * 0.32);
+    background: #fff;
+    border-radius: 100px;
+    opacity: 0.92;
+    filter: drop-shadow(0 8px 6px rgba(0, 60, 120, 0.12));
+    animation: drift var(--t, 60s) linear infinite;
+    animation-delay: var(--d, 0s);
+    left: -40vw;
+  }
+  .cloud::before, .cloud::after {
+    content: "";
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+  }
+  .cloud::before { width: 50%; height: 160%; top: -85%; left: 14%; }
+  .cloud::after  { width: 36%; height: 120%; top: -55%; left: 52%; }
+  @keyframes drift { from { transform: translateX(0); } to { transform: translateX(150vw); } }
+
+  /* --- Gaivotas --- */
+  .bird {
+    position: absolute;
+    width: var(--s, 42px);
+    left: -10vw;
+    top: var(--y, 15vh);
+    animation: fly var(--t, 22s) linear infinite;
+    animation-delay: var(--d, 0s);
+  }
+  .bird svg { width: 100%; animation: flap 0.45s ease-in-out infinite alternate; transform-origin: center; }
+  @keyframes flap { to { transform: scaleY(0.35); } }
+  @keyframes fly {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(30vw, -4vh); }
+    50%  { transform: translate(60vw, 3vh); }
+    75%  { transform: translate(90vw, -3vh); }
+    100% { transform: translate(125vw, 0); }
+  }
+
+  /* --- Mar --- */
+  .sea {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 44vh;
+    background: linear-gradient(180deg, #1fc8e3 0%, #0fa3c9 40%, #0a74a8 100%);
+  }
+  .sea::after { /* brilho do sol na água */
+    content: "";
+    position: absolute;
+    top: 0; right: 6vw;
+    width: 18vw; height: 60%;
+    background: repeating-linear-gradient(180deg, rgba(255, 255, 220, 0.55) 0 3px, transparent 3px 14px);
+    -webkit-mask: linear-gradient(180deg, #000, transparent);
+            mask: linear-gradient(180deg, #000, transparent);
+    animation: shimmerSea 2s ease-in-out infinite alternate;
+  }
+  @keyframes shimmerSea { to { opacity: 0.35; transform: scaleX(1.2); } }
+
+  .wave {
+    position: absolute;
+    left: 0;
+    width: 200%;
+    height: var(--h, 60px);
+    top: var(--top, -40px);
+    animation: waveMove var(--t, 10s) linear infinite;
+  }
+  .wave.rev { animation-direction: reverse; }
+  .wave svg { width: 100%; height: 100%; display: block; }
+  @keyframes waveMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* --- Barquinho --- */
+  .boat {
+    position: absolute;
+    bottom: calc(44vh - 18px);
+    left: -10vw;
+    font-size: clamp(28px, 3.5vw, 46px);
+    animation: sail 70s linear infinite;
+    z-index: 0;
+  }
+  .boat span { display: inline-block; animation: bob 2.5s ease-in-out infinite; }
+  @keyframes sail { to { transform: translateX(120vw); } }
+  @keyframes bob { 50% { transform: translateY(-6px) rotate(-6deg); } }
+
+  /* --- Areia --- */
+  .sand {
+    position: absolute;
+    left: -20%;
+    width: 140%;
+    bottom: -4vh;
+    height: 26vh;
+    border-radius: 50% 50% 0 0 / 45% 45% 0 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(160, 110, 40, 0.25) 1.5px, transparent 2px) 0 0 / 22px 22px,
+      radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.5) 1px, transparent 2px) 0 0 / 30px 30px,
+      linear-gradient(180deg, #fbe3b0, var(--sand) 40%, var(--sand-dark));
+    box-shadow: 0 -10px 0 rgba(255, 255, 255, 0.55);
+    animation: foam 4s ease-in-out infinite;
+  }
+  @keyframes foam {
+    50% { box-shadow: 0 -18px 0 rgba(255, 255, 255, 0.35); }
+  }
+
+  /* --- Coqueiro --- */
+  .palm {
+    position: absolute;
+    left: -1vw;
+    bottom: 6vh;
+    height: min(62vh, 520px);
+    transform-origin: 50% 100%;
+    animation: sway 5s ease-in-out infinite;
+    filter: drop-shadow(6px 8px 6px rgba(0, 0, 0, 0.2));
+  }
+  .palm .leaves { transform-origin: 110px 110px; animation: leaves 3s ease-in-out infinite; }
+  @keyframes sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2.5deg); } }
+  @keyframes leaves { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(5deg); } }
+
+  /* --- Guarda-sol --- */
+  .umbrella {
+    position: absolute;
+    right: 4vw;
+    bottom: 4vh;
+    width: clamp(110px, 16vw, 220px);
+    transform-origin: 55% 100%;
+    animation: wobble 4s ease-in-out infinite;
+  }
+  @keyframes wobble { 50% { transform: rotate(3deg); } }
+
+  /* --- Bola de praia --- */
+  .ball-wrap {
+    position: absolute;
+    right: 24vw;
+    bottom: 5vh;
+    animation: bounce 1.4s cubic-bezier(.5, 0, .5, 1) infinite;
+  }
+  .ball {
+    width: clamp(36px, 4vw, 56px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.85) 0 12%, transparent 30%),
+      conic-gradient(#ff4757 0 60deg, #fff 0 120deg, #1e90ff 0 180deg, #fff 0 240deg, #ffd32a 0 300deg, #fff 0);
+    box-shadow: inset -6px -6px 12px rgba(0, 0, 0, 0.25);
+    animation: spin 1.4s linear infinite;
+  }
+  .ball-shadow {
+    position: absolute;
+    right: calc(24vw + 4px);
+    bottom: 4vh;
+    width: clamp(30px, 3.4vw, 48px);
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(120, 80, 20, 0.35);
+    animation: shadow 1.4s cubic-bezier(.5, 0, .5, 1) infinite;
+  }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14vh); } }
+  @keyframes shadow { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.5); opacity: 0.4; } }
+
+  /* --- Caranguejo --- */
+  .crab {
+    position: absolute;
+    bottom: 2vh;
+    left: 22vw;
+    font-size: clamp(30px, 3.5vw, 48px);
+    animation: crabWalk 14s ease-in-out infinite alternate;
+  }
+  .crab span { display: inline-block; animation: crabStep 0.3s ease-in-out infinite alternate; }
+  @keyframes crabWalk { to { transform: translateX(40vw); } }
+  @keyframes crabStep { to { transform: translateY(-4px) rotate(8deg); } }
+
+  /* ===================== CONTEÚDO ===================== */
+  main {
+    position: relative;
+    z-index: 5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+  .wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .card {
+    width: min(960px, 100%);
+    padding: clamp(18px, 3vw, 36px);
+    border-radius: 32px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.1));
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 25px 60px rgba(0, 50, 100, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    animation: floaty 6s ease-in-out infinite, popIn 0.9s cubic-bezier(.2, 1.6, .4, 1) both;
+  }
+  @keyframes floaty { 50% { transform: translateY(-8px); } }
+  @keyframes popIn { from { opacity: 0; scale: 0.6; } to { opacity: 1; scale: 1; } }
+
+  h1 {
+    font-family: 'Lilita One', 'Impact', sans-serif;
+    font-weight: 400;
+    font-size: clamp(28px, 5.4vw, 64px);
+    line-height: 1.15;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  h1 .word { display: inline-block; white-space: nowrap; margin: 0 0.18em; }
+  h1 .ch {
+    display: inline-block;
+    animation: hop 1.8s ease-in-out infinite;
+    text-shadow:
+      2px 2px 0 #12395c, -2px -2px 0 #12395c, 2px -2px 0 #12395c, -2px 2px 0 #12395c,
+      0 6px 0 rgba(0, 0, 0, 0.25);
+  }
+  @keyframes hop {
+    0%, 60%, 100% { transform: translateY(0) rotate(0); }
+    20% { transform: translateY(-14px) rotate(-6deg); }
+    40% { transform: translateY(2px) rotate(3deg); }
+  }
+
+  .subtitle {
+    font-size: clamp(15px, 2vw, 22px);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 40, 80, 0.5);
+    margin-bottom: 18px;
+  }
+  .subtitle b {
+    background: #ff6b6b;
+    padding: 2px 10px;
+    border-radius: 999px;
+    display: inline-block;
+    animation: wiggle 2s ease-in-out infinite;
+  }
+  @keyframes wiggle { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg) scale(1.06); } }
+
+  /* --- Painel LED --- */
+  .bezel {
+    display: inline-block;
+    max-width: 100%;
+    padding: 10px;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #e9edf2, #8a96a3 40%, #f4f6f8 55%, #6b7785);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45), inset 0 2px 2px rgba(255, 255, 255, 0.8);
+    position: relative;
+  }
+  .bezel .screw {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff, #777);
+  }
+  .screw.tl { top: 4px; left: 4px; } .screw.tr { top: 4px; right: 4px; }
+  .screw.bl { bottom: 4px; left: 4px; } .screw.br { bottom: 4px; right: 4px; }
+
+  .screen {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(6px, 1.2vw, 16px);
+    padding: clamp(14px, 2vw, 26px) clamp(14px, 2.4vw, 32px) clamp(10px, 1.4vw, 18px);
+    border-radius: 14px;
+    background: radial-gradient(ellipse at center, #1c0707 0%, #0b0303 70%, #000 100%);
+    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.95), inset 0 0 4px rgba(255, 60, 60, 0.3);
+    overflow: hidden;
+    font-size: clamp(34px, 7vw, 96px);
+  }
+  .screen::before { /* reflexo de vidro */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 35%, transparent 36%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .screen::after { /* scanlines */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 3px);
+    pointer-events: none;
+    z-index: 3;
+    animation: flicker 4s steps(1) infinite;
+  }
+  @keyframes flicker { 0%, 100% { opacity: 1; } 47% { opacity: 0.75; } 48% { opacity: 1; } }
+
+  .unit { display: flex; flex-direction: column; align-items: center; gap: 0.12em; }
+  .digits { display: flex; gap: 0.1em; }
+  .label {
+    font-family: 'Lilita One', monospace;
+    font-size: clamp(11px, 1.4vw, 17px);
+    letter-spacing: 3px;
+    color: #ff8080;
+    text-shadow: 0 0 6px rgba(255, 60, 60, 0.9);
+  }
+
+  /* Dígito de 7 segmentos */
+  .digit {
+    position: relative;
+    width: 0.6em;
+    height: 1em;
+    transform: skewX(-7deg);
+    filter: drop-shadow(0 0 0.06em var(--led-glow));
+  }
+  .seg {
+    position: absolute;
+    background: var(--led-off);
+    transition: background 0.15s, filter 0.15s;
+  }
+  .seg.on { background: var(--led); }
+  .seg.a, .seg.g, .seg.d {
+    left: 0.07em;
+    width: 0.46em;
+    height: 0.1em;
+    clip-path: polygon(0 50%, 0.05em 0, calc(100% - 0.05em) 0, 100% 50%, calc(100% - 0.05em) 100%, 0.05em 100%);
+  }
+  .seg.a { top: 0; }
+  .seg.g { top: 0.45em; }
+  .seg.d { top: 0.9em; }
+  .seg.b, .seg.c, .seg.e, .seg.f {
+    width: 0.1em;
+    height: 0.42em;
+    clip-path: polygon(50% 0, 100% 0.05em, 100% calc(100% - 0.05em), 50% 100%, 0 calc(100% - 0.05em), 0 0.05em);
+  }
+  .seg.f { left: 0; top: 0.06em; }
+  .seg.b { right: 0; top: 0.06em; }
+  .seg.e { left: 0; top: 0.52em; }
+  .seg.c { right: 0; top: 0.52em; }
+
+  .colon {
+    height: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25em;
+    padding: 0 0.04em;
+  }
+  .colon i {
+    display: block;
+    width: 0.11em; height: 0.11em;
+    border-radius: 2px;
+    background: var(--led);
+    box-shadow: 0 0 0.1em var(--led-glow);
+    transition: opacity 0.1s;
+  }
+  .colon.off i { opacity: 0.08; box-shadow: none; }
+
+  /* --- Frase divertida --- */
+  .phrase {
+    min-height: 2.6em;
+    margin: 20px auto 8px;
+    max-width: 700px;
+    font-size: clamp(16px, 2.2vw, 24px);
+    font-weight: 700;
+    text-shadow: 0 2px 5px rgba(0, 40, 80, 0.55);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .phrase.hide { opacity: 0; transform: translateY(10px) scale(0.95); }
+
+  /* --- Barra "prancha" --- */
+  .progress-title {
+    font-weight: 700;
+    font-size: clamp(14px, 1.8vw, 18px);
+    margin: 10px 0 8px;
+    text-shadow: 0 2px 4px rgba(0, 40, 80, 0.5);
+  }
+  .board {
+    position: relative;
+    height: 30px;
+    max-width: 700px;
+    margin: 0 auto 6px;
+    border-radius: 50% / 100%;
+    background: linear-gradient(180deg, #fff, #e3f6ff);
+    border: 3px solid #12395c;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+  }
+  .board-inner { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; }
+  .board-fill {
+    height: 100%;
+    width: 0%;
+    background:
+      repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.35) 0 10px, transparent 10px 20px),
+      linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff);
+    background-size: 28px 28px, 100% 100%;
+    animation: stripes 1s linear infinite;
+    transition: width 1.5s cubic-bezier(.2, .9, .3, 1);
+  }
+  @keyframes stripes { to { background-position: 28px 0, 0 0; } }
+  .board::after { /* listra central da prancha */
+    content: "";
+    position: absolute;
+    top: 50%; left: 6%; right: 6%;
+    height: 2px;
+    background: rgba(18, 57, 92, 0.35);
+  }
+  .surfer {
+    position: absolute;
+    top: -34px;
+    left: 0%;
+    font-size: 34px;
+    transform: translateX(-50%);
+    transition: left 1.5s cubic-bezier(.2, .9, .3, 1);
+    animation: surf 1.2s ease-in-out infinite;
+  }
+  @keyframes surf { 50% { transform: translateX(-50%) translateY(-5px) rotate(-8deg); } }
+
+  /* --- Chips de estatísticas --- */
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 18px;
+  }
+  .chip {
+    background: rgba(255, 255, 255, 0.9);
+    color: #12395c;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: clamp(13px, 1.6vw, 16px);
+    box-shadow: 0 4px 0 rgba(18, 57, 92, 0.35);
+    transition: transform 0.2s;
+    animation: chipIn 0.6s backwards;
+  }
+  .chip:hover { transform: translateY(-4px) rotate(-2deg) scale(1.06); }
+  .chip:nth-child(2) { animation-delay: 0.15s; }
+  .chip:nth-child(3) { animation-delay: 0.3s; }
+  .chip:nth-child(4) { animation-delay: 0.45s; }
+  @keyframes chipIn { from { opacity: 0; transform: translateY(20px) scale(0.5); } }
+
+  .hint {
+    margin-top: 16px;
+    font-size: 14px;
+    opacity: 0.95;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    animation: blinkHint 2s ease-in-out infinite;
+  }
+  @keyframes blinkHint { 50% { opacity: 0.5; } }
+
+  /* --- Rodapé --- */
+  footer {
+    margin-top: 24px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: rgba(18, 57, 92, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    font-size: clamp(14px, 1.8vw, 18px);
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+  footer .name {
+    font-family: 'Lilita One', sans-serif;
+    font-size: 1.35em;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #ffd93d, #ff6b6b, #ff8fd8, #4dd6ff, #6bcb77, #ffd93d);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    animation: shine 4s linear infinite;
+    display: inline-block;
+  }
+  @keyframes shine { to { background-position: 300% 0; } }
+
+  /* --- Confete --- */
+  .confetti {
+    position: fixed;
+    z-index: 50;
+    pointer-events: none;
+    font-size: var(--size, 26px);
+    animation: confetti var(--dur, 2s) cubic-bezier(.25, .6, .4, 1) forwards;
+  }
+  .confetti.paper {
+    width: 10px;
+    height: 16px;
+    border-radius: 2px;
+    background: var(--c);
+  }
+  @keyframes confetti {
+    0%   { transform: translate(-50%, -50%) scale(0.3) rotate(0); opacity: 1; }
+    25%  { transform: translate(calc(-50% + var(--dx) * 0.6), var(--up)) scale(1) rotate(calc(var(--rot) * 0.3)); }
+    100% { transform: translate(calc(-50% + var(--dx)), 105vh) scale(1) rotate(var(--rot)); opacity: 0.9; }
+  }
+
+  /* Modo festa! */
+  body.party .card { animation: party 0.6s ease-in-out infinite alternate; }
+  @keyframes party { from { transform: rotate(-1.5deg) scale(1); } to { transform: rotate(1.5deg) scale(1.03); } }
+
+  @media (max-width: 640px) {
+    .palm { opacity: 0.7; left: -14vw; }
+    .umbrella { opacity: 0.8; }
+    .sun { right: 4vw; top: 3vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== CENÁRIO DE PRAIA ===================== -->
+<div class="scene" aria-hidden="true">
+  <div class="sun"><span>😎</span></div>
+
+  <div class="cloud" style="top:8vh;  --w:180px; --t:70s; --d:-10s"></div>
+  <div class="cloud" style="top:20vh; --w:120px; --t:55s; --d:-35s"></div>
+  <div class="cloud" style="top:4vh;  --w:220px; --t:90s; --d:-60s"></div>
+  <div class="cloud" style="top:28vh; --w:90px;  --t:45s; --d:-5s"></div>
+
+  <div class="bird" style="--y:14vh; --t:24s; --d:-4s;  --s:42px"><svg viewBox="0 0 40 16"><path d="M2 12 Q11 1 20 10 Q29 1 38 12" fill="none" stroke="#2b3a4a" stroke-width="2.6" stroke-linecap="round"/></svg></div>
+  <div class="bird" style="--y:19vh; --t:24s; --d:-5s;  --s:30px"><svg viewBox="0 0 40 16"><path d="M2 12 Q11 1 20 10 Q29 1 38 12" fill="none" stroke="#2b3a4a" stroke-width="2.6" stroke-linecap="round"/></svg></div>
+  <div class="bird" style="--y:10vh; --t:30s; --d:-18s; --s:34px"><svg viewBox="0 0 40 16"><path d="M2 12 Q11 1 20 10 Q29 1 38 12" fill="none" stroke="#2b3a4a" stroke-width="2.6" stroke-linecap="round"/></svg></div>
+
+  <div class="boat"><span>⛵</span></div>
+
+  <div class="sea">
+    <div class="wave" style="--top:-34px; --h:50px; --t:14s">
+      <svg viewBox="0 0 2880 100" preserveAspectRatio="none"><path fill="#26d0ea" d="M0 40 Q180 0 360 40 T720 40 T1080 40 T1440 40 T1800 40 T2160 40 T2520 40 T2880 40 V100 H0 Z"/></svg>
+    </div>
+    <div class="wave rev" style="--top:4vh; --h:50px; --t:11s; opacity:.7">
+      <svg viewBox="0 0 2880 100" preserveAspectRatio="none"><path fill="#13b3d6" d="M0 40 Q180 10 360 40 T720 40 T1080 40 T1440 40 T1800 40 T2160 40 T2520 40 T2880 40 V100 H0 Z"/></svg>
+    </div>
+    <div class="wave" style="--top:11vh; --h:55px; --t:8s; opacity:.6">
+      <svg viewBox="0 0 2880 100" preserveAspectRatio="none"><path fill="#0b8fc0" d="M0 40 Q180 0 360 40 T720 40 T1080 40 T1440 40 T1800 40 T2160 40 T2520 40 T2880 40 V100 H0 Z"/></svg>
+    </div>
+  </div>
+
+  <div class="sand"></div>
+
+  <!-- Coqueiro -->
+  <svg class="palm" viewBox="0 0 200 400">
+    <path d="M100 400 C 95 300, 80 200, 110 110" fill="none" stroke="#8b5a2b" stroke-width="22" stroke-linecap="round"/>
+    <path d="M100 400 C 95 300, 80 200, 110 110" fill="none" stroke="#6b4220" stroke-width="22" stroke-dasharray="4 14"/>
+    <g class="leaves">
+      <path fill="#2e9e3e" d="M110 110 Q 60 70 6 115 Q 60 88 110 110"/>
+      <path fill="#38b24a" d="M110 110 Q 160 70 198 122 Q 155 92 110 110"/>
+      <path fill="#2a8f38" d="M110 110 Q 80 40 34 32 Q 90 62 110 110"/>
+      <path fill="#3cbf50" d="M110 110 Q 140 40 188 46 Q 135 66 110 110"/>
+      <path fill="#33a845" d="M110 110 Q 108 50 122 2 Q 126 62 110 110"/>
+      <path fill="#2a8f38" d="M110 110 Q 70 122 42 172 Q 80 128 110 110"/>
+      <path fill="#2e9e3e" d="M110 110 Q 152 125 172 178 Q 140 130 110 110"/>
+      <circle cx="102" cy="120" r="8" fill="#6b3e1d"/>
+      <circle cx="117" cy="122" r="8" fill="#5a3317"/>
+      <circle cx="109" cy="131" r="8" fill="#6b3e1d"/>
+    </g>
+  </svg>
+
+  <!-- Guarda-sol -->
+  <svg class="umbrella" viewBox="0 0 200 200">
+    <defs>
+      <linearGradient id="stripes" x1="0" x2="1">
+        <stop offset="0" stop-color="#ff4757"/><stop offset=".2" stop-color="#ff4757"/>
+        <stop offset=".2" stop-color="#fff"/><stop offset=".4" stop-color="#fff"/>
+        <stop offset=".4" stop-color="#ff4757"/><stop offset=".6" stop-color="#ff4757"/>
+        <stop offset=".6" stop-color="#fff"/><stop offset=".8" stop-color="#fff"/>
+        <stop offset=".8" stop-color="#ff4757"/><stop offset="1" stop-color="#ff4757"/>
+      </linearGradient>
+    </defs>
+    <line x1="100" y1="40" x2="112" y2="200" stroke="#f1f1f1" stroke-width="6" stroke-linecap="round"/>
+    <path fill="url(#stripes)" stroke="#b02a37" stroke-width="2" d="M10 72 Q100 -12 190 72 Q167 60 145 72 Q122 60 100 72 Q77 60 55 72 Q32 60 10 72 Z"/>
+    <circle cx="100" cy="30" r="5" fill="#ffd32a"/>
+  </svg>
+
+  <div class="ball-shadow"></div>
+  <div class="ball-wrap"><div class="ball"></div></div>
+
+  <div class="crab"><span>🦀</span></div>
+</div>
+
+<!-- ===================== CONTEÚDO ===================== -->
+<main>
+  <div class="wrap">
+    <section class="card">
+      <h1 id="title"></h1>
+      <p class="subtitle">Rumo à praia em <b>21/12/2026 às 20h</b> 🏝️</p>
+
+      <div class="bezel">
+        <span class="screw tl"></span><span class="screw tr"></span>
+        <span class="screw bl"></span><span class="screw br"></span>
+        <div class="screen">
+          <div class="unit"><div class="digits" id="days"></div><span class="label">DIAS</span></div>
+          <div class="colon"><i></i><i></i></div>
+          <div class="unit"><div class="digits" id="hours"></div><span class="label">HORAS</span></div>
+          <div class="colon"><i></i><i></i></div>
+          <div class="unit"><div class="digits" id="mins"></div><span class="label">MIN</span></div>
+          <div class="colon"><i></i><i></i></div>
+          <div class="unit"><div class="digits" id="secs"></div><span class="label">SEG</span></div>
+        </div>
+      </div>
+
+      <p class="phrase" id="phrase">Carregando o protetor solar... 🧴</p>
+
+      <p class="progress-title" id="progressTitle">Carregando férias... 0%</p>
+      <div class="board">
+        <div class="board-inner"><div class="board-fill" id="fill"></div></div>
+        <span class="surfer" id="surfer">🏄</span>
+      </div>
+
+      <div class="stats">
+        <span class="chip" id="chipWeeks">📅 -- semanas</span>
+        <span class="chip" id="chipMondays">😩 -- segundas-feiras</span>
+        <span class="chip" id="chipWeekends">🌅 -- fins de semana</span>
+        <span class="chip" id="chipCoffee">☕ ~-- cafezinhos</span>
+      </div>
+
+      <p class="hint">👆 Clique em qualquer lugar para soltar confete!</p>
+    </section>
+  </div>
+
+  <footer>Feito com ☀️ e muita vontade de praia por <span class="name">Fernando Marques</span></footer>
+</main>
+
+<script>
+  // ===== Configuração =====
+  const TARGET = new Date(2026, 11, 21, 20, 0, 0);  // 21/12/2026 às 20h (mês 11 = dezembro)
+  const START  = new Date(2026, 0, 1, 0, 0, 0);     // início da "barra de carregamento"
+
+  // ===== Título com letras saltitantes =====
+  const COLORS = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4dd6ff', '#ff8fd8', '#ff9f43'];
+  function setTitle(text) {
+    const h1 = document.getElementById('title');
+    h1.innerHTML = '';
+    let i = 0;
+    text.split(' ').forEach(word => {
+      const w = document.createElement('span');
+      w.className = 'word';
+      Array.from(word).forEach(ch => {
+        const s = document.createElement('span');
+        s.className = 'ch';
+        s.textContent = ch;
+        s.style.color = COLORS[i % COLORS.length];
+        s.style.animationDelay = (i * 0.07) + 's';
+        w.appendChild(s);
+        i++;
+      });
+      h1.appendChild(w);
+    });
+  }
+  setTitle('🏖️ Contagem regressiva para as FÉRIAS! 🌴');
+
+  // ===== Display de 7 segmentos =====
+  const SEGMENTS = {
+    0: 'abcdef', 1: 'bc', 2: 'abdeg', 3: 'abcdg', 4: 'bcfg',
+    5: 'acdfg', 6: 'acdefg', 7: 'abc', 8: 'abcdefg', 9: 'abcdfg'
+  };
+
+  function buildDigits(id, n) {
+    const box = document.getElementById(id);
+    for (let i = 0; i < n; i++) {
+      const d = document.createElement('div');
+      d.className = 'digit';
+      'abcdefg'.split('').forEach(s => {
+        const seg = document.createElement('i');
+        seg.className = 'seg ' + s;
+        seg.dataset.s = s;
+        d.appendChild(seg);
+      });
+      box.appendChild(d);
+    }
+  }
+  buildDigits('days', 3);
+  buildDigits('hours', 2);
+  buildDigits('mins', 2);
+  buildDigits('secs', 2);
+
+  function showNumber(id, str) {
+    const digits = document.getElementById(id).children;
+    Array.from(str).forEach((ch, i) => {
+      const on = SEGMENTS[ch];
+      digits[i].querySelectorAll('.seg').forEach(seg => {
+        seg.classList.toggle('on', on.includes(seg.dataset.s));
+      });
+    });
+  }
+
+  const pad = (n, len) => String(n).padStart(len, '0');
+  const colons = document.querySelectorAll('.colon');
+
+  // ===== Estatísticas divertidas =====
+  function updateStats(now) {
+    let mondays = 0, weekends = 0, workdays = 0;
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    while (d < TARGET) {
+      const wd = d.getDay();
+      if (wd === 1) mondays++;
+      if (wd === 6) weekends++;
+      if (wd >= 1 && wd <= 5) workdays++;
+      d.setDate(d.getDate() + 1);
+    }
+    const daysLeft = Math.max(0, Math.ceil((TARGET - now) / 86400000));
+    const weeks = (daysLeft / 7).toFixed(1).replace('.', ',');
+    document.getElementById('chipWeeks').textContent = `📅 ${weeks} semanas`;
+    document.getElementById('chipMondays').textContent = `😩 ${mondays} segunda${mondays === 1 ? '' : 's'}-feira${mondays === 1 ? '' : 's'}`;
+    document.getElementById('chipWeekends').textContent = `🌅 ${weekends} fi${weekends === 1 ? 'm' : 'ns'} de semana`;
+    document.getElementById('chipCoffee').textContent = `☕ ~${workdays * 3} cafezinhos`;
+  }
+
+  function updateProgress(now) {
+    const pct = Math.min(100, Math.max(0, ((now - START) / (TARGET - START)) * 100));
+    document.getElementById('fill').style.width = pct + '%';
+    document.getElementById('surfer').style.left = pct + '%';
+    document.getElementById('progressTitle').textContent =
+      pct >= 100 ? 'Férias carregadas: 100%! 🎉' : `Carregando férias... ${pct.toFixed(2).replace('.', ',')}%`;
+  }
+
+  // ===== Loop principal =====
+  let booting = true;
+  let partyStarted = false;
+  let blink = false;
+
+  function tick() {
+    const now = new Date();
+    blink = !blink;
+    colons.forEach(c => c.classList.toggle('off', blink));
+
+    if (booting) { // efeito "ligando o display"
+      const r = () => String(Math.floor(Math.random() * 10));
+      showNumber('days', r() + r() + r());
+      showNumber('hours', r() + r());
+      showNumber('mins', r() + r());
+      showNumber('secs', r() + r());
+      return;
+    }
+
+    let diff = TARGET - now;
+    if (diff <= 0) {
+      ['days', 'hours', 'mins', 'secs'].forEach(id => showNumber(id, id === 'days' ? '000' : '00'));
+      if (!partyStarted) startParty();
+      return;
+    }
+
+    const total = Math.floor(diff / 1000);
+    showNumber('days',  pad(Math.floor(total / 86400), 3));
+    showNumber('hours', pad(Math.floor((total % 86400) / 3600), 2));
+    showNumber('mins',  pad(Math.floor((total % 3600) / 60), 2));
+    showNumber('secs',  pad(total % 60, 2));
+  }
+
+  const bootTimer = setInterval(tick, 70);
+  setTimeout(() => {
+    clearInterval(bootTimer);
+    booting = false;
+    tick();
+    updateStats(new Date());
+    updateProgress(new Date());
+    setInterval(tick, 1000);
+    setInterval(() => { updateStats(new Date()); updateProgress(new Date()); }, 60000);
+  }, 1600);
+
+  // ===== Frases divertidas =====
+  const PHRASES = [
+    'Já sentindo o cheiro do protetor solar... 🧴',
+    'Modo praia: carregando ▓▓▓▓▓░░░ 🏖️',
+    'Respondendo e-mails com o pensamento no mar 🌊',
+    'Água de coco já está gelando 🥥',
+    'Reunião? Só se for na areia ⛱️',
+    'Contando os segundos (literalmente, olha ali em cima) ⏱️',
+    'O chinelo já está pronto na porta 🩴',
+    'Status: fisicamente no trabalho, mentalmente na rede 🏝️',
+    'Próximo deploy: eu, na praia 🚀',
+    'Café substituído por caipirinha em breve 🍹',
+    'Já separei a sunga e o óculos escuro 😎',
+    'Ctrl + Alt + FÉRIAS 💻➡️🏖️'
+  ];
+  const phraseEl = document.getElementById('phrase');
+  let lastPhrase = -1;
+  function nextPhrase() {
+    if (partyStarted) return;
+    let i;
+    do { i = Math.floor(Math.random() * PHRASES.length); } while (i === lastPhrase);
+    lastPhrase = i;
+    phraseEl.classList.add('hide');
+    setTimeout(() => { phraseEl.textContent = PHRASES[i]; phraseEl.classList.remove('hide'); }, 500);
+  }
+  setInterval(nextPhrase, 6000);
+
+  // ===== Confete! =====
+  const EMOJIS = ['🌴', '☀️', '🍹', '🐚', '🏖️', '🥥', '🌊', '😎', '🩴', '🦀', '⛱️', '🍉'];
+  const PAPER = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4dd6ff', '#ff8fd8', '#ff9f43'];
+  const rand = (a, b) => a + Math.random() * (b - a);
+
+  function spawn(x, y, opts = {}) {
+    const el = document.createElement('span');
+    const isPaper = Math.random() < 0.45;
+    el.className = 'confetti' + (isPaper ? ' paper' : '');
+    if (isPaper) el.style.setProperty('--c', PAPER[Math.floor(Math.random() * PAPER.length)]);
+    else el.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.setProperty('--dx', rand(-opts.spread || -220, opts.spread || 220) + 'px');
+    el.style.setProperty('--up', (opts.up !== undefined ? opts.up : rand(-280, -80)) + 'px');
+    el.style.setProperty('--rot', rand(-720, 720) + 'deg');
+    el.style.setProperty('--dur', rand(1.8, 3.2) + 's');
+    el.style.setProperty('--size', rand(20, 38) + 'px');
+    document.body.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+
+  function burst(x, y, count = 28) {
+    for (let i = 0; i < count; i++) spawn(x, y);
+  }
+
+  document.addEventListener('click', e => burst(e.clientX, e.clientY));
+
+  // Uma explosão de boas-vindas
+  setTimeout(() => burst(window.innerWidth / 2, window.innerHeight / 3, 40), 900);
+
+  // ===== Chegou o dia! =====
+  function startParty() {
+    partyStarted = true;
+    document.body.classList.add('party');
+    setTitle('🎉 FÉRIAS!!! 🎉');
+    phraseEl.textContent = 'Chegou o grande dia! Desliga o computador e corre pra praia! 🏃‍♂️🏖️';
+    updateProgress(new Date());
+    setInterval(() => {
+      for (let i = 0; i < 4; i++) spawn(rand(0, window.innerWidth), -40, { up: 0, spread: 80 });
+    }, 250);
+  }
+</script>
+</body>
+</html>
